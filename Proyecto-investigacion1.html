@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BargasLautaro - Pasos de una Investigación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            margin: 0;
+            overflow: ;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step {
+            display: none;
+            width: 80%;
+            font-size: 20px;
+            border: 2px solid green;
+            padding: 20px;
+            background-color: black;
+            text-align: left;
+        }
+        .active {
+            display: block;
+        }
+        .next-btn, .prev-btn {
+            position: fixed;
+            top: 300px;
+            transform: translateY(-50%);
+            background-color: green;
+            border: none;
+            padding: 10px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .next-btn {
+          
+            right: 0;
+        }
+        .prev-btn {
+            left: 0;
+            display: none;
+        }
+        .next-btn:hover, .prev-btn:hover {
+            background-color: limegreen;
+        }
+         .h44 {
+            position: fixed;
+            bottom: -20px;
+            width: 100%;
+            text-align: center;
+            color: lime;
+            background-color: black;
+            border-bottom: 10px;
+            
+            padding: 1px;
+        }
+        
+        h2 {color: lime;}
+        h3{ color: gold;}
+        p{ padding:5px; color: lightblue;
+        li{background-color: purple;  } 
+    </style>
+</head>
+<body>
+
+    <div class="container">
+<div class="step active">
+    <h2>1. Planteamiento del Problema</h2>
+    <p>El **planteamiento del problema** es el punto de partida de cualquier investigación. Aquí se define con precisión qué se quiere investigar y por qué es importante hacerlo.</p>
+
+    <h3>Explicación 1 - Definición Formal</h3>
+    <p>Para formular un problema de investigación correctamente, es necesario responder a estas preguntas clave:</p>
+    <ul>
+        <li>¿Qué tema se quiere estudiar?</li>
+        <li>¿Cuál es la relevancia del tema?</li>
+        <li>¿A quién afecta o beneficia la investigación?</li>
+        <li>¿Cuáles son las causas y consecuencias del problema?</li>
+        <li>¿Cómo se puede abordar el problema?</li>
+    </ul>
+    <p>Un problema bien planteado debe ser **claro**, **relevante**, **viable** y **medible**.</p>
+
+    <h3>Explicación 2 - Comparación con un Problema Cotidiano</h3>
+    <p>Imagina que tu celular no enciende. Para resolverlo, debes seguir un proceso:</p>
+    <ol>
+        <li>Definir el problema: "Mi celular no prende."</li>
+        <li>Analizar posibles causas: Puede ser la batería, un fallo del sistema o la pantalla dañada.</li>
+        <li>Buscar información: Consultar un manual, ver tutoriales o preguntar a un experto.</li>
+        <li>Probar soluciones: Cargar el celular, reiniciarlo o cambiar la batería.</li>
+    </ol>
+    <p>Este mismo enfoque estructurado se aplica a una investigación.</p>
+
+    <h3>Explicación 3 - Analogía con un Detective</h3>
+    <p>Un investigador es como un detective que intenta resolver un caso. Imagina que un detective recibe un caso de robo:</p>
+    <ul>
+        <li>**Definir el problema:** ¿Qué se robó y dónde?</li>
+        <li>**Revisar pruebas:** Buscar huellas, cámaras de seguridad, testigos.</li>
+        <li>**Formular hipótesis:** ¿Fue un robo planeado o espontáneo?</li>
+        <li>**Investigar:** Analizar la evidencia y probar teorías.</li>
+    </ul>
+    <p>De la misma forma, un investigador científico sigue un proceso estructurado para encontrar respuestas a su problema.</p>
+
+    <h3>Ejemplos de Planteamiento del Problema</h3>
+
+    <h4>Ejemplo Científico</h4>
+    <p><strong>Tema:</strong> Impacto del cambio climático en la biodiversidad.</p>
+    <p><strong>Planteamiento:</strong> "En los últimos años, el cambio climático ha alterado los ecosistemas. Sin embargo, aún no se han identificado qué especies son más vulnerables y por qué. ¿Cómo afecta el cambio climático a la biodiversidad de los bosques andinos?"</p>
+
+    <h4>Ejemplo Social</h4>
+    <p><strong>Tema:</strong> Uso de redes sociales y su impacto en la autoestima adolescente.</p>
+    <p><strong>Planteamiento:</strong> "Los adolescentes pasan muchas horas en redes sociales, donde se ven expuestos a estándares de belleza irreales. ¿Existe una relación entre el tiempo de uso de redes sociales y la autoestima en jóvenes de 13 a 18 años?"</p>
+
+    <h4>Ejemplo de Ingeniería</h4>
+    <p><strong>Tema:</strong> Optimización del consumo de energía en hogares inteligentes.</p>
+    <p><strong>Planteamiento:</strong> "Los hogares modernos consumen grandes cantidades de energía, lo que afecta el medio ambiente y el costo de vida. ¿Qué estrategias de automatización pueden reducir el consumo eléctrico sin comprometer la comodidad?"</p>
+
+    <h3>Lista de 20 Ejemplos de Investigaciones</h3>
+    <ol>
+        <li>Impacto de los pesticidas en la calidad del agua.</li>
+        <li>Relación entre el sueño y el rendimiento académico.</li>
+        <li>Efectos de la contaminación del aire en la salud respiratoria.</li>
+        <li>Influencia de la inteligencia artificial en el mercado laboral.</li>
+        <li>Uso de energías renovables en zonas rurales.</li>
+        <li>Relación entre la alimentación y la obesidad infantil.</li>
+        <li>Uso de la realidad virtual en la educación.</li>
+        <li>Factores que influyen en el abandono escolar.</li>
+        <li>Diseño de materiales biodegradables para envases.</li>
+        <li>Impacto de la música en la concentración y productividad.</li>
+        <li>Efectos del sedentarismo en la salud cardiovascular.</li>
+        <li>Comparación de métodos de purificación de agua.</li>
+        <li>Influencia de la publicidad en el consumo de alimentos ultraprocesados.</li>
+        <li>Desarrollo de prótesis biónicas de bajo costo.</li>
+        <li>Factores que afectan la eficiencia de los paneles solares.</li>
+        <li>Uso de drones en la reforestación de zonas dañadas.</li>
+        <li>Impacto del cambio climático en la agricultura.</li>
+        <li>Efectos del trabajo remoto en la salud mental.</li>
+        <li>Avances en la nanotecnología aplicada a la medicina.</li>
+        <li>Relación entre el uso de videojuegos y la toma de decisiones.</li>
+    </ol>
+</div>
+
+<div class="step">
+    <h2>2. Revisión de Literatura</h2>
+    <p>La **revisión de literatura** es el proceso de recopilar información relevante y confiable sobre un tema antes de iniciar una investigación. Es fundamental conocer lo que ya se ha estudiado para construir sobre ese conocimiento y no repetir investigaciones innecesarias.</p>
+
+    <h3>¿Por qué es importante la revisión de literatura?</h3>
+    <ul>
+      
+      
+        <li>Evita que la investigación sea redundante.</li>
+        <li>Permite fundamentar la hipótesis con información previa.</li>
+        <li>Ayuda a conocer metodologías que se han utilizado antes.</li>
+        <li>Permite comparar distintos enfoques sobre un mismo tema.</li>
+    </ul>
+
+
+<p>La revisión de literatura es fundamental en una investigación porque permite conocer qué se ha estudiado previamente sobre un tema, evitar errores ya documentados y construir sobre conocimientos previos. Sin una buena revisión de fuentes confiables, la investigación podría basarse en información errónea o incompleta, lo que afectaría la validez de los resultados. Además, al utilizar diferentes métodos de búsqueda (como bases de datos académicas, libros, artículos científicos, videos educativos y redes sociales verificadas), se obtiene una visión más amplia y fundamentada del problema de estudio, facilitando la formulación de hipótesis sólidas y metodologías adecuadas.</p>
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Cómo buscar información en distintas fuentes</h3>
+    
+    <h4>1. **Búsqueda en Wikipedia** (Útil, pero con precaución)</h4>
+    <p>Wikipedia es una fuente rápida para obtener información general, pero no es una fuente académica confiable. Sin embargo, se puede usar de las siguientes formas:</p>
+    <ul>
+        <li>Leer la introducción de un tema para entenderlo de manera general.</li>
+        <li>Revisar las **referencias al final del artículo**, que muchas veces incluyen libros, artículos científicos y fuentes oficiales.</li>
+        <li>Comparar la información con otras fuentes académicas.</li>
+    </ul>
+    <p><strong>Ejemplo de búsqueda:</strong> Si se investiga sobre "Cambio Climático", se puede buscar en Wikipedia y revisar las fuentes que citan estudios científicos.</p>
+
+    <h4>2. **El Rincón del Vago y sitios similares**</h4>
+    <p>Sitios como **El Rincón del Vago** contienen resúmenes, trabajos escolares y apuntes de estudiantes. No son fuentes confiables para una investigación científica, pero pueden servir para:</p>
+    <ul>
+        <li>Obtener ideas sobre cómo estructurar un trabajo.</li>
+        <li>Identificar temas que podrían investigarse más a fondo.</li>
+        <li>Revisar cómo otras personas han desarrollado un tema.</li>
+    </ul>
+
+    <h4>3. **Inteligencias Artificiales (ChatGPT, Bard, etc.)**</h4>
+    <p>Las IA pueden ayudar en la investigación proporcionando información rápida y estructurada. Sin embargo, deben usarse con precaución porque:</p>
+    <ul>
+        <li>La información puede estar desactualizada.</li>
+        <li>Puede generar errores o datos sin verificación.</li>
+        <li>No cita fuentes confiables de manera automática.</li>
+    </ul>
+    <p>**Consejo:** Si usas una IA, verifica los datos con fuentes académicas antes de incluirlos en tu investigación.</p>
+
+    <h4>4. **Búsqueda en Google Académico**</h4>
+    <p>Google Académico (<a href="https://scholar.google.com/" target="_blank">scholar.google.com</a>) es una excelente herramienta para encontrar artículos científicos y trabajos de investigación. Para buscar información confiable:</p>
+    <ul>
+        <li>Escribir el tema en el buscador, por ejemplo: **"Impacto del plástico en los océanos"**.</li>
+        <li>Usar comillas ("") para buscar frases exactas.</li>
+        <li>Filtrar por año para encontrar estudios recientes.</li>
+        <li>Revisar el número de citas: los artículos más citados suelen ser más relevantes.</li>
+    </ul>
+
+    <h4>5. **Videos de YouTube como fuente de información**</h4>
+    <p>Los videos pueden ser útiles para aprender sobre un tema, pero es importante verificar la credibilidad del canal. Para buscar información en YouTube:</p>
+    <ul>
+        <li>Buscar canales educativos o de divulgación científica, como **TED-Ed, Kurzgesagt, National Geographic, QuantumFracture, etc.**</li>
+        <li>Verificar si los videos mencionan fuentes científicas en la descripción.</li>
+        <li>Evitar videos sin referencias o con información poco fundamentada.</li>
+    </ul>
+    <p>**Ejemplo:** Si buscas "Efectos del cambio climático", puedes encontrar videos explicativos de la NASA o la ONU con información confiable.</p>
+
+    <h4>6. **Redes sociales como fuente de información**</h4>
+    <p>En redes sociales (Twitter, Facebook, Reddit, etc.), se pueden encontrar debates, noticias y opiniones sobre temas actuales. Sin embargo, es fundamental:</p>
+    <ul>
+        <li>Verificar si la información proviene de cuentas oficiales o expertos en el tema.</li>
+        <li>Evitar noticias falsas y datos sin referencias.</li>
+        <li>Contrastar la información con fuentes académicas o sitios de noticias confiables.</li>
+    </ul>
+    <p>**Ejemplo:** Un científico puede publicar un estudio en Twitter, pero es necesario leer el artículo original en una revista científica para confirmar su validez.</p>
+
+    <h4>7. **Búsqueda en bases de datos científicas**</h4>
+    <p>Si se necesita información más técnica, se pueden usar bases de datos como:</p>
+    <ul>
+        <li><a href="https://www.scielo.org/" target="_blank">SciELO</a> (Científica en español).</li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed</a> (Medicina y biología).</li>
+        <li><a href="https://www.researchgate.net/" target="_blank">ResearchGate</a> (Investigaciones académicas).</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Ejemplo de revisión de literatura en distintas investigaciones</h3>
+
+    <h4>Ejemplo Científico</h4>
+    <p><strong>Tema:</strong> Contaminación del agua por plásticos.</p>
+    <p><strong>Revisión de literatura:</strong> "Estudios recientes han demostrado que los microplásticos han contaminado el 80% de las fuentes de agua dulce en el mundo (Smith et al., 2022). Investigaciones en la Universidad de California indican que los plásticos liberan sustancias tóxicas al degradarse, lo que afecta la salud humana (Jones & Green, 2021)."</p>
+
+    <h4>Ejemplo Social</h4>
+    <p><strong>Tema:</strong> Impacto del teletrabajo en la productividad laboral.</p>
+    <p><strong>Revisión de literatura:</strong> "Según un informe de la Universidad de Harvard (2021), el 65% de los trabajadores remotos aumentó su productividad en comparación con los que trabajan en oficina. Sin embargo, un estudio de la Universidad de Stanford advierte que el teletrabajo puede generar aislamiento y reducir la comunicación efectiva en equipos de trabajo (Brown et al., 2022)."</p>
+
+    <h4>Ejemplo de Ingeniería</h4>
+    <p><strong>Tema:</strong> Uso de materiales reciclados en la construcción.</p>
+    <p><strong>Revisión de literatura:</strong> "Diversos estudios han demostrado que el uso de concreto reciclado reduce la huella de carbono sin comprometer la resistencia estructural (Martínez, 2020). En Europa, algunas empresas han implementado estructuras con plásticos reciclados, logrando edificios más sostenibles (Gómez & Pérez, 2021)."</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Consejo Final</h3>
+    <p>La revisión de literatura es clave para cualquier investigación. Usar múltiples fuentes y verificar su confiabilidad garantiza una base teórica sólida.</p>
+</div>
+
+
+<div class="step">
+    <h2>3. Formulación de Hipótesis</h2>
+    <p>La **hipótesis** es una suposición fundamentada que intenta explicar el problema de investigación. Se plantea como una posible respuesta a la pregunta de investigación y debe ser comprobable mediante experimentación, observación o análisis de datos.</p>
+
+    <h3>Características de una buena hipótesis</h3>
+    <ul>
+        <li><strong>Debe ser clara y específica:</strong> No debe ser ambigua o general.</li>
+        <li><strong>Debe ser comprobable:</strong> Se debe poder probar con datos reales.</li>
+        <li><strong>Debe ser basada en información previa:</strong> No debe ser una suposición sin fundamentos.</li>
+        <li><strong>Debe estar relacionada con el problema de investigación:</strong> Debe responder la pregunta planteada.</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Tipos de hipótesis</h3>
+    
+    <h4>1. **Hipótesis Descriptiva**</h4>
+    <p>Describe una característica del fenómeno estudiado, sin comparaciones ni relaciones causales.</p>
+    <p><strong>Ejemplo:</strong> "El 70% de los adolescentes en Argentina usa redes sociales más de 4 horas al día."</p>
+
+    <h4>2. **Hipótesis Correlacional**</h4>
+    <p>Propone una relación entre dos variables, sin establecer causa y efecto.</p>
+    <p><strong>Ejemplo:</strong> "Los estudiantes que duermen menos de 6 horas tienen menor rendimiento académico que aquellos que duermen más de 8 horas."</p>
+
+    <h4>3. **Hipótesis Causal**</h4>
+    <p>Establece una relación de causa y efecto entre dos variables.</p>
+    <p><strong>Ejemplo:</strong> "El consumo excesivo de bebidas azucaradas aumenta el riesgo de desarrollar diabetes tipo 2."</p>
+
+    <h4>4. **Hipótesis Comparativa**</h4>
+    <p>Compara dos o más grupos para ver si existe una diferencia significativa.</p>
+    <p><strong>Ejemplo:</strong> "Los alumnos que estudian con técnicas de memorización visual tienen mejores resultados en los exámenes que los que estudian solo con lectura."</p>
+
+    <h4>5. **Hipótesis Nula**</h4>
+    <p>Indica que no hay relación entre las variables o que cualquier relación es por casualidad.</p>
+    <p><strong>Ejemplo:</strong> "No hay diferencia significativa en el rendimiento académico entre estudiantes que estudian con música y aquellos que estudian en silencio."</p>
+
+    <h4>6. **Hipótesis Alternativa**</h4>
+    <p>Es la opuesta a la hipótesis nula; indica que sí existe una relación entre variables.</p>
+    <p><strong>Ejemplo:</strong> "Los estudiantes que estudian con música relajante obtienen mejores resultados en pruebas de concentración que aquellos que estudian en silencio."</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Ejemplos de formulación de hipótesis en distintas áreas</h3>
+
+    <h4>Ejemplo Científico</h4>
+    <p><strong>Tema:</strong> Impacto del cambio climático en la biodiversidad.</p>
+    <p><strong>Hipótesis:</strong> "El aumento de la temperatura global reduce la población de anfibios en los bosques tropicales debido a la alteración de su hábitat."</p>
+
+    <h4>Ejemplo Social</h4>
+    <p><strong>Tema:</strong> Influencia de las redes sociales en la autoestima de los adolescentes.</p>
+    <p><strong>Hipótesis:</strong> "Los adolescentes que pasan más de 3 horas diarias en redes sociales tienen una menor autoestima que aquellos que las usan menos de 1 hora al día."</p>
+
+    <h4>Ejemplo de Medicina</h4>
+    <p><strong>Tema:</strong> Relación entre el consumo de comida rápida y la obesidad.</p>
+    <p><strong>Hipótesis:</strong> "El consumo frecuente de comida rápida está directamente relacionado con un aumento en los índices de obesidad en adultos jóvenes."</p>
+
+    <h4>Ejemplo de Tecnología</h4>
+    <p><strong>Tema:</strong> Eficiencia de la inteligencia artificial en el diagnóstico médico.</p>
+    <p><strong>Hipótesis:</strong> "Los algoritmos de inteligencia artificial tienen una precisión del 90% en la detección temprana de enfermedades cardíacas, superando la precisión de los diagnósticos tradicionales."</p>
+
+    <h4>Ejemplo de Psicología</h4>
+    <p><strong>Tema:</strong> Impacto de la música en la concentración.</p>
+    <p><strong>Hipótesis:</strong> "Las personas que escuchan música instrumental mientras estudian tienen mayor capacidad de concentración que aquellas que estudian en completo silencio."</p>
+
+    <h4>Ejemplo de Economía</h4>
+    <p><strong>Tema:</strong> Efecto del salario mínimo en el desempleo.</p>
+    <p><strong>Hipótesis:</strong> "Un aumento del 10% en el salario mínimo reduce el desempleo en sectores de baja calificación laboral."</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Errores comunes al formular hipótesis</h3>
+    <ul>
+        <li><strong>Hipótesis demasiado amplia:</strong> No se puede probar fácilmente.</li>
+        <li><strong>Falta de fundamentación:</strong> No se basa en investigaciones previas.</li>
+        <li><strong>No es medible:</strong> No se pueden obtener datos concretos para probarla.</li>
+        <li><strong>No es específica:</strong> No define claramente las variables en estudio.</li>
+    </ul>
+
+    <h3>Consejo Final</h3>
+    <p>Una hipótesis bien formulada es clave para una investigación exitosa. Debe ser clara, específica y verificable con datos. Antes de definir la hipótesis, es recomendable hacer una revisión de literatura para asegurarse de que se basa en información previa confiable.</p>
+</div>
+
+
+<div class="step">
+    <h2>4. Metodología</h2>
+    <p>La **metodología** es el conjunto de pasos y técnicas que se utilizan para recolectar, analizar y procesar la información en una investigación. En esta etapa, los estudiantes organizan sus ideas y definen cómo llevarán a cabo su estudio.</p>
+
+    <h3>¿Por qué es importante la metodología?</h3>
+    <ul>
+        <li>Permite seguir un proceso ordenado y lógico.</li>
+        <li>Facilita la recolección de datos de manera eficiente.</li>
+        <li>Garantiza que la investigación sea clara y replicable.</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Fases de la metodología</h3>
+
+    <h4>1. **Organización de ideas**</h4>
+    <p>Antes de comenzar la recolección de datos, los estudiantes deben estructurar su investigación. Esto incluye:</p>
+    <ul>
+        <li>Definir los objetivos de la investigación.</li>
+        <li>Determinar qué información es necesaria.</li>
+        <li>Elegir las fuentes de información (libros, encuestas, experimentos, etc.).</li>
+    </ul>
+    <p><strong>Ejemplo:</strong> Si los estudiantes quieren investigar el impacto del uso de redes sociales en el rendimiento escolar, primero deben decidir qué aspectos medirán (horas de uso, calificaciones, nivel de concentración, etc.).</p>
+
+    <h4>2. **Definición de la población y muestra**</h4>
+    <p>La **población** es el grupo total de personas a las que podría aplicarse la investigación. La **muestra** es el subconjunto de esa población que se estudiará.</p>
+    <p><strong>Ejemplo:</strong> Si se estudia el impacto del sueño en el rendimiento escolar, la población pueden ser todos los estudiantes de secundaria, pero la muestra podría ser un grupo de 30 alumnos de una escuela específica.</p>
+
+    <h4>3. **Técnicas de recolección de datos**</h4>
+    <p>Para obtener información confiable, se pueden usar diferentes técnicas:</p>
+    
+    <h5>a) **Encuestas y cuestionarios**</h5>
+    <p>Son preguntas estructuradas que permiten recopilar datos de muchas personas de manera rápida.</p>
+    <p><strong>Ejemplo:</strong> Una encuesta sobre "Uso de redes sociales y rendimiento académico" puede incluir preguntas como:</p>
+    <ul>
+        <li>¿Cuántas horas al día usas redes sociales?</li>
+        <li>¿Sientes que te distraen mientras estudias?</li>
+        <li>¿Cómo han sido tus calificaciones en los últimos meses?</li>
+    </ul>
+
+    <h5>b) **Observaciones directas**</h5>
+    <p>Consiste en registrar el comportamiento de las personas o fenómenos en su entorno natural.</p>
+    <p><strong>Ejemplo:</strong> Para estudiar la atención en clase, los investigadores pueden observar cuántas veces un estudiante revisa su celular mientras el profesor explica.</p>
+
+    <h5>c) **Experimentos**</h5>
+    <p>Permiten comprobar hipótesis mediante pruebas controladas.</p>
+    <p><strong>Ejemplo:</strong> Un grupo de estudiantes podría probar si dormir más horas mejora su rendimiento en pruebas matemáticas.</p>
+
+    <h5>d) **Revisión de documentos y fuentes secundarias**</h5>
+    <p>Analizar libros, artículos y datos estadísticos ya existentes.</p>
+    <p><strong>Ejemplo:</strong> Consultar informes del Ministerio de Educación sobre el impacto del uso de celulares en el aula.</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Ejemplo de aplicación metodológica</h3>
+
+    <h4>Ejemplo Científico</h4>
+    <p><strong>Tema:</strong> Relación entre el uso del celular y la calidad del sueño.</p>
+    <p><strong>Metodología:</strong></p>
+    <ul>
+        <li>Población: Estudiantes de secundaria.</li>
+        <li>Muestra: 50 estudiantes de entre 15 y 18 años.</li>
+        <li>Método de recolección: Encuestas y seguimiento del tiempo de pantalla.</li>
+        <li>Análisis: Comparar horas de sueño con el rendimiento en pruebas de atención.</li>
+    </ul>
+
+    <h4>Ejemplo Social</h4>
+    <p><strong>Tema:</strong> Impacto del teletrabajo en la vida familiar.</p>
+    <p><strong>Metodología:</strong></p>
+    <ul>
+        <li>Población: Trabajadores que hacen home office.</li>
+        <li>Muestra: 40 empleados de una empresa tecnológica.</li>
+        <li>Método de recolección: Entrevistas y análisis de horarios laborales.</li>
+        <li>Análisis: Comparar satisfacción laboral y tiempo con la familia.</li>
+    </ul>
+
+    <h4>Ejemplo de Ingeniería</h4>
+    <p><strong>Tema:</strong> Reducción del consumo eléctrico en hogares.</p>
+    <p><strong>Metodología:</strong></p>
+    <ul>
+        <li>Población: Familias en una ciudad.</li>
+        <li>Muestra: 100 hogares.</li>
+        <li>Método de recolección: Medición del consumo eléctrico antes y después de aplicar estrategias de eficiencia energética.</li>
+        <li>Análisis: Comparación del consumo de energía con diferentes medidas aplicadas.</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Errores comunes en la metodología</h3>
+    <ul>
+        <li>Definir una muestra demasiado pequeña o no representativa.</li>
+        <li>Usar encuestas mal estructuradas que no respondan al problema de investigación.</li>
+        <li>No registrar correctamente los datos recolectados.</li>
+        <li>Falta de control en los experimentos, lo que genera resultados poco confiables.</li>
+    </ul>
+
+    <h3>Consejo Final</h3>
+    <p>Para que la metodología sea efectiva, es importante definir un plan claro, elegir las herramientas adecuadas para recolectar información y asegurarse de que los datos sean representativos del problema que se quiere estudiar.</p>
+</div>
+
+<div class="step">
+    <h2>5. Recolección de Datos</h2>
+    <p>La **recolección de datos** es el proceso de obtener información para responder la pregunta de investigación y comprobar la hipótesis. Se deben utilizar métodos adecuados para garantizar que los datos sean confiables y útiles.</p>
+
+    <h3>¿Por qué es importante la recolección de datos?</h3>
+    <ul>
+        <li>Permite obtener evidencia para responder la pregunta de investigación.</li>
+        <li>Ayuda a validar o rechazar la hipótesis.</li>
+        <li>Evita errores y sesgos en el estudio.</li>
+        <li>Facilita el análisis y la interpretación de los resultados.</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Métodos de Recolección de Datos</h3>
+
+    <h4>1. **Encuestas y Cuestionarios**</h4>
+    <p>Son preguntas estructuradas que permiten obtener información de muchas personas de manera rápida.</p>
+    
+    <h4>Ejemplos:</h4>
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 1:</strong> Para investigar el impacto del uso de redes sociales en el rendimiento escolar, se puede diseñar un cuestionario con preguntas como:</p>
+    <ul>
+        <li>¿Cuántas horas al día usas redes sociales?</li>
+        <li>¿Sientes que las redes sociales afectan tu concentración en el estudio?</li>
+        <li>¿Cómo han sido tus calificaciones en los últimos meses?</li>
+    </ul>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 2:</strong> En un estudio sobre hábitos alimenticios, se puede preguntar:</p>
+    <ul>
+        <li>¿Cuántas veces consumes comida rápida por semana?</li>
+        <li>¿Cuántas porciones de frutas y verduras consumes diariamente?</li>
+        <li>¿Realizas actividad física regularmente?</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h4>2. **Entrevistas**</h4>
+    <p>Consiste en hacer preguntas abiertas a una persona o grupo para obtener información más detallada.</p>
+
+    <h4>Ejemplos:</h4>
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 1:</strong> Para estudiar el impacto del teletrabajo en la vida familiar, se pueden hacer preguntas como:</p>
+    <ul>
+        <li>¿Cómo ha cambiado la relación con tu familia desde que trabajas desde casa?</li>
+        <li>¿Sientes que trabajas más horas en teletrabajo que en oficina?</li>
+        <li>¿Cuáles son los principales beneficios y dificultades que has encontrado?</li>
+    </ul>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 2:</strong> En un estudio sobre estrés académico, se pueden realizar entrevistas a estudiantes preguntando:</p>
+    <ul>
+        <li>¿Cuáles son las principales causas de estrés en tu vida académica?</li>
+        <li>¿Cómo manejas el estrés durante la temporada de exámenes?</li>
+        <li>¿Crees que el sistema educativo debería implementar medidas para reducir el estrés estudiantil?</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h4>3. **Observaciones Directas**</h4>
+    <p>Consiste en registrar el comportamiento de las personas o fenómenos en su entorno natural.</p>
+
+    <h4>Ejemplos:</h4>
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 1:</strong> Para estudiar la atención en clase, un investigador puede observar cuántas veces un estudiante revisa su celular mientras el profesor explica.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 2:</strong> En un estudio sobre el tráfico en una ciudad, se pueden registrar cuántos peatones cruzan en semáforos en rojo en distintas horas del día.</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h4>4. **Experimentos**</h4>
+    <p>Permiten probar hipótesis mediante pruebas controladas y repetibles.</p>
+
+    <h4>Ejemplos:</h4>
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 1:</strong> Un grupo de estudiantes puede probar si dormir más horas mejora su rendimiento en pruebas matemáticas.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 2:</strong> En un estudio sobre el crecimiento de plantas, se pueden regar distintas plantas con agua y otras con refrescos azucarados para ver las diferencias en su crecimiento.</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h4>5. **Revisión de Documentos y Datos Secundarios**</h4>
+    <p>Analizar información previamente registrada en libros, artículos científicos, bases de datos, etc.</p>
+
+    <h4>Ejemplos:</h4>
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 1:</strong> Consultar informes de la ONU sobre temperaturas globales para un estudio sobre cambio climático.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+    <p><strong>Ejemplo 2:</strong> Analizar registros históricos sobre la evolución de las tasas de natalidad en una región para estudiar cambios demográficos.</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Consejo Final</h3>
+    <p>Elegir el método correcto de recolección de datos es clave para obtener información confiable. Se recomienda combinar varias técnicas para obtener una visión más completa del problema de investigación.</p>
+</div>
+
+
+<div class="step">
+    <h2>6. Análisis de Datos</h2>
+    <p>El **análisis de datos** es el proceso en el que se interpretan los datos recolectados para extraer conclusiones. En esta etapa se organizan, procesan y comparan los datos obtenidos para determinar si la hipótesis planteada es válida o no.</p>
+
+    <h3>¿Por qué es importante el análisis de datos?</h3>
+    <ul>
+        <li>Permite transformar datos en información útil.</li>
+        <li>Ayuda a identificar patrones, tendencias y relaciones.</li>
+        <li>Facilita la toma de decisiones basadas en evidencia.</li>
+        <li>Evita errores en la interpretación de resultados.</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Pasos para el Análisis de Datos</h3>
+
+    <h4>1. **Organización de los Datos**</h4>
+    <p>Antes de analizar los datos, es necesario organizarlos de forma estructurada. Para ello se pueden usar:</p>
+    <ul>
+        <li>Tablas para visualizar los datos de forma clara.</li>
+        <li>Gráficos (barras, líneas, circulares) para interpretar tendencias.</li>
+        <li>Software estadístico como Excel, SPSS o Google Sheets.</li>
+    </ul>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>2. **Limpieza de Datos**</h4>
+    <p>Se eliminan errores, datos duplicados o respuestas inválidas.</p>
+    <p><strong>Ejemplo:</strong> Si en una encuesta sobre consumo de frutas, un estudiante respondió que come "1000 manzanas al día", se debe considerar un error y corregirlo o eliminarlo.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>3. **Análisis Estadístico**</h4>
+    <p>Consiste en aplicar métodos matemáticos para interpretar los datos:</p>
+    <ul>
+        <li><strong>Media (promedio):</strong> Suma de los valores dividida por la cantidad total de datos.</li>
+        <li><strong>Mediana:</strong> Valor que se encuentra en el centro de un conjunto de datos ordenados.</li>
+        <li><strong>Moda:</strong> El valor que más se repite en el conjunto de datos.</li>
+        <li><strong>Desviación estándar:</strong> Indica qué tan dispersos están los datos respecto a la media.</li>
+    </ul>
+    <p><strong>Ejemplo:</strong> Si se investiga el tiempo que los estudiantes pasan en redes sociales, se puede calcular el promedio de horas diarias y compararlo con el rendimiento académico.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>4. **Comparación de Datos**</h4>
+    <p>Para verificar si hay relaciones entre variables, se pueden hacer comparaciones:</p>
+    <ul>
+        <li>Gráficos de dispersión para analizar correlaciones.</li>
+        <li>Tablas de frecuencia para ver la distribución de datos.</li>
+        <li>Pruebas estadísticas para comprobar relaciones de causa-efecto.</li>
+    </ul>
+    <p><strong>Ejemplo:</strong> Si en un estudio sobre alimentación y rendimiento académico se encuentran valores como:</p>
+    <table border="1">
+        <tr>
+            <th>Estudiante</th>
+            <th>Comidas saludables por día</th>
+            <th>Calificación promedio</th>
+        </tr>
+        <tr>
+            <td>A</td>
+            <td>5</td>
+            <td>9.0</td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>2</td>
+            <td>6.5</td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>4</td>
+            <td>8.5</td>
+        </tr>
+    </table>
+    <p>Se puede notar una posible relación entre la alimentación saludable y mejores calificaciones.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>5. **Identificación de Patrones y Tendencias**</h4>
+    <p>Se busca identificar comportamientos repetitivos en los datos.</p>
+    <p><strong>Ejemplo:</strong> En un estudio sobre el uso de dispositivos electrónicos antes de dormir y la calidad del sueño, si la mayoría de los participantes que usaron pantallas más de 2 horas antes de acostarse tuvieron un sueño de menor calidad, se puede detectar un patrón de afectación.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>6. **Interpretación de los Resultados**</h4>
+    <p>Se debe analizar qué significan los datos obtenidos en relación con la hipótesis inicial.</p>
+    <p><strong>Ejemplo:</strong> Si se estudia la relación entre el tiempo de estudio y el rendimiento académico, y se encuentra que los estudiantes que estudian más de 2 horas diarias tienen mejores calificaciones, se puede concluir que hay una relación positiva.</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Ejemplo de Aplicación del Análisis de Datos</h3>
+
+    <h4>Ejemplo Científico</h4>
+    <p><strong>Tema:</strong> Efecto del cambio climático en los arrecifes de coral.</p>
+    <p><strong>Análisis:</strong> Se compararon temperaturas del agua con la cantidad de arrecifes de coral dañados. Se encontró que en regiones donde la temperatura subió más de 1,5 °C, hubo una reducción del 50% en la población de corales.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>Ejemplo Social</h4>
+    <p><strong>Tema:</strong> Impacto del teletrabajo en la salud mental.</p>
+    <p><strong>Análisis:</strong> Se compararon encuestas de bienestar emocional antes y después del inicio del teletrabajo. Se detectó un aumento del estrés en el 60% de los participantes que no tenían un espacio adecuado para trabajar en casa.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>Ejemplo de Ingeniería</h4>
+    <p><strong>Tema:</strong> Reducción del consumo energético en hogares.</p>
+    <p><strong>Análisis:</strong> Se midió el consumo eléctrico de 100 hogares antes y después de implementar bombillas LED y electrodomésticos eficientes. Se encontró una reducción promedio del 30% en el consumo mensual de electricidad.</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h3>Errores Comunes en el Análisis de Datos</h3>
+    <ul>
+        <li>No limpiar los datos antes de analizarlos.</li>
+        <li>Utilizar métodos de análisis inadecuados.</li>
+        <li>Interpretar los datos de manera subjetiva sin evidencia estadística.</li>
+        <li>Hacer generalizaciones sin una muestra representativa.</li>
+    </ul>
+
+    <h3>Consejo Final</h3>
+    <p>El análisis de datos debe hacerse con herramientas adecuadas y sin prejuicios. La información obtenida debe ser clara, precisa y responder a la hipótesis planteada en la investigación.</p>
+</div>
+
+<div class="step">
+    <h2>7. Conclusiones</h2>
+    <p>La **conclusión** es la parte final de una investigación donde se interpretan los resultados obtenidos y se responde a la pregunta de investigación. Aquí se determina si la hipótesis fue confirmada o rechazada y se presentan las implicaciones del estudio.</p>
+
+    <h3>¿Por qué es importante la conclusión?</h3>
+    <ul>
+        <li>Resume los hallazgos más importantes de la investigación.</li>
+        <li>Responde a la pregunta de investigación.</li>
+        <li>Ayuda a entender el impacto de los resultados.</li>
+        <li>Permite proponer futuras investigaciones o aplicaciones prácticas.</li>
+    </ul>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Pasos para redactar una buena conclusión</h3>
+
+    <h4>1. **Resumir los hallazgos principales**</h4>
+    <p>Se deben mencionar los descubrimientos más importantes sin repetir toda la investigación.</p>
+    <p><strong>Ejemplo:</strong> En un estudio sobre el uso de redes sociales y rendimiento académico, se podría escribir:</p>
+    <p>"Los resultados indican que los estudiantes que pasan más de 4 horas al día en redes sociales tienen, en promedio, calificaciones más bajas que aquellos que las usan menos de 2 horas."</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>2. **Confirmar o rechazar la hipótesis**</h4>
+    <p>Se debe indicar si los datos obtenidos apoyan o refutan la hipótesis inicial.</p>
+    <p><strong>Ejemplo:</strong> Si la hipótesis era "El consumo excesivo de comida rápida aumenta el riesgo de obesidad en adolescentes", la conclusión podría ser:</p>
+    <p>"Los resultados obtenidos confirman la hipótesis, ya que el 78% de los adolescentes con un alto consumo de comida rápida presentaron índices de obesidad superiores al promedio."</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>3. **Explicar las implicaciones de los resultados**</h4>
+    <p>Se deben discutir las consecuencias de los hallazgos y cómo pueden aplicarse en la realidad.</p>
+    <p><strong>Ejemplo:</strong> En un estudio sobre el teletrabajo y la salud mental:</p>
+    <p>"Dado que el 65% de los trabajadores encuestados reportó altos niveles de estrés debido al teletrabajo, se recomienda que las empresas implementen estrategias para equilibrar la vida laboral y personal."</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>4. **Reconocer limitaciones del estudio**</h4>
+    <p>Es importante señalar cualquier factor que haya afectado la investigación.</p>
+    <p><strong>Ejemplo:</strong> "Una limitación de este estudio fue el tamaño de la muestra, ya que solo se encuestaron 100 estudiantes. Para estudios futuros, sería recomendable incluir una muestra más amplia."</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>5. **Proponer investigaciones futuras**</h4>
+    <p>Se pueden sugerir nuevas preguntas o enfoques para investigaciones posteriores.</p>
+    <p><strong>Ejemplo:</strong> "Sería interesante realizar un estudio que evalúe el impacto de estrategias de desintoxicación digital en el rendimiento académico."</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Ejemplos de Conclusiones en Distintas Áreas</h3>
+
+    <h4>Ejemplo Científico</h4>
+    <p><strong>Tema:</strong> Efecto del cambio climático en los arrecifes de coral.</p>
+    <p><strong>Conclusión:</strong> "El aumento de la temperatura del agua ha reducido la población de corales en un 40% en las últimas dos décadas, lo que indica una necesidad urgente de medidas para reducir las emisiones de CO₂."</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>Ejemplo Social</h4>
+    <p><strong>Tema:</strong> Impacto de la educación a distancia en el rendimiento académico.</p>
+    <p><strong>Conclusión:</strong> "Si bien la educación a distancia ha permitido continuar la enseñanza durante la pandemia, los datos muestran que el 55% de los estudiantes encuestados presentó una disminución en su rendimiento debido a la falta de interacción en el aula."</p>
+
+    <hr style="border: 1px solid gray; width: 80%;">
+
+    <h4>Ejemplo de Ingeniería</h4>
+    <p><strong>Tema:</strong> Eficiencia de paneles solares en distintas condiciones climáticas.</p>
+    <p><strong>Conclusión:</strong> "Los paneles solares son más eficientes en regiones con mayor exposición solar, con una reducción del 30% en eficiencia en climas nublados. Se recomienda el desarrollo de tecnologías que mejoren el rendimiento en condiciones adversas."</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>Errores Comunes al Redactar Conclusiones</h3>
+    <ul>
+        <li>Repetir exactamente lo mismo que se dijo en la introducción.</li>
+        <li>No responder a la pregunta de investigación.</li>
+        <li>Hacer afirmaciones sin respaldo en los datos obtenidos.</li>
+        <li>No mencionar las limitaciones del estudio.</li>
+        <li>Incluir información nueva que no fue discutida en la investigación.</li>
+    </ul>
+
+    <h3>Consejo Final</h3>
+    <p>La conclusión debe ser clara, concisa y responder a la pregunta de investigación. Es la parte donde se demuestra la relevancia del estudio y se plantean posibles aplicaciones o nuevas investigaciones.</p>
+</div>
+<div class="step">
+    <h2>8. ¡Felicitaciones por llegar hasta aquí!</h2>
+    <p>¡Has completado todos los pasos de la investigación! Espero que toda esta información te haya sido útil para realizar tu trabajo de manera clara y estructurada.</p>
+
+    <p>Les mando un gran saludo,</p>
+    <h3>Nehuen Lautaro Bargas</h3>
+    <p>Espero que puedan aplicar todo lo aprendido en su investigación, ya que esta tiene una **fecha de entrega** y es importante que lo completen a tiempo.</p>
+
+    <hr style="border: 2px solid green; width: 80%;">
+
+    <h3>📅 Tiempo restante para la entrega de la tarea:</h3>
+    <h2 id="countdown" style="color: red;"></h2>
+
+    <script>
+        // Establecer la fecha de entrega para el viernes 4 de abril de 2025 a las 23:59:59
+        let entregaFecha = new Date("April 4, 2025 23:59:59").getTime();
+
+        function actualizarContador() {
+            let ahora = new Date().getTime();
+            let diferencia = entregaFecha - ahora;
+
+            if (diferencia <= 0) {
+                document.getElementById("countdown").innerHTML = "⏳ ¡Tiempo terminado para la entrega de la tarea!";
+            } else {
+                let dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                let horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+                let segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = 
+                    `⏳ ${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos restantes`;
+            }
+        }
+
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
+    </script>
+</div>
+
+ <button class="prev-btn" onclick="prevStep()">⬅</button>
+ <button class="next-btn" onclick="nextStep()">➡</button>
+    </div>
+
+    <h4 class="h44">Bargas Nehuen Lautaro - <span id="date"></span></h4>
+
+    <script>
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.step');
+        const nextButton = document.querySelector('.next-btn');
+        const prevButton = document.querySelector('.prev-btn');
+
+        function updateButtons() {
+            prevButton.style.display = currentStep > 0 ? "block" : "none";
+        }
+
+        function nextStep() {
+            steps[currentStep].classList.remove('active');
+            currentStep = (currentStep + 1) % steps.length;
+            steps[currentStep].classList.add('active');
+            updateButtons();
+        }
+
+        function prevStep() {
+            steps[currentStep].classList.remove('active');
+            currentStep = (currentStep - 1 + steps.length) % steps.length;
+            steps[currentStep].classList.add('active');
+            updateButtons();
+        }
+
+        document.getElementById("date").textContent = new Date().toLocaleDateString("es-AR");
+        updateButtons();
+    </script>
+
+</body>
+</html>
