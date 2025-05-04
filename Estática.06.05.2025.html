@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Problemas Leyes de Newton</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+            margin-bottom: 30px;
+        }
+
+        .pregunta {
+            display: none;
+            border: 2px solid #0ff;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .active {
+            display: block;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background: #0ff;
+            color: #000;
+            box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+        }
+
+        .mensaje-cooldown {
+            color: #ff0;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+            text-shadow: 0 0 8px #ff0, 0 0 16px #ff0;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes pulse {
+            0% {transform: scale(1);}
+            50% {transform: scale(1.05);}
+            100% {transform: scale(1);}
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>Problemas sobre las Leyes de Newton</h1>
+
+<!-- Preguntas --> <div id="preguntas"> <!-- Pregunta 1 --> <div class="pregunta active"> <h3>Pregunta 1: Fuerza y Aceleración</h3> <p>Un auto de 1,200 kg acelera a 5 m/s². ¿Qué fuerza genera su motor?</p> </div> <!-- Pregunta 2 --> <div class="pregunta"> <h3>Pregunta 2: Peso vs. Masa</h3> <p>Una mujer astronauta tiene una masa de 65 kg. ¿Cuál es su peso en la Tierra (g = 9.8 m/s²)?</p> </div> <!-- Pregunta 3 --> <div class="pregunta"> <h3>Pregunta 3: Gravedad en Otros Planetas</h3> <p>Un hombre pesa 800 N en un planeta con gravedad de 8 m/s². ¿Cuál sería su peso en la Tierra?</p> </div> <!-- Pregunta 4 --> <div class="pregunta"> <h3>Pregunta 4: Fuerza en el Espacio</h3> <p>¿Qué fuerza debe aplicar un Saiyajin masculino para mover una nave de 1,500 kg a 2 m/s² en el espacio (sin gravedad)?</p> </div> <!-- Pregunta 5 --> <div class="pregunta"> <h3>Pregunta 5: Aceleración y Fuerza</h3> <p>Una mujer piloto aplica 3,000 N de fuerza a su auto de 1,000 kg. ¿Qué aceleración logra?</p> </div> <!-- Pregunta 6 --> <div class="pregunta"> <h3>Pregunta 6: Masa y Gravedad</h3> <p>Un objeto pesa 490 N en la Tierra. ¿Cuál es su masa? ¿Y su peso en un planeta con g = 5 m/s²?</p> </div> <!-- Pregunta 7 --> <div class="pregunta"> <h3>Pregunta 7: Colisión y Fuerza</h3> <p>Un auto choca contra un muro desacelero a razon de 180km/s². ¿Qué fuerza experimenta si su masa es 1,200 kg?</p> </div> <!-- Pregunta 8 --> <div class="pregunta"> <h3>Pregunta 8: Fuerza de Gravedad</h3> <p>¿Qué fuerza gravitacional ejerce la Tierra sobre un niño de 40 kg durante una caída libre?</p> </div> <!-- Pregunta 9 --> <div class="pregunta"> <h3>Pregunta 9: Aceleración de un Saiyajin</h3> <p>Una Saiyajin femenina de 80 kg aplica 1,600 N de fuerza para volar. ¿Qué aceleración logra?</p> </div> <!-- Pregunta 10 --> <div class="pregunta"> <h3>Pregunta 10: Peso y Elevadores</h3> <p>Un hombre de 70 kg está en un elevador que sube con aceleración de 2 m/s². ¿Qué peso registra la báscula?</p> </div> <!-- Pregunta 11 --> <div class="pregunta"> <h3>Pregunta 11: Caída Libre y Masa</h3> <p>¿Por qué un hombre y una mujer de diferentes masas caen al suelo al mismo tiempo en vacío?</p> </div> <!-- Pregunta 12 --> <div class="pregunta"> <h3>Pregunta 12: Fuerza de Empuje</h3> <p>¿Qué fuerza necesita un Saiyajin para detener una roca de 500 kg que se mueve a 10 m/s en 2 segundos?</p> </div> <!-- Pregunta 13 --> <div class="pregunta"> <h3>Pregunta 13: Aceleración de un Auto</h3> <p>Un auto de 1,400 kg es empujado con una fuerza de 2,800 N. ¿Qué aceleración logra?</p> </div> <!-- Pregunta 14 --> <div class="pregunta"> <h3>Pregunta 14: Gravedad y Altura</h3> <p>¿Cómo cambia la gravedad que experimenta una mujer astronauta si orbita a 400 km vs. 800 km de la Tierra?</p> </div> <!-- Pregunta 15 --> <div class="pregunta"> <h3>Pregunta 15: Fuerza Combinada</h3> <p>Dos Saiyajin (uno masculino y uno femenino) empujan un asteroide de 10,000 kg con fuerzas de 5,000 N y 3,000 N. ¿Qué aceleración logran?</p> </div>
+
+
+
+
+
+ <div class="pregunta"> <h3>Pregunta 16: Fuerza de Frenado</h3> <p>Un hombre conductor frena su auto de 1,400 kg desde 30 m/s hasta detenerse en 5 segundos. ¿Qué fuerza aplican los frenos?</p> </div> <!-- Pregunta 17 -->
+ <div class="pregunta"> <h3>Pregunta 17: Peso en Otros Planetas</h3> <p>Un Saiyajin masculino pesa 1,200 N en la Tierra. ¿Cuál sería su peso en un planeta con gravedad 6 m/s²?</p> </div> <!-- Pregunta 18 --> <div class="pregunta"> <h3>Pregunta 18: Fuerza y Aceleración</h3> <p>Una mujer piloto acelera su auto de 1,100 kg a 4.5 m/s². ¿Qué fuerza genera el motor del auto?</p> </div> <!-- Pregunta 19 --> <div class="pregunta"> <h3>Pregunta 19: Fuerzas Combinadas</h3> <p>Dos Saiyajin (uno femenino y uno masculino) empujan una nave de 3,000 kg con fuerzas de 1,800 N y 1,200 N. ¿Qué aceleración logran?</p> </div> <!-- Pregunta 20 --> <div class="pregunta"> <h3>Pregunta 20: Caída Libre</h3> <p>¿Por qué un hombre y una mujer de diferentes masas caen al suelo al mismo tiempo en un ambiente sin aire (como la Luna)?</p> </div> <!-- Pregunta 21 --> <div class="pregunta"> <h3>Pregunta 21: Gravedad y Altura</h3> <p>Una astronauta femenina orbita a 500 km de altura. ¿Cómo cambia su peso comparado con estar en la superficie terrestre?</p> </div> <!-- Pregunta 22 --> <div class="pregunta"> <h3>Pregunta 22: Tensión en una Cuerda</h3> <p>¿Qué tensión soporta una cuerda que levanta a un hombre de 80 kg con aceleración de 3 m/s² hacia arriba?</p> </div> <!-- Pregunta 23 --> <div class="pregunta"> <h3>Pregunta 23: Colisión y Fuerza</h3> <p>Un auto choca contra un muro a 25 m/s y se detiene en 0.4 segundos. ¿Qué fuerza experimenta si su masa es 1,300 kg?</p> </div> <!-- Pregunta 24 --> <div class="pregunta"> <h3>Pregunta 24: Aceleración Espacial</h3> <p>Un Saiyajin femenino aplica 2,400 N de fuerza a una nave de 1,200 kg en el espacio. ¿Qué aceleración logra?</p> </div> <!-- Pregunta 25 --> <div class="pregunta"> <h3>Pregunta 25: Fuerza Normal</h3> <p>Un hombre de 75 kg está en un elevador que baja con aceleración de 1.5 m/s². ¿Qué fuerza normal registra la báscula?</p> </div> <!-- Pregunta 26 --> <div class="pregunta"> <h3>Pregunta 26: Fuerza en Superficie Sin Fricción</h3> <p>¿Qué fuerza necesita un auto de 1,000 kg para acelerar a 5 m/s² en una carretera sin fricción?</p> </div> <!-- Pregunta 27 --> <div class="pregunta"> <h3>Pregunta 27: Gravedad en la Luna</h3> <p>Una mujer de 60 kg salta en la Luna (g = 1.6 m/s²). ¿Cuál es su peso allí comparado con la Tierra?</p> </div> <!-- Pregunta 28 --> <div class="pregunta"> <h3>Pregunta 28: Fuerza del Motor</h3> <p>¿Qué fuerza genera el motor de un auto de 1,500 kg que acelera a 3.2 m/s² en una carretera plana?</p> </div> <!-- Pregunta 29 --> <div class="pregunta"> <h3>Pregunta 29: Aceleración con Masa Adicional</h3> <p>Un Saiyajin masculino de 90 kg lleva a un niño de 30 kg y vuela aplicando 1,800 N de fuerza. ¿Qué aceleración logran?</p> </div> <!-- Pregunta 30 --> <div class="pregunta"> <h3>Pregunta 30: Fuerza en Frenado Rápido</h3> <p>Un auto de 1,600 kg frena desde 20 m/s hasta detenerse en 2 segundos. ¿Qué fuerza aplican los frenos?</p> </div> </div>
+
+
+
+
+    <button id="btnSiguiente">Siguiente</button>
+    <div class="mensaje-cooldown" id="mensajeCooldown"></div>
+
+    <script>
+        const preguntas = document.querySelectorAll('.pregunta');
+        const btnSiguiente = document.getElementById('btnSiguiente');
+        const mensajeCooldown = document.getElementById('mensajeCooldown');
+        let indiceActual = 0;
+        const cooldownHoras = 0;
+
+        // Verificar si hay un cooldown activo
+        function verificarCooldown() {
+            const ultimoIntento = localStorage.getItem('ultimoIntento');
+            if (!ultimoIntento) return false;
+            
+            const tiempoTranscurrido = Date.now() - parseInt(ultimoIntento);
+            return tiempoTranscurrido < (cooldownHoras * 60 * 60 * 1000);
+        }
+
+        // Mostrar mensaje de cooldown
+        function mostrarMensajeCooldown() {
+            const ultimoIntento = parseInt(localStorage.getItem('ultimoIntento'));
+            const tiempoTranscurrido = Date.now() - ultimoIntento;
+            const tiempoRestante = (cooldownHoras * 60 * 60 * 1000) - tiempoTranscurrido;
+            const minutosRestantes = Math.ceil(tiempoRestante / 60000);
+            
+            mensajeCooldown.textContent = `Debes esperar ${minutosRestantes} minuto${minutosRestantes !== 1 ? 's' : ''} para intentar de nuevo`;
+            mensajeCooldown.style.display = 'block';
+            btnSiguiente.disabled = true;
+            btnSiguiente.style.opacity = '0.5';
+        }
+
+        // Manejador de botón
+        function mostrarSiguiente() {
+            // Verificar cooldown
+            if (verificarCooldown()) {
+                mostrarMensajeCooldown();
+                return;
+            }
+
+            // Eliminar animación anterior
+            preguntas[indiceActual].classList.remove('active', 'pulse');
+            
+            // Incrementar índice o finalizar
+            if (indiceActual < preguntas.length - 1) {
+                indiceActual++;
+                preguntas[indiceActual].classList.add('active', 'pulse');
+            } else {
+                btnSiguiente.disabled = true;
+                btnSiguiente.textContent = '¡Finalizado!';
+                btnSiguiente.style.backgroundColor = '#0f0';
+                btnSiguiente.style.borderColor = '#0f0';
+                
+                // Registrar hora del último intento
+                localStorage.setItem('ultimoIntento', Date.now());
+                setTimeout(() => {
+                    btnSiguiente.style.backgroundColor = 'transparent';
+                    btnSiguiente.style.borderColor = '#0ff';
+                    btnSiguiente.textContent = 'Siguiente';
+                    btnSiguiente.disabled = false;
+                }, 2000);
+            }
+        }
+
+        // Inicialización
+        if (verificarCooldown()) {
+            mostrarMensajeCooldown();
+        } else {
+            mensajeCooldown.style.display = 'none';
+            btnSiguiente.disabled = false;
+        }
+
+        btnSiguiente.addEventListener('click', mostrarSiguiente);
+    </script>
+</body>
+</html>
