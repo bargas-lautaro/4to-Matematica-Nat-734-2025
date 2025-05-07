@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Problemas Leyes de Newton</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+            margin-bottom: 30px;
+        }
+
+        .pregunta {
+            display: none;
+            border: 2px solid #0ff;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .active {
+            display: block;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background: #0ff;
+            color: #000;
+            box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+        }
+
+        .mensaje-cooldown {
+            color: #ff0;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+            text-shadow: 0 0 8px #ff0, 0 0 16px #ff0;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes pulse {
+            0% {transform: scale(1);}
+            50% {transform: scale(1.05);}
+            100% {transform: scale(1);}
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease;
+        }
+
+        @media only screen and (max-width: 600px) {
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    body {
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        width: 100%;
+    }
+
+    .pregunta {
+        width: 100%;
+        max-width: 95%;
+        padding: 15px;
+        font-size: 1em;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    button {
+        width: 100%;
+        max-width: 95%;
+        padding: 15px;
+        font-size: 1.1em;
+    }
+
+    #preguntas {
+        width: 100%;
+    }
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <h1>Problemas sobre las Leyes de Newton</h1>
+
+<!-- Preguntas --> <div id="preguntas"><!-- Pregunta 31 -->
+<div class="pregunta">
+    <h3>Pregunta 1: Empresa de camisetas</h3>
+    <p>Una empresa vende camisetas a $1.500 cada una. Para cubrir gastos, necesita generar al menos $45.000, pero no puede vender más de 100 camisetas. ¿Qué cantidad de camisetas puede vender?</p>
+</div>
+
+<!-- Pregunta 32 -->
+<div class="pregunta">
+    <h3>Pregunta 2: Juego de cartas</h3>
+    <p>Un jugador tiene 2.100 puntos. Cada sobre cuesta 300 puntos y desea comprar al menos 3 sobres. ¿Cuántos sobres puede comprar como mínimo y máximo?</p>
+</div>
+
+<!-- Pregunta 33 -->
+<div class="pregunta">
+    <h3>Pregunta 3: Reparto de insumos</h3>
+    <p>Una empresa reparte 80 cajas entre sucursales. Cada una recibe al menos 12 cajas. La empresa debe repartir en al menos 5 sucursales. ¿Entre cuántas puede repartir?</p>
+</div>
+
+<!-- Pregunta 34 -->
+<div class="pregunta">
+    <h3>Pregunta 4: Evento con entradas</h3>
+    <p>Una organizadora alquila un salón por $20.000 y cobra $800 por entrada. Quiere ganar al menos $4.000, pero el salón solo permite 40 personas. ¿Entre que rango de entradas debe venderse?</p>
+</div>
+
+<!-- Pregunta 5 -->
+<div class="pregunta">
+    <h3>Pregunta 5: Producción de empanadas</h3>
+    <p>Un negocio gasta $6.000 en ingredientes y $3.000 en salarios para producir empanadas. Cada empanada se vende a $60. ¿Cuántas debe vender para obtener al menos $3.000 de ganancia?</p>
+</div>
+
+<!-- Pregunta 6 -->
+<div class="pregunta">
+    <h3>Pregunta 6: Venta de entradas para torneo</h3>
+    <p>Se venden entradas a $250 para un torneo de videojuegos. Se necesita recaudar entre $2.000 y $3.000. ¿Cuántas entradas se deben vender?</p>
+</div>
+
+<!-- Pregunta 7 -->
+<div class="pregunta">
+    <h3>Pregunta 7: Reparto de premios</h3>
+    <p>Hay un premio total de $10.000 a repartir entre ganadores con premios de $1.200 como mínimo por persona. ¿Cuál es el número máximo de personas que pueden recibir premios?</p>
+</div>
+
+<!-- Pregunta 8 -->
+<div class="pregunta">
+    <h3>Pregunta 8: Producción de cajas</h3>
+    <p>Una fábrica produce cajas a $50 cada una. El ingreso total debe estar entre $5.000 y $8.000. ¿Cuántas cajas puede fabricar?</p>
+</div>
+
+<!-- Pregunta 9 -->
+<div class="pregunta">
+    <h3>Pregunta 9: Donación de libros</h3>
+    <p>Una biblioteca recibe una donación de hasta 3900 libros. Cada escuela debe recibir al menos 35 libros. ¿Cuál es el máximo número de escuelas beneficiadas?</p>
+</div>
+
+<!-- Pregunta 10 -->
+<div class="pregunta">
+    <h3>Pregunta 10: Producción de pan</h3>
+    <p>Una panadería necesita producir panes a $50 cada uno. Los gastos diarios fijos son $10.000. No puede hornear más de 700 panes por día. ¿Cuál es el rango de producción si desea obtener al menos $5.000 de ganancia diaria?</p>
+</div>
+
+
+<!-- Pregunta 11 -->
+<div class="pregunta">
+    <h3>Pregunta 11: Producción con costos y ganancias</h3>
+    <p>Una fábrica vende cada unidad producida a $200. Tiene un costo fijo mensual de $20.000 y un costo variable de $40 por unidad. Desea obtener una ganancia mensual de al menos $10.000, pero no puede producir más de 500 unidades por mes. ¿Cuál es el rango posible de unidades que puede producir?</p>
+</div>
+
+
+<!-- Pregunta 12 -->
+<div class="pregunta">
+    <h3>Pregunta 12: Venta de entradas</h3>
+    <p>Una sala de cine vende entradas a $200. Tiene un gasto fijo de $10.000 más $50 por cada entrada (en refrigerios y limpieza). ¿Cuál es la cantidad mínima de entradas que debe vender para no tener pérdidas?</p>
+</div>
+
+
+<div class="pregunta">
+    <h3>Pregunta 13: Concurso de dibujo</h3>
+    <p>Se entregan premios de $570 a cada ganador. El presupuesto total es de $6.000 y se quiere premiar al menos a 5 personas. ¿Cuál es el rango posible de ganadores?</p>
+</div>
+
+<!-- Pregunta 14 -->
+<div class="pregunta">
+    <h3>Pregunta 14: Juegos de feria</h3>
+    <p>Cada juego cuesta 240 fichas. Un niño tiene al menos 5000 fichas y quiere jugar al menos 3 veces. ¿Cuántas veces puede jugar?</p>
+</div>
+
+<!-- Pregunta 15 -->
+<div class="pregunta">
+    <h3>Pregunta 15: Producción limitada</h3>
+    <p>Una fábrica produce tornillos a un costo de $10 cada uno. Tiene una inversión fija de $8.000 y desea generar al menos $4.000 de ganancia. No puede fabricar más de 1.800 tornillos. ¿Cuál es el rango posible de producción?</p>
+</div>
+
+
+<!-- Pregunta 16 -->
+<div class="pregunta">
+    <h3>Pregunta 16: Campaña de donación</h3>
+    <p>Una ONG recibe donaciones de $400 por persona. Necesita recaudar $12.000 para gastos de emergencia y otros $3.000 para alimentos. ¿Cuál es el mínimo número de personas necesarias para alcanzar el objetivo?</p>
+</div>
+
+
+<!-- Pregunta 17 -->
+<div class="pregunta">
+    <h3>Pregunta 17: Compra de libros</h3>
+    <p>Un estudiante quiere comprar libros que cuestan $500 cada uno. Tiene $4.000, pero debe reservar al menos $1.000 para transporte y comida. ¿Cuál es el número máximo de libros que puede comprar?</p>
+</div>
+
+<!-- Pregunta 18 -->
+<div class="pregunta">
+    <h3>Pregunta 18: Producción de botellas</h3>
+    <p>Una embotelladora necesita producir botellas que se venden a $25 cada una. Los costos fijos diarios son de $5.000 y el objetivo es generar al menos $3.000 de ganancia. Por mantenimiento, no puede producir más de 500 botellas. ¿Cuál es el rango posible de producción?</p>
+</div>
+
+
+<!-- Pregunta 19 -->
+<div class="pregunta">
+    <h3>Pregunta 19: Publicidad en redes</h3>
+    <p>Una empresa invierte $250 por anuncio en redes. Desea invertir entre $1.000 y $2.500. Además, por política interna, debe contratar al menos 5 anuncios. ¿Cuántos anuncios puede contratar en total?</p>
+</div>
+
+<!-- Pregunta 20 -->
+<div class="pregunta">
+    <h3>Pregunta 20: Compra de entradas a evento</h3>
+    <p>Una empresa desea comprar entradas a $600 para un evento, pero no puede gastar más de $9.000. ¿Cuál es la cantidad máxima de entradas que puede adquirir?</p>
+</div>
+
+<!-- Pregunta 21 -->
+<div class="pregunta">
+    <h3>Pregunta 21: Producción de sillas</h3>
+    <p>Una carpintería necesita fabricar más de 150 sillas, pero no puede superar las 230 por falta de material. ¿Cuántas sillas puede fabricar?</p>
+</div>
+
+<!-- Pregunta 22 -->
+<div class="pregunta">
+    <h3>Pregunta 22: Premios en competencia</h3>
+    <p>El organizador tiene $18.000 y quiere dar $2.000 por premio. ¿Cuál es la cantidad máxima de premios posibles?</p>
+</div>
+
+<!-- Pregunta 23 -->
+<div class="pregunta">
+    <h3>Pregunta 23: Transporte de paquetes</h3>
+    <p>Cada camión puede transportar 150 cajas. Se necesitan mover al menos 900 cajas. ¿Cuál es la cantidad mínima de camiones necesarios?</p>
+</div>
+
+<!-- Pregunta 24 -->
+<div class="pregunta">
+    <h3>Pregunta 24: Fabricación de mesas</h3>
+    <p>Una empresa debe fabricar al menos 75 mesas y como máximo 120 por semana. ¿Cuál es el intervalo de producción posible?</p>
+</div>
+
+<!-- Pregunta 25 -->
+<div class="pregunta">
+    <h3>Pregunta 25: Inscripción a torneo</h3>
+    <p>Cada inscripción cuesta $500. El club necesita reunir al menos $6.000 pero no puede superar los $8.000. ¿Cuál es el rango de inscriptos?</p>
+</div>
+
+
+
+
+
+</div>
+
+
+    <button id="btnSiguiente">Siguiente</button>
+    <div class="mensaje-cooldown" id="mensajeCooldown"></div>
+
+    <script>
+        const preguntas = document.querySelectorAll('.pregunta');
+        const btnSiguiente = document.getElementById('btnSiguiente');
+        const mensajeCooldown = document.getElementById('mensajeCooldown');
+        let indiceActual = 0;
+        const cooldownHoras = 0.2;
+
+        // Verificar si hay un cooldown activo
+        function verificarCooldown() {
+            const ultimoIntento = localStorage.getItem('ultimoIntento');
+            if (!ultimoIntento) return false;
+            
+            const tiempoTranscurrido = Date.now() - parseInt(ultimoIntento);
+            return tiempoTranscurrido < (cooldownHoras * 60 * 60 * 1000);
+        }
+
+        // Mostrar mensaje de cooldown
+        function mostrarMensajeCooldown() {
+            const ultimoIntento = parseInt(localStorage.getItem('ultimoIntento'));
+            const tiempoTranscurrido = Date.now() - ultimoIntento;
+            const tiempoRestante = (cooldownHoras * 60 * 60 * 1000) - tiempoTranscurrido;
+            const minutosRestantes = Math.ceil(tiempoRestante / 60000);
+            
+            mensajeCooldown.textContent = `Debes esperar ${minutosRestantes} minuto${minutosRestantes !== 1 ? 's' : ''} para intentar de nuevo`;
+            mensajeCooldown.style.display = 'block';
+            btnSiguiente.disabled = true;
+            btnSiguiente.style.opacity = '0.5';
+        }
+
+        // Manejador de botón
+        function mostrarSiguiente() {
+            // Verificar cooldown
+            if (verificarCooldown()) {
+                mostrarMensajeCooldown();
+                return;
+            }
+
+            // Eliminar animación anterior
+            preguntas[indiceActual].classList.remove('active', 'pulse');
+            
+            // Incrementar índice o finalizar
+            if (indiceActual < preguntas.length - 1) {
+                indiceActual++;
+                preguntas[indiceActual].classList.add('active', 'pulse');
+            } else {
+                btnSiguiente.disabled = true;
+                btnSiguiente.textContent = '¡Finalizado!';
+                btnSiguiente.style.backgroundColor = '#0f0';
+                btnSiguiente.style.borderColor = '#0f0';
+                
+                // Registrar hora del último intento
+                localStorage.setItem('ultimoIntento', Date.now());
+                setTimeout(() => {
+                    btnSiguiente.style.backgroundColor = 'transparent';
+                    btnSiguiente.style.borderColor = '#0ff';
+                    btnSiguiente.textContent = 'Siguiente';
+                    btnSiguiente.disabled = false;
+                }, 2000);
+            }
+        }
+
+        // Inicialización
+        if (verificarCooldown()) {
+            mostrarMensajeCooldown();
+        } else {
+            mensajeCooldown.style.display = 'none';
+            btnSiguiente.disabled = false;
+        }
+
+        btnSiguiente.addEventListener('click', mostrarSiguiente);
+    </script>
+</body>
+</html>
