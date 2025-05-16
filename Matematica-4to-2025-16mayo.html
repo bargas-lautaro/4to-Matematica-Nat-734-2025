@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Inecuaciones Avanzadas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .ejercicio {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+      text-align: center;
+      font-size: 2em;
+      border-bottom: 2px solid #0f0;
+      padding: 40px;
+    }
+
+    .ejercicio h2 {
+      color: #00ff00;
+      margin-bottom: 20px;
+    }
+
+    .ejercicio p {
+      font-size: 1.6em;
+      max-width: 90%;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      border-top: 3px solid green;
+      text-align: center;
+      padding: 5px;
+      font-size: 0.9em;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 1</h2>
+    <p>El triple de un número, menos la mitad del mismo número, debe ser mayor que 2 veces el número más 6.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 2</h2>
+    <p>5x - 2(3x - 4) + 7 ≤ 8 - x</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 3</h2>
+    <p>El doble de la suma de un número y 5 es menor que el triple del mismo número menos 4.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 4</h2>
+    <p>6x + 3(2 - x) > 4x - 9</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 5</h2>
+    <p>La suma del doble de un número, más 8, y la resta entre 20 y ese número, es mayor o igual a 30.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 6</h2>
+    <p>2(4x - 3) + 5x ≤ 3(x + 6) + 2x</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 7</h2>
+    <p>El resultado de restar 4 al cuádruple de un número debe ser mayor que el doble del número aumentado en 10.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 8</h2>
+    <p>3(2x + 5) - 4(x - 1) ≥ 2(x + 6)</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 9</h2>
+    <p>Un número dividido entre 2, más 3, es menor que el mismo número dividido entre 3 más 5.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 10</h2>
+    <p>4(x - 1) + 3x < 2(3x + 5) - x</p>
+  </div>
+<div class="ejercicio">
+    <h2>Ejercicio 11</h2>
+    <p>Una empresa cobra $4.000 por cada producto. Si quiere ganar más de $200.000 en un mes, ¿cuántos productos necesita vender?</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 12</h2>
+    <p>Una fábrica produce un artículo con un costo de $2.000 por unidad. Si su presupuesto no puede superar los $400.000, ¿cuántos artículos puede fabricar como máximo?</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 13</h2>
+    <p>Un negocio gana $3.500 por servicio realizado. ¿Cuántos servicios debe hacer para superar los $210.000 en ingresos?</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 14</h2>
+    <p>Una empresa debe pagar $250.000 en total por salarios. Si cada trabajador cobra $50.000, ¿cuántos trabajadores puede contratar como máximo?</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 15</h2>
+    <p>Una empresa vende cada unidad en $5.000. ¿Cuántas unidades necesita vender para ganar más de $300.000?</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 16</h2>
+    <p>Una pyme gasta $800 por unidad producida. Si quiere mantener los gastos por debajo de $240.000, ¿cuántas unidades puede producir como máximo?</p>
+  </div>
+  
+  <div class="ejercicio">
+    <h2>Ejercicio 17</h2>
+    <p>La diferencia entre la cantidad de entradas vendidas y 200 debe ser menor a 50.<br>
+    Expresión matemática: |x - 200| &lt; 50</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 18</h2>
+    <p>Queremos que el número de asistentes esté lo más cerca posible de 300, pero no se puede alejar más de 60.<br>
+    Expresión matemática: |x - 300| &lt; 60</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 19</h2>
+    <p>El precio de un producto puede variar, pero debe estar a no más de $120 de diferencia respecto a $1.000.<br>
+    Expresión matemática: |x - 1.000| ≤ 120</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 20</h2>
+    <p>Una pieza debe tener una longitud cercana a 250 mm, con una tolerancia de ±10 mm.<br>
+    Expresión matemática: |x - 250| ≤ 10</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 21</h2>
+    <p>El tiempo ideal para hornear un pan es de 30 minutos, pero puede variar como máximo 5 minutos para cada lado.<br>
+    Expresión matemática: |x - 30| ≤ 5</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 22</h2>
+    <p>La temperatura ideal de fermentación es de 22°C. El rango permitido es de ±3°C respecto a ese valor.<br>
+    Expresión matemática: |x - 22| ≤ 3</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 23</h2>
+    <p>Una caja debe pesar lo más cerca posible de 1.500 g. El error aceptable es de hasta 200 g arriba o abajo.<br>
+    Expresión matemática: |x - 1.500| &lt; 200</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 24</h2>
+    <p>Para no perder calidad, el valor de la resistencia debe estar dentro de ±0,5 ohms respecto a 5 ohms.<br>
+    Expresión matemática: |x - 5| ≤ 0,5</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 25</h2>
+    <p>Una persona quiere mantener su consumo diario de calorías cerca de 2.000, con una variación de no más de 300.<br>
+    Expresión matemática: |x - 2.000| &lt; 300</p>
+  </div>
+  
+  <footer>
+    Bargas Nehuen Lautaro - 16/05/2025
+  </footer>
+</body>
+</html>
