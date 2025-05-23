@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Inecuaciones Avanzadas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .ejercicio {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+      text-align: center;
+      font-size: 2em;
+      border-bottom: 2px solid #0f0;
+      padding: 40px;
+    }
+
+    .ejercicio h2 {
+      color: #00ff00;
+      margin-bottom: 20px;
+    }
+
+    .ejercicio p {
+      font-size: 1.6em;
+      max-width: 90%;
+    }
+
+    #marca {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      border-top: 3px solid green;
+      text-align: center;
+      padding: 5px;
+      font-size: 0.9em;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 1</h2>
+    <p>Si al restar 5 a un número y multiplicar el resultado por 2 se obtiene algo mayor que la suma del número y 7.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 2</h2>
+    <p>3x + 4 ≤ 2(x + 6) − 1</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 3</h2>
+    <p>El doble de la suma de un número y 9 es menor que el triple de ese mismo número menos 4.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 4</h2>
+    <p>5(x − 2) − 3x > 4 − x</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 5</h2>
+    <p>La suma de un número y su mitad debe ser menor o igual al triple del número menos 8.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 6</h2>
+    <p>2(5x − 7) + x ≥ 4(x − 3) + 6</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 7</h2>
+    <p>Una cafetería vende café a $1.200 por taza. Quiere facturar al menos $150.000 en una semana y gasta $27.500 diarios en alquiler.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 8</h2>
+    <p>Un taller cobra $18.000 por reparación y tiene un gasto fijo de $72.000. Su presupuesto total no debe superar $324.000.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 9</h2>
+    <p>Una consultora cobra $7.500 por asesoría. Tiene gastos fijos de $90.000 y quiere una ganancia superior a $60.000.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 10</h2>
+    <p>Cada caja pesa 250 g y el embalaje 15g. El total no debe superar los 15 kg. ¿Cuántas cajas puede enviar?</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 11</h2>
+<p>Un horno industrial debe operar a 450 °C. Por protocolo de seguridad, se permite que la temperatura varíe como máximo 15 °C hacia cualquier lado. Además, nunca debe bajar de los 440 °C durante el tratamiento. ¿Entre qué valores debe mantenerse la temperatura para cumplir ambas condiciones? Expresar un Inecuación.</p>
+  </div>
+
+  <div class="ejercicio">
+<h2>Ejercicio 12</h2>
+<p>Una cisterna de 20.000 litros se utiliza para abastecer un sistema de refrigeración industrial. Por seguridad, el sistema debe operar solo si el volumen de agua se encuentra al menos 1.500 litros por encima del nivel mínimo de 12.000 litros, y además, no debe superar los 19.000 litros para evitar sobrepresión. ¿Cuál es el rango de volúmenes permitidos para que el sistema funcione con seguridad? Expresá la condición como una inecuación.</p>
+  </div>
+
+  <div class="ejercicio">
+<h2>Ejercicio 13</h2>
+<p>En un laboratorio químico se prepara una solución para conservar tejidos biológicos. Para asegurar la efectividad del conservante y evitar daños, la concentración de formaldehído debe ser superior al 4 %, pero también debe mantenerse al menos 2 % por debajo del límite máximo legal de 10 %.<br><br>
+Planteá una inecuación que represente el intervalo válido de concentración y determiná el rango de valores que cumplen con ambas condiciones.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 14</h2>
+<p>Una empresa de electrodomésticos lanza al mercado una nueva batidora. Según estudios de mercado, el precio ideal de venta es de $25.000. Para mantener la competitividad y no perder rentabilidad, se establece que el precio final debe ser al menos $1.500 menor que el valor objetivo y no superar los $26.800 para competir con productos similares.<br><br>
+Planteá una inecuación que represente el intervalo de precios permitidos y determiná el rango de valores posibles para el precio de la batidora.</p>
+  </div>
+
+  <div class="ejercicio"><h2>Ejercicio 15</h2>
+<p>Un tanque de gas comprimido contiene una mezcla que se expande con el calor. A una temperatura ambiente de 20 °C, la presión inicial es de 6 bar. Por cada grado que aumenta la temperatura, la presión se incrementa en 0,15 bar. Por razones de seguridad, la presión no debe superar los 9 bar en ningún momento.<br><br>
+Determiná la máxima temperatura que puede alcanzar el ambiente sin que la presión del tanque supere el límite permitido. Planteá una inecuación y resolvela.</p>
+
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 16</h2>
+    <p>7x − 4(2x − 3) &lt; 3(x + 5)</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 17</h2>
+    <p>El triple de la suma de un número y 9 es al menos el doble del número aumentado en 15.</p>
+  </div>
+
+  <div class="ejercicio">
+    <h2>Ejercicio 18</h2>
+    <p>6(x − 1) + 8 ≥ 5x + 10</p>
+  </div>
+
+
+  <h4 id="marca">Bargas Nehuen Lautaro - 23/05/2025</h4>
+</body>
+</html>
