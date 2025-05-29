@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Logaritmos Interactivos</title>
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: aqua;
+    }
+    .ejercicio {
+      border: 2px solid lime;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 60px;
+      font-size: 16px;
+    }
+    .correcto {
+      color: lime;
+      animation: bajar 1s forwards;
+    }
+    .incorrecto {
+      color: red;
+      animation: subir 1s forwards;
+    }
+    @keyframes bajar {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes subir {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .resultado {
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Resolución de Ecuaciones con Logaritmos</h1>
+
+  <h2>Teoría Básica</h2>
+  <p>Un logaritmo responde a la pregunta: ¿a qué exponente debo elevar la base para obtener el número?</p>
+  <p>Por ejemplo: log<sub>2</sub>(8) = 3, ya que 2³ = 8</p>
+
+  <h2>Propiedades Principales</h2>
+  <ul>
+    <li><strong>log<sub>b</sub>(MN) = log<sub>b</sub>(M) + log<sub>b</sub>(N)</strong></li>
+    <li><strong>log<sub>b</sub>(M/N) = log<sub>b</sub>(M) - log<sub>b</sub>(N)</strong></li>
+    <li><strong>log<sub>b</sub>(M<sup>k</sup>) = k·log<sub>b</sub>(M)</strong></li>
+    <li><strong>log<sub>b</sub>(b) = 1</strong></li>
+    <li><strong>log<sub>b</sub>(1) = 0</strong></li>
+    <li><strong>cambio de base:</strong> log<sub>a</sub>(b) = log<sub>c</sub>(b) / log<sub>c</sub>(a)</li>
+  </ul>
+
+
+  <script>
+    function verificar(id, correcto) {
+      const valor = parseFloat(document.getElementById('resp' + id).value);
+      const resultado = document.getElementById('res' + id);
+      resultado.innerHTML = '';
+      if (Math.abs(valor - correcto) < 0.01) {
+        resultado.innerHTML = "<span class='correcto'>Correcto</span>";
+      } else {
+        resultado.innerHTML = "<span class='incorrecto'>Incorrecto</span>";
+      }
+    }
+  </script>
+
+  <h4 style="position: fixed; bottom: 0; left: 0; width: 100%; background: black; border-top: 3px solid lime; color: white; text-align: center;">
+    Bargas Nehuen Lautaro - 29/05/2025
+  </h4>
+
+</body>
+</html>
