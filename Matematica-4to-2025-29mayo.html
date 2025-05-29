@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BargasLautaro - Descomposición Vectorial</title>
+
+  <style>
+    :root {
+      --verde-neon: #39FF14;
+      --aqua: #00FFFF;
+    }
+
+    * { box-sizing: border-box; }
+
+    body{
+      margin:0;
+      background:#000;
+      color:var(--verde-neon);
+      font-family:Arial, sans-serif;
+      text-align:center;
+    }
+
+    h1{
+      color:var(--aqua);
+      margin-top:2vh;
+      font-size:5vw;
+    }
+
+    #lienzo-wrapper{
+      width:90vw;
+      max-width:600px;
+      aspect-ratio:1/1;
+      margin:0 auto;
+      border:2px solid var(--verde-neon);
+    }
+
+    #lienzo{ width:100%; height:100%; }
+
+    #controles{
+      width:90vw;
+      max-width:600px;
+      margin:3vh auto;
+      display:flex;
+      flex-direction:column;
+      gap:2vh;
+    }
+
+    label{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:4vw;
+    }
+
+    input[type="range"],
+    input[type="number"]{
+      flex:1 1 auto;
+      margin-left:2vw;
+    }
+
+    #valores, #ratios{
+      margin-top:2vh;
+      font-size:4vw;
+      line-height:1.4;
+    }
+
+    #ratios span.formula{
+      color:var(--aqua);
+    }
+
+    /* Firma fija al pie */
+    h4.firma{
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      margin:0;
+      padding:0.5vh 0;
+      background:#000;
+      color:#FFF;
+      border-top:3px solid var(--verde-neon);
+      font-size:3vw;
+    }
+
+    @media (min-width:600px){
+      h1{font-size:32px;}
+      label,#valores,#ratios{font-size:20px;}
+      h4.firma{font-size:16px;}
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Descomposición de un Vector</h1>
+
+  <div id="lienzo-wrapper">
+    <canvas id="lienzo"></canvas>
+  </div>
+
+  <div id="controles">
+    <label>
+      Ángulo (°):
+      <input type="range" id="angulo" min="0" max="360" value="45">
+      <input type="number" id="angulo-num" min="0" max="360" value="45" step="1">
+    </label>
+
+    <label>
+      Magnitud (hipotenusa):
+      <input type="range" id="magnitud" min="1" max="100" value="80">
+      <input type="number" id="magnitud-num" min="1" max="100" value="80" step="0.1">
+    </label>
+  </div>
+
+  <div id="valores">
+    X: <span id="compX">0</span>,
+    Y: <span id="compY">0</span>
+  </div>
+
+  <div id="ratios">
+    <span class="formula">sen&nbsp;θ = Y / h = </span><span id="senVal">0</span><br>
+    <span class="formula">cos&nbsp;θ = X / h = </span><span id="cosVal">0</span><br>
+    <span class="formula">tan&nbsp;θ = Y / X = </span><span id="tanVal">—</span>
+  </div>
+
+  <!-- Firma inferior -->
+  <h4 class="firma">Bargas Nehuen Lautaro - 29/05/2025</h4>
+
+  <script>
+    const canvas = document.getElementById("lienzo");
+    const ctx = canvas.getContext("2d");
+
+    /* =======  REDIMENSIONAR CANVAS AL CONTENEDOR  ======= */
+    function redimensionar(){
+      canvas.width  = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      dibujar();
+    }
+    window.addEventListener("resize", redimensionar);
+
+    /* =======  CONTROLES  ======= */
+    const anguloSlider   = document.getElementById("angulo");
+    const anguloNum      = document.getElementById("angulo-num");
+    const magnitudSlider = document.getElementById("magnitud");
+    const magnitudNum    = document.getElementById("magnitud-num");
+
+    /* Sincronizar sliders y campos numéricos */
+    [anguloSlider, anguloNum].forEach(ctrl =>
+      ctrl.addEventListener("input", e=>{
+        anguloSlider.value = anguloNum.value = e.target.value;
+        dibujar();
+      })
+    );
+
+    [magnitudSlider, magnitudNum].forEach(ctrl =>
+      ctrl.addEventListener("input", e=>{
+        magnitudSlider.value = magnitudNum.value = e.target.value;
+        dibujar();
+      })
+    );
+
+    /* Elementos para mostrar componentes y razones */
+    const compXSpan = document.getElementById("compX");
+    const compYSpan = document.getElementById("compY");
+    const senSpan   = document.getElementById("senVal");
+    const cosSpan   = document.getElementById("cosVal");
+    const tanSpan   = document.getElementById("tanVal");
+
+    /* =======  FUNCIÓN PRINCIPAL DE DIBUJO  ======= */
+    function dibujar(){
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0,0,w,h);
+
+      /* Centro del canvas */
+      const cx = w/2;
+      const cy = h/2;
+
+      /* Parámetros de usuario */
+      const angDeg = parseFloat(anguloSlider.value);
+      const angRad = angDeg * Math.PI / 180;
+      const magUser = parseFloat(magnitudSlider.value);
+
+      /* Escala para que vector y circunferencia quepan siempre */
+      const radioMax = Math.min(w,h)*0.45;          // píxeles disponibles
+      const scale = radioMax / 100;                 // 100 unidades de magnitud → radioMax px
+      const radio = magUser * scale;                // radio adaptable a magnitud elegida
+
+      /* Componentes escaladas para dibujar */
+      const x = radio * Math.cos(angRad);
+      const y = radio * Math.sin(angRad);
+
+      /* Componentes reales (sin escala) */
+      const compXReal = magUser * Math.cos(angRad);
+      const compYReal = magUser * Math.sin(angRad);
+
+      /* Mostrar componentes con coma decimal */
+      compXSpan.textContent = compXReal.toFixed(2).replace(".",",");
+      compYSpan.textContent = compYReal.toFixed(2).replace(".",",");
+
+      /* Razones trigonométricas */
+      const sen   = (compYReal / magUser).toFixed(4);
+      const cos   = (compXReal / magUser).toFixed(4);
+      const tan   = Math.abs(compXReal) < 1e-6 ? "∞" : (compYReal / compXReal).toFixed(4);
+
+      senSpan.textContent = sen.replace(".",",");
+      cosSpan.textContent = cos.replace(".",",");
+      tanSpan.textContent = tan === "∞" ? "∞" : tan.replace(".",",");
+
+      /* =======  DIBUJO  ======= */
+      ctx.strokeStyle = "#39FF14";
+      ctx.lineWidth = 2;
+
+      /* Ejes */
+      ctx.beginPath();
+      ctx.moveTo(0,cy); ctx.lineTo(w,cy);
+      ctx.moveTo(cx,0); ctx.lineTo(cx,h);
+      ctx.stroke();
+
+      /* Circunferencia que marca la magnitud (radio variable) */
+      ctx.beginPath();
+      ctx.arc(cx,cy,radio,0,2*Math.PI);
+      ctx.stroke();
+
+      /* Vector hipotenusa */
+      ctx.strokeStyle = "#00FFFF";
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+x, cy-y);   // y se invierte en canvas
+      ctx.stroke();
+
+      /* Componentes X e Y */
+      ctx.strokeStyle = "#FF0000";
+      /* X */
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+x,cy);
+      ctx.stroke();
+      /* Y */
+      ctx.beginPath();
+      ctx.moveTo(cx+x,cy);
+      ctx.lineTo(cx+x,cy-y);
+      ctx.stroke();
+
+      /* Punto en el extremo */
+      ctx.fillStyle = "#FFFFFF";
+      ctx.beginPath();
+      ctx.arc(cx+x, cy-y, 4, 0, 2*Math.PI);
+      ctx.fill();
+    }
+
+    /* Primer trazado */
+    redimensionar();
+  </script>
+</body>
+</html>
