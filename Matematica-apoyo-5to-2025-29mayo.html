@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Ecuaciones Cuadráticas</title>
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: monospace;
+      padding: 20px;
+    }
+    .desarrollo {
+      white-space: pre-line;
+      background: #111;
+      border-left: 4px solid lime;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .ejercicio {
+      border: 1px solid lime;
+      padding: 10px;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+    h4 {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background: black;
+      color: white;
+      border: 3px solid green;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Transformación entre formas de funciones cuadráticas</h1>  <p>Las tres formas principales de una función cuadrática son:</p>
+  <ul>
+    <li><strong>Cartesiana:</strong> f(x) = ax² + bx + c</li>
+    <li><strong>Factorizada:</strong> f(x) = a(x - x1)(x - x2)</li>
+    <li><strong>Canónica:</strong> f(x) = a(x - h)² + k</li>
+  </ul>  <div class="desarrollo">
+  <strong>De cartesiana a factorizada:</strong>
+  Se aplican las fórmulas para encontrar las raíces x1 y x2:
+  f(x) = ax² + bx + c
+  x1, x2 = (-b ± sqrt(b² - 4ac)) / 2a
+  f(x) = a(x - x1)(x - x2)<strong>De cartesiana a canónica:</strong> f(x) = ax² + bx + c h = -b / 2a k = f(h) = a(h)² + b(h) + c f(x) = a(x - h)² + k
+
+<strong>De canónica a cartesiana:</strong> f(x) = a(x - h)² + k f(x) = a(x² - 2hx + h²) + k f(x) = ax² - 2ahx + ah² + k
+
+<strong>De factorizada a cartesiana:</strong> f(x) = a(x - x1)(x - x2) f(x) = a(x² - (x1 + x2)x + x1x2)
+
+  </div>  <h2>Ejercicios</h2>
+  <div class="ejercicio">
+    <strong>Ejercicio 1:</strong> Convertir f(x) = x² - 5x + 6 a forma factorizada y canónica.
+  </div>
+  <div class="ejercicio">
+    <strong>Ejercicio 2:</strong> Convertir f(x) = 2x² + 4x - 6 a forma factorizada y canónica.
+  </div>
+  <div class="ejercicio">
+    <strong>Ejercicio 3:</strong> Expandir f(x) = 3(x - 1)(x + 2) a forma cartesiana.
+  </div>
+  <div class="ejercicio">
+    <strong>Ejercicio 4:</strong> Expandir f(x) = 2(x - 3)² - 4 a forma cartesiana.
+  </div>
+  <div class="ejercicio">
+    <strong>Ejercicio 5:</strong> Convertir f(x) = -x² + 2x + 3 a forma factorizada y canónica.
+  </div>  <h4>Bargas Nehuen Lautaro - 29/05/2025</h4>
+</body>
+</html>
