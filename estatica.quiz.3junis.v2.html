@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro-Estatica4to-Neón</title>
+  <style>
+    /* —— ESTILO GENERAL NEÓN —— */
+    :root{
+      --verde-neon:#39ff14;
+      --aqua:#00ffff;
+      --rojo:#ff0033;
+      --negro:#000;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      background:var(--negro);
+      color:var(--verde-neon);
+      font-family:Arial,Helvetica,sans-serif;
+      padding:1rem;
+    }
+    h1{color:var(--aqua);text-shadow:0 0 7px var(--aqua);}
+    section{
+      border:3px solid var(--verde-neon);
+      padding:1rem;
+      margin:1.2rem 0;
+      border-radius:12px;
+      box-shadow:0 0 12px var(--verde-neon);
+    }
+    label{display:block;margin:0.6rem 0;}
+    input[type="number"]{
+      width:120px;padding:0.3rem;border-radius:6px;border:2px solid var(--aqua);
+      background:#111;color:var(--verde-neon);font-weight:bold;
+    }
+    button{
+      margin-left:0.5rem;padding:0.4rem 0.8rem;border:none;border-radius:6px;
+      background:var(--aqua);color:var(--negro);font-weight:bold;cursor:pointer;
+      box-shadow:0 0 8px var(--aqua);
+    }
+    button:hover{background:var(--verde-neon);box-shadow:0 0 8px var(--verde-neon);}
+    /* —— ANIMACIONES DE FEEDBACK —— */
+    @keyframes caeTop{0%{top:-50px;opacity:0;}100%{top:0;opacity:1;}}
+    @keyframes subeBottom{0%{bottom:-50px;opacity:0;}100%{bottom:0;opacity:1;}}
+    .correcto,.incorrecto{
+      position:relative;font-weight:bold;font-size:1.1rem;text-shadow:0 0 6px currentColor;
+    }
+    .correcto{color:var(--verde-neon);animation:caeTop 1s;}
+    .incorrecto{color:var(--rojo);animation:subeBottom 1s;}
+    /* —— FIRMA —— */
+    footer h4{
+      position:fixed;bottom:0;left:0;width:100%;text-align:center;
+      background:var(--negro);color:#fff;border-top:3px solid var(--verde-neon);
+      padding:4px;font-size:0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- ——— DIV SUPERPUESTO CON VIDEO HASTA 04/06/2025 11:30 ——— -->
+
+<style>
+  #overlay{
+    position:fixed;inset:0;z-index:9999;
+    background:rgba(0,0,0,0.999);
+    display:flex;justify-content:center;align-items:center;
+    transition:opacity 1s ease;
+  }
+  #overlay.oculto{opacity:0;pointer-events:none;}
+  .video-wrapper{
+    text-align:center;
+    color:var(--verde-neon,#39ff14);
+  }
+  .video-wrapper iframe{
+    width:80vw;max-width:640px;aspect-ratio:16/9;
+    border:4px solid var(--aqua,#00ffff);
+    box-shadow:0 0 12px var(--aqua,#00ffff);
+    border-radius:12px;
+  }
+  .video-wrapper .mensaje{margin-top:1rem;font-size:1.2rem;}
+</style>
+
+<script>
+(function(){
+  const overlay=document.getElementById('overlay');
+  const video=document.getElementById('rickvid');
+  const target=new Date('2025-06-04T11:30:00-03:00'); // Hora Catamarca
+  function revisar(){
+    const ahora=new Date();
+    if(ahora>=target){
+      /* Detiene y oculta */
+      video.src='about:blank';
+      setTimeout(()=>overlay.classList.add('oculto'),500);
+      clearInterval(timer);
+    }
+  }
+  revisar();                       // Chequeo inicial
+  const timer=setInterval(revisar,1000);  // Cada segundo
+})();
+</script>
+<!-- ——— FIN DIV SUPERPUESTO ——— -->
+  <h1>Ejercicios de Estática – 4º año</h1>
+
+<!-- ══════════════════════════════════════════════════════ -->
+  <!--                  EJERCICIO 1 COMPLETO                  -->
+  <!--        (actualizado para ángulo α = 76°)               -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <section id="ej1">
+    <h2>1. Caja de 25&nbsp;kg en distintos planetas</h2>
+    <p>
+      Una caja de masa <strong>25&nbsp;kg</strong> cuelga de dos cables que forman el
+      mismo ángulo <em>α = 76°</em> con la horizontal.<br>
+      La tensión en <u>cada</u> cable se calcula con  
+      <code>T = \dfrac{m·g}{2·\sin α}</code>;  
+      para <em>α = 76°</em> resulta <code>T ≈ 12,88·g</code>.
+    </p>
+
+    <ol style="position:relative; left:20%;">
+      <li>Tierra — <code>g<sub>T</sub> = 9,8&nbsp;m/s²</code></li>
+      <li>Luna — <code>g<sub>L</sub> = 1,62&nbsp;m/s²</code></li>
+      <li>Mercurio — <code>g<sub>Mer</sub> = 3,7&nbsp;m/s²</code></li>
+      <li>Venus — <code>g<sub>Ven</sub> = 8,87&nbsp;m/s²</code></li>
+      <li>Marte — <code>g<sub>M</sub> = 3,41&nbsp;m/s²</code></li>
+      <li>Júpiter — <code>g<sub>Jup</sub> = 24,79&nbsp;m/s²</code></li>
+      <li>Saturno — <code>g<sub>Sat</sub> = 10,44&nbsp;m/s²</code></li>
+      <li>Urano — <code>g<sub>Ura</sub> = 8,69&nbsp;m/s²</code></li>
+      <li>Neptuno — <code>g<sub>Nep</sub> = 11,15&nbsp;m/s²</code></li>
+      <li>Plutón — <code>g<sub>P</sub> = 0,62&nbsp;m/s²</code></li>
+    </ol>
+
+    <p>Ingresá el valor (podés usar coma en lugar de punto) y presioná <em>Verificar</em>:</p>
+
+    <label>T<sub>Tierra</sub> (N):
+      <input type="number" step="0.01" id="tierra">
+      <button onclick="verifica('tierra',126.25)">Verificar</button>
+    </label>
+
+    <label>T<sub>Luna</sub> (N):
+      <input type="number" step="0.01" id="luna">
+      <button onclick="verifica('luna',20.87)">Verificar</button>
+    </label>
+
+    <label>T<sub>Mercurio</sub> (N):
+      <input type="number" step="0.01" id="mercurio">
+      <button onclick="verifica('mercurio',47.67)">Verificar</button>
+    </label>
+
+    <label>T<sub>Venus</sub> (N):
+      <input type="number" step="0.01" id="venus">
+      <button onclick="verifica('venus',114.27)">Verificar</button>
+    </label>
+
+    <label>T<sub>Marte</sub> (N):
+      <input type="number" step="0.01" id="marte">
+      <button onclick="verifica('marte',43.93)">Verificar</button>
+    </label>
+
+    <label>T<sub>Júpiter</sub> (N):
+      <input type="number" step="0.01" id="jupiter">
+      <button onclick="verifica('jupiter',319.36)">Verificar</button>
+    </label>
+
+    <label>T<sub>Saturno</sub> (N):
+      <input type="number" step="0.01" id="saturno">
+      <button onclick="verifica('saturno',134.5)">Verificar</button>
+    </label>
+
+    <label>T<sub>Urano</sub> (N):
+      <input type="number" step="0.01" id="urano">
+      <button onclick="verifica('urano',111.95)">Verificar</button>
+    </label>
+
+    <label>T<sub>Neptuno</sub> (N):
+      <input type="number" step="0.01" id="neptuno">
+      <button onclick="verifica('neptuno',143.64)">Verificar</button>
+    </label>
+
+    <label>T<sub>Plutón</sub> (N):
+      <input type="number" step="0.01" id="pluton">
+      <button onclick="verifica('pluton',7.99)">Verificar</button>
+    </label>
+  </section>
+  <!-- ───────────────────────── FIN EJERCICIO 1 ───────────────────────── -->
+
+  <!-- EJERCICIO 2 -->
+<!-- ══════════════════════════════════════════════════════ -->
+  <!--                  EJERCICIO 2 COMPLETO                  -->
+  <!--        (ahora con 6 sub-apartados por hora)            -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <section id="ej2">
+    <h2>2. Tanque de agua con carga creciente</h2>
+    <p>
+      Un tanque inicialmente vacío está suspendido por dos cables que forman el mismo
+      ángulo <em>β = 45°</em> con la horizontal.<br>
+      Cada hora se agregan <strong>250&nbsp;kg</strong> de agua
+      (<code>g = 9,8&nbsp;m/s²</code>).
+      <br>La tensión en cada cable se determina con
+      <code>T = \dfrac{m·g}{2·\sin β}</code>;  
+      para <em>β = 45°</em> queda <code>T ≈ 0,7071·m·g</code>.
+    </p>
+
+    <ol>
+      <li>Hora&nbsp;1 – masa 250&nbsp;kg</li>
+      <li>Hora&nbsp;2 – masa 500&nbsp;kg</li>
+      <li>Hora&nbsp;3 – masa 750&nbsp;kg</li>
+      <li>Hora&nbsp;4 – masa 1.000&nbsp;kg</li>
+      <li>Hora&nbsp;5 – masa 1.250&nbsp;kg</li>
+      <li>Hora&nbsp;6 – masa 1.500&nbsp;kg</li>
+    </ol>
+
+    <p>Completá cada tensión (usá coma como separador decimal) y presioná <em>Verificar</em>:</p>
+
+    <label>Hora&nbsp;1 — Tensión (N):
+      <input type="number" step="0.1" id="h1">
+      <button onclick="verifica('h1',1732.4)">Verificar</button>
+    </label>
+
+    <label>Hora&nbsp;2 — Tensión (N):
+      <input type="number" step="0.1" id="h2">
+      <button onclick="verifica('h2',3464.8)">Verificar</button>
+    </label>
+
+    <label>Hora&nbsp;3 — Tensión (N):
+      <input type="number" step="0.1" id="h3">
+      <button onclick="verifica('h3',5197.2)">Verificar</button>
+    </label>
+
+    <label>Hora&nbsp;4 — Tensión (N):
+      <input type="number" step="0.1" id="h4">
+      <button onclick="verifica('h4',6929.6)">Verificar</button>
+    </label>
+
+    <label>Hora&nbsp;5 — Tensión (N):
+      <input type="number" step="0.1" id="h5">
+      <button onclick="verifica('h5',8662.1)">Verificar</button>
+    </label>
+
+    <label>Hora&nbsp;6 — Tensión (N):
+      <input type="number" step="0.1" id="h6">
+      <button onclick="verifica('h6',10394.5)">Verificar</button>
+    </label>
+  </section>
+  <!-- ───────────────────────── FIN EJERCICIO 2 ───────────────────────── -->
+
+  <!-- EJERCICIO 3 -->
+  <section id="ej3">
+    <h2>3. ¿Se rompe la soga?</h2>
+    <p>
+      Considerá dos cables que soportan una caja (ángulo con horizontal
+      <em>α = 30°</em>).  
+      Cada cable resiste hasta <strong>250 N</strong> antes de romperse.
+    </p>
+    <p>Para cada masa, indicá si la soga se rompe y, como punto extra, calculá la tensión:</p>
+
+    <label>Masa 10 kg — Tensión (N):
+      <input type="number" step="0.1" id="m10">
+      <button onclick="verifica('m10',98)">Verificar</button>
+    </label>
+    <label>¿Se rompe? (Sí/No):
+      <input type="text" id="r10">
+      <button onclick="verificaTexto('r10','no')">Comprobar</button>
+    </label>
+
+    <label>Masa 20 kg — Tensión (N):
+      <input type="number" step="0.1" id="m20">
+      <button onclick="verifica('m20',196)">Verificar</button>
+    </label>
+    <label>¿Se rompe? (Sí/No):
+      <input type="text" id="r20">
+      <button onclick="verificaTexto('r20','no')">Comprobar</button>
+    </label>
+
+    <label>Masa 30 kg — Tensión (N):
+      <input type="number" step="0.1" id="m30">
+      <button onclick="verifica('m30',294)">Verificar</button>
+    </label>
+    <label>¿Se rompe? (Sí/No):
+      <input type="text" id="r30">
+      <button onclick="verificaTexto('r30','sí')">Comprobar</button>
+    </label>
+  </section>
+
+  <script>
+    /* —— VERIFICACIÓN NUMÉRICA —— */
+    function verifica(id, correcto){
+      const inp=document.getElementById(id),
+            valor=parseFloat(inp.value.replace(',','.')),
+            diff=Math.abs(valor-correcto);
+      mensaje(inp,(diff<=0.5));
+    }
+    /* —— VERIFICACIÓN TEXTO —— */
+    function verificaTexto(id, esperado){
+      const inp=document.getElementById(id),
+            txt=inp.value.trim().toLowerCase();
+      mensaje(inp,(txt===esperado));
+    }
+    /* —— MUESTRA MENSAJE —— */
+    function mensaje(input, esCorrecto){
+      const div=document.createElement('div');
+      div.className=esCorrecto?'correcto':'incorrecto';
+      div.textContent=esCorrecto?'CORRECTO':'INCORRECTO';
+      input.parentNode.appendChild(div);
+      setTimeout(()=>div.remove(),1800);
+    }
+  </script>
+
+  <footer>
+    <h4>Bargas Nehuen Lautaro – 03/06/2025</h4>
+  </footer>
+</body>
+</html>
