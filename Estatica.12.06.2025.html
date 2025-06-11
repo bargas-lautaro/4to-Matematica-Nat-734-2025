@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>BargasLautaro-PlanosInclinados-6Ejs</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+ :root{--neon:#39ff14;--negro:#000;--rojo:#ff0040;}
+ *{box-sizing:border-box;font-family:Consolas,monospace}
+ body{margin:0;background:var(--negro);color:var(--neon)}
+ h1{text-align:center;text-shadow:0 0 10px var(--neon)}
+ .card{border:2px solid var(--neon);margin:1rem auto;padding:1rem;max-width:900px}
+ .datos span{display:inline-block;width:7.5rem}
+ .fila{display:flex;align-items:center;gap:.4rem;margin:.35rem 0}
+ label{width:3.6rem}
+ input{
+   width:6rem;padding:4px;background:var(--negro);color:var(--neon);
+   border:1px solid var(--neon);text-align:center
+ }
+ button{cursor:pointer;padding:4px 7px;background:var(--negro);color:var(--neon);border:1px solid var(--neon)}
+ .msg{position:relative;width:6rem;text-align:center;font-weight:bold;opacity:0}
+ .ok{color:var(--neon);animation:down 1.2s forwards}
+ .bad{color:var(--rojo);animation:up 1.2s forwards}
+ @keyframes down{0%{top:-1.2rem;opacity:0}50%{opacity:1}100%{top:1.2rem;opacity:0}}
+ @keyframes up  {0%{top:1.2rem ;opacity:0}50%{opacity:1}100%{top:-1.2rem;opacity:0}}
+ .estado{margin-top:.4rem;font-weight:bold;text-align:center}
+ footer{
+   position:fixed;bottom:0;left:0;width:100%;
+   background:#000;border-top:3px solid #00ff40;color:#fff;
+   text-align:center;font-size:0.8rem;padding:2px}
+</style>
+</head>
+<body>
+
+<h1>Planos inclinados – Ejercicios</h1>
+
+<script>
+/* ---------- soluciones: [Fp , Fn , Fpy , Fpx , Frz] ---------- */
+const sol=[
+ [98.00 , 84.87 , 84.87 , 49.00 , 16.97], // Fpx > Frz  → movimiento
+ [117.60,106.58 ,106.58 , 49.70 , 15.99], // movimiento
+ [78.48 , 60.12 , 60.12 , 50.45 , 18.04], // movimiento
+ [49.05 , 46.09 , 46.09 , 16.78 , 11.52], // reposo (Fpx < Frz)  ❗ ejemplo estático
+ [32.40 , 31.30 , 31.30 ,  8.39 ,  3.13], // reposo
+ [55.65 , 45.59 , 45.59 , 31.92 , 15.96]  // movimiento
+];
+const labels=['fp','fn','fpy','fpx','frz'];
+const tol=0.01;
+
+/* ---------- utilidades ---------- */
+const txtNum=txt=>parseFloat(txt.replace(/\./g,'').replace(',','.'));
+function resultado(i,j){
+   const id=`e${i}_${labels[j]}`;
+   const inp=document.getElementById(id);
+   const val=txtNum(inp.value);
+   const msg=document.getElementById('msg_'+id);
+   msg.classList.remove('ok','bad'); void msg.offsetWidth;
+
+   if(Math.abs(val-sol[i][j])<=tol){msg.textContent='CORRECTO';msg.classList.add('ok')}
+   else{msg.textContent='INCORRECTO';msg.classList.add('bad')}
+   /* tras verificar Fpx o Frz, evaluamos el estado */
+   if(labels[j]==='fpx'||labels[j]==='frz') evaluarEstado(i);
+}
+function evaluarEstado(i){
+   const fpx=txtNum(document.getElementById(`e${i}_fpx`).value);
+   const frz=txtNum(document.getElementById(`e${i}_frz`).value);
+   if(!isFinite(fpx)||!isFinite(frz)) return;  // todavía no hay datos
+   const est=document.getElementById(`estado${i}`);
+   if(Math.abs(fpx-sol[i][3])<=tol && Math.abs(frz-sol[i][4])<=tol){
+        est.textContent=(fpx>frz? '→ El bloque se DESLIZA (Fpx > Frz)' : '→ Bloque en REPOSO (Fpx ≤ Frz)');
+   }else est.textContent=''; // espera valores correctos
+}
+
+/* ---------- datos de cada ejercicio ---------- */
+const datos=[
+ {m:10,g:9.80,μ:0.20,θ:30},
+ {m:12,g:9.80,μ:0.15,θ:25},
+ {m: 8,g:9.81,μ:0.30,θ:40},
+ {m: 5,g:9.81,μ:0.25,θ:20},
+ {m:20,g:1.62,μ:0.10,θ:15}, // Luna
+ {m:15,g:3.71,μ:0.35,θ:35}  // Marte
+];
+
+/* ---------- genera el HTML ---------- */
+document.body.insertAdjacentHTML('beforeend',
+ datos.map((d,i)=>`
+  <div class="card">
+   <h2>Ejercicio ${i+1}</h2>
+   <p class="datos">
+     <span>m = ${d.m} kg</span>
+     <span>g = ${d.g} m/s²</span>
+     <span>&#956; = ${d.μ}</span>
+     <span>&#952; = ${d.θ}°</span>
+   </p>
+   <svg width="220" height="120">
+     <line x1="0" y1="100" x2="200" y2="100" stroke="${getComputedStyle(document.body).color}" stroke-width="2"/>
+     <line x1="30" y1="100" x2="30" y2="60" stroke="${getComputedStyle(document.body).color}" stroke-width="2"/>
+     <line x1="30" y1="100" x2="170" y2="40" stroke="${getComputedStyle(document.body).color}" stroke-width="2"/>
+   </svg>
+   ${labels.map((lbl,j)=>`
+     <div class="fila">
+       <label>${lbl.toUpperCase()}</label>
+       <input id="e${i}_${lbl}" placeholder="0,00">
+       <button onclick="resultado(${i},${j})">✓</button>
+       <span id="msg_e${i}_${lbl}" class="msg"></span>
+     </div>`).join('')}
+   <div id="estado${i}" class="estado"></div>
+  </div>
+ `).join('')
+);
+</script>
+
+<footer>Bargas Nehuen Lautaro – 11/06/2025</footer>
+</body>
+</html>
