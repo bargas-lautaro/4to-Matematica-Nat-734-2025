@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Generador Planos Inclinados</title>
+  <style>
+    body {
+      background-color: black;
+      color: aqua;
+      font-family: monospace;
+    }
+    button {
+      width: 90%;
+      height: 35%;
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 18px;
+      background-color: #001f3f;
+      color: aqua;
+      border: 3px solid purple;
+      border-radius: 10px;
+      animation: brillar 2s infinite;
+      display: block;
+    }
+    button:active {
+      background-color: white;
+      color: black;
+      border-color: black;
+    }
+    .ejercicio {
+      border: 2px solid;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    @keyframes brillar {
+      0% { border-color: purple; }
+      50% { border-color: fuchsia; }
+      100% { border-color: purple; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Actividades de Planos Inclinados</h1>
+
+  <button id="btnActividad1" onclick="generarEjercicio1()">Actividad 1: Ejercicio Plano Inclinado</button>
+  <div id="ejercicio1" class="ejercicio"></div>
+
+  <button id="btnActividad2" onclick="generarEjercicio2()">Actividad 1: Ejercicio Plano Inclinado (coeficiente de rozamiento)</button>
+  <div id="ejercicio2" class="ejercicio"></div>
+
+  <h4 style="position: fixed; bottom: 0; width: 100%; background: black; color: white; border: 3px solid lime;">
+    Bargas Nehuen Lautaro - 17/06/2025
+  </h4>
+
+  <script>
+    let contador1 = 1;
+    let contador2 = 1;
+
+    function generarNumero(min, max, decimales=0) {
+      const num = Math.random() * (max - min) + min;
+      return parseFloat(num.toFixed(decimales));
+    }
+
+    function generarColor() {
+      const colores = ["lime", "yellow", "orange", "cyan", "pink", "magenta", "white"];
+      return colores[Math.floor(Math.random() * colores.length)];
+    }
+
+    function generarEjercicio1() {
+      const masa = generarNumero(1, 100, 1);
+      const gravedad = generarNumero(1, 25, 1);
+      const angulo = generarNumero(10, 60, 1);
+      const mu = generarNumero(0, 1, 2);
+
+      const enunciado = `
+        Ejercicio Plano Inclinado ${contador1}:
+        Un cuerpo de masa ${masa} kg se encuentra sobre un plano inclinado con un ángulo de ${angulo}°. 
+        La gravedad en el planeta es de ${gravedad} m/s² y el coeficiente de rozamiento es de ${mu}. 
+        ¿El cuerpo está estático o no está estático? Justifica la respuesta con un diagrama de cuerpo libre y verbalmente.
+      `;
+
+      const div = document.getElementById("ejercicio1");
+      div.innerHTML = `<div style="border-color:${generateBorderColor()}; border-width:2px; border-style:solid; padding:5px; margin:5px;">${enunciado}</div>`;
+
+      contador1++;
+      document.getElementById("btnActividad1").innerText = `Actividad ${contador1}: Ejercicio Plano Inclinado`;
+    }
+
+    function generarEjercicio2() {
+      const masa = generarNumero(1, 100, 1);
+      const gravedad = generarNumero(1, 25, 1);
+      const angulo = generarNumero(10, 60, 1);
+
+      const enunciado = `
+        Ejercicio Plano Inclinado (coeficiente de rozamiento) ${contador2}:
+        Un cuerpo de masa ${masa} kg está sobre un plano inclinado de ${angulo}° en un planeta con gravedad 
+        de ${gravedad} m/s². ¿Cuál es el coeficiente de rozamiento mínimo necesario para que el cuerpo 
+        permanezca estático? Justifica la respuesta con un diagrama de cuerpo libre y verbalmente.
+      `;
+
+      const div = document.getElementById("ejercicio2");
+      div.innerHTML = `<div style="border-color:${generateBorderColor()}; border-width:2px; border-style:solid; padding:5px; margin:5px;">${enunciado}</div>`;
+
+      contador2++;
+      document.getElementById("btnActividad2").innerText = `Actividad ${contador2}: Ejercicio Plano Inclinado (coeficiente de rozamiento)`;
+    }
+
+    function generateBorderColor() {
+      const colores = ["lime", "yellow", "orange", "cyan", "pink", "magenta", "white"];
+      return colores[Math.floor(Math.random() * colores.length)];
+    }
+  </script>
+</body>
+</html>
