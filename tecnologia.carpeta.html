@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Archivos Tecnología - BargasLautaro</title>
+  <style>
+    body {
+      background-color: black;
+      color: #39FF14;
+      font-family: monospace;
+      padding: 20px;
+    }
+    button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #111;
+      color: #39FF14;
+      border: 2px solid #39FF14;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #39FF14;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Archivos HTML de Tecnología</h1>
+  <div id="botones"></div>
+
+  <script>
+    const repoApiUrl = "https://api.github.com/repos/bargas-lautaro/4to-Matematica-Nat-734-2025/contents";
+
+    fetch(repoApiUrl)
+      .then(response => response.json())
+      .then(files => {
+        files.forEach(file => {
+          if (file.name.endsWith(".html") && file.name.toLowerCase().includes("tecnologia")) {
+            const btn = document.createElement("button");
+            btn.textContent = file.name;
+            btn.onclick = () => {
+              const url = `https://htmlpreview.github.io/?https://github.com/bargas-lautaro/4to-Matematica-Nat-734-2025/blob/main/${file.name}`;
+              window.open(url, "_blank");
+            };
+            document.getElementById("botones").appendChild(btn);
+          }
+        });
+      })
+      .catch(err => {
+        console.error("Error al obtener los archivos del repositorio", err);
+      });
+  </script>
+</body>
+</html>
