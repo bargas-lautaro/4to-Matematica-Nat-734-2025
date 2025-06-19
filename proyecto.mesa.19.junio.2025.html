@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>BargasLautaro-InformeCientificoEscolar</title>
+
+  <style>
+    /* Colores y bordes */
+    :root{
+      --verde-neon: #00e35d;          /* verde neón suavizado */
+      --purpura:    #a020f0;          /* púrpura para bordes */
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      background:#000;
+      color:var(--verde-neon);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.5;
+      padding:20px 10px 60px;        /* espacio inferior para el pie fijo */
+    }
+
+    /* Bloques de texto con borde púrpura */
+    h1,h2,h3,p,li{
+      border:3px solid var(--purpura);
+      padding:6px;
+      margin-bottom:12px;
+    }
+
+    h1,h2,h3{
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+    h1{font-size:1.8rem;text-align:center}
+    h2{font-size:1.3rem}
+    h3{font-size:1.1rem}
+
+    p,li{font-size:.95rem}
+
+    /* “Barra” con 30 temas posibles */
+    .tema-bar{
+      border:3px solid var(--purpura);
+      padding:10px;
+      max-height:160px;
+      overflow-y:auto;
+    }
+    .tema-bar li{
+      list-style:none;
+      border-left:3px solid var(--purpura);
+      margin-bottom:6px;
+      padding-left:8px;
+    }
+
+    /* Separadores de sección */
+    .section{
+      border-top:3px dashed var(--purpura);
+      padding-top:16px;
+      margin-top:16px;
+    }
+
+    .nota{font-style:italic}
+
+    footer{
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      background:#000;
+      color:#fff;
+      border-top:3px solid #0f0;
+      text-align:center;
+      padding:4px 0;
+      font-size:0.8rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Actividad: Realizar una investigación completa de un tema a elección</h1>
+
+  <p>El informe deberá contener <strong>al menos 8 hojas (sin contar carátula ni bibliografía)</strong> y culminará con una <em>defensa oral</em> donde se evaluará la comprensión de todo lo escrito.</p>
+
+  <h2>Posibles temas de investigación (elige uno o propón otro relacionado):</h2>
+<div class="tema-bar">
+  <ul>
+    <li>Influencia de la inteligencia artificial generativa (ChatGPT, Gemini, Copilot) en los hábitos de estudio y la originalidad de las tareas</li>
+    <li>Efectos de la sobreexposición a pantallas en la calidad del sueño y el rendimiento académico</li>
+    <li>Créptomanía adolescente: factores desencadenantes y estrategias de prevención en el ámbito escolar</li>
+    <li>Adicción a las apuestas online y juegos de azar (casino virtual, skins, cajas-botín)</li>
+    <li>Impacto psicológico y social de los “crush tokens” (apuestas amorosas) en redes sociales</li>
+    <li>Distribución clandestina de apps de apuestas en la Comarca Andina: canales y tácticas de marketing</li>
+    <li>Uso responsable de IA para la detección automática de plagio y ciberacoso</li>
+    <li>Ciberbullying: prevalencia, perfiles de agresores y víctimas, y protocolos de intervención escolar</li>
+    <li>Violencia de género digital: difusión de imágenes íntimas y sextorsión entre pares</li>
+    <li>Gamificación de contenidos de Física: ¿mejora la motivación o distrae del aprendizaje conceptual?</li>
+    <li>Influencias de videojuegos multijugador en la toma de decisiones y el trabajo en equipo</li>
+    <li>Efecto de la música lo-fi o binaural beats en la concentración durante el estudio</li>
+    <li>Consumo de bebidas energéticas, cafeína y suplementos “pre-workout” en adolescentes deportistas</li>
+    <li>Huella de carbono de la vida cotidiana de un estudiante rural frente a uno urbano</li>
+    <li>Microplásticos en el Lago Epuyén y el río Epuyén: muestreo y análisis preliminar</li>
+    <li>Percepción local del riesgo volcánico (Complejo Volcánico Puyehue-Cordón Caulle) en jóvenes</li>
+    <li>Salud mental y redes sociales: relación entre tiempo de pantalla y autoestima</li>
+    <li>Desinformación (“fake news”) sobre salud en TikTok: análisis de casos virales</li>
+    <li>Accesibilidad digital en zonas rurales: impacto del 4G recién instalado en El Hoyo</li>
+    <li>Efecto de la pandemia en los estilos de aprendizaje híbridos (presencial + virtual)</li>
+    <li>Realidad aumentada y realidad virtual como herramientas para la clase de Biología</li>
+    <li>Uso de drones para monitorear incendios forestales y su potencial educativo</li>
+    <li>Economía circular aplicada a microemprendimientos escolares (ej.: huertas y compostaje)</li>
+    <li>Aplicaciones de sensores IoT caseros para medir calidad de aire en aulas</li>
+    <li>Dietas restrictivas (keto, vegana, ayuno intermitente) y su impacto en el desarrollo adolescente</li>
+    <li>Autoimagen corporal y filtros de belleza en Instagram/Snapchat</li>
+    <li>Género y elección de carreras STEM: barreras percibidas por estudiantes de 5.º año</li>
+    <li>Brecha digital de género en el acceso a herramientas de programación</li>
+    <li>Estrés académico, ansiedad por evaluaciones y efectividad del mindfulness escolar</li>
+    <li>IA para identificación temprana de dislexia mediante análisis de escritura</li>
+    <li>Toma de decisiones éticas frente a deepfakes y contenido manipulado</li>
+    <li>Estrategias de estudio pomodoro vs. multitarea: comparación experimental</li>
+    <li>Uso de energías renovables (paneles solares) en escuelas de la provincia de Chubut</li>
+    <li>Efecto de las prácticas de ecobric en la reducción de residuos plásticos escolares</li>
+    <li>Historia de la minería de oro en la cordillera y percepción ambiental juvenil</li>
+    <li>Lluvia ácida y su repercusión en los bosques de coihue y ciprés</li>
+    <li>Impacto de la música trap en la construcción de identidad adolescente</li>
+    <li>Consumo de “fast fashion” y conciencia ambiental entre estudiantes</li>
+    <li>NFT y criptomonedas: riesgos y atractivo para menores de edad</li>
+    <li>Efectos del teletrabajo parental en la dinámica familiar post-pandemia</li>
+    <li>Prevención de enfermedades de transmisión sexual: eficacia de campañas escolares</li>
+    <li>Uso de aplicaciones de monitoreo menstrual y privacidad de datos</li>
+    <li>Factores asociados al abandono escolar y estrategias de retención</li>
+    <li>Inclusión educativa de estudiantes con discapacidad intelectual mediante TIC</li>
+    <li>Robótica educativa y pensamiento computacional: estudio piloto en 4.º año</li>
+    <li>Aprendizaje basado en proyectos y su influencia en la motivación intrínseca</li>
+    <li>Etiquetado frontal de alimentos (Ley de Promoción de la Alimentación Saludable) y hábitos de compra en kioscos escolares</li>
+    <li>Influencia de los microinfluencers locales en el consumo cultural (música, moda, deporte)</li>
+    <li>Microemprendimientos de repostería online impulsados por estudiantes: viabilidad y desafíos</li>
+    <li>Seguridad de datos personales en apps educativas (Google Classroom, WhatsApp, Discord)</li>
+    <li>Cultura maker y uso de impresoras 3D para prototipado en proyectos escolares</li>
+    <li>Efectividad de la enseñanza entre pares (peer tutoring) en Matemática</li>
+    <li>Cambio climático y migración de aves en la Comarca Andina: observación de campo</li>
+    <li>Percepción de la justicia climática entre adolescentes rurales</li>
+    <li>Impacto de las redes 5G en la percepción de riesgo en salud</li>
+    <li>Uso de cómics y manga como recurso para enseñar conceptos de Física</li>
+    <li>Prácticas de reciclaje de residuos electrónicos en colegios secundarios</li>
+    <li>Aplicación de QR interactivo en cartelería escolar para fomentar la lectura</li>
+    <li>El fenómeno K-pop y su influencia en las preferencias de idioma y cultura</li>
+    <li>Adicción a los filtros faciales de realidad aumentada y autoaceptación</li>
+    <li>Efecto de la restricción nocturna de dispositivos (modo “bienestar digital”) en la calidad del sueño</li>
+    <li>Evaluación de la privacidad en navegadores móviles usados por estudiantes (Firefox Focus, DuckDuckGo, etc.)</li>
+  </ul>
+</div>
+
+  <div class="section">
+    <h2>Guía estructurada de tu informe científico</h2>
+
+    <h3>1. Carátula</h3>
+    <p>Incluye: título del trabajo, nombre completo del autor, institución, curso, profesor, lugar y fecha.</p>
+
+    <h3>2. Resumen</h3>
+    <p>Un <strong>abstract</strong> de 150-250 palabras que describa brevemente el problema, la metodología empleada y los resultados principales.</p>
+
+    <h3>3. Traducción</h3>
+    <p>Presenta el título y el resumen anteriores traducidos al inglés.  Esto entrena tu capacidad para comunicar ciencia en contextos internacionales.</p>
+
+    <h3>4. Hipótesis</h3>
+    <p>Enuncia una <em>proposición verificable</em> (“Si… entonces…”) que conduzca la investigación.  Debe ser clara, específica y medible.</p>
+
+    <h3>5. Contexto o desarrollo (Marco teórico &amp; Metodología)</h3>
+    <p>
+      <strong>Marco teórico:</strong> resume estudios previos, conceptos clave y estadísticas relevantes.<br>
+      <strong>Metodología:</strong> explica cómo obtendrás los datos (encuestas, experimentos, entrevistas, análisis documental, etc.), justifica por qué ese método es adecuado y detalla los pasos a seguir.
+    </p>
+
+    <h3>6. Resultados y análisis</h3>
+    <p>Muestra los datos recolectados (tablas, gráficos, citas) y explica qué significan en relación con tu hipótesis.  Evita “copiar y pegar” sin interpretar.</p>
+
+    <h3>7. Conclusión</h3>
+    <p>Responde si la evidencia <strong>confirma, refuta o invita a reformular</strong> tu hipótesis.  Destaca limitaciones y posibles líneas de investigación futuras.</p>
+
+    <h3>8. Verificación de datos</h3>
+    <p>Describe cómo comprobaste la fiabilidad de las fuentes (triangulación, contraste con bases de datos oficiales, revisión por pares, etc.).</p>
+
+    <h3>9. Fuentes &amp; Bibliografía</h3>
+    <p>
+      Lista detallada de todas las referencias utilizando el formato APA 7.  
+      Ejemplo básico:<br>
+      González, C., &amp; Zeleny, J. R. (2019). <em>Metrología.</em> Editorial XYZ.
+    </p>
+
+    <p class="nota">💡 Consejo: incluye anexos con encuestas, entrevistas o códigos si aportan claridad, pero recuerda que <u>no cuentan dentro de las 8 páginas mínimas</u>.</p>
+  </div>
+
+  <footer>
+    Bargas Nehuen Lautaro – 19/06/2025
+  </footer>
+</body>
+</html>
