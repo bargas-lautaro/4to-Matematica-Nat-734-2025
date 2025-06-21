@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Visualizador dinámico GitHub</title>
+  <style>
+    body {
+      background: black;
+      margin: 0;
+      padding: 0;
+      font-family: monospace;
+    }
+    #contenedor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .carpeta {
+      border-radius: 10px;
+      width: 90vw;
+      height: ;
+      background: black;
+      border: 5px solid #00FF00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      text-align: center;
+      transition: background 0.5s;
+    }
+    .carpeta.activa {
+      animation: cambioColor 1s infinite alternate;
+    }
+    @keyframes cambioColor {
+      from { background-color: black; }
+      to { background-color: #003300; }
+    }
+    .carpeta a {
+      color: #00ba7b;
+      text-align: center;
+      align-items: center;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: #0c0f24;
+      font-size: 2.5em;
+    }
+    @media (min-width: 600px) {
+      .carpeta a {
+        font-size: 3em;
+      }
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      color: #00FF00;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.5s;
+      padding-top: 50px;
+    }
+    #overlay.mostrar {
+      display: flex;
+      opacity: 1;
+    }
+    #overlay input {
+      font-size: 1.5em;
+      padding: 5px;
+      margin-bottom: 20px;
+      width: 80%;
+      background: black;
+      border: 2px solid #00FF00;
+      color: #00FF00;
+    }
+    #overlay ul {
+      list-style-type: none;
+      padding: 0;
+      width: 80%;
+    }
+    .archivo {
+      margin: 10px 0;
+      text-align: center;
+    }
+    .archivo a {
+      color: #00FF00;
+      text-decoration: none;
+      font-size: 2em;
+    }
+    .archivo a:hover {
+      color: #00DDDD;
+    }
+    #cerrar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      border: none;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  
+  @keyframes brilloEscala {
+    0% {
+      color: #00FF00;
+      transform: scale(1);
+      text-shadow: 0 0 5px #00FF00;
+    }
+    50% {
+      color: #00DD00;
+      transform: scale(1.1);
+      text-shadow: 0 0 20px #00FF00;
+    }
+    100% {
+      color: #00FF00;
+      transform: scale(1);
+      text-shadow: 0 0 5px #00FF00;
+    }
+  }
+
+  h1 {
+    animation: brilloEscala 2s infinite alternate;
+    display: inline-block;
+  }
+
+  </style>
+</head>
+<body>
+  <h1 style="color:#00FF00; text-align:center; align-items:center; left:10%; position:relative;">Visualizador de GitHub</h1>
+  <div id="contenedor"></div>
+
+  <div id="overlay">
+    <button id="cerrar" onclick="cerrarOverlay()">X</button>
+    <input type="text" id="buscador" placeholder="Buscar archivo..." oninput="filtrarArchivos()">
+    <ul id="listaArchivos"></ul>
+  </div>
+
+  <h4 style="position: fixed; bottom: 0; width: 100%; background: black; color: white; border-top: 3px solid green; text-align: center;">
+    Bargas Nehuen Lautaro - 21/06/2025
+  </h4>
+
+  <script>
+    const usuario = "bargas-lautaro";
+    const repo = "4to-Matematica-Nat-734-2025";
+    let archivosGlobales = [];
+
+    async function obtenerContenido(ruta = "") {
+      const url = `https://api.github.com/repos/${usuario}/${repo}/contents/${ruta}`;
+      const respuesta = await fetch(url);
+      if (!respuesta.ok) {
+        alert(`Error al cargar: ${respuesta.status}`);
+        return [];
+      }
+      return await respuesta.json();
+    }
+
+    async function mostrarCarpetas() {
+      const datos = await obtenerContenido();
+      datos.forEach(item => {
+        if (item.type === "dir") {
+          const div = document.createElement("div");
+          div.className = "carpeta";
+
+          const enlace = document.createElement("a");
+          enlace.textContent = `📁 ${item.name}`;
+          enlace.onclick = () => {
+            abrirOverlay(item.path, div);
+          };
+          div.appendChild(enlace);
+
+          document.getElementById("contenedor").appendChild(div);
+        }
+      });
+    }
+
+    async function abrirOverlay(path, divElemento) {
+      // Resetear animación en otras carpetas
+      document.querySelectorAll(".carpeta").forEach(c => c.classList.remove("activa"));
+      divElemento.classList.add("activa");
+
+      const datos = await obtenerContenido(path);
+      // Ordenar por fecha descendente (más reciente arriba)
+      datos.sort((a, b) => new Date(b.git_url || b.download_url) - new Date(a.git_url || a.download_url));
+      archivosGlobales = datos.filter(item => item.type === "file" && item.name.endsWith(".html"));
+
+      const lista = document.getElementById("listaArchivos");
+      lista.innerHTML = "";
+
+      if (archivosGlobales.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "No hay archivos HTML en esta carpeta";
+        lista.appendChild(li);
+      } else {
+        archivosGlobales.forEach(item => {
+          const li = document.createElement("li");
+          li.className = "archivo";
+          const enlace = document.createElement("a");
+          enlace.href = `https://htmlpreview.github.io/?https://github.com/${usuario}/${repo}/blob/main/${item.path}`;
+          enlace.target = "_blank";
+          enlace.textContent = `📝 ${item.name}`;
+          li.appendChild(enlace);
+          lista.appendChild(li);
+        });
+      }
+
+      const overlay = document.getElementById("overlay");
+      overlay.classList.add("mostrar");
+    }
+
+    function cerrarOverlay() {
+      document.getElementById("overlay").classList.remove("mostrar");
+      document.querySelectorAll(".carpeta").forEach(c => c.classList.remove("activa"));
+    }
+
+    function filtrarArchivos() {
+      const filtro = document.getElementById("buscador").value.toLowerCase();
+      const lista = document.getElementById("listaArchivos");
+      lista.innerHTML = "";
+
+      const filtrados = archivosGlobales.filter(item => item.name.toLowerCase().includes(filtro));
+
+      if (filtrados.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "No se encontraron archivos";
+        lista.appendChild(li);
+      } else {
+        filtrados.forEach(item => {
+          const li = document.createElement("li");
+          li.className = "archivo";
+          const enlace = document.createElement("a");
+          enlace.href = `https://htmlpreview.github.io/?https://github.com/${usuario}/${repo}/blob/main/${item.path}`;
+          enlace.target = "_blank";
+          enlace.textContent = `📝 ${item.name}`;
+          li.appendChild(enlace);
+          lista.appendChild(li);
+        });
+      }
+    }
+
+    mostrarCarpetas();
+  </script>
+</body>
+</html>
