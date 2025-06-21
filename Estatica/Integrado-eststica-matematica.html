@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BargasLautaro - Menú Moderno</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .menu-btn {
+      width: 90%;
+      height: 15%;
+      margin: 0px 0;
+      background-color: #333;
+      color: #fff;
+      border: 3px solid #00ff00;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    .menu-btn:hover {
+      background-color: seagreen;
+    }
+
+    .content-div {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 1);
+      padding: 0px;
+      overflow-y: auto;
+      font-size: 4vh;
+      align-items: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: red;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 5vh;
+      cursor: pointer;
+    }
+
+    .exercise {
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #444;
+      border-radius: 5px;
+    }
+    
+    .result {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .titulos {
+            text-align: center;
+            font-size: 2em;
+            border: 5px solid;
+            padding: 10px;
+            transition: color 0.5s ease, border-color 0.5s ease;
+        }
+  </style>
+</head>
+<body>
+
+
+<div class="menu-btn" onclick="openDiv('div1')">Abrir DIV 1 - Operaciones Vectoriales</div>
+<div class="menu-btn" onclick="openDiv('div2')">Abrir DIV 2 - Magnitud de Vectores</div>
+
+<!-- Contenido del primer DIV -->
+<div id="div1" class="content-div">
+  <button class="close-btn" onclick="closeDiv('div1')">X</button>
+ 
+  <h2 class="titulos" >
+    Suma, Resta, Multiplicación y División de Vectores
+    </h2>
+
+  
+  <div class="exercise">
+    <p><strong>Ejercicio 1:</strong> Calcula la suma de los vectores (3N;4N) y (1N;2N).</p>
+    <input type="text" id="answer1" placeholder="Ejemplo: (2N;6N)">
+    <button onclick="checkAnswer('answer1', '(4N;6N)', 'result1')">Verificar</button>
+    <p id="result1" class="result"></p> </div>
+  <div class="exercise">
+    <p><strong>Ejercicio 2:</strong> Resta el vector (5N;8N) del vector (12N;4N).</p>
+    <input type="text" id="answer2" placeholder="Ejemplo: (1N;1N)">
+    <button onclick="checkAnswer('answer2', '(7N;-4N)', 'result2')">Verificar</button>
+    <p id="result2" class="result"></p> </div>
+  <div class="exercise">
+    <p><strong>Ejercicio 3:</strong> Multiplica el vector (2N;3N) por el escalar 4.</p>
+    <input type="text" id="answer3" placeholder="Ejemplo: ">
+    <button onclick="checkAnswer('answer3', '(8;12)', 'result3')">Verificar</button>
+    <p id="result3" class="result"></p> </div>
+  <div class="exercise">
+    <p><strong>Ejercicio 4:</strong> Divide el vector (6N;9N) por el escalar 3.</p>
+    <input type="text" id="answer4" placeholder="+$+#(">
+    <button onclick="checkAnswer('answer4', '(2N;3N)', 'result4')">Verificar</button>
+    <p id="result4" class="result"></p> </div>
+  <div class="exercise">
+    <p><strong>Ejercicio 5:</strong> Calcula la magnitud del vector (14N, 33N).</p>
+    <input type="text" id="answer5" placeholder="Ejemplo: 10.2">
+    <button onclick="checkAnswer('answer5', '35,85N', 'result5')">Verificar</button>
+    <p id="result5" class="result"></p> </div>
+  <div class="exercise">
+    <p><strong>Ejercicio 6:</strong> Calcula la suma de los vectores (3;4) y (2;-1).</p>
+    <input type="text" id="answer6" placeholder=>
+    <button onclick="checkAnswer('answer6', '(5;3)', 'result6')">Verificar</button>
+    <p id="result6" class="result"></p> </div>
+  <div class="exercise">
+    <p><strong>Ejercicio 7:</strong> Encuentra el vector unitario en la dirección de (6;8).</p>
+    <input type="text" id="answer7" placeholder="Ejemplo:12,15°">
+    <button onclick="checkAnswer('answer7', '36,87°', 'result7')">Verificar</button>
+    <p id="result7" class="result"></p></div>
+  <div class="exercise">
+    <p><strong>Ejercicio 8:</strong> Calcula la suma de los vectores (-3;-2) y (5;7).</p>
+    <input type="text" id="answer8" placeholder="Ejemplo: (1;5)">
+    <button onclick="checkAnswer('answer8', '(2;5)', 'result8')">Verificar</button>
+    <p id="result8" class="result"></p></div>
+
+ 
+</div>
+
+<!-- Contenido del segundo DIV: Magnitud de Vectores -->
+<div id="div2" class="content-div">
+  <button class="close-btn" onclick="closeDiv('div2')">X</button>
+  
+  <h2 class="titulos" >
+    Ejercicios de Magnitud de Vectores
+    </h2>
+
+  <div class="exercise">
+    <p><strong>Ejercicio 1:</strong> Calcula 5 veces la mitad de la magnitud del vector (3; 4).</p>
+    <input type="text" id="answer31" placeholder="Ejemplo: 5,00">
+    <button onclick="checkAnswer('answer31', '12,50', 'result31')">Verificar</button>
+    <p id="result31" class="result"></p></div>
+
+  <div class="exercise">
+    <p><strong>Ejercicio 2:</strong> Calcula el doble de la magnitud del vector (-5;12) mas el vector (3;-10).</p>
+    <input type="text" id="answer32" placeholder="Ejemplo: 13.00">
+    <button onclick="checkAnswer('answer32', '48.36', 'result32')">Verificar</button>
+    <p id="result32" class="result"></p>
+    </div>
+
+  <div class="exercise">
+  <p><strong>Ejercicio 4:</strong> Calcula la magnitud del vector (-15; -12).</p>
+  <input type="text" id="answer34" placeholder="Ejemplo: 13.00">
+  <button onclick="checkAnswer('answer34', '19.20', 'result34')">Verificar</button>
+  <p id="result34" class="result"></p>
+  </div>
+
+  <div class="exercise">
+  <p><strong>Ejercicio 5:</strong> Calcula el ángulo del vector (5; 12) con respecto al eje x en grados.</p>
+  <input type="text" id="answer35" placeholder="(Ejemplo: 10.23°">
+  <button onclick="checkAnswer('answer35', '67.38°', 'result35')">Verificar</button>
+  <p id="result35" class="result"></p>
+  </div>
+
+  <div class="exercise">
+  <p><strong>Ejercicio 6:</strong> Calcula el cuadruple de la magnitud del vector (-7; -24).</p>
+  <input type="text" id="answer36" placeholder="Ejemplo: 25.00">
+  <button onclick="checkAnswer('answer36', '100.00', 'result36')">Verificar</button>
+  <p id="result36" class="result"></p>
+  </div>
+
+  <div class="exercise">
+  <p><strong>Ejercicio 7:</strong> Calcula el ángulo del vector (-7; -24) con respecto al eje x en grados.</p>
+  <input type="text" id="answer37" placeholder="Ejemplo: 200,43°">
+  <button onclick="checkAnswer('answer37', '73.74°', 'result37')">Verificar</button>
+  <p id="result37" class="result"></p>
+  </div>
+</div>
+
+<!-- Botón para abrir el DIV 3 (Teorema del Seno y Coseno) -->
+<div class="menu-btn" onclick="openDiv('divTeoremas')">Abrir DIV 3 - Teorema del Seno y Coseno</div>
+
+<!-- Contenido del tercer DIV: Teorema del Seno y Coseno -->
+<div id="divTeoremas" class="content-div">
+  <button class="close-btn" onclick="closeDiv('divTeoremas')">X</button>
+  
+  <h2 class="titulos">Teorema del Seno y Coseno</h2>
+
+  <h3 class="titulos">Ejercicios Completos de Triángulos</h3>
+
+  <!-- Ejercicio 1: Dos lados y un ángulo -->
+  <div class="exercise">
+    <p><strong>Ejercicio 1:</strong> En un triángulo de fuerzas, si el ángulo A es 30° y los lados a y b son 10N y 12N, calcula los valores de:</p>
+    <ul>
+      <li>Ángulo B (en grados)</li>
+      <input type="text" id="answer52" placeholder="Ejemplo: 45°">
+      <button onclick="checkAnswer('answer52', '36,87°', 'result52')">Verificar</button>
+      <p id="result52"></p>
+
+      <li>Ángulo C (en grados)</li>
+      <input type="text" id="answer53" placeholder="Ejemplo: 105">
+      <button onclick="checkAnswer('answer53', '113,13°', 'result53')">Verificar</button>
+      <p id="result53"></p>
+
+      <li>Lado c</li>
+      <input type="text" id="answer54" placeholder="Ejemplo: 14,14N">
+      <button onclick="checkAnswer('answer54', '18,39N', 'result54')">Verificar</button>
+      <p id="result54"></p>
+    </ul>
+  </div>
+
+  <!-- Ejercicio 2: Dos ángulos y un lado -->
+  <div class="exercise">
+    <p><strong>Ejercicio 2:</strong> En un triangulo del cuadro de una bicicleta , si el ángulo A es 60°, el ángulo B es 45°, y el lado a es 12N, calcula los valores de:</p>
+    <ul>
+      <li>Ángulo C (en grados)</li>
+      <input type="text" id="answer55" placeholder="Ejemplo: 55°">
+      <button onclick="checkAnswer('answer55', '75°', 'result55')">Verificar</button>
+      <p id="result55"></p>
+
+      <li>Lado b</li>
+      <input type="text" id="answer56" placeholder="Ejemplo: 10,39N">
+      <button onclick="checkAnswer('answer56', '9,79N', 'result56')">Verificar</button>
+      <p id="result56"></p>
+
+      <li>Lado c</li>
+      <input type="text" id="answer57" placeholder="Ejemplo: 14,14N">
+      <button onclick="checkAnswer('answer57', '13,38N', 'result57')">Verificar</button>
+      <p id="result57"></p>
+    </ul>
+  </div>
+
+  <!-- Ejercicio 3: Tres lados -->
+  <div class="exercise">
+    <p><strong>Ejercicio 3:</strong> En un triángulo de un puente con armadura de celosía, si los lados a, b y c son 8N, 15N y 17N, calcula los valores de:</p>
+    <ul>
+      <li>Ángulo A (en grados)</li>
+      <input type="text" id="answer58" placeholder="Ejemplo: 28,42°">
+      <button onclick="checkAnswer('answer58', '28,07°', 'result58')">Verificar</button>
+      <p id="result58"></p>
+
+      <li>Ángulo B (en grados)</li>
+      <input type="text" id="answer59" placeholder="Ejemplo: 56,12°">
+      <button onclick="checkAnswer('answer59', '61,93°', 'result59')">Verificar</button>
+      <p id="result59"></p>
+
+      <li>Ángulo C (en grados)</li>
+      <input type="text" id="answer60" placeholder="Ejemplo: 95,29°">
+      <button onclick="checkAnswer('answer60', '90,00°', 'result60')">Verificar</button>
+      <p id="result60"></p>
+    </ul>
+  </div>
+
+</div>
+
+
+<!-- Botón para abrir el DIV 4 (Funciones lineales y estática) -->
+<div class="menu-btn" onclick="openDiv('divFuncionesEstaticas')">Abrir DIV 4 - Funciones Lineales y Estática</div>
+
+<!-- Contenido del cuarto DIV: Funciones Lineales y Estática -->
+<div id="divFuncionesEstaticas" class="content-div">
+  <button class="close-btn" onclick="closeDiv('divFuncionesEstaticas')">X</button>
+  
+  <h2 class="titulos" >Funciones Lineales y Estática</h2>
+
+  <!-- Ejercicio 1 -->
+  <div class="exercise">
+    <p><strong>Ejercicio 1:</strong> En una barra infinita, una persona camina manteniendo equilibrio. Si cuando está a 10 metros del punto de giro su momento es de 700N.m, calcula el momento que genera en las siguientes distancias:</p>
+    
+    <ul>
+      <li>A 1 metro</li>
+      <input type="text" id="answerMoment1" placeholder="Respuesta en N·m">
+      <button onclick="checkAnswer('answerMoment1', '70N.m', 'resultMoment1')">Verificar</button>
+      <p id="resultMoment1"></p>
+
+      <li>A 5 metros</li>
+      <input type="text" id="answerMoment5" placeholder="Respuesta en N·m">
+      <button onclick="checkAnswer('answerMoment5', '350N.m', 'resultMoment5')">Verificar</button>
+      <p id="resultMoment5"></p>
+
+      <li>A 15 metros</li>
+      <input type="text" id="answerMoment15" placeholder="Respuesta en N·m">
+      <button onclick="checkAnswer('answerMoment15', '1050N.m', 'resultMoment15')">Verificar</button>
+      <p id="resultMoment15"></p>
+
+      <li>A 18 metros</li>
+      <input type="text" id="answerMoment18" placeholder="Respuesta en N·m">
+      <button onclick="checkAnswer('answerMoment18', '1260N.m', 'resultMoment18')">Verificar</button>
+      <p id="resultMoment18"></p>
+    </ul>
+    
+    <p><strong>Ingresa la función de momento (M) en función de la distancia (d) usando el valor calculado de 9.8 * masa:</strong></p>
+    <input type="text" id="answerFunction1" placeholder="Ejemplo: M = 700 * d">
+    <button onclick="checkAnswer('answerFunction1', 'M = 70N.d', 'resultFunction1')">Verificar</button>
+    <p id="resultFunction1"></p>
+  </div>
+
+  <!-- Ejercicio 2 -->
+  <div class="exercise">
+    <p><strong>Ejercicio 2:</strong> Dos personas están en equilibrio en una tabla larga. <strong>Naruto</strong> (50 kg) está a 4 metros del punto de giro, y <strong>Sasuke</strong> está a 10 metros del punto de giro. Responde las siguientes preguntas:</p>
+    
+    <ul>
+      <li>¿Cuál debe ser la masa de Sasuke para mantener el equilibrio?</li>
+      <input type="text" id="answerMassSasuke" placeholder="Respuesta en kg">
+      <button onclick="checkAnswer('answerMassSasuke', '20', 'resultMassSasuke')">Verificar</button>
+      <p id="resultMassSasuke"></p>
+      
+      <li>Si Naruto se aleja a 7 metros, ¿cuál debe ser la masa de Sasuke para mantener el equilibrio?</li>
+      <input type="text" id="answerMassSasukeNew" placeholder="Respuesta en kg">
+      <button onclick="checkAnswer('answerMassSasukeNew', '35', 'resultMassSasukeNew')">Verificar</button>
+      <p id="resultMassSasukeNew"></p>
+    </ul>
+    
+    <p><strong>Ingresa la función de momento (M) en función de la distancia (d) para Naruto:</strong></p>
+    <input type="text" id="answerFunction2" placeholder="Ejemplo: M = 490 * d">
+    <button onclick="checkAnswer('answerFunction2', 'M = 490 * d', 'resultFunction2')">Verificar</button>
+    <p id="resultFunction2"></p>
+  </div>
+
+  <!-- Ejercicio 3 -->
+  <div class="exercise">
+    <p><strong>Ejercicio 3:</strong> Dos personas están en equilibrio en una tabla larga. <strong>Luffy</strong> (70 kg) está a 5 metros del punto de giro, y <strong>Zoro</strong> está a 8 metros del punto de giro. Responde las siguientes preguntas:</p>
+    
+    <ul>
+      <li>¿Cuál debe ser la masa de Zoro para mantener el equilibrio?</li>
+      <input type="text" id="answerMassZoro" placeholder="Respuesta en kg">
+      <button onclick="checkAnswer('answerMassZoro', '43.75', 'resultMassZoro')">Verificar</button>
+      <p id="resultMassZoro"></p>
+      
+      <li>Si Luffy se aleja a 10 metros, ¿cuál debe ser la masa de Zoro para mantener el equilibrio?</li>
+      <input type="text" id="answerMassZoroNew" placeholder="Respuesta en kg">
+      <button onclick="checkAnswer('answerMassZoroNew', '87.5', 'resultMassZoroNew')">Verificar</button>
+      <p id="resultMassZoroNew"></p>
+    </ul>
+    
+    <p><strong>Ingresa la función de momento (M) en función de la distancia (d) para Luffy:</strong></p>
+    <input type="text" id="answerFunction3" placeholder="Ejemplo: M = 686 * d">
+    <button onclick="checkAnswer('answerFunction3', 'M = 686 * d', 'resultFunction3')">Verificar</button>
+    <p id="resultFunction3"></p>
+  </div>
+
+
+  <div class="exercise">
+  <p><strong>Ejercicio 6:</strong> Un voladizo de 20 metros de longitud tiene puntos de apoyo a 4 m, 10 m y 17 m. Se están colocando torres de ladrillos en estos puntos. Si el voladizo soporta un momento máximo de 734.500 N·m, ¿cuántos ladrillos se pueden colocar en total (con la misma cantidad en cada punto) antes de que se rompa el voladizo?</p>
+  
+  <ul>
+    <li>¿Cuál es la cantidad total de ladrillos que se pueden colocar en los tres puntos antes de que el voladizo se rompa?</li>
+    <input type="text" id="answerTotalBricks" placeholder="Cantidad total de ladrillos">
+    <button onclick="checkAnswer('answerTotalBricks', '750', 'resultTotalBricks')">Verificar</button>
+    <p id="resultTotalBricks"></p>
+  </ul>
+  
+  <p><strong>Ingresa la función de momento (M) en función del total de ladrillos (n):</strong></p>
+  <input type="text" id="answerFunction6" placeholder="Ejemplo: M = 49 * n">
+  <button onclick="checkAnswer('answerFunction6', 'M = 49 * n', 'resultFunction6')">Verificar</button>
+  <p id="resultFunction6"></p>
+  </div>
+  
+</div>
+<script>
+  // Variables globales para el conteo
+
+  let tiempoTranscurrido = 0; // Tiempo en segundos
+  let intervaloTemporizador; // Intervalo para el temporizador
+
+  let totalEjercicios = 0; // Número total de ejercicios realizados
+  let errores = 0;         // Número de respuestas incorrectas
+  let aciertos = 0;        // Número de respuestas correctas
+
+  // Crear y configurar el div para mostrar el contador y los textos laterales
+  const contadorDiv = document.createElement('div');
+  contadorDiv.id = 'contadorResultados';
+  contadorDiv.style.position = 'fixed';
+  contadorDiv.style.bottom = '0';
+  contadorDiv.style.width = '100%';
+  contadorDiv.style.height = '8%';
+  contadorDiv.style.backgroundColor = '#333';
+  contadorDiv.style.color = '#fff';
+  contadorDiv.style.display = 'flex';
+  contadorDiv.style.justifyContent = 'space-between';
+  contadorDiv.style.alignItems = 'center';
+  contadorDiv.style.padding = '0 20px';
+  contadorDiv.style.borderTop = '3px solid green';
+  contadorDiv.style.fontSize = '1.2em';
+
+  // Elemento para mostrar los textos laterales y el contador
+  const docenteEstatica = document.createElement('div');
+  docenteEstatica.textContent = "-Docente Matemática: Nuco Va";
+
+  const contadorCentral = document.createElement('div');
+  contadorCentral.id = 'contadorCentral';
+  contadorCentral.textContent = `Aciertos: ${aciertos} | Errores: ${errores}`;
+  contadorCentral.style.textAlign = 'center';
+
+  const docenteMatematica = document.createElement('div');
+  docenteMatematica.textContent = "Docente Estática: Bargas Lautaro -";
+
+  // Añadir los elementos al div principal
+  contadorDiv.appendChild(docenteEstatica);
+  contadorDiv.appendChild(contadorCentral);
+  contadorDiv.appendChild(docenteMatematica);
+
+  document.body.appendChild(contadorDiv);
+
+  // Función para actualizar el contador
+function actualizarContador() {
+  const contadorCentral = document.getElementById('contadorCentral');
+  contadorCentral.textContent = `Aciertos: ${aciertos} | Errores: ${errores}`;
+
+  // Guardar datos en el caché
+  localStorage.setItem('aciertos', aciertos);
+  localStorage.setItem('errores', errores);
+  localStorage.setItem('tiempoTranscurrido', tiempoTranscurrido);
+}
+function iniciarTemporizador() {
+  intervaloTemporizador = setInterval(() => {
+    tiempoTranscurrido++;
+    localStorage.setItem('tiempoTranscurrido', tiempoTranscurrido);
+
+    // Opcional: Mostrar el tiempo en el contador
+    const tiempoElemento = document.getElementById('contadorCentral');
+    tiempoElemento.textContent = `Aciertos: ${aciertos} | Errores: ${errores} | Tiempo: ${formatearTiempo(tiempoTranscurrido)}`;
+  }, 1000);
+}
+
+function formatearTiempo(segundos) {
+  const minutos = Math.floor(segundos / 60);
+  const restoSegundos = segundos % 60;
+  return `${minutos}m ${restoSegundos}s`;
+}
+
+
+  function cargarDatosDelCache() {
+  const aciertosGuardados = localStorage.getItem('aciertos');
+  const erroresGuardados = localStorage.getItem('errores');
+  const tiempoGuardado = localStorage.getItem('tiempoTranscurrido');
+
+  aciertos = aciertosGuardados ? parseInt(aciertosGuardados, 10) : 0;
+  errores = erroresGuardados ? parseInt(erroresGuardados, 10) : 0;
+  tiempoTranscurrido = tiempoGuardado ? parseInt(tiempoGuardado, 10) : 0;
+
+  actualizarContador();
+}
+
+
+  function openDiv(divId) {
+    document.getElementById(divId).style.display = "block";
+  }
+
+  function closeDiv(divId) {
+    document.getElementById(divId).style.display = "none";
+  }
+
+  function checkAnswer(inputId, correctAnswer, resultId) {
+    const userAnswer = document.getElementById(inputId).value.trim();
+    const result = document.getElementById(resultId);
+
+    totalEjercicios++; // Incrementa el número total de ejercicios realizados
+
+    if (userAnswer === correctAnswer) {
+      result.textContent = "Correcto";
+      result.style.color = "green";
+      aciertos++; // Incrementa el número de aciertos
+    } else {
+      result.textContent = "Incorrecto";
+      result.style.color = "red";
+      errores++; // Incrementa el número de errores
+    }
+
+    actualizarContador(); // Actualizar el contador en pantalla
+  }
+
+  function cambiarColoresParaTodos() {
+    const titulos = document.querySelectorAll('.titulos');
+    const colores = ['red', 'blue', 'green', 'orange', 'purple', 'pink', 'yellow'];
+    titulos.forEach(titulo => {
+      const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+      const bordeAleatorio = colores[Math.floor(Math.random() * colores.length)];
+      titulo.style.color = colorAleatorio;
+      titulo.style.borderColor = bordeAleatorio;
+    });
+  }
+
+  // Cambia los colores de todos los títulos cada segundo
+  setInterval(cambiarColoresParaTodos, 1000);
+  cargarDatosDelCache();
+  cargarDatosDelCache();
+  iniciarTemporizador();
+
+
+
+  window.addEventListener('beforeunload', () => {
+  clearInterval(intervaloTemporizador);
+  localStorage.setItem('aciertos', aciertos);
+  localStorage.setItem('errores', errores);
+  localStorage.setItem('tiempoTranscurrido', tiempoTranscurrido);
+});
+
+
+</script>
+
+</body>
+</html>

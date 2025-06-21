@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Cables y Vectores (desbloqueo 11:30)</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .pregunta {
+      display: none;
+      font-size: 22px;
+      border: 3px solid #0f0;
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      cursor: pointer;
+    }
+    .pregunta.activa {
+      display: block;
+    }
+    #bloqueado {
+      font-size: 20px;
+      padding: 30px;
+      border: 3px solid #f00;
+    }
+    h4 {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #000;
+      color: #fff;
+      border-top: 3px solid #0f0;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="bloqueado">
+  <h2>Contenido bloqueado</h2>
+  <p>Este material estará disponible a partir de las 11:30 de hoy.</p>
+  <img src="https://usagif.com/wp-content/uploads/laughing-62.gif" width="100%" style="position:absolute;top:40%;left:0%;">
+</div>
+
+<div id="contenido" style="display:none;">
+
+  <!-- CAJAS CON ÁNGULOS DISTINTOS -->
+  <div id="p1" class="pregunta activa" onclick="siguiente(1)">
+    Una caja de 15 kg está en la Luna (g ≈ 1,6 m/s²).<br>
+    Los cables forman 30° con la horizontal.<br><br>
+    ¿Cuál es la tensión en cada cable?
+  </div>
+
+  <div id="p2" class="pregunta" onclick="siguiente(2)">
+    Una caja de 22 kg está en Marte (g ≈ 3,7 m/s²).<br>
+    Ambos cables hacen un ángulo de 45° con la horizontal.<br><br>
+    Hallá la tensión en cada cable.
+  </div>
+
+  <div id="p3" class="pregunta" onclick="siguiente(3)">
+    Una caja de 34 kg cuelga en un planeta con g = 10 m/s².<br>
+    Los cables forman un ángulo de 20° con la horizontal.<br><br>
+    Calculá la tensión de cada cable.
+  </div>
+
+  <div id="p4" class="pregunta" onclick="siguiente(4)">
+    Una caja de 18 kg cuelga en la Tierra (g = 9,8 m/s²).<br>
+    Ambos cables forman un ángulo de 60° con la horizontal.<br><br>
+    Determiná la tensión en cada cable.
+  </div>
+
+  <div id="p5" class="pregunta" onclick="siguiente(5)">
+    Una caja de 28 kg está en un planeta con g = 5,5 m/s².<br>
+    Los cables forman un ángulo de 35° con la horizontal.<br><br>
+    Calculá la tensión en cada cable.
+  </div>
+
+  <div id="p6" class="pregunta" onclick="siguiente(6)">
+    Una caja de 40 kg cuelga en Júpiter (g ≈ 24,8 m/s²).<br>
+    Los cables forman un ángulo de 25° con la horizontal.<br><br>
+    Calculá la tensión en cada cable.
+  </div>
+
+  <!-- VECTORES CON ÁNGULOS DISTINTOS EN CADA EJERCICIO -->
+  <div id="p7" class="pregunta" onclick="siguiente(7)">
+    Vector A: 40 N a 0°<br>
+    Vector B: 60 N a 120°<br><br>
+    Hallá el módulo de C (ángulo 240°) para que ΣF = 0.
+  </div>
+
+  <div id="p8" class="pregunta" onclick="siguiente(8)">
+    Vector F₁: 55 N a 0°<br>
+    Vector F₂: 40 N a 135°<br><br>
+    Calculá el módulo de F₃ (a 225°) para equilibrio.
+  </div>
+
+  <div id="p9" class="pregunta" onclick="siguiente(9)">
+    Vector P₂: 50 N a 110°<br>
+    Vector P₃: 50 N a 250°<br><br>
+    Hallá el módulo de P₁ (a 0°) para ΣP = 0.
+  </div>
+
+  <div id="p10" class="pregunta" onclick="siguiente(10)">
+    Vector Q₁: 90 N a 0°<br>
+    Vector Q₃: 80 N a 210°<br><br>
+    Determiná |Q₂| a 140° para equilibrio.
+  </div>
+
+  <div id="p11" class="pregunta" onclick="siguiente(11)">
+    Vector R₁: 70 N a 0°<br>
+    Vector R₂: 50 N a 150°<br><br>
+    Calculá |R₃| a 270° para que ΣR = 0.
+  </div>
+
+  <div id="p12" class="pregunta" onclick="siguiente(12)">
+    Vector S₁: 65 N a 90°<br>
+    Vector S₂: 55 N a 210°<br><br>
+    Hallá |S₃| a 330° para equilibrio total.
+  </div>
+
+</div>
+
+<h4>Bargas Nehuen Lautaro - 27/05/2025</h4>
+
+<script>
+  function siguiente(n){
+    const act = document.getElementById("p"+n);
+    const nxt = document.getElementById("p"+(n+1));
+    act.classList.remove("activa");
+    if(nxt){ nxt.classList.add("activa"); }
+  }
+
+  function verificarHora(){
+    const ahora = new Date();
+    const h = ahora.getHours();
+    const m = ahora.getMinutes();
+    if(h > 11 || (h === 11 && m >= 30)){
+      document.getElementById("contenido").style.display = "block";
+      document.getElementById("bloqueado").style.display = "none";
+    }else{
+      document.getElementById("contenido").style.display = "none";
+      document.getElementById("bloqueado").style.display = "block";
+    }
+  }
+
+  verificarHora();
+  setInterval(verificarHora, 10000);
+</script>
+
+</body>
+</html>

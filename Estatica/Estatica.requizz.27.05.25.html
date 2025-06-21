@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Preguntas con restricción horaria</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .pregunta {
+      display: none;
+      font-size: 22px;
+      border: 3px solid green;
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      cursor: pointer;
+    }
+
+    .pregunta.activa {
+      display: block;
+    }
+
+    #bloqueado {
+      font-size: 20px;
+      padding: 30px;
+      border: 3px solid red;
+    }
+
+    h4 {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      border-top: 3px solid green;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="bloqueado">
+  <h2>Contenido bloqueado</h2>
+  <p>Este material estará disponible a partir de las 11:30 de hoy.</p>
+  <img src="https://usagif.com/wp-content/uploads/laughing-62.gif" width="100%" style="position: absolute; top:40%; left:0%;">
+</div>
+
+<div id="contenido" style="display:none;">
+  <div id="p1" class="pregunta activa" onclick="siguiente(1)">
+    Broly entrena en un planeta con gravedad 90G.<br>
+    Su peso allí es de 180.000 N.<br><br>
+    ¿Cuál sería su peso en la Tierra?
+  </div>
+
+  <div id="p2" class="pregunta" onclick="siguiente(2)">
+    Trunks pesa 120.000 N en un planeta con gravedad 80G.<br><br>
+    ¿Cuál sería su peso en la Tierra?
+  </div>
+
+  <div id="p3" class="pregunta" onclick="siguiente(3)">
+    Piccolo entrena en un planeta con gravedad 60G y allí pesa 90.000 N.<br><br>
+    ¿Cuál sería su peso en la Tierra?
+  </div>
+
+  <div id="p4" class="pregunta" onclick="siguiente(4)">
+    Bardock entrena con gravedad 110G y tiene un peso de 220.000 N.<br><br>
+    ¿Qué peso tendría en la Tierra?
+  </div>
+
+  <div id="p5" class="pregunta" onclick="siguiente(5)">
+    Raditz pesa 104.000 N en un planeta con gravedad 65G.<br><br>
+    ¿Cuál sería su peso en condiciones terrestres?
+  </div>
+
+  <div id="p6" class="pregunta" onclick="siguiente(6)">
+    Kale entrena con gravedad 95G y pesa 209.000 N allí.<br><br>
+    ¿Cuál sería su peso en la Tierra?
+  </div>
+
+  <div id="p7" class="pregunta" onclick="siguiente(7)">
+    Una caja de 18 kg está en la Luna (g ≈ 1,6 m/s²),<br>
+    sostenida por 4 cables que comparten el peso por igual.<br><br>
+    ¿Qué tensión soporta cada cable?
+  </div>
+
+  <div id="p8" class="pregunta" onclick="siguiente(8)">
+    Una caja de 35 kg está en Marte (g ≈ 3,7 m/s²),<br>
+    sostenida por 4 sogas. T1 = T2 = T3 y T4 = 90 N.<br><br>
+    ¿Cuánto vale cada una de las tensiones T?
+  </div>
+
+  <div id="p9" class="pregunta" onclick="siguiente(9)">
+    Una caja de 28 kg está en un planeta con g = 4,5 m/s²,<br>
+    sostenida por 4 cables. T1 = T2, y T3 = 85 N, T4 = 65 N.<br><br>
+    ¿Cuánto valen T1 y T2?
+  </div>
+
+  <div id="p10" class="pregunta" onclick="siguiente(10)">
+    Una caja de 42 kg cuelga en la Tierra (g = 9,8 m/s²).<br>
+    Sostenida por 4 cables: T1 = T2 = T3 y T4 = 140 N.<br><br>
+    ¿Cuánto vale la tensión T?
+  </div>
+
+  <div id="p11" class="pregunta" onclick="siguiente(11)">
+    Una caja de 22 kg cuelga en Júpiter (g ≈ 24,8 m/s²),<br>
+    con T1 = T2, T3 = 250 N y T4 = 180 N.<br><br>
+    ¿Cuánto valen T1 y T2?
+  </div>
+
+  <div id="p12" class="pregunta" onclick="siguiente(12)">
+    Una caja de 20 kg cuelga en un planeta con g = 12 m/s².<br>
+    T1 = T2 = T3, y T4 = 140 N.<br><br>
+    ¿Cuál es la tensión T?
+  </div>
+</div>
+
+<h4>Bargas Nehuen Lautaro - 15/05/2025</h4>
+
+<script>
+  function siguiente(numero) {
+    const actual = document.getElementById("p" + numero);
+    const prox = document.getElementById("p" + (numero + 1));
+    actual.classList.remove("activa");
+    if (prox) {
+      prox.classList.add("activa");
+    }
+  }
+
+  function verificarHora() {
+    const ahora = new Date();
+    const h = ahora.getHours();
+    const m = ahora.getMinutes();
+
+    if (h > 11 || (h === 11 && m >= 30)) {
+      document.getElementById("contenido").style.display = "block";
+      document.getElementById("bloqueado").style.display = "none";
+    } else {
+      document.getElementById("contenido").style.display = "none";
+      document.getElementById("bloqueado").style.display = "block";
+    }
+  }
+
+  verificarHora();
+  setInterval(verificarHora, 10000);
+</script>
+
+</body>
+</html>

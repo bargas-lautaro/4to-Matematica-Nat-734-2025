@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Trigonometría</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .button-container {
+            margin: 20px;
+        }
+        .example, .calculator {
+            display: none;
+            border: 1px solid #000;
+            padding: 20px;
+            margin: 20px;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ur p         }
+        .close-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20pd
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .input-field {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicios de Trigonometría</h1>
+    <div class="button-container">
+        <button onclick="showExample()">Mostrar Ejemplos Paso a Paso</button>
+        <button onclick="showCalculator()">Calcular Datos Faltantes</button>
+    </div>
+
+    <div id="example" class="example">
+        <h2>Ejemplos Paso a Paso</h2>
+        <p><strong>Ejemplo 1:</strong> Calcular los lados de un triángulo rectángulo sabiendo un ángulo y un cateto.</p>
+        <p>Paso 1: Identificar los datos conocidos. Supongamos que tenemos un ángulo de 30° y un cateto opuesto de 5 N.</p>
+        <p>Paso 2: Utilizar las funciones trigonométricas para encontrar los otros lados.</p>
+        <p>sin(30°) = opuesto / hipotenusa => 0.5 = 5 / hipotenusa => hipotenusa = 10 N</p>
+        <p>cos(30°) = adyacente / hipotenusa => √3/2 = adyacente / 10 => adyacente = 5√3 N</p>
+        
+        <p><strong>Ejemplo 2:</strong> Calcular los lados de un triángulo rectángulo sabiendo un ángulo y la hipotenusa.</p>
+        <p>Paso 1: Identificar los datos conocidos. Supongamos que tenemos un ángulo de 45° y una hipotenusa de 10 N.</p>
+        <p>Paso 2: Utilizar las funciones trigonométricas para encontrar los otros lados.</p>
+        <p>sin(45°) = opuesto / 10 => √2/2 = opuesto / 10 => opuesto = 10√2/2 = 5√2 N</p>
+        <p>cos(45°) = adyacente / 10 => √2/2 = adyacente / 10 => adyacente = 10√2/2 = 5√2 N</p>
+        
+        <p><strong>Ejemplo 3:</strong> Calcular los lados de un triángulo rectángulo sabiendo un cateto y la hipotenusa.</p>
+        <p>Paso 1: Identificar los datos conocidos. Supongamos que tenemos un cateto de 6 N y una hipotenusa de 10 N.</p>
+        <p>Paso 2: Utilizar el teorema de Pitágoras para encontrar el otro cateto.</p>
+        <p>hipotenusa² = opuesto² + adyacente² => 10² = 6² + adyacente² => 100 = 36 + adyacente² => adyacente = √64 = 8 N</p>
+        <p>Paso 3: Utilizar funciones trigonométricas para encontrar los ángulos.</p>
+        <p>sin(θ) = opuesto / hipotenusa => sin(θ) = 6 / 10 => θ = sin⁻¹(0.6) ≈ 36.87°</p>
+        <p>cos(θ) = adyacente / hipotenusa => cos(θ) = 8 / 10 => θ = cos⁻¹(0.8) ≈ 36.87°</p>
+
+        <button class="close-btn" onclick="hideExample()">Cerrar</button>
+    </div>
+
+    <div id="calculator" class="calculator">
+        <h2>Calculadora de Datos Faltantes</h2>
+        <div class="input-field">
+            <label for="angle">Ángulo (en grados):</label>
+            <input type="number" id="angle" step="any">
+        </div>
+        <div class="input-field">
+            <label for="hypotenuse">Hipotenusa (en N):</label>
+            <input type="number" id="hypotenuse" step="any">
+        </div>
+        <div class="input-field">
+            <label for="side">Un lado (en N):</label>
+            <input type="number" id="side" step="any">
+        </div>
+        <button onclick="calculate()">Calcular</button>
+        <div id="results"></div>
+        <button class="close-btn" onclick="hideCalculator()">Cerrar</button>
+    </div>
+
+    <script>
+        function showExample() {
+            document.getElementById('example').style.display = 'block';
+        }
+
+        function hideExample() {
+            document.getElementById('example').style.display = 'none';
+        }
+
+        function showCalculator() {
+            document.getElementById('calculator').style.display = 'block';
+        }
+
+        function hideCalculator() {
+            document.getElementById('calculator').style.display = 'none';
+        }
+
+        function calculate() {
+            const angle = parseFloat(document.getElementById('angle').value);
+            const hypotenuse = parseFloat(document.getElementById('hypotenuse').value);
+            const side = parseFloat(document.getElementById('side').value);
+            let results = document.getElementById('results');
+            results.innerHTML = '';
+
+            if (angle && hypotenuse) {
+                const opposite = hypotenuse * Math.sin(angle * Math.PI / 180);
+                const adjacent = hypotenuse * Math.cos(angle * Math.PI / 180);
+                results.innerHTML = `<p>Cateto opuesto: ${opposite.toFixed(2)} N</p>
+                                     <p>Cateto adyacente: ${adjacent.toFixed(2)} N</p>`;
+            } else if (angle && side) {
+                const hypotenuse = side / Math.sin(angle * Math.PI / 180);
+                const adjacent = side / Math.tan(angle * Math.PI / 180);
+                results.innerHTML = `<p>Hipotenusa: ${hypotenuse.toFixed(2)} N</p>
+                                     <p>Cateto adyacente: ${adjacent.toFixed(2)} N</p>`;
+            } else if (hypotenuse && side) {
+                const angle = Math.asin(side / hypotenuse) * (180 / Math.PI);
+                const adjacent = Math.sqrt(hypotenuse * hypotenuse - side * side);
+                results.innerHTML = `<p>Ángulo: ${angle.toFixed(2)}°</p>
+                                     <p>Cateto adyacente: ${adjacent.toFixed(2)} N</p>`;
+            } else {
+                results.innerHTML = `<p>Por favor, ingrese al menos dos valores.</pk>`;
+            }
+        }
+    </script>
+</body>
+</html>r
