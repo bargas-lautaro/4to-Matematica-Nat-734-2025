@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>BargasLautaro – Introducción a la Función Lineal</title>
+<style>
+:root {
+    --bg-color:#000;
+    --txt-aqua:#ffffff;
+    --border-aqua:2px solid var(--txt-aqua);
+    --border-white:10px solid #ffffff;
+    --verde-fluor:#39ff14;
+    --naranja-fluor:#ff8c00;
+    --magenta-fluor:#ff00ff;
+    --cyan-fixed:#00bfff;
+    --celeste:#00bfff;
+}
+body{
+    margin:0;
+    background:var(--bg-color);
+    color:var(--txt-aqua);
+    font-family:Arial,Helvetica,sans-serif;
+}
+main{
+    border:var(--border-white);
+    width:90%;
+    margin:2% auto;
+    padding:4%;
+}
+p{
+    background:var(--bg-color);
+    border:var(--border-aqua);
+    padding:2%;
+    margin:3% 0;
+    line-height:1.5;
+}
+.x{color:var(--verde-fluor);}
+.y{color:var(--naranja-fluor);} 
+.pendiente{color:var(--magenta-fluor);font-weight:bold;}
+.constante{color:var(--cyan-fixed);font-weight:bold;}
+.equation{font-size:150%;text-align:center;margin:2% 0;}
+em{color:var(--celeste);font-style:normal;}
+h4#firma{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#000;
+    color:#fff;
+    border-top:3px solid #00ff00;
+    text-align:center;
+    margin:0;
+    padding:1%;
+    font-weight:normal;
+}
+</style>
+</head>
+<body>
+<main>
+<p>Una función lineal es como una máquina matemática: vos le ingresás un valor, llamado <span class="x">variable independiente (x)</span>, y la máquina realiza un proceso con ese valor.</p>
+<br>
+<div class="ejemplo">
+    <strong>Ejemplo MRU (auto):</strong>
+    Un auto circula a 60&nbsp;km/h desde el kilómetro&nbsp;0, modelado por
+    <span class="y">D</span> = <span class="pendiente">60</span><span class="x">t</span> + <span class="constante">0</span>.
+    <br><em>Preguntas:</em>
+    ¿Qué distancia recorrerá en 2&nbsp;h? •
+    ¿Cuánto tiempo tardará en recorrer 150&nbsp;km?
+</div>
+
+<br>
+
+<p>Generalmente, este proceso consiste en multiplicar <span class="x">x</span> por un número fijo <span class="pendiente">b</span> y sumarle otro número fijo <span class="constante">C</span>, devolviéndote un resultado. Ese resultado es la <span class="y">variable dependiente (Y)</span> porque depende del valor que ingresaste.</p>
+<p class="equation"><span class="y">Y</span> = <span class="pendiente">b</span><span class="x">x</span> + <span class="constante">C</span></p>
+<p>En esta fórmula, <span class="pendiente">b</span> se llama <span class="pendiente">pendiente</span> y representa cuánto cambia <span class="y">Y</span> cuando <span class="x">x</span> aumenta en una unidad. Es decir, indica si la función sube o baja y con qué rapidez lo hace.</p>
+<p>Por su parte, <span class="constante">C</span> es el número fijo que se suma: marca el valor donde la función corta al eje Y, el punto de inicio cuando <span class="x">x</span> es cero.</p>
+<p><strong>Ejemplo MRU (auto):</strong> Un auto que circula a 90&nbsp;km/h desde el kilómetro&nbsp;0 se modela con <span class="y">D</span> = <span class="pendiente">90</span><span class="x">t</span> + <span class="constante">0</span>.<br><em>Preguntas:</em> ¿Cuánta distancia recorrerá en 1,5&nbsp;h? • ¿Cuánta distancia recorrerá en 3&nbsp;h? • ¿En qué momento habrá recorrido 225&nbsp;km? • ¿Qué representa la pendiente en este contexto?</p>
+<p><strong>Ejemplo empresa de streaming:</strong> La empresa cobra $<span class="constante">1.000</span> de abono base más $<span class="pendiente">250</span> por cada película: <span class="y">C</span> = <span class="pendiente">250</span><span class="x">n</span> + <span class="constante">1.000</span>.<br><em>Preguntas:</em> ¿Cuánto pagará un cliente que alquila 6 películas? • ¿Cuántas películas puede alquilar con $2.750? • ¿Cuánto costará ver 0 películas? • ¿Qué indica la constante en esta función?</p>
+<p><strong>Ejemplo caminata:</strong> Una persona parte a <span class="constante">20</span>&nbsp;m de su casa y camina a <span class="pendiente">1,5</span>&nbsp;m/s: <span class="y">P</span> = <span class="pendiente">1,5</span><span class="x">t</span> + <span class="constante">20</span>.<br><em>Preguntas:</em> ¿A qué distancia estará después de 12&nbsp;s? • ¿Cuánto tiempo necesita para estar a 80&nbsp;m? • ¿Cuál será su posición en 0&nbsp;s? • ¿Cómo se interpreta la pendiente en metros por segundo?</p>
+<p><strong>Ejemplo combustión:</strong> La masa de un tronco disminuye a razón de <span class="pendiente">−0,3</span>&nbsp;kg/min: <span class="y">M</span> = <span class="pendiente">−0,3</span><span class="x">t</span> + <span class="constante">4</span>.<br><em>Preguntas:</em> ¿Qué masa quedará tras 5&nbsp;min? • ¿Cuándo la masa será de 1&nbsp;kg? • ¿Cuánta masa habrá desaparecido en 10&nbsp;min? • ¿Qué significa que la pendiente sea negativa?</p>
+<p><strong>Ejemplo tanque de agua:</strong> El volumen de agua V en un tanque baja a razón de <span class="pendiente">−5</span>&nbsp;L/min desde <span class="constante">200</span>&nbsp;L: <span class="y">V</span> = <span class="pendiente">−5</span><span class="x">t</span> + <span class="constante">200</span>.<br><em>Preguntas:</em> ¿Cuánta agua habrá tras 18&nbsp;min? • ¿En qué minuto el tanque quedará vacío? • ¿Qué volumen habrá a los 8&nbsp;min? • ¿Qué indica el valor 200&nbsp;L en la ecuación?</p>
+<p><strong>Ejemplo taxi:</strong> La tarifa de un taxi es $<span class="constante">700</span> de bajada de bandera más $<span class="pendiente">120</span> por kilómetro: <span class="y">F</span> = <span class="pendiente">120</span><span class="x">d</span> + <span class="constante">700</span>.<br><em>Preguntas:</em> ¿Cuánto costará un viaje de 8&nbsp;km? • ¿Qué distancia se puede recorrer con $1.900? • ¿Cuál sería el costo de un viaje de 0&nbsp;km? • ¿Qué representan la pendiente y la constante?</p>
+<p><strong>Ejemplo horno:</strong> La temperatura del horno aumenta a <span class="pendiente">20</span>&nbsp;°C/min partiendo de <span class="constante">150</span>&nbsp;°C: <span class="y">T</span> = <span class="pendiente">20</span><span class="x">t</span> + <span class="constante">150</span>.<br><em>Preguntas:</em> ¿Qué temperatura habrá a los 7&nbsp;min? • ¿Cuándo llegará a 250&nbsp;°C? • ¿Qué temperatura habrá a los 0&nbsp;min? • ¿Cómo se relaciona la pendiente con la rapidez de calentamiento?</p>
+</main>
+<h4 id="firma">Bargas Nehuen Lautaro – 27/06/2025</h4>
+</body>
+</html>
