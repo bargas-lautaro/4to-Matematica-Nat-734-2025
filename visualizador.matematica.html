@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BargasLautaro - Visualizador HTMLPreview</title>
   <style>
     body {
@@ -9,10 +10,12 @@
       color: #fff;
       font-family: sans-serif;
       text-align: center;
-      padding: 20px;
+      margin: 0;
+      padding: 0 10px 60px 10px;
     }
     h1 {
       color: lime;
+      margin-top: 20px;
     }
     .file-list {
       margin-top: 30px;
@@ -24,13 +27,15 @@
       background-color: #111;
       border: 2px solid lime;
       color: white;
-      padding: 10px 20px;
-      margin: 8px;
-      width: 90%;
+      padding: 12px;
+      margin: 8px 0;
+      width: 100%;
       max-width: 600px;
       cursor: pointer;
       font-size: 1em;
       transition: all 0.3s;
+      border-radius: 8px;
+      box-sizing: border-box;
     }
     .file-button:hover {
       background-color: lime;
@@ -47,6 +52,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.9em;
     }
     footer a {
       background-color: lime;
@@ -54,11 +61,26 @@
       padding: 5px 10px;
       text-decoration: none;
       border-radius: 5px;
+      margin: 5px;
+    }
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.3em;
+      }
+      .file-button {
+        font-size: 0.9em;
+        padding: 10px;
+      }
+      footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Visualizador de archivos HTML (734 - Matemática 4to)</h1>
+  <h1>Visualizador de archivos HTML<br>(734 - Matemática 4to)</h1>
   <div id="fileList" class="file-list">Cargando archivos...</div>
 
   <footer>
@@ -77,7 +99,6 @@
       if (!match) return null;
       const dia = parseInt(match[1]);
       const mesTexto = match[2].toLowerCase();
-
       const meses = {
         enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4,
         junio: 5, julio: 6, agosto: 7, septiembre: 8,
@@ -85,7 +106,6 @@
       };
       const mes = meses[mesTexto];
       const anio = 2025;
-
       return new Date(anio, mes, dia);
     }
 
