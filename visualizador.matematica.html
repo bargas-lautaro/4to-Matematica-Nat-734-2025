@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BargasLautaro - Visualizador HTMLPreview</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: lime;
+    }
+    .file-list {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .file-button {
+      background-color: #111;
+      border: 2px solid lime;
+      color: white;
+      padding: 10px 20px;
+      margin: 8px;
+      width: 90%;
+      max-width: 600px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+    .file-button:hover {
+      background-color: lime;
+      color: black;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      border-top: 3px solid lime;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer a {
+      background-color: lime;
+      color: black;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Visualizador de archivos HTML (734 - Matemática 4to)</h1>
+  <div id="fileList" class="file-list">Cargando archivos...</div>
+
+  <footer>
+    <span>Bargas Nehuen Lautaro</span>
+    <a href="https://github.com/bargas-lautaro/4to-Matematica-Nat-734-2025" target="_blank">Repositorio</a>
+    <span id="fecha"></span>
+  </footer>
+
+  <script>
+    const repoPath = '734-matematica-4to';
+    const branch = 'main';
+    const apiUrl = 'https://api.github.com/repos/bargas-lautaro/4to-Matematica-Nat-734-2025/contents/' + repoPath + '?ref=' + branch;
+
+    function parseFecha(nombre) {
+      const match = nombre.match(/(\d{2})([a-zA-Z]+)\.html$/);
+      if (!match) return null;
+      const dia = parseInt(match[1]);
+      const mesTexto = match[2].toLowerCase();
+
+      const meses = {
+        enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4,
+        junio: 5, julio: 6, agosto: 7, septiembre: 8,
+        octubre: 9, noviembre: 10, diciembre: 11
+      };
+      const mes = meses[mesTexto];
+      const anio = 2025;
+
+      return new Date(anio, mes, dia);
+    }
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => {
+        const archivos = data.filter(file =>
+          file.name.endsWith('.html') &&
+          file.name.startsWith('Matematica-4to-2025')
+        );
+
+        archivos.sort((a, b) => {
+          const fechaA = parseFecha(a.name);
+          const fechaB = parseFecha(b.name);
+          return fechaB - fechaA;
+        });
+
+        const fileListDiv = document.getElementById('fileList');
+        fileListDiv.innerHTML = '';
+
+        archivos.forEach(file => {
+          const btn = document.createElement('button');
+          btn.className = 'file-button';
+          btn.textContent = file.name;
+          btn.onclick = () => {
+            const url = 'https://htmlpreview.github.io/?https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/' + repoPath + '/' + file.name;
+            window.open(url, '_blank');
+          };
+          fileListDiv.appendChild(btn);
+        });
+      })
+      .catch(err => {
+        document.getElementById('fileList').innerText = 'Error al cargar archivos: ' + err;
+      });
+
+    document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-AR');
+  </script>
+</body>
+</html>
