@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BargasLautaro - Visualizador HTMLPreview Tecnología</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0 10px 60px 10px;
+    }
+    h1 {
+      color: lime;
+      margin-top: 20px;
+    }
+    .file-list {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .file-button {
+      background-color: #111;
+      border: 2px solid lime;
+      color: white;
+      padding: 12px;
+      margin: 8px 0;
+      width: 100%;
+      max-width: 600px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    .file-button:hover {
+      background-color: lime;
+      color: black;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      border-top: 3px solid lime;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.9em;
+    }
+    footer a {
+      background-color: lime;
+      color: black;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.3em;
+      }
+      .file-button {
+        font-size: 0.9em;
+        padding: 10px;
+      }
+      footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Visualizador de archivos HTML<br>(Tecnología - 3ro)</h1>
+  <div id="fileList" class="file-list">Cargando archivos...</div>
+
+  <footer>
+    <span>Bargas Nehuen Lautaro</span>
+    <a href="https://github.com/bargas-lautaro/4to-Matematica-Nat-734-2025/tree/main/Tecnologia/3ro.765.2025" target="_blank">Repositorio</a>
+    <span id="fecha"></span>
+  </footer>
+
+  <script>
+    const repoPath = 'Tecnologia/3ro.765.2025';
+    const branch = 'main';
+    const apiUrl = `https://api.github.com/repos/bargas-lautaro/4to-Matematica-Nat-734-2025/contents/${repoPath}?ref=${branch}`;
+
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => {
+        const archivos = data.filter(file =>
+          file.name.endsWith('.html') &&
+          file.name.startsWith('Tecnologia')
+        );
+
+        archivos.sort((a, b) => b.name.localeCompare(a.name)); // Orden alfabético inverso (más nuevo arriba)
+
+        const fileListDiv = document.getElementById('fileList');
+        fileListDiv.innerHTML = '';
+
+        archivos.forEach(file => {
+          const btn = document.createElement('button');
+          btn.className = 'file-button';
+          btn.textContent = file.name;
+          btn.onclick = () => {
+            const url = 'https://htmlpreview.github.io/?https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/' + repoPath + '/' + file.name;
+            window.open(url, '_blank');
+          };
+          fileListDiv.appendChild(btn);
+        });
+      })
+      .catch(err => {
+        document.getElementById('fileList').innerText = 'Error al cargar archivos: ' + err;
+      });
+
+    document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-AR');
+  </script>
+</body>
+</html>
