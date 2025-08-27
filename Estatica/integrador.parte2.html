@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BargasLautaro - Leyes de Newton (30 ejercicios, anime)</title>
+<style>
+  :root{--ok:#23c552;--bad:#ff3b3b}
+  *{box-sizing:border-box}
+  body{margin:0;background:#111;color:#eee;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  header{padding:18px;border-bottom:2px solid #222;background:#0b0b0b;position:sticky;top:0;z-index:5}
+  h1{margin:0;font-size:1.3rem}
+  .wrap{max-width:1200px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;padding:16px}
+  .card{background:#151515;border:1px solid #2a2a2a;border-radius:12px;padding:14px}
+  .card h3{margin:.25rem 0 .5rem;font-size:1.02rem}
+  .io{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+  .io input{width:160px;background:#0f0f0f;border:1px solid #2a2a2a;border-radius:10px;padding:10px 12px;color:#eee;font-size:1rem}
+  .btn{background:#1c1c1c;border:1px solid #2a2a2a;border-radius:12px;padding:10px 14px;color:#eee;cursor:pointer}
+  .btn:hover{filter:brightness(1.12)}
+  .res{height:22px;position:relative;overflow:visible}
+  .tag{position:absolute;left:0;right:0;text-align:center;font-weight:800;letter-spacing:.3px}
+  .ok{color:var(--ok);animation:sd .55s ease-out}
+  .bad{color:var(--bad);animation:su .55s ease-out}
+  @keyframes sd{from{transform:translateY(-22px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @keyframes su{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
+  h4#firma{position:fixed;bottom:8px;left:8px;color:#fff;background:#000;border:3px solid #00ff6a;padding:6px 10px;border-radius:8px;margin:0;z-index:6}
+  .nota{opacity:.9;padding:0 16px}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>Ejercicios mezclados de las Leyes de Newton (Goku, Vegeta, Broly, Sukuna, Itadori, Ichigo, Messi SS3, CR7 malvado…)</h1>
+  <p class="nota">Ingresá solo el valor numérico con sus unidades indicadas en el placeholder. Se aceptan coma o punto. El sistema solo indicará correcto/incorrecto (no se revela el resultado).</p>
+</header>
+
+<main class="wrap">
+  <section class="grid" id="ejercicios"></section>
+</main>
+
+<h4 id="firma">Bargas Nehuen Lautaro — <span id="fecha"></span></h4>
+
+<script>
+  function fechaAR(d=new Date()){return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`}
+  document.getElementById('fecha').textContent=fechaAR()
+  function parseNum(s){if(typeof s!=='string') return NaN;return Number(s.trim().replace(',','.'))}
+  function makeAns(e){
+    if(e.kind==='Fma_a') return e.F/e.m
+    if(e.kind==='Fma_F') return e.m*e.a
+    if(e.kind==='inercia_a0') return 0
+    if(e.kind==='accion_reaccion') return e.F
+    if(e.kind==='g_from_weights'){const ge=9.81;const m=e.Ptierra/ge;return e.Pplaneta/m}
+    if(e.kind==='P_mg') return e.m*e.g
+    if(e.kind==='m_from_Pg') return e.P/e.g
+    if(e.kind==='a_from_net'){return (e.Fder-e.Fizq)/e.m}
+    if(e.kind==='F_extra_for_vcte'){return Math.abs(e.Fap-e.Froz)}
+    return NaN
+  }
+  const ejercicios=[
+    {txt:"Goku (80 kg) recibe una fuerza horizontal de 400 N. ¿Aceleración?", unit:"m/s²", kind:"Fma_a", m:80, F:400},
+    {txt:"Vegeta empuja a Broly con 600 N. ¿Magnitud de la fuerza de Broly sobre Vegeta?", unit:"N", kind:"accion_reaccion", F:600},
+    {txt:"Broly tiene dos fuerzas opuestas de 300 N y 300 N. ¿Aceleración?", unit:"m/s²", kind:"inercia_a0"},
+    {txt:"Goku aplica 200 N a la derecha y el rozamiento es 200 N a la izquierda. ¿Aceleración?", unit:"m/s²", kind:"inercia_a0"},
+    {txt:"Vegeta (60 kg) acelera a 2 m/s². ¿Fuerza neta?", unit:"N", kind:"Fma_F", m:60, a:2},
+    {txt:"Broly golpea a Goku con 1000 N. ¿Magnitud de la reacción sobre Broly?", unit:"N", kind:"accion_reaccion", F:1000},
+    {txt:"Goku (70 kg) con F=210 N. ¿Aceleración?", unit:"m/s²", kind:"Fma_a", m:70, F:210},
+    {txt:"Vegeta con ΣF=0 en reposo. ¿Aceleración?", unit:"m/s²", kind:"inercia_a0"},
+    {txt:"Broly tira de una cuerda con 500 N. ¿Cuánto tira la cuerda de Broly (magnitud)?", unit:"N", kind:"accion_reaccion", F:500},
+    {txt:"Goku (50 kg) acelera 4 m/s². ¿Fuerza neta?", unit:"N", kind:"Fma_F", m:50, a:4},
+
+    {txt:"Vegeta: peso en la Tierra 735 N y en Planeta X 690 N. ¿g de Planeta X?", unit:"m/s²", kind:"g_from_weights", Ptierra:735, Pplaneta:690},
+    {txt:"Goku: peso en la Tierra 686 N y en Planeta Y 980 N. ¿g de Planeta Y?", unit:"m/s²", kind:"g_from_weights", Ptierra:686, Pplaneta:980},
+    {txt:"Sukuna: peso en la Tierra 784,8 N y en Planeta Z 588,6 N. ¿g de Planeta Z?", unit:"m/s²", kind:"g_from_weights", Ptierra:784.8, Pplaneta:588.6},
+    {txt:"Itadori: peso en la Tierra 637,65 N y en Planeta K 490 N. ¿g de Planeta K?", unit:"m/s²", kind:"g_from_weights", Ptierra:637.65, Pplaneta:490},
+    {txt:"Ichigo: peso en la Tierra 735 N y en Planeta R 1.102,5 N. ¿g de Planeta R?", unit:"m/s²", kind:"g_from_weights", Ptierra:735, Pplaneta:1102.5},
+
+    {txt:"Messi SS3 (72 kg) en Planeta Marte g=3,7 m/s². ¿Peso allí?", unit:"N", kind:"P_mg", m:72, g:3.7},
+    {txt:"Cristiano Ronaldo malvado (85 kg) en Luna g=1,62 m/s². ¿Peso allí?", unit:"N", kind:"P_mg", m:85, g:1.62},
+    {txt:"Videl (58 kg) en Planeta T g=12 m/s². ¿Peso allí?", unit:"N", kind:"P_mg", m:58, g:12},
+    {txt:"Trunks (62 kg) en Planeta W g=8,5 m/s². ¿Peso allí?", unit:"N", kind:"P_mg", m:62, g:8.5},
+    {txt:"Chi-Chi (55 kg) en Planeta Q g=24,8 m/s². ¿Peso allí?", unit:"N", kind:"P_mg", m:55, g:24.8},
+
+    {txt:"Piccolo con P=800 N en Planeta M y g=10 m/s². ¿Masa?", unit:"kg", kind:"m_from_Pg", P:800, g:10},
+    {txt:"Bulma con P=588,6 N en la Tierra g=9,81 m/s². ¿Masa?", unit:"kg", kind:"m_from_Pg", P:588.6, g:9.81},
+    {txt:"Krilin con P=735 N en Planeta N g=12,25 m/s². ¿Masa?", unit:"kg", kind:"m_from_Pg", P:735, g:12.25},
+    {txt:"Gohan con P=540 N en Planeta P g=9 m/s². ¿Masa?", unit:"kg", kind:"m_from_Pg", P:540, g:9},
+
+    {txt:"Ichigo recibe 120 N a la derecha y 90 N a la izquierda; m=60 kg. ¿Aceleración?", unit:"m/s²", kind:"a_from_net", Fder:120, Fizq:90, m:60},
+    {txt:"Sukuna empuja con 250 N; rozamiento 200 N opuesto; m=25 kg. ¿Aceleración?", unit:"m/s²", kind:"a_from_net", Fder:250, Fizq:200, m:25},
+    {txt:"Itadori quiere velocidad constante con rozamiento de 45 N. ¿Fuerza de arrastre necesaria (magnitud)?", unit:"N", kind:"F_extra_for_vcte", Fap:45, Froz:45},
+    {txt:"Broly empuja una pared con 800 N. ¿Magnitud de la reacción de la pared?", unit:"N", kind:"accion_reaccion", F:800},
+    {txt:"Goku en vuelo estacionario: empuje 700 N y peso 700 N. ¿Fuerza neta (magnitud)?", unit:"N", kind:"inercia_a0"},
+    {txt:"Vegeta arrastra un trineo con 150 N a la derecha; rozamiento 50 N a la izquierda; m=50 kg. ¿Aceleración?", unit:"m/s²", kind:"a_from_net", Fder:150, Fizq:50, m:50}
+  ]
+  const withAns=ejercicios.map(e=>({...e,ans:makeAns(e)}))
+  const cont=document.getElementById('ejercicios')
+  withAns.forEach((e,i)=>{
+    const card=document.createElement('div')
+    card.className='card'
+    card.innerHTML=`
+      <h3>${i+1}. ${e.txt}</h3>
+      <div class="io">
+        <input type="text" id="in-${i}" placeholder="Valor en ${e.unit}">
+        <button class="btn" id="b-${i}">Verificar</button>
+      </div>
+      <div class="res" id="r-${i}"></div>
+    `
+    cont.appendChild(card)
+    const tol=Math.max(0.05,Math.abs(e.ans)*0.01)
+    document.getElementById(`b-${i}`).addEventListener('click',()=>{
+      const u=parseNum(document.getElementById(`in-${i}`).value)
+      const ok=Number.isFinite(u)&&Math.abs(u-e.ans)<=tol
+      document.getElementById(`r-${i}`).innerHTML=`<span class="tag ${ok?'ok':'bad'}">${ok?'correcto':'incorrecto'}</span>`
+    })
+  })
+</script>
+</body>
+</html>
