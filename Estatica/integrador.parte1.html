@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BargasLautaro - Vectores 2D Escalar</title>
+<style>
+  :root{--ok:#23c552;--bad:#ff3b3b}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:0;background:#111;color:#eee}
+  header{padding:18px 16px;border-bottom:2px solid #222;background:#0b0b0b;position:sticky;top:0;z-index:2}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:16px}
+  .card{background:#151515;border:1px solid #2a2a2a;border-radius:12px;padding:14px;box-shadow:0 0 0 1px #0006}
+  .vecs{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .chip{background:#1b1b1b;border:1px solid #2f2f2f;border-radius:999px;padding:6px 10px;font-weight:600}
+  .chip b{color:#9ad1ff}
+  .task h3{margin:.3rem 0 .5rem;font-size:1.02rem}
+  .io{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+  .io input{width:90px;background:#0f0f0f;border:1px solid #2a2a2a;border-radius:10px;padding:10px 12px;color:#eee;font-size:1rem}
+  .btn{background:#1c1c1c;border:1px solid #2a2a2a;border-radius:12px;padding:10px 14px;color:#eee;cursor:pointer}
+  .btn:hover{filter:brightness(1.15)}
+  .hint{opacity:.85;font-size:.92rem;margin-top:8px;color:#c9c9c9}
+  .res{height:22px;position:relative;overflow:visible}
+  .tag{position:absolute;left:0;right:0;text-align:center;font-weight:800;letter-spacing:.3px}
+  .ok{color:var(--ok);animation:slideDown .55s ease-out}
+  .bad{color:var(--bad);animation:slideUp .55s ease-out}
+  @keyframes slideDown{from{transform:translateY(-22px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @keyframes slideUp{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
+  h4#firma{position:fixed;bottom:8px;left:8px;color:#fff;background:#000;border:3px solid #00ff6a;padding:6px 10px;border-radius:8px;margin:0;z-index:3}
+  .wrap{max-width:1200px;margin:0 auto}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1 style="margin:0;font-size:1.25rem">Ejercicios de suma/resta/multiplicación escalar de vectores en 2D</h1>
+      <div class="vecs" id="definiciones"></div>
+      <p class="hint">Ingresá el resultado en forma escalar: componente <i>x</i> y componente <i>y</i>. Podés escribir decimales con coma o punto.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid" id="lista"></section>
+  </main>
+
+  <h4 id="firma">Bargas Nehuen Lautaro — <span id="fecha"></span></h4>
+
+<script>
+  const V = {A:[2,-1], B:[-3,4], C:[5,0], D:[-2,-3], F:[1,6]}
+  const ejercicios = [
+    [{k:1,v:'A'},{k:1,v:'B'}],
+    [{k:1,v:'A'},{k:1,v:'B'},{k:1,v:'C'}],
+    [{k:2,v:'A'},{k:1,v:'B'},{k:-1,v:'C'}],
+    [{k:-1,v:'A'},{k:3,v:'C'}],
+    [{k:1,v:'D'},{k:1,v:'F'}],
+    [{k:2,v:'D'},{k:-1,v:'F'}],
+    [{k:1,v:'A'},{k:-1,v:'B'},{k:1,v:'D'}],
+    [{k:3,v:'A'},{k:2,v:'B'}],
+    [{k:1,v:'C'},{k:-1,v:'D'},{k:1,v:'F'}],
+    [{k:2,v:'F'},{k:-1,v:'A'}],
+    [{k:4,v:'A'},{k:-1,v:'C'}],
+    [{k:1,v:'B'},{k:2,v:'C'},{k:-1,v:'D'}],
+    [{k:-2,v:'A'},{k:1,v:'B'},{k:1,v:'C'}],
+    [{k:1,v:'A'},{k:3,v:'D'},{k:1,v:'F'}],
+    [{k:2,v:'A'},{k:2,v:'B'},{k:2,v:'C'}],
+    [{k:3,v:'F'},{k:-2,v:'D'}],
+    [{k:1,v:'C'},{k:1,v:'D'},{k:-1,v:'B'}],
+    [{k:5,v:'A'},{k:-2,v:'B'},{k:1,v:'F'}],
+    [{k:2,v:'A'},{k:-3,v:'C'},{k:1,v:'D'}],
+    [{k:-1,v:'A'},{k:-1,v:'B'},{k:-1,v:'C'}]
+  ]
+
+  const $defs = document.getElementById('definiciones')
+  Object.entries(V).forEach(([n,[x,y]])=>{
+    const chip=document.createElement('div')
+    chip.className='chip'
+    chip.innerHTML=`<b>${n}</b> = (${x}; ${y})`
+    $defs.appendChild(chip)
+  })
+
+  function exprToText(expr){
+    const parts = expr.map(t=>{
+      if(t.k===1) return t.v
+      if(t.k===-1) return `-${t.v}`
+      return `${t.k}${t.v}`
+    })
+    return parts.join(' + ').replace(/\+\s-\s/g,' - ')
+  }
+
+  function evalExpr(expr){
+    return expr.reduce((acc,t)=>{
+      const [vx,vy]=V[t.v]
+      acc[0]+=t.k*vx
+      acc[1]+=t.k*vy
+      return acc
+    },[0,0])
+  }
+
+  function parseNum(s){
+    if(typeof s!=='string') return NaN
+    const t = s.trim().replace(',','.')
+    return Number(t)
+  }
+
+  const $list = document.getElementById('lista')
+  ejercicios.forEach((expr,i)=>{
+    const [rx,ry]=evalExpr(expr)
+    const card=document.createElement('div')
+    card.className='card task'
+    card.innerHTML=`
+      <h3>${i+1}. ${exprToText(expr)}</h3>
+      <div class="io">
+        <label>x = <input type="text" inputmode="decimal" placeholder="0" id="x${i}"></label>
+        <label>y = <input type="text" inputmode="decimal" placeholder="0" id="y${i}"></label>
+        <button class="btn" id="b${i}">Verificar</button>
+        <button class="btn" id="s${i}">Mostrar resultado</button>
+      </div>
+      <div class="res" id="r${i}"></div>
+      <div class="hint" id="h${i}" style="display:none">Resultado: (${rx}; ${ry})</div>
+    `
+    $list.appendChild(card)
+    document.getElementById(`b${i}`).addEventListener('click',()=>{
+      const ux=parseNum(document.getElementById(`x${i}`).value)
+      const uy=parseNum(document.getElementById(`y${i}`).value)
+      const ok=Number.isFinite(ux)&&Number.isFinite(uy)&&Math.abs(ux-rx)<1e-9&&Math.abs(uy-ry)<1e-9
+      const res=document.getElementById(`r${i}`)
+      res.innerHTML=`<span class="tag ${ok?'ok':'bad'}">${ok?'correcto':'incorrecto'}</span>`
+    })
+    document.getElementById(`s${i}`).addEventListener('click',()=>{
+      const el=document.getElementById(`h${i}`)
+      el.style.display= el.style.display==='none' ? 'block' : 'none'
+    })
+  })
+
+  function fechaAR(d=new Date()){
+    const dd=String(d.getDate()).padStart(2,'0')
+    const mm=String(d.getMonth()+1).padStart(2,'0')
+    const yyyy=d.getFullYear()
+    return `${dd}/${mm}/${yyyy}`
+  }
+  document.getElementById('fecha').textContent=fechaAR()
+</script>
+</body>
+</html>
