@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BargasLautaro - Estática: Reacciones Ay y By</title>
+<style>
+  body{margin:0;background:#111;color:#eee;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  header{padding:18px;border-bottom:2px solid #222;background:#0b0b0b;position:sticky;top:0}
+  h1{margin:0;font-size:1.2rem}
+  .wrap{max-width:1200px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:16px}
+  .card{background:#151515;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden}
+  .card header{padding:10px 12px;border-bottom:1px solid #2a2a2a;background:#131313}
+  .card header h3{margin:0;font-size:1rem}
+  .imgbox{background:#0f0f0f;display:flex;align-items:center;justify-content:center}
+  .imgbox img{display:block;width:100%;height:auto}
+  .body{padding:12px}
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+  label{display:flex;align-items:center;gap:6px}
+  input[type="text"]{width:120px;background:#0f0f0f;border:1px solid #2a2a2a;border-radius:10px;padding:10px 12px;color:#eee;font-size:1rem}
+  .btn{background:#1c1c1c;border:1px solid #2a2a2a;border-radius:12px;padding:10px 14px;color:#eee;cursor:pointer}
+  .btn:hover{filter:brightness(1.12)}
+  h4#firma{position:fixed;bottom:8px;left:8px;color:#fff;background:#000;border:3px solid #00ff6a;padding:6px 10px;border-radius:8px;margin:0}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Estática · Reacciones en A<sub>y</sub> y B<sub>y</sub> (6 ejercicios)</h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="grid" id="lista"></section>
+</main>
+
+<h4 id="firma">Bargas Nehuen Lautaro — <span id="fecha"></span></h4>
+
+<script>
+function fechaAR(d=new Date()){
+  return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`
+}
+document.getElementById('fecha').textContent=fechaAR()
+
+const imgs = [
+  "https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/Estatica/Ej1.png",
+  "https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/Estatica/Ej2.png",
+  "https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/Estatica/Ej3.png",
+  "https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/Estatica/Ej4.png",
+  "https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/Estatica/Ej5.png",
+  "https://raw.githubusercontent.com/bargas-lautaro/4to-Matematica-Nat-734-2025/main/Estatica/Ej6.png"
+]
+
+const $lista=document.getElementById("lista")
+imgs.forEach((src,i)=>{
+  const card=document.createElement("div")
+  card.className="card"
+  card.innerHTML=`
+    <header><h3>Ejercicio ${i+1}: calcular A<sub>y</sub> y B<sub>y</sub></h3></header>
+    <div class="imgbox"><img alt="Ejercicio ${i+1}" src="${src}"></div>
+    <div class="body">
+      <div class="row">
+        <label>A<sub>y</sub> = <input type="text" placeholder="0,00"></label>
+      </div>
+      <div class="row">
+        <label>B<sub>y</sub> = <input type="text" placeholder="0,00"></label>
+      </div>
+      <div class="row">
+        <button class="btn" onclick="window.open('https://www.youtube.com/watch?v=u4wVyLeCXck&list=PLlbNDPDmKN2V_2sTha0wFA_ZwhtsgTDtE','_blank')">Ayuda</button>
+      </div>
+    </div>
+  `
+  $lista.appendChild(card)
+})
+</script>
+</body>
+</html>
