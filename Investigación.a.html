@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BargasLautaro - Guía de Investigación</title>
+    <style>
+        /* Variables de color y tema */
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-cyan: #00f2ff;
+            --accent-blue: #3b82f6;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --glow: 0 0 15px rgba(0, 242, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding-top: 80px; /* Para el header fijo */
+        }
+
+        /* Cabecera Fija */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: var(--glow);
+        }
+
+        header h1 {
+            color: var(--accent-cyan);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Título del Documento */
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(90deg, rgba(30,41,59,1) 0%, rgba(15,23,42,1) 100%);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 4px;
+        }
+
+        .page-title h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .page-title p {
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+        }
+
+        /* Tarjetas de Secciones */
+        .section-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+
+        /* Títulos de Secciones */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .section-header h3 {
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .section-header::before {
+            content: "/>";
+            color: var(--accent-blue);
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        /* Explicación de la sección */
+        .section-explanation {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: var(--text-muted);
+            border-left: 3px solid var(--text-muted);
+        }
+
+        /* Lista de Preguntas */
+        .question-group {
+            margin-bottom: 20px;
+        }
+
+        .question-title {
+            color: var(--text-light);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-title::before {
+            content: "•";
+            color: var(--accent-cyan);
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .question-text {
+            color: var(--text-muted);
+            padding-left: 25px;
+            font-size: 1rem;
+        }
+
+        /* Etiquetas para Entrevistas */
+        .tag {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .tag-vecino { background-color: #10b981; } /* Verde */
+        .tag-experto { background-color: #f59e0b; } /* Naranja */
+        .tag-general { background-color: #8b5cf6; } /* Morado */
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BargasLautaro</h1>
+    </header>
+
+    <div class="container">
+        <div class="page-title">
+            <h2>Informe Científico: Crisis Ígnea</h2>
+            <p>Estructura y Guía de Preguntas - Comarca Andina</p>
+        </div>
+
+        <!-- 1. ABSTRACT -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>1. Abstract (Resumen)</h3>
+            </div>
+            <div class="section-explanation">
+                <strong>¿Qué es la información que va acá?</strong> Es un resumen muy corto y directo de todo el informe. Se escribe al final de todo. Debe mencionar rápidamente el problema, cómo se investigó (las entrevistas) y qué conclusión principal se sacó. Sirve para que alguien decida si quiere leer el resto del trabajo.
+            </div>
+            
+            <div class="question-group">
+                <div class="question-title">Síntesis del Proyecto</div>
+                <div class="question-text">
+                    ¿Cómo podrías explicar en un máximo de 200 palabras cuál es el estado actual de los incendios en la Comarca, a cuántas personas entrevistaste para el estudio y cuál fue la solución o hallazgo más importante que encontraron?
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. INTRODUCCIÓN -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>2. Introducción</h3>
+            </div>
+            <div class="section-explanation">
+                <strong>¿Qué es la información que va acá?</strong> Es la presentación del tema para quien no sabe nada de la Comarca. Se explica cuál es el problema, dónde ocurre, por qué es importante hablar de esto ahora y qué se busca lograr con este informe.
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">El Problema y el Entorno</div>
+                <div class="question-text">
+                    ¿Cuál es el estado actual de los incendios en la Comarca Andina y qué zonas o localidades han sido las más afectadas en los últimos años? ¿Qué características del lugar (montañas, viento, bosques) lo hacen peligroso?
+                </div>
+            </div>
+            
+            <div class="question-group">
+                <div class="question-title">Contexto Histórico</div>
+                <div class="question-text">
+                    ¿Cómo ha cambiado la cantidad o gravedad de los incendios en los últimos 10 años en comparación con cuando nuestros abuelos vivían acá? ¿Es algo nuevo o siempre pasó?
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Justificación</div>
+                <div class="question-text">
+                    ¿Por qué es importante que nosotros, como alumnos y vecinos, investiguemos las causas y consecuencias de estos incendios en nuestra comunidad?
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. DESARROLLO -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>3. Desarrollo (Cuerpo Técnico)</h3>
+            </div>
+            <div class="section-explanation">
+                <strong>¿Qué es la información que va acá?</strong> Es la parte más larga y "jugosa". Acá van los datos duros, la teoría, las explicaciones científicas y técnicas de por qué ocurren los incendios, cómo se comportan y qué daños causan en el ambiente y la infraestructura.
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Factores Climáticos y Físicos</div>
+                <div class="question-text">
+                    ¿Qué es la regla del "30-30-30" (temperatura, humedad y viento) y cómo explica la rapidez con la que avanza el fuego en nuestra zona durante el verano?
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Vegetación y Biomasa</div>
+                <div class="question-text">
+                    ¿Qué diferencia hay cuando el fuego agarra un bosque de vegetación nativa (como el coihue o la lenga) frente a una plantación de pinos (exóticos)? ¿Por qué arde distinto?
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Intervención Humana e Infraestructura</div>
+                <div class="question-text">
+                    ¿Qué porcentaje de los incendios se inician por causas naturales (rayos) y cuántos por causas humanas (intencionales, fogones mal apagados, o tendidos eléctricos en mal estado)? ¿Cómo afecta que la gente construya casas cada vez más arriba en el cerro, metidas en el bosque?
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Impacto en el Suelo y Post-incendio</div>
+                <div class="question-text">
+                    Después de que el fuego apaga, ¿qué pasa con la tierra? ¿Cómo afecta el incendio a la capacidad del suelo para absorber agua, y por qué esto puede causar inundaciones o deslaves en el invierno siguiente?
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ENTREVISTAS -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>4. Entrevistas (Trabajo de Campo)</h3>
+            </div>
+            <div class="section-explanation">
+                <strong>¿Qué es la información que va acá?</strong> Es el registro de las charlas con la gente. El objetivo es hacerle preguntas a 10 personas distintas de la Comarca para entender cómo viven ellos el problema, qué saben y qué sienten. Acá te dejo ideas de cómo preguntarles.
+            </div>
+
+            <div class="question-group">
+                <span class="tag tag-vecino">A Vecinos en General</span>
+                <div class="question-title">Percepción de Seguridad y Evacuación</div>
+                <div class="question-text">
+                    "Si hoy viera una columna de humo en el cerro cerca de su casa, ¿usted sabe exactamente qué pasos seguir, a quién llamar y por dónde evacuar de forma segura?"
+                </div>
+            </div>
+
+            <div class="question-group">
+                <span class="tag tag-general">A Vecinos / Comerciantes</span>
+                <div class="question-title">Impacto y Responsabilidad</div>
+                <div class="question-text">
+                    "Según lo que usted observa, ¿cree que los incendios ocurren más por descuido de la gente (basura, fogatas) o por falta de mantenimiento del Estado (cables de luz, limpieza de bosques)?"
+                </div>
+            </div>
+
+            <div class="question-group">
+                <span class="tag tag-experto">A Bomberos, Brigadistas o Docentes</span>
+                <div class="question-title">Prevención y Recursos</div>
+                <div class="question-text">
+                    "Desde su punto de vista, ¿qué herramientas, recursos o educación nos está faltando en la Comarca para poder prevenir o frenar los incendios antes de que se descontrolen?"
+                </div>
+            </div>
+
+            <div class="question-group">
+                <span class="tag tag-general">A Afectados Históricos</span>
+                <div class="question-title">Memoria y Emoción</div>
+                <div class="question-text">
+                    "Para quienes vivieron de cerca grandes incendios (como el de 2021): ¿Cómo cambió su forma de vivir en relación al bosque? ¿Sigue sintiendo que es un lugar seguro o cambió su percepción?"
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. CONCLUSIONES -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>5. Conclusiones</h3>
+            </div>
+            <div class="section-explanation">
+                <strong>¿Qué es la información que va acá?</strong> Es el cierre del informe. Se junta lo que ustedes investigaron en la teoría (Desarrollo) con lo que les dijo la gente (Entrevistas) para dar un veredicto final y proponer soluciones.
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Contraste de Información</div>
+                <div class="question-text">
+                    ¿Coincide lo que dicen los libros y la teoría sobre prevención con lo que la gente sabe y hace en la realidad según las entrevistas? ¿Dónde está fallando la comunicación?
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Estado Actual y Resiliencia</div>
+                <div class="question-text">
+                    Después de analizar todo, ¿la Comarca está hoy mejor preparada para afrontar un incendio que hace unos años, o seguimos en el mismo nivel de riesgo?
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">Propuestas de Solución</div>
+                <div class="question-text">
+                    Basado en las opiniones de las 10 personas entrevistadas y en su investigación, ¿cuáles serían las 3 acciones más urgentes (educativas, de infraestructura o comunitarias) que deberían aplicarse en la Comarca para mejorar esta situación?
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Documento de Investigación Escolar - Comarca Andina - 2026</p>
+    </footer>
+
+</body>
+</html>
