@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Química 2 - Actividades</title>
+    <style>
+        /* CSS INTEGRADO - Optimizado para vista web moderna */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            /* Fondo suave y moderno */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .header {
+            border-bottom: 4px solid #2b6cb0;
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .header-title {
+            font-size: 2.5rem;
+            color: #2b6cb0;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .header-meta {
+            font-size: 1.1rem;
+            color: #718096;
+            font-weight: 600;
+            background: #edf2f7;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+        .instruction-box {
+            background-color: #ebf8ff;
+            border-left: 6px solid #3182ce;
+            padding: 20px;
+            margin-bottom: 35px;
+            font-style: italic;
+            font-size: 1.1rem;
+            border-radius: 0 12px 12px 0;
+            color: #2c5282;
+        }
+        h2 {
+            font-size: 1.6rem;
+            color: #2c5282;
+            margin-top: 45px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin: 25px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.05rem;
+            background-color: #ffffff;
+            min-width: 700px;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 14px;
+            text-align: center;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        tr:hover {
+            background-color: #ebf8ff;
+        }
+        .clickable-term {
+            color: #dd6b20;
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .clickable-term:hover {
+            color: #c05621;
+            background-color: #feebc8;
+            text-decoration-style: solid;
+        }
+        ol, ul {
+            margin-bottom: 20px;
+        }
+        .molecule-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+        .molecule-item {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .molecule-item strong {
+            color: #4a5568;
+        }
+        .reading-section {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            padding: 35px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: justify;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            position: relative;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .reading-section::before {
+            content: "📖";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 24px;
+            background: white;
+            padding: 0 10px;
+        }
+        .graphic-container {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background-color: #f7fafc;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e0;
+        }
+        .graphic-caption {
+            font-size: 0.95rem;
+            color: #718096;
+            margin-top: 15px;
+            font-style: italic;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .questions-list {
+            padding-left: 25px;
+        }
+        .questions-list li {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            padding-left: 5px;
+        }
+
+        /* Modal Styles (Ventana emergente) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5vh auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 650px;
+            border-radius: 16px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-40px) scale(0.95);}
+            to {opacity: 1; transform: translateY(0) scale(1);}
+        }
+        .close-btn {
+            color: #a0aec0;
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+        .close-btn:hover {
+            color: #e53e3e;
+        }
+        .modal-title {
+            color: #dd6b20;
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #feebc8;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .lewis-example {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f7fafc;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .container { padding: 25px; border-radius: 12px; }
+            .header-title { font-size: 2rem; }
+            .reading-section { padding: 20px; font-size: 1.05rem; }
+            .modal-content { margin: 10vh auto; padding: 25px; }
+        }
+        
+        /* Print styles */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+            .clickable-term { text-decoration: none; color: inherit; }
+            .instruction-box { border: 1px solid #cbd5e0; }
+            .graphic-container { background: transparent; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 class="header-title">Química 2</h1>
+        <div class="header-meta">Fecha: 19 de mayo de 2026</div>
+    </div>
+
+    <div class="instruction-box">
+        <strong>Indicación para los estudiantes:</strong> Por favor, copien de manera prolija la fecha, los títulos y cada una de las siguientes actividades completas en sus carpetas para resolverlas. Lean atentamente los textos antes de contestar.
+    </div>
+
+    <h2>Actividad 1: Estructura Atómica y Tabla Periódica</h2>
+    <p>Copiar y completar el siguiente cuadro en la carpeta utilizando la tabla periódica de los elementos:</p>
+    
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Elemento</th>
+                    <th>Símbolo</th>
+                    <th>Protones (+)</th>
+                    <th>Neutrones (±)</th>
+                    <th>Electrones (-)</th>
+                    <th>Masa Atómica (A)</th>
+                    <th>Electronegatividad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Carbono</td><td>C</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Oxígeno</td><td>O</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Sodio</td><td>Na</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Cloro</td><td>Cl</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Calcio</td><td>Ca</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Flúor</td><td>F</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Magnesio</td><td>Mg</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Nitrógeno</td><td>N</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Actividad 2: Uniones Químicas y Representación de Moléculas</h2>
+    <p>Copiar el enunciado y la lista de moléculas en la carpeta. Para cada una de ellas, realiza los siguientes pasos:</p>
+    <ol>
+        <li>Representa la <span class="clickable-term" onclick="openModal()" title="Haz clic para ver un ejemplo">Estructura de Lewis</span> de los átomos involucrados y de la molécula formada.</li>
+        <li>Determina si se trata de una <strong>unión iónica</strong> o una <strong>unión covalente</strong>.</li>
+        <li>Indica brevemente qué ocurre con los electrones en dicha unión (¿se comparten o se transfieren?).</li>
+    </ol>
+
+    <ul class="molecule-list">
+        <li class="molecule-item"><strong>a)</strong> H<sub>2</sub>O (Agua)</li>
+        <li class="molecule-item"><strong>b)</strong> NaCl (Cloruro de Sodio)</li>
+        <li class="molecule-item"><strong>c)</strong> CO<sub>2</sub> (Dióxido de Carbono)</li>
+        <li class="molecule-item"><strong>d)</strong> MgO (Óxido de Magnesio)</li>
+        <li class="molecule-item"><strong>e)</strong> CH<sub>4</sub> (Metano)</li>
+        <li class="molecule-item"><strong>f)</strong> HCl (Cloruro de Hidrógeno)</li>
+    </ul>
+
+    <h2>Actividad 3: Introducción a los Hidrocarburos</h2>
+    <p>Lee atentamente el siguiente texto introductorio, observa el gráfico y luego copia y responde las preguntas en tu carpeta.</p>
+    
+    <div class="reading-section">
+        <p>En el fascinante universo de la química orgánica existe una familia fundamental y extraordinariamente versátil de compuestos conocidos como <strong>hidrocarburos</strong>. Como su propio nombre lo sugiere, la regla de oro de estos compuestos es que están estructurados de forma exclusiva por átomos de tan solo dos elementos químicos: el <strong>carbono (C)</strong> y el <strong>hidrógeno (H)</strong>. Ningún otro elemento forma parte de su esqueleto principal.</p>
+        
+        <p>A nivel microscópico, los átomos de carbono tienen una capacidad única y asombrosa: pueden unirse fuertemente entre sí formando largas cadenas, como si fueran los eslabones de un collar infinito. Estas cadenas pueden ser líneas rectas, formar ramas secundarias o incluso cerrarse sobre sí mismas formando anillos geométricos. Una vez que el carbono construye este "esqueleto" o armazón principal de la molécula, los átomos de hidrógeno se acoplan a los espacios vacíos que quedan libres, completando la estructura para que sea estable.</p>
+        
+        <div class="graphic-container">
+            <!-- Gráfico SVG de un Hidrocarburo (Propano) -->
+            <svg width="100%" max-width="400" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <!-- Enlaces (Líneas grises) -->
+                <line x1="150" y1="75" x2="70" y2="75" stroke="#a0aec0" stroke-width="4"/>
+                <line x1="150" y1="75" x2="230" y2="75" stroke="#a0aec0" stroke-width="4"/>
+                
+                <!-- Enlaces con Hidrógenos del Carbono Central -->
+                <line x1="150" y1="75" x2="150" y2="25" stroke="#a0aec0" stroke-width="4"/>
+                <line x1="150" y1="75" x2="150" y2="125" stroke="#a0aec0" stroke-width="4"/>
+                
+                <!-- Enlaces con Hidrógenos del Carbono Izquierdo -->
+                <line x1="70" y1="75" x2="70" y2="25" stroke="#a0aec0" stroke-width="4"/>
+                <line x1="70" y1="75" x2="70" y2="125" stroke="#a0aec0" stroke-width="4"/>
+                <line x1="70" y1="75" x2="20" y2="75" stroke="#a0aec0" stroke-width="4"/>
+                
+                <!-- Enlaces con Hidrógenos del Carbono Derecho -->
+                <line x1="230" y1="75" x2="230" y2="25" stroke="#a0aec0" stroke-width="4"/>
+                <line x1="230" y1="75" x2="230" y2="125" stroke="#a0aec0" stroke-width="4"/>
+                <line x1="230" y1="75" x2="280" y2="75" stroke="#a0aec0" stroke-width="4"/>
+
+                <!-- Átomos de Carbono (Círculos oscuros) -->
+                <circle cx="70" cy="75" r="18" fill="#2d3748"/>
+                <text x="70" y="81" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" font-weight="bold">C</text>
+                
+                <circle cx="150" cy="75" r="18" fill="#2d3748"/>
+                <text x="150" y="81" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" font-weight="bold">C</text>
+                
+                <circle cx="230" cy="75" r="18" fill="#2d3748"/>
+                <text x="230" y="81" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" font-weight="bold">C</text>
+
+                <!-- Átomos de Hidrógeno (Círculos celestes) -->
+                <!-- H Izquierda -->
+                <circle cx="20" cy="75" r="12" fill="#4299e1"/>
+                <text x="20" y="80" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+                <circle cx="70" cy="25" r="12" fill="#4299e1"/>
+                <text x="70" y="30" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+                <circle cx="70" cy="125" r="12" fill="#4299e1"/>
+                <text x="70" y="130" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+                
+                <!-- H Centro -->
+                <circle cx="150" cy="25" r="12" fill="#4299e1"/>
+                <text x="150" y="30" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+                <circle cx="150" cy="125" r="12" fill="#4299e1"/>
+                <text x="150" y="130" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+
+                <!-- H Derecha -->
+                <circle cx="280" cy="75" r="12" fill="#4299e1"/>
+                <text x="280" y="80" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+                <circle cx="230" cy="25" r="12" fill="#4299e1"/>
+                <text x="230" y="30" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+                <circle cx="230" cy="125" r="12" fill="#4299e1"/>
+                <text x="230" y="130" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle" font-weight="bold">H</text>
+            </svg>
+            <div class="graphic-caption">Gráfico 1: Representación de la molécula de Propano (C<sub>3</sub>H<sub>8</sub>), un hidrocarburo típico. Nota cómo el "esqueleto" central está formado por Carbono y recubierto por Hidrógeno.</div>
+        </div>
+
+        <p>¿De dónde proviene la inmensa mayoría de los hidrocarburos que utilizamos hoy en día? La respuesta nos lleva millones de años en el pasado. Se originan a partir de los restos fosilizados de organismos microscópicos, algas y plancton que vivían en océanos antiguos. Con el paso de eras geológicas, estos restos quedaron enterrados bajo capas y capas de tierra y roca. La inmensa presión y el intenso calor del interior de la Tierra "cocinaron" esta materia orgánica, transformándola en lo que hoy conocemos como <strong>combustibles fósiles</strong>.</p>
+        
+        <p>Aunque a veces no los notemos, los hidrocarburos son los pilares invisibles de nuestra civilización actual. Son los componentes exclusivos del petróleo crudo, del gas natural con el que cocinamos o calentamos nuestros hogares en invierno, y de todos los derivados que mueven nuestros transportes: la nafta, el gasoil, el kerosene de los aviones. Pero su utilidad no termina en darnos energía mediante la combustión; también son la materia prima esencial y el punto de partida en las fábricas e industrias para elaborar una enorme cantidad de cosas que tocamos a diario: plásticos de todo tipo, fibras sintéticas para nuestra ropa, pinturas, asfaltos y medicamentos.</p>
+    </div>
+
+    <p><strong>Cuestionario Introductorio:</strong></p>
+    <ol class="questions-list">
+        <li>A partir de lo leído en el texto, explica detalladamente cuáles son los únicos dos tipos de átomos que pueden formar la estructura de un hidrocarburo y cómo se organizan ("quién forma el esqueleto y quién rellena").</li>
+        <li>Basándote en la lectura, ¿cómo se originaron en la naturaleza los hidrocarburos que extraemos hoy en día de las profundidades de la Tierra?</li>
+        <li>Menciona al menos cuatro ejemplos de usos en la vida cotidiana (productos, recursos o combustibles) donde los hidrocarburos se encuentren presentes.</li>
+        <li>Analiza cuidadosamente las fórmulas químicas de estos tres compuestos diferentes:
+            <br><br>
+            • Compuesto A: <strong>C<sub>4</sub>H<sub>10</sub></strong> (Butano)
+            <br>
+            • Compuesto B: <strong>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></strong> (Glucosa)
+            <br>
+            • Compuesto C: <strong>CH<sub>4</sub></strong> (Metano)
+            <br><br>
+            Utilizando la regla de oro mencionada al inicio del texto, determina cuáles de estos compuestos pertenecen a la familia de los hidrocarburos y justifica tu elección explicando por qué el compuesto restante queda descartado.</li>
+    </ol>
+
+    <div class="footer">
+        Material didáctico para Química 2 - Actividades Prácticas y de Lectura
+    </div>
+</div>
+
+<!-- Modal para Estructura de Lewis -->
+<div id="lewisModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3 class="modal-title">¿Qué es la Estructura de Lewis?</h3>
+        <p>La Estructura o Diagrama de Lewis es una forma visual muy sencilla de representar los átomos y cómo se unen para formar moléculas.</p>
+        
+        <p><strong>La regla principal:</strong> En estos gráficos <strong>SOLO</strong> se dibujan los electrones de la última capa del átomo (llamados <em>electrones de valencia</em>). Estos son los únicos electrones que participan en las uniones químicas.</p>
+        
+        <p>Los electrones se representan utilizando <strong>puntos (•)</strong> o <strong>cruces (x)</strong> alrededor del símbolo del elemento químico.</p>
+        
+        <div class="lewis-example">
+            <strong>Ejemplo: Molécula de Metano (CH<sub>4</sub>)</strong>
+            <p style="font-size: 1.05rem; color: #4a5568; margin-top: 10px; text-align: center;">El Carbono (C) tiene 4 electrones de valencia (rojos) y comparte un electrón con 4 Hidrógenos (H) distintos (azules).</p>
+            
+            <!-- SVG de Ejemplo de Lewis -->
+            <svg width="180" height="180" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" style="margin-top: 20px;">
+                <!-- Símbolo Central -->
+                <text x="75" y="82" font-family="Arial, sans-serif" font-size="28" fill="#2d3748" text-anchor="middle" font-weight="bold">C</text>
+                
+                <!-- Símbolos Exteriores -->
+                <text x="75" y="30" font-family="Arial, sans-serif" font-size="22" fill="#2d3748" text-anchor="middle" font-weight="bold">H</text>
+                <text x="75" y="135" font-family="Arial, sans-serif" font-size="22" fill="#2d3748" text-anchor="middle" font-weight="bold">H</text>
+                <text x="20" y="82" font-family="Arial, sans-serif" font-size="22" fill="#2d3748" text-anchor="middle" font-weight="bold">H</text>
+                <text x="130" y="82" font-family="Arial, sans-serif" font-size="22" fill="#2d3748" text-anchor="middle" font-weight="bold">H</text>
+                
+                <!-- Electrones del Carbono (Rojos) -->
+                <circle cx="75" cy="52" r="3.5" fill="#e53e3e"/>
+                <circle cx="75" cy="98" r="3.5" fill="#e53e3e"/>
+                <circle cx="52" cy="75" r="3.5" fill="#e53e3e"/>
+                <circle cx="98" cy="75" r="3.5" fill="#e53e3e"/>
+
+                <!-- Electrones del Hidrógeno (Azules) -->
+                <circle cx="85" cy="52" r="3.5" fill="#3182ce"/>
+                <circle cx="85" cy="98" r="3.5" fill="#3182ce"/>
+                <circle cx="42" cy="75" r="3.5" fill="#3182ce"/>
+                <circle cx="108" cy="75" r="3.5" fill="#3182ce"/>
+            </svg>
+        </div>
+        <p style="text-align: center; font-size: 1rem; margin-top: 20px; color: #718096;"><em>Al compartir electrones, ambos átomos logran estabilidad completando su nivel de energía.</em></p>
+    </div>
+</div>
+
+<script>
+    // Funciones para controlar la ventana modal
+    const modal = document.getElementById("lewisModal");
+
+    function openModal() {
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Evita que el fondo se deslice mientras el modal está abierto
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    // Cerrar el modal si el usuario hace clic en el fondo gris
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
