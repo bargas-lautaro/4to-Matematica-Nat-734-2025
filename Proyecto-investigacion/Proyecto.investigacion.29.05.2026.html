@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estudio: Impacto de la Contaminación Radiactiva</title>
+    <style>
+        /* Reset y Estilos Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Encabezado Principal */
+        .header-banner {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-bottom: 5px solid #d97706;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-banner h1 {
+            margin: 0 0 10px 0;
+            font-size: 24pt;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header-banner p {
+            margin: 0;
+            font-size: 12pt;
+            color: #cbd5e1;
+        }
+
+        /* Secciones */
+        h2 {
+            font-size: 16pt;
+            color: #0f172a;
+            border-left: 5px solid #d97706;
+            padding-left: 12px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 11pt;
+            color: #475569;
+            margin-bottom: 30px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Tarjetas de Lugares */
+        .place-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .place-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16pt;
+            color: #1e293b;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        /* Contenedor del Mapa */
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .meta-info {
+            margin-bottom: 15px;
+            background-color: #f1f5f9;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 10.5pt;
+        }
+
+        .meta-item {
+            margin-bottom: 5px;
+        }
+        
+        .meta-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .meta-label {
+            font-weight: bold;
+            color: #475569;
+        }
+
+        .description-block {
+            font-size: 11pt;
+            margin-bottom: 15px;
+        }
+
+        .people-block {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            border-radius: 0 6px 6px 0;
+            font-size: 10.5pt;
+            margin-bottom: 15px;
+        }
+
+        .people-title {
+            font-weight: bold;
+            color: #b45309;
+            margin-bottom: 5px;
+        }
+
+        /* Bloque de Recursos de Investigación */
+        .resources-block {
+            background-color: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 15px;
+            border-radius: 0 6px 6px 0;
+            font-size: 10.5pt;
+        }
+
+        .resources-title {
+            font-weight: bold;
+            color: #15803d;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .resources-title svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+        }
+
+        .resources-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .resources-list li {
+            margin-bottom: 8px;
+        }
+
+        .resources-list a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .resources-list a:hover {
+            text-decoration: underline;
+            color: #1d4ed8;
+        }
+
+        /* Bloques de Preguntas */
+        .category-block {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .category-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 5px;
+        }
+
+        .question-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .question-list li {
+            margin-bottom: 12px;
+            font-size: 11pt;
+            color: #334155;
+        }
+
+        .question-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px 0;
+            font-size: 10pt;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            line-height: 1.8;
+        }
+
+        footer strong {
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Banner de Encabezado -->
+        <div class="header-banner">
+            <h1>Guía de Investigación: Impacto del Riesgo Radiactivo</h1>
+            <p>Material de referencia, mapas, recursos y banco de preguntas transversales para proyectos estudiantiles.</p>
+        </div>
+
+        <div class="intro-text">
+            Esta guía interactiva contiene dos secciones fundamentales: un registro histórico de los puntos geográficos con mayor contaminación radiactiva (con mapas y enlaces de investigación) y un banco de preguntas metodológicas generalizadas para guiar el análisis crítico.
+        </div>
+
+        <!-- SECCIÓN 1: LUGARES HISTÓRICOS -->
+        <h2>1. Casos de Estudio Históricos</h2>
+        
+        <!-- Caso 1 -->
+        <div class="place-card">
+            <h3>Central Nuclear de Chernóbil y Prípiat</h3>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps?q=Pripyat,+Ucrania&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="meta-info">
+                <div class="meta-item"><span class="meta-label">Ubicación:</span> Prípiat, norte de Ucrania</div>
+                <div class="meta-item"><span class="meta-label">Fecha del incidente:</span> 26 de abril de 1986</div>
+            </div>
+            <div class="description-block">
+                Durante una prueba de seguridad mal ejecutada en el reactor número 4, se produjo un aumento imprevisto de potencia que desencadenó una explosión masiva. Se liberó al menos 100 veces más radiación directa a la atmósfera que las bombas atómicas de Hiroshima y Nagasaki combinadas.
+            </div>
+            <div class="people-block">
+                <div class="people-title">Población y Personal Afectado:</div>
+                La ciudad modelo de Prípiat (50.000 habitantes) fue evacuada de emergencia. Aproximadamente 600.000 "liquidadores" intervinieron en la mitigación, recibiendo dosis severas de radiación.
+            </div>
+            <div class="resources-block">
+                <div class="resources-title">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+                    Enlaces para investigar:
+                </div>
+                <ul class="resources-list">
+                    <li><a href="https://www.iaea.org/es/temas/el-accidente-de-chernobil" target="_blank">OIEA: El accidente de Chernóbil y sus consecuencias</a></li>
+                    <li><a href="https://www.who.int/es/news/item/05-09-2005-chernobyl-the-true-scale-of-the-accident" target="_blank">OMS: La verdadera magnitud del accidente de Chernóbil</a></li>
+                    <li><a href="https://www.nationalgeographic.es/historia/que-ocurrio-en-chernobil" target="_blank">National Geographic: Qué ocurrió en Chernóbil (Resumen)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Caso 2 -->
+        <div class="place-card">
+            <h3>Complejo Nuclear Mayak y Lago Karachay</h3>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps?q=Ozyoro+Karachay,+Chelyabinsk+Oblast,+Rusia&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="meta-info">
+                <div class="meta-item"><span class="meta-label">Ubicación:</span> Óblast de Cheliábinsk, Rusia (Región de los Montes Urales)</div>
+                <div class="meta-item"><span class="meta-label">Fecha del incidente:</span> Operaciones desde 1948; Desastre de Kyshtym el 29 de sep. de 1957</div>
+            </div>
+            <div class="description-block">
+                Mayak constituyó uno de los mayores complejos secretos de la Unión Soviética destinados a la producción de plutonio militar. Durante años, los desechos radiactivos líquidos de alto nivel fueron vertidos directamente en el río Techa y el lago Karachay. En 1957 ocurrió el Desastre de Kyshtym (explosión de un tanque).
+            </div>
+            <div class="people-block">
+                <div class="people-title">Población y Personal Afectado:</div>
+                Cerca de 450.000 personas de la región sufrieron exposición por agua contaminada. Muchas aldeas fueron evacuadas tarde, mientras otras continuaron habitando áreas de riesgo durante décadas.
+            </div>
+            <div class="resources-block">
+                <div class="resources-title">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+                    Enlaces para investigar:
+                </div>
+                <ul class="resources-list">
+                    <li><a href="https://www.bbc.com/mundo/noticias-internacional-41764350" target="_blank">BBC Mundo: El desastre nuclear de Kyshtym que la URSS ocultó</a></li>
+                    <li><a href="https://bellona.org/news/nuclear-issues/radwaste-storage-at-nuclear-fleet-bases/2011-12-russias-infamous-reprocessing-plant-mayak-never-stopped-illegal-dumping-of-radioactive-waste-into-nearby-river-poisoning-residents-newly-disclosed-court-finding-says" target="_blank">Bellona Foundation: Investigaciones sobre los vertidos en Mayak (Inglés)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Caso 3 -->
+        <div class="place-card">
+            <h3>Central Nuclear de Fukushima Daiichi</h3>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps?q=Fukushima+Daiichi+Nuclear+Power+Plant,+Japon&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="meta-info">
+                <div class="meta-item"><span class="meta-label">Ubicación:</span> Prefectura de Fukushima, Japón</div>
+                <div class="meta-item"><span class="meta-label">Fecha del incidente:</span> 11 de marzo de 2011</div>
+            </div>
+            <div class="description-block">
+                Un terremoto de 9.0 generó un tsunami que inundó la central costera. La pérdida total de energía interrumpió la refrigeración, provocando la fusión del núcleo en tres reactores y explosiones de hidrógeno que liberaron radionucleidos a la atmósfera y al Océano Pacífico.
+            </div>
+            <div class="people-block">
+                <div class="people-title">Población y Personal Afectado:</div>
+                Más de 150.000 civiles debieron ser desplazados. Los equipos de respuesta técnica operaron bajo condiciones extremas para contener las fugas y estabilizar la planta.
+            </div>
+            <div class="resources-block">
+                <div class="resources-title">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+                    Enlaces para investigar:
+                </div>
+                <ul class="resources-list">
+                    <li><a href="https://www.iaea.org/es/temas/el-accidente-de-fukushima-daiichi" target="_blank">OIEA: Informe y situación actual de Fukushima Daiichi</a></li>
+                    <li><a href="https://es.greenpeace.org/es/trabajamos-en/cambio-climatico/energia-nuclear/fukushima/" target="_blank">Greenpeace: El legado de Fukushima a más de una década</a></li>
+                    <li><a href="https://www.bbc.com/mundo/noticias-internacional-56321287" target="_blank">BBC: Las lecciones y el estigma social tras Fukushima</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Caso 4 -->
+        <div class="place-card">
+            <h3>Sitio de Pruebas de Semipalátinsk (El Polígono)</h3>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps?q=Semipalatinsk+Test+Site,+Kazajistan&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="meta-info">
+                <div class="meta-item"><span class="meta-label">Ubicación:</span> Estepa nororiental de Kazajistán</div>
+                <div class="meta-item"><span class="meta-label">Fecha del incidente:</span> Período operativo de 1949 a 1989</div>
+            </div>
+            <div class="description-block">
+                Este sitio operó como el principal campo de pruebas de armamento nuclear de la URSS. Se ejecutaron 456 detonaciones atómicas sin evaluar públicamente el impacto residual de la pluma radiactiva sobre los núcleos urbanos y rurales colindantes.
+            </div>
+            <div class="people-block">
+                <div class="people-title">Población y Personal Afectado:</div>
+                Se estima que más de 1.5 millones de personas estuvieron expuestas directamente. La región evidencia tasas elevadas de neoplasias y anomalías congénitas que perduran de manera intergeneracional.
+            </div>
+            <div class="resources-block">
+                <div class="resources-title">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+                    Enlaces para investigar:
+                </div>
+                <ul class="resources-list">
+                    <li><a href="https://www.ctbto.org/specials/testing-times/29-august-1949-first-soviet-nuclear-test" target="_blank">CTBTO: Historia de las pruebas en Semipalátinsk (Inglés)</a></li>
+                    <li><a href="https://elpais.com/internacional/2019/08/29/actualidad/1567087610_324424.html" target="_blank">El País: El polígono del horror nuclear en Kazajistán</a></li>
+                    <li><a href="https://www.icrc.org/es/doc/resources/documents/article/other/kazakhstan-nuclear-article-150310.htm" target="_blank">Cruz Roja Internacional: Las consecuencias en las familias de Semipalátinsk</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Caso 5 -->
+        <div class="place-card">
+            <h3>Complejo Nuclear de Hanford</h3>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps?q=Hanford+Site,+Washington,+USA&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="meta-info">
+                <div class="meta-item"><span class="meta-label">Ubicación:</span> Estado de Washington, Estados Unidos (Cuenca del Río Columbia)</div>
+                <div class="meta-item"><span class="meta-label">Fecha del incidente:</span> 1943 (Proyecto Manhattan) a 1987</div>
+            </div>
+            <div class="description-block">
+                Construido durante el Proyecto Manhattan, albergó el primer reactor de plutonio a gran escala, suministrando material para la bomba de Nagasaki. Generó millones de galones de residuos líquidos altamente radiactivos almacenados en tanques subterráneos, muchos de los cuales tienen filtraciones que amenazan el río Columbia.
+            </div>
+            <div class="people-block">
+                <div class="people-title">Población y Personal Afectado:</div>
+                Las poblaciones rurales a favor del viento ("downwinders") absorbieron yodo-131. Las comunidades indígenas locales vieron alterados sus territorios ancestrales. Es hoy la limpieza ambiental más costosa de EE.UU.
+            </div>
+            <div class="resources-block">
+                <div class="resources-title">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+                    Enlaces para investigar:
+                </div>
+                <ul class="resources-list">
+                    <li><a href="https://espanol.epa.gov/espanol/limpieza-del-sitio-hanford" target="_blank">EPA (Gobierno de EE.UU.): Limpieza del Sitio Hanford</a></li>
+                    <li><a href="https://ahf.nuclearmuseum.org/ahf/location/hanford-wa/" target="_blank">Atomic Heritage Foundation: Historia del sitio de Hanford (Inglés)</a></li>
+                    <li><a href="https://www.nytimes.com/es/2016/06/06/espanol/fugas-en-un-cementerio-nuclear-en-washington-preocupan-a-los-trabajadores.html" target="_blank">New York Times: Fugas en el cementerio nuclear de Washington</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+<!-- SECCIÓN 2: BANCO DE PREGUNTAS -->
+        <h2>2. Banco de Preguntas Guía para la Investigación</h2>
+        <div class="intro-text" style="background-color: #f8fafc; border-left: 4px solid #475569; margin-bottom: 20px;">
+            Las siguientes preguntas omiten deliberadamente nombres propios o localizaciones específicas. Están diseñadas para que cualquier estudiante pueda aplicarlas directamente al caso de estudio tecnológico o ambiental que haya seleccionado para su análisis a partir de los enlaces de investigación provistos arriba.
+        </div>
+
+        <!-- Categoría A -->
+        <div class="category-block">
+            <div class="category-title">Salud Humana y Efectos Biológicos</div>
+            <ol class="question-list" start="1">
+                <li>¿Cuáles son los principales efectos físicos y genéticos a largo plazo documentados en la población local expuesta a la radiación tras el incidente?</li>
+                <li>¿Qué enfermedades crónicas (como tipos específicos de cáncer o afecciones de tiroides) mostraron un aumento estadístico en la región tras el evento?</li>
+                <li>¿De qué manera el desplazamiento forzado, el estrés postraumático y el miedo prolongado a la contaminación afectaron la salud mental de los damnificados?</li>
+                <li>¿Qué protocolos de seguimiento médico y asistencia pública se implementaron (o se omitieron) para proteger a los trabajadores de emergencia y a los civiles expuestos?</li>
+            </ol>
+        </div>
+
+        <!-- Categoría B -->
+        <div class="category-block">
+            <div class="category-title">Impacto Social, Cultural y Psicológico</div>
+            <ol class="question-list" start="5">
+                <li>¿Cómo ha afectado el estigma social o la discriminación a los sobrevivientes y evacuados al intentar rehacer sus vidas en nuevas comunidades?</li>
+                <li>¿De qué manera la gestión de la información por parte de las autoridades durante el incidente influyó en la confianza del público hacia las instituciones y la ciencia?</li>
+                <li>¿Cómo se ha integrado el trauma de este evento en la identidad cultural, la literatura, el arte o el folclore de la población afectada?</li>
+                <li>¿Qué impacto tuvo el desarrollo de la instalación o el desastre en los derechos, la economía local y las tierras de las comunidades originarias o residentes de la zona?</li>
+                <li>¿Cómo se gestiona actualmente la memoria histórica del lugar (por ejemplo, mediante turismo, museos o monumentos) y cómo impacta esto en el respeto por las víctimas?</li>
+            </ol>
+        </div>
+
+        <!-- Categoría C -->
+        <div class="category-block">
+            <div class="category-title">Estado Ambiental y Ecosistemas</div>
+            <ol class="question-list" start="10">
+                <li>¿Cómo se alteró la dinámica de la flora y la fauna local a raíz de la contaminación inicial y del posterior abandono humano del área?</li>
+                <li>¿Cuáles fueron y son los principales riesgos de contaminación para las fuentes hídricas cercanas (ríos, lagos, mares, napas subterráneas)?</li>
+                <li>¿Qué isótopos radiactivos específicos se liberaron al medio ambiente y cuánto tiempo se estima que permanecerán activos en el suelo y el ecosistema?</li>
+                <li>¿Qué consecuencias tuvo la lluvia radiactiva o el vertido de residuos para las actividades agrícolas, ganaderas y la soberanía alimentaria de la región?</li>
+            </ol>
+        </div>
+
+        <!-- Categoría D -->
+        <div class="category-block">
+            <div class="category-title">Ingeniería, Remediación y Políticas Actuales</div>
+            <ol class="question-list" start="14">
+                <li>¿Qué tecnologías o métodos científicos de remediación ambiental (como la biorremediación o fitorremediación) se han aplicado para descontaminar el agua y los suelos?</li>
+                <li>¿Cuáles fueron las soluciones de ingeniería diseñadas para contener la fuente de radiación, detener las fugas y estabilizar la zona crítica?</li>
+                <li>¿Qué desafíos técnicos, económicos o logísticos continúan dificultando el desmantelamiento total de las instalaciones o la recuperación del área?</li>
+                <li>¿Qué planes de contingencia existen en la actualidad para prevenir que fenómenos naturales (incendios, inundaciones, sismos) vuelvan a dispersar la radiación residual?</li>
+            </ol>
+        </div>
+
+        <!-- Categoría E -->
+        <div class="category-block">
+            <div class="category-title">Lecciones Históricas y Repercusiones Globales</div>
+            <ol class="question-list" start="18">
+                <li>¿Qué cambios fundamentales impulsó este suceso en las normativas de seguridad, políticas energéticas o protocolos de emergencia a nivel internacional?</li>
+                <li>¿Cómo influyó este evento en el debate público mundial y en los movimientos sociales respecto a los riesgos de la energía o el armamento nuclear?</li>
+                <li>¿Qué lecciones clave o aprendizajes técnicos deja este caso de estudio para prevenir futuros desastres tecnológicos y ambientales?</li>
+            </ol>
+        </div>
+
+        <!-- FOOTER ACTUALIZADO -->
+        <footer>
+            Guía Didáctica de Contaminación Radiactiva e Impacto Socioambiental<br>
+            Elaborado por: <strong>Bargas, Nehuen Lautaro</strong> | 29 de mayo de 2026
+        </footer>
+
+    </div>
+
+</body>
+</html>
