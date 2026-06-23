@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Química 2 - Hidrocarburos (Alcanos, Alquenos, Alquinos)</title>
+    <style>
+        /* CSS INTEGRADO - Optimizado para vista web e impresión */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .exam-header {
+            border: 2px solid #2b6cb0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 35px;
+            background-color: #f7fafc;
+        }
+        .header-title {
+            font-size: 2.2rem;
+            color: #2b6cb0;
+            margin: 0 0 5px 0;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header-subtitle {
+            text-align: center;
+            color: #4a5568;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .student-info-full {
+            grid-column: span 2;
+        }
+        .blank-line {
+            display: inline-block;
+            border-bottom: 1px solid #4a5568;
+            height: 20px;
+            margin-left: 10px;
+        }
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 45px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .activity-title {
+            font-size: 1.5rem;
+            color: #2c5282;
+            margin: 0;
+        }
+        .points-badge {
+            background-color: #dd6b20;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Grillas para graficar */
+        .drawing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .drawing-box {
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            height: 200px;
+            padding: 15px;
+            position: relative;
+            background-color: #fdfefe;
+        }
+        .molecule-name {
+            font-weight: bold;
+            color: #2b6cb0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        
+        /* Contenedores de Hidrocarburos */
+        .hydrocarbon-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .hydrocarbon-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f8fafc;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .name-input {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .name-input span {
+            color: #2b6cb0;
+        }
+        .name-line {
+            border-bottom: 2px solid #a0aec0;
+            width: 150px;
+            height: 25px;
+        }
+        
+        /* Preguntas */
+        .question-item {
+            margin-bottom: 30px;
+            font-size: 1.15rem;
+        }
+        .answer-lines {
+            margin-top: 15px;
+        }
+        .answer-line {
+            border-bottom: 1px solid #cbd5e0;
+            height: 35px;
+            width: 100%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            .student-info { grid-template-columns: 1fr; }
+            .student-info-full { grid-column: span 1; }
+            .drawing-grid, .hydrocarbon-container { grid-template-columns: 1fr; }
+            .activity-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+
+        /* Estilos de Impresión */
+        @media print {
+            body { background: none; padding: 0; }
+            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+            .exam-header { background-color: transparent !important; }
+            .hydrocarbon-item, .drawing-box { background-color: transparent !important; break-inside: avoid; }
+            .activity-header { break-after: avoid; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="exam-header">
+        <h1 class="header-title">Prueba Evaluativa - Química 2</h1>
+        <div class="header-subtitle">Tema: Hidrocarburos (Alcanos, Alquenos, Alquinos y Ramificaciones)</div>
+        
+        <div class="student-info">
+            <div class="student-info-full">
+                Nombre y Apellido: <span class="blank-line" style="width: calc(100% - 170px);"></span>
+            </div>
+            <div>
+                Fecha: <span class="blank-line" style="width: 150px;"></span>
+            </div>
+            <div>
+                Curso / División: <span class="blank-line" style="width: 100px;"></span>
+            </div>
+            <div class="student-info-full" style="color: #c53030; text-align: right; margin-top: 10px; font-size: 1.2rem;">
+            <strong>Calificación Final: <span class="blank-line" style="width: 60px;"></span> / 30 pts</strong>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD 1 -->
+    <div class="activity-header">
+        <h2 class="activity-title">Actividad 1: Desarrollo de Fórmulas Semidesarrolladas Complejas</h2>
+        <span class="points-badge">10 Puntos (1 c/u)</span>
+    </div>
+    <p>A partir del nombre oficial de la IUPAC de cada hidrocarburo, dibuja su <strong>fórmula semidesarrollada</strong>. Recuerda verificar la tetravalencia del carbono y la posición exacta de las ramificaciones y enlaces múltiples.</p>
+    
+    <div class="drawing-grid">
+        <div class="drawing-box">
+            <span class="molecule-name">a) 3-etil-2,4-dimetilheptano</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">b) 4-etil-2-metil-2,5-octadieno</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">c) 3-propil-1,4-hexadiino</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">d) 4-etil-3,3-dimetiloctano</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">e) 5-isopropil-2,6-dimetilnonano</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">f) 3,4-dietil-1,3,5-hexatrieno</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">g) 6-etil-4-propil-2-octino</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">h) 2,2,3,3-tetrametilpentano</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">i) 3-etil-4-metil-1-pentino</span>
+        </div>
+        <div class="drawing-box">
+            <span class="molecule-name">j) 5-propil-2,4,6-trimetildecano</span>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD 2 -->
+    <div class="activity-header">
+        <h2 class="activity-title">Actividad 2: Nomenclatura Avanzada</h2>
+        <span class="points-badge">10 Puntos (1 c/u)</span>
+    </div>
+    <p>Observa cuidadosamente las siguientes cadenas, identifica la cadena principal más larga y numérala según las prioridades correctas. Escribe el <strong>nombre IUPAC completo</strong> de cada molécula.</p>
+
+    <div class="hydrocarbon-container">
+        
+        <!-- Molécula 1: 3-etilheptano -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 350 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <!-- Enlaces simples -->
+                <line x1="35" y1="40" x2="55" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="85" y1="40" x2="105" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="40" x2="155" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="185" y1="40" x2="205" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="235" y1="40" x2="255" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="285" y1="40" x2="305" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                
+                <!-- Ramificación Etil -->
+                <line x1="120" y1="50" x2="120" y2="80" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="120" y1="100" x2="120" y2="120" stroke="#a0aec0" stroke-width="3"/>
+
+                <!-- Textos Cadena -->
+                <text x="20" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="120" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan></text>
+                <text x="170" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="220" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="270" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="320" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+
+                <!-- Textos Rama -->
+                <text x="120" y="95" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="120" y="135" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 2: 2,5-dimetil-3-hexeno -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <!-- Enlaces -->
+                <line x1="35" y1="40" x2="55" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="85" y1="40" x2="105" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <!-- Enlace Doble -->
+                <line x1="135" y1="36" x2="155" y2="36" stroke="#e53e3e" stroke-width="3"/>
+                <line x1="135" y1="44" x2="155" y2="44" stroke="#e53e3e" stroke-width="3"/>
+                <line x1="185" y1="40" x2="205" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="235" y1="40" x2="255" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <!-- Ramas -->
+                <line x1="70" y1="50" x2="70" y2="80" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="220" y1="50" x2="220" y2="80" stroke="#a0aec0" stroke-width="3"/>
+                
+                <text x="20" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan></text>
+                <text x="120" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="170" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="220" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="270" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="95" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="220" y="95" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 3: 4-metil-2-heptino -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 350 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <!-- Enlaces -->
+                <line x1="40" y1="40" x2="55" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <!-- Enlace Triple -->
+                <line x1="85" y1="34" x2="105" y2="34" stroke="#805ad5" stroke-width="3"/>
+                <line x1="85" y1="40" x2="105" y2="40" stroke="#805ad5" stroke-width="3"/>
+                <line x1="85" y1="46" x2="105" y2="46" stroke="#805ad5" stroke-width="3"/>
+                <line x1="135" y1="40" x2="155" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="185" y1="40" x2="205" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="235" y1="40" x2="255" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="285" y1="40" x2="305" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="170" y1="50" x2="170" y2="80" stroke="#a0aec0" stroke-width="3"/>
+                
+                <text x="20" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">C</tspan></text>
+                <text x="120" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">C</text>
+                <text x="170" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="220" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="270" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="320" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+                <text x="170" y="95" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle">CH<tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 4: 5-etil-3,3-dimetilheptano -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 350 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <!-- Enlaces -->
+                <line x1="35" y1="70" x2="55" y2="70" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="85" y1="70" x2="105" y2="70" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="70" x2="155" y2="70" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="185" y1="70" x2="205" y2="70" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="235" y1="70" x2="255" y2="70" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="285" y1="70" x2="305" y2="70" stroke="#a0aec0" stroke-width="3"/>
+                <!-- Ramas -->
+                <line x1="120" y1="60" x2="120" y2="30" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="120" y1="80" x2="120" y2="110" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="220" y1="80" x2="220" y2="100" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="220" y1="115" x2="220" y2="135" stroke="#a0aec0" stroke-width="3"/>
+                
+                <text x="20" y="75" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="75" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="120" y="75" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">C</tspan></text>
+                <text x="170" y="75" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="220" y="75" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan></text>
+                <text x="270" y="75" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="320" y="75" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+                <text x="120" y="25" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="120" y="125" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+                <text x="220" y="112" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="220" y="147" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+   <!-- Molécula 5: 2,2-dimetilbutano -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <line x1="35" y1="75" x2="55" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="85" y1="75" x2="105" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="75" x2="155" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="70" y1="65" x2="70" y2="35" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="70" y1="85" x2="70" y2="115" stroke="#a0aec0" stroke-width="3"/>
+                <text x="20" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">C</tspan></text>
+                <text x="120" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="170" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="30" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="130" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 6: 1,3-butadieno -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <!-- Enlaces dobles -->
+                <line x1="35" y1="71" x2="55" y2="71" stroke="#e53e3e" stroke-width="3"/>
+                <line x1="35" y1="79" x2="55" y2="79" stroke="#e53e3e" stroke-width="3"/>
+                <line x1="85" y1="75" x2="105" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="71" x2="155" y2="71" stroke="#e53e3e" stroke-width="3"/>
+                <line x1="135" y1="79" x2="155" y2="79" stroke="#e53e3e" stroke-width="3"/>
+                <text x="20" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="70" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan></text>
+                <text x="120" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="170" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 7: 3-metil-1-pentino -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <line x1="35" y1="69" x2="55" y2="69" stroke="#805ad5" stroke-width="3"/>
+                <line x1="35" y1="75" x2="55" y2="75" stroke="#805ad5" stroke-width="3"/>
+                <line x1="35" y1="81" x2="55" y2="81" stroke="#805ad5" stroke-width="3"/>
+                <line x1="85" y1="75" x2="105" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="75" x2="155" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="120" y1="85" x2="120" y2="115" stroke="#a0aec0" stroke-width="3"/>
+                <text x="20" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="70" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">C</text>
+                <text x="120" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="170" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="220" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+                <text x="120" y="130" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 8: 2,3,4-trimetilpentano -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <line x1="35" y1="50" x2="55" y2="50" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="85" y1="50" x2="105" y2="50" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="50" x2="155" y2="50" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="70" y1="60" x2="70" y2="90" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="120" y1="60" x2="120" y2="90" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="170" y1="60" x2="170" y2="90" stroke="#a0aec0" stroke-width="3"/>
+                <text x="20" y="55" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="55" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan></text>
+                <text x="120" y="55" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="170" y="55" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="220" y="55" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="105" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="120" y="105" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+                <text x="170" y="105" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 9: 3-etil-2-metilhexano -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <line x1="35" y1="40" x2="55" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="85" y1="40" x2="105" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="40" x2="155" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="185" y1="40" x2="205" y2="40" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="70" y1="50" x2="70" y2="80" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="120" y1="50" x2="120" y2="80" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="120" y1="100" x2="120" y2="120" stroke="#a0aec0" stroke-width="3"/>
+                <text x="20" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan></text>
+                <text x="120" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="170" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="220" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="270" y="45" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+                <text x="70" y="95" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle">CH<tspan dy="4" font-size="10">3</tspan></text>
+                <text x="120" y="95" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">2</tspan></text>
+                <text x="120" y="135" font-family="Arial" font-size="14" fill="#3182ce" font-weight="bold" text-anchor="middle"><tspan dy="-4">CH</tspan><tspan dy="4" font-size="10">3</tspan></text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+
+        <!-- Molécula 10: 1,4-pentadiino -->
+        <div class="hydrocarbon-item">
+            <svg width="100%" height="150" viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block;">
+                <!-- Triples enlaces -->
+                <line x1="35" y1="69" x2="55" y2="69" stroke="#805ad5" stroke-width="3"/>
+                <line x1="35" y1="75" x2="55" y2="75" stroke="#805ad5" stroke-width="3"/>
+                <line x1="35" y1="81" x2="55" y2="81" stroke="#805ad5" stroke-width="3"/>
+                <line x1="85" y1="75" x2="105" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="135" y1="75" x2="155" y2="75" stroke="#a0aec0" stroke-width="3"/>
+                <line x1="185" y1="69" x2="205" y2="69" stroke="#805ad5" stroke-width="3"/>
+                <line x1="185" y1="75" x2="205" y2="75" stroke="#805ad5" stroke-width="3"/>
+                <line x1="185" y1="81" x2="205" y2="81" stroke="#805ad5" stroke-width="3"/>
+                <text x="20" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+                <text x="70" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">C</text>
+                <text x="120" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH<tspan dy="4" font-size="10">2</tspan></text>
+                <text x="170" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold"><tspan dy="-4">C</tspan></text>
+                <text x="220" y="80" font-family="Arial" font-size="14" fill="#2d3748" font-weight="bold">CH</text>
+            </svg>
+            <div class="name-input"><span>Nombre:</span> <div class="name-line"></div></div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD 3 -->
+    <div class="activity-header">
+        <h2 class="activity-title">Actividad 3: Análisis y Justificación Estructural</h2>
+        <span class="points-badge">10 Puntos (1 c/u)</span>
+    </div>
+    <p>Lee detenidamente cada consigna analítica y responde en las líneas punteadas. Aplica estrictamente las reglas de la química orgánica y de la IUPAC.</p>
+
+    <div class="question-item">
+        <strong>1)</strong> Calcula y escribe la fórmula molecular global (Ej: C<sub>x</sub>H<sub>y</sub>) de una molécula llamada <strong>4-etil-2-metil-1,5-octadieno</strong>. Muestra brevemente cómo lo dedujiste a partir del nombre sin necesidad de dibujar toda la molécula.
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>2)</strong> Un estudiante inexperto nombró una estructura molecular como <strong>"2-etil-4-metilpentano"</strong>. Explica detalladamente por qué este nombre rompe una regla fundamental de la IUPAC y escribe cuál debería ser el nombre correcto de dicha molécula.
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>3)</strong> Al numerar la cadena de un hidrocarburo que tiene al mismo tiempo un enlace triple y dos ramificaciones complejas, ¿quién tiene prioridad absoluta para recibir el número localizador más bajo? Explica por qué.
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>4)</strong> Verdadero o Falso: <em>"El 3-etil-3-metilheptano y el decano son compuestos completamente diferentes en su forma, pero son considerados isómeros de cadena entre sí."</em> Justifica matemáticamente tu respuesta.
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>5)</strong> La fórmula general de los alcanos es C<sub>n</sub>H<sub>2n+2</sub>. Escribe las fórmulas generales correspondientes para los alquenos y alquinos, indicando el motivo estructural que explica la disminución de la cantidad de hidrógenos.
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>6)</strong> Puntos de ebullición: Si tienes un recipiente con octano lineal y otro con 2,2,3,3-tetrametilbutano, ambos con exactamente la misma cantidad de átomos. ¿Cuál esperas que tenga un mayor punto de ebullición y por qué?
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>7)</strong> Identificación de error: Un compañero nombra una molécula como <strong>"3-propilhexano"</strong>. ¿Cuál es el error conceptual que cometió al elegir la cadena principal? ¿Cuál sería el nombre IUPAC correcto de ese hidrocarburo?
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>8)</strong> Un hidrocarburo presenta en su cadena un enlace doble y un enlace triple en igualdad de posiciones (ej: un enino donde numerar de izquierda a derecha da las mismas ubicaciones que al revés). ¿Qué enlace tiene preferencia para llevar el número más bajo según IUPAC?
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>9)</strong> Explica con tus palabras y claridad técnica cuál es la diferencia estructural que existe entre acoplar un radical <strong>"propil"</strong> versus un radical <strong>"isopropil"</strong> a una cadena carbonada principal.
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+    <div class="question-item">
+        <strong>10)</strong> Un cicloalcano (como el ciclohexano) y un alqueno lineal de igual cantidad de carbonos comparten exactamente la misma fórmula molecular global (Ej: C<sub>6</sub>H<sub>12</sub>). ¿Cómo se explica matemáticamente esto si el cicloalcano solo posee enlaces simples?
+        <div class="answer-lines">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
