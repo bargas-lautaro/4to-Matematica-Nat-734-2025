@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estudio: Estequiometría y Partículas</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: var(--primary-color);
+        }
+        .concept-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .formula-box {
+            background-color: #fdf2e9;
+            border: 1px solid #e67e22;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .example-box {
+            background-color: #eafaf1;
+            border: 1px solid #2ecc71;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        ol {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        /* Estilos específicos para impresión */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .controls {
+                display: none;
+            }
+            .concept-box, .formula-box, .example-box {
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="controls">
+        <button onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
+    </div>
+
+    <h1>Guía de Estudio: Relaciones de Masa, Moles y Partículas</h1>
+
+    <section id="teoria">
+        <h2>1. Conceptos Fundamentales</h2>
+        <p>En química, trabajamos con cantidades de materia que a nivel macroscópico equivalen a billones de partículas. Para conectar lo que podemos pesar con lo que no podemos ver, utilizamos los siguientes conceptos:</p>
+
+        <div class="concept-box">
+            <h3>El Mol (La "docena" de la química)</h3>
+            <p>Es la unidad del Sistema Internacional para medir la <strong>cantidad de sustancia</strong>. Al igual que una "docena" siempre significa 12 cosas, un "mol" siempre significa una cantidad específica e inmensa de partículas (átomos, moléculas, iones).</p>
+        </div>
+
+        <div class="concept-box">
+            <h3>El Número de Avogadro (N<sub>A</sub>)</h3>
+            <p>Es la cantidad exacta de unidades que hay en un mol. Nos sirve como un "puente de traducción" para contar partículas microscópicas pesándolas a escala macroscópica.</p>
+            <div class="formula-box">
+                N<sub>A</sub> = 6.022 &times; 10<sup>23</sup> partículas/mol
+            </div>
+        </div>
+
+        <div class="concept-box">
+            <h3>Masa Molar (MM)</h3>
+            <p>Es la masa que tiene exactamente <strong>un mol</strong> de una sustancia. Se mide en <strong>g/mol</strong> y su valor numérico coincide con la masa atómica de la tabla periódica. Por ejemplo, el Oxígeno (O) pesa 16 g/mol; el gas oxígeno (O<sub>2</sub>) pesa 32 g/mol.</p>
+        </div>
+    </section>
+
+    <section id="formulas">
+        <h2>2. Fórmulas e Indicaciones</h2>
+        <p>Para resolver estos ejercicios, el <strong>Mol</strong> siempre debe ser tu estación central. No se puede pasar directamente de Masa a Partículas; siempre debes convertir primero a Moles.</p>
+        
+        <h3>A. Conversión entre Masa y Moles</h3>
+        <p>Para calcular la cantidad de moles (n) a partir de una masa dada (m):</p>
+        <div class="formula-box">n = m / MM</div>
+        
+        <h3>B. Conversión entre Moles y Partículas</h3>
+        <p>Para saber cuántas partículas hay en una cierta cantidad de moles:</p>
+        <div class="formula-box">Número de partículas = n &times; (6.022 &times; 10<sup>23</sup>)</div>
+    </section>
+
+    <section id="ejemplo">
+        <h2>3. Ejemplo Práctico Resuelto</h2>
+        <div class="example-box">
+            <h3>¿Cuántas moléculas hay en 90 gramos de agua (H<sub>2</sub>O)?</h3>
+            <p><strong>Paso 1: Datos.</strong> Masa (m) = 90 g.</p>
+            <p><strong>Paso 2: Masa Molar (MM).</strong> H (1 g/mol &times; 2) + O (16 g/mol &times; 1) = 18 g/mol.</p>
+            <p><strong>Paso 3: Masa a Moles.</strong> n = 90 g / 18 g/mol = 5 moles de H<sub>2</sub>O.</p>
+            <p><strong>Paso 4: Moles a Moléculas.</strong> 5 moles &times; (6.022 &times; 10<sup>23</sup>) = 3.011 &times; 10<sup>24</sup> moléculas.</p>
+        </div>
+    </section>
+
+    <section id="ejercicios">
+        <h2>4. Guía de Ejercicios (40 Problemas)</h2>
+        <p><em>Nota: Utiliza la tabla periódica para calcular las masas molares.</em></p>
+
+        <h3>Parte 1: Conversión de Masa a Moles</h3>
+        <ol>
+            <li>¿Cuántos moles hay en 90 gramos de agua (H<sub>2</sub>O)?</li>
+            <li>Calcula la cantidad de moles que corresponden a 150 gramos de cloruro de sodio (NaCl).</li>
+            <li>Tienes una muestra de 45 gramos de glucosa (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>). ¿A cuántos moles equivale?</li>
+            <li>Determina los moles presentes en 200 gramos de ácido sulfúrico (H<sub>2</sub>SO<sub>4</sub>).</li>
+            <li>Si tienes un anillo de oro puro (Au) que pesa 15 gramos, ¿cuántos moles de oro contiene?</li>
+        </ol>
+
+        <h3>Parte 2: Conversión de Moles a Masa</h3>
+        <ol start="6">
+            <li>¿Cuál es la masa en gramos de 3.5 moles de dióxido de carbono (CO<sub>2</sub>)?</li>
+            <li>Calcula la masa de 0.25 moles de amoníaco (NH<sub>3</sub>).</li>
+            <li>¿Cuántos gramos pesan 5 moles de hierro (Fe)?</li>
+            <li>Un experimento requiere 1.2 moles de hidróxido de sodio (NaOH). ¿Cuántos gramos debes pesar en la balanza?</li>
+            <li>Determina la masa equivalente a 0.75 moles de gas oxígeno (O<sub>2</sub>).</li>
+        </ol>
+
+        <h3>Parte 3: Conversión de Moles a Partículas</h3>
+        <ol start="11">
+            <li>¿Cuántas moléculas hay en 2 moles de gas metano (CH<sub>4</sub>)?</li>
+            <li>Calcula el número de átomos de cobre (Cu) presentes en 0.5 moles de este metal.</li>
+            <li>¿Cuántas moléculas de nitrógeno (N<sub>2</sub>) hay en 4.5 moles de gas nitrógeno?</li>
+            <li>Si tienes 0.1 moles de vitamina C (C<sub>6</sub>H<sub>8</sub>O<sub>6</sub>), ¿cuántas moléculas tienes en total?</li>
+            <li>Determina la cantidad de átomos de plata (Ag) que hay en 3 moles de plata pura.</li>
+        </ol>
+
+        <h3>Parte 4: Conversión de Partículas a Moles</h3>
+        <ol start="16">
+            <li>Si tienes 3.011 &times; 10<sup>23</sup> átomos de helio (He), ¿cuántos moles tienes?</li>
+            <li>Calcula el número de moles que corresponden a 1.204 &times; 10<sup>24</sup> moléculas de agua (H<sub>2</sub>O).</li>
+            <li>Una muestra contiene 9.033 &times; 10<sup>23</sup> moléculas de dióxido de azufre (SO<sub>2</sub>). ¿A cuántos moles equivale?</li>
+            <li>¿Cuántos moles representan 6.022 &times; 10<sup>22</sup> átomos de carbono (C)?</li>
+            <li>Determina la cantidad de moles si cuentas con 1.5 &times; 10<sup>24</sup> moléculas de ozono (O<sub>3</sub>).</li>
+        </ol>
+
+        <h3>Parte 5: Conversión de Masa a Partículas (Masa &rarr; Moles &rarr; Partículas)</h3>
+        <ol start="21">
+            <li>¿Cuántas moléculas hay en 36 gramos de agua (H<sub>2</sub>O)?</li>
+            <li>Calcula el número de átomos presentes en un clavo de hierro (Fe) que pesa 28 gramos.</li>
+            <li>¿Cuántas moléculas de sacarosa (C<sub>12</sub>H<sub>22</sub>O<sub>11</sub>) hay en una cucharada de azúcar que pesa 15 gramos?</li>
+            <li>Determina la cantidad de moléculas en 88 gramos de gas carbónico (CO<sub>2</sub>).</li>
+            <li>Si un globo contiene 8 gramos de gas helio (He), ¿cuántos átomos de helio hay en su interior?</li>
+        </ol>
+
+        <h3>Parte 6: Conversión de Partículas a Masa (Partículas &rarr; Moles &rarr; Masa)</h3>
+        <ol start="26">
+            <li>¿Cuál es la masa en gramos de 1.204 &times; 10<sup>24</sup> moléculas de amoníaco (NH<sub>3</sub>)?</li>
+            <li>Calcula la masa de 3.011 &times; 10<sup>23</sup> átomos de oro (Au).</li>
+            <li>Si tienes 9.033 &times; 10<sup>23</sup> moléculas de ácido nítrico (HNO<sub>3</sub>), ¿cuántos gramos pesaría esta muestra?</li>
+            <li>¿Qué masa en gramos representa tener exactamente 6.022 &times; 10<sup>25</sup> moléculas de gas hidrógeno (H<sub>2</sub>)?</li>
+            <li>Determina el peso en gramos de 5 &times; 10<sup>22</sup> átomos de plomo (Pb).</li>
+        </ol>
+
+        <h3>Parte 7: Átomos específicos dentro de una Molécula</h3>
+        <ol start="31">
+            <li>¿Cuántos átomos de hidrógeno (H) hay en 2 moles de agua (H<sub>2</sub>O)?</li>
+            <li>Calcula el número de átomos de oxígeno (O) presentes en 44 gramos de dióxido de carbono (CO<sub>2</sub>).</li>
+            <li>¿Cuántos átomos totales (sumando todos los elementos) hay en 1 mol de glucosa (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>)?</li>
+            <li>Determina cuántos átomos de carbono (C) hay en 50 gramos de etano (C<sub>2</sub>H<sub>6</sub>).</li>
+            <li>Si tienes 100 gramos de ácido sulfúrico (H<sub>2</sub>SO<sub>4</sub>), ¿cuántos átomos de oxígeno contiene la muestra?</li>
+        </ol>
+
+        <h3>Parte 8: Desafíos y Ejercicios Combinados</h3>
+        <ol start="36">
+            <li>Una gota de agua tiene una masa aproximada de 0.05 gramos. ¿Cuántas moléculas de agua hay en una gota? ¿Y cuántos átomos de hidrógeno?</li>
+            <li>Tienes 4.5 &times; 10<sup>24</sup> moléculas de un compuesto desconocido que pesan 340 gramos. ¿Cuál es la masa molar de este compuesto?</li>
+            <li>Si mezclas 10 gramos de sodio (Na) con 10 gramos de cloro gas (Cl<sub>2</sub>), ¿cuántos átomos de sodio tienes en comparación con las moléculas de cloro?</li>
+            <li>Un tanque contiene 2 kilogramos (2000 gramos) de gas butano (C<sub>4</sub>H<sub>10</sub>). Calcula el número total de moléculas en el tanque.</li>
+            <li>Calcula qué muestra tiene mayor masa: 3.5 &times; 10<sup>23</sup> moléculas de UF<sub>6</sub> (hexafluoruro de uranio) o 5 moles de agua (H<sub>2</sub>O). (Demuestra con cálculos).</li>
+        </ol>
+    </section>
+</div>
+
+</body>
+</html>
