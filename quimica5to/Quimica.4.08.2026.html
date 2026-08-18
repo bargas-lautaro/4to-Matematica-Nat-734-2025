@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apunte de Cátedra: Estequiometría y Reacciones Redox</title>
+    <style>
+        :root {
+            --primary-color: #1a3c5a;
+            --secondary-color: #2980b9;
+            --text-color: #333333;
+            --border-color: #bdc3c7;
+            --bg-color: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: var(--text-color);
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .page-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--primary-color);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2em;
+        }
+        .header h2 {
+            color: var(--secondary-color);
+            margin: 5px 0 0 0;
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+        .student-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .concept-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .concept-title {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .important-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .exercise-section {
+            margin-top: 30px;
+        }
+        .exercise-item {
+            margin-bottom: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #fdfefe;
+            border: 1px dashed var(--border-color);
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        /* Utilidades para impresión */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .page-container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+    <div class="header">
+        <h1>Química Aplicada: La Receta de la Materia</h1>
+        <h2>Introducción a la Estequiometría y Reacciones Redox</h2>
+        <div class="student-info">
+            <span>Alumno: ___________________________________</span>
+            <span>Fecha: ___/___/20__</span>
+        </div>
+    </div>
+
+    <h3>1. Glosario Fundamental: Estequiometría</h3>
+    <p>Para trabajar con materiales en una obra, necesitamos proporciones exactas. En química, a la "matemática" detrás de estas recetas la llamamos <strong>Estequiometría</strong>. Nos permite calcular las cantidades exactas de sustancias que participan en una transformación.</p>
+
+    <div class="concept-box">
+        <p><span class="concept-title">Reacción Química:</span> Es el proceso físico real mediante el cual una o más sustancias (Reactivos) rompen sus uniones moleculares y se transforman en sustancias totalmente nuevas (Productos). Ejemplo: la mezcla de cal y agua, o la oxidación del hierro.</p>
+        
+        <p><span class="concept-title">Ecuación Química:</span> Es la representación escrita y matemática de la reacción. Es el "plano" que leemos en el papel.</p>
+        
+        <p><span class="concept-title">Reactivos y Productos:</span> Los reactivos se escriben a la izquierda de la flecha (lo que tengo al principio). Los productos se escriben a la derecha (el resultado final).</p>
+        
+        <p><span class="concept-title">Subíndices:</span> Son los números pequeños debajo de los símbolos químicos (ej. H<sub>2</sub>O). Indican cuántos átomos de ese elemento hay en la molécula. <strong>Regla fundamental: JAMÁS se modifican</strong>, porque cambiaría la identidad del material.</p>
+        
+        <p><span class="concept-title">Coeficientes Estequiométricos:</span> Son los números grandes que colocamos delante de la fórmula completa. Indican la cantidad de moléculas que participan. Es el único número que usamos para "balancear" la ecuación.</p>
+    </div>
+
+    <div class="important-note">
+        <strong>Ley de Lavoisier (Conservación de la Masa):</strong> "En la naturaleza, la materia no se crea ni se destruye, solo se transforma". Todo átomo que ingresa como reactivo, debe salir obligatoriamente en los productos. Por eso debemos balancear las ecuaciones.
+    </div>
+
+    <h3>2. Reacciones de Óxido-Reducción (REDOX)</h3>
+    <p>En el rubro de la construcción, una de las reacciones químicas más destructivas y críticas que debemos comprender es la corrosión de los metales (especialmente las armaduras de acero en el hormigón). Este proceso es una reacción REDOX.</p>
+    <p>Las reacciones REDOX son aquellas donde ocurre una <strong>transferencia de electrones</strong> entre las sustancias. Una sustancia regala electrones y la otra los acepta.</p>
+
+    <div class="concept-box">
+        <ul>
+            <li><span class="concept-title">Oxidación:</span> Es el proceso donde una sustancia <strong>pierde electrones</strong>. Al perder cargas negativas, su carga total se vuelve más positiva (aumenta su número de oxidación).</li>
+            
+            <li><span class="concept-title">Reducción:</span> Es el proceso donde una sustancia <strong>gana electrones</strong>. Al ganar cargas negativas, su carga total se reduce (disminuye su número de oxidación).</li>
+        </ul>
+        <p><em>Regla mnemotécnica: ¡La oxidación y la reducción SIEMPRE ocurren juntas! Si alguien pierde electrones, otro tiene que agarrarlos.</em></p>
+    </div>
+
+    <p>[attachment_0](attachment)</p>
+
+    <h4>Los Agentes Involucrados:</h4>
+    <ul>
+        <li><strong>Agente Oxidante:</strong> Es la sustancia que "roba" los electrones. Como gana electrones, es la sustancia que <strong>se reduce</strong>. (El oxígeno del aire o el agua son grandes agentes oxidantes para los metales).</li>
+        <li><strong>Agente Reductor:</strong> Es la sustancia que "entrega" o cede los electrones. Al perderlos, es la sustancia que <strong>se oxida</strong>. (El hierro de la armadura actúa como agente reductor y termina oxidándose).</li>
+    </ul>
+
+    <h3>3. Guía de Ejercicios Prácticos</h3>
+    
+    <div class="exercise-section">
+        <p><strong>PARTE A: Identificación en la Ecuación</strong><br>
+        Dada la siguiente ecuación de la síntesis del amoníaco: <strong>N<sub>2</sub> + 3H<sub>2</sub> &rarr; 2NH<sub>3</sub></strong></p>
+        <ol>
+            <li>Identificá y encerrá en un círculo cuáles son los reactivos y cuál es el producto.</li>
+            <li>Señalizá con una flecha un subíndice y con otra flecha un coeficiente estequiométrico.</li>
+            <li>Explicá con tus palabras qué pasaría si cambiáramos el "3" pequeño del NH<sub>3</sub> por un "4".</li>
+        </ol>
+
+        <p><strong>PARTE B: Balanceo por Tanteo (Equilibrando la Obra)</strong><br>
+        Aplicá la Ley de Lavoisier balanceando las siguientes ecuaciones químicas colocando los coeficientes correspondientes. Utilizá lápiz.</p>
+        
+        <div class="exercise-item">1) ___ C + ___ O<sub>2</sub> &rarr; ___ CO (Combustión incompleta, gas tóxico)</div>
+        <div class="exercise-item">2) ___ H<sub>2</sub> + ___ O<sub>2</sub> &rarr; ___ H<sub>2</sub>O (Formación de agua)</div>
+        <div class="exercise-item">3) ___ Fe + ___ O<sub>2</sub> &rarr; ___ Fe<sub>2</sub>O<sub>3</sub> (Oxidación del hierro / Herrumbre)</div>
+        <div class="exercise-item">4) ___ Al + ___ O<sub>2</sub> &rarr; ___ Al<sub>2</sub>O<sub>3</sub> (Oxidación del aluminio para aberturas)</div>
+        <div class="exercise-item">5) ___ CH<sub>4</sub> + ___ O<sub>2</sub> &rarr; ___ CO<sub>2</sub> + ___ H<sub>2</sub>O (Combustión del gas natural)</div>
+        <div class="exercise-item">6) ___ Na + ___ Cl<sub>2</sub> &rarr; ___ NaCl (Formación de sal común)</div>
+        <div class="exercise-item">7) ___ SO<sub>2</sub> + ___ O<sub>2</sub> &rarr; ___ SO<sub>3</sub> (Formación de óxido sulfúrico)</div>
+        <div class="exercise-item">8) ___ K + ___ H<sub>2</sub>O &rarr; ___ KOH + ___ H<sub>2</sub> (Reacción violenta con agua)</div>
+
+        <p><strong>PARTE C: Análisis Conceptual REDOX</strong><br>
+        En la obra civil, dejamos varillas de hierro a la intemperie y notamos que el oxígeno y la humedad comienzan a degradar el material formando óxido férrico.</p>
+        <ol>
+            <li>En este proceso físico, ¿Qué elemento químico se está oxidando (pierde electrones)?</li>
+            <li>¿Qué elemento del ambiente funciona como el Agente Oxidante principal?</li>
+            <li>Como futuros técnicos, si aplicamos pintura antióxido sobre la varilla, ¿Qué parte del proceso REDOX estamos bloqueando físicamente?</li>
+        </ol>
+    </div>
+
+</div>
+
+</body>
+</html>
