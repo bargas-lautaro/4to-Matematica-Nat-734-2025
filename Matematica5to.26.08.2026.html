@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad: División de Polinomios</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #2c3e50;
+        }
+
+        /* --- Contenedor Principal --- */
+        #mainContent {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            
+            filter: blur(8px);
+            user-select: none;
+            pointer-events: none;
+            transition: filter 0.4s ease;
+        }
+
+        #mainContent.unlocked {
+            filter: blur(0);
+            user-select: auto;
+            pointer-events: auto;
+        }
+
+        h1 {
+            color: #1a365d;
+            border-bottom: 2px solid #3182ce;
+            padding-bottom: 12px;
+            margin-top: 0;
+        }
+
+        .aviso-importante {
+            background-color: #ebf8ff;
+            border-left: 5px solid #3182ce;
+            padding: 18px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.6;
+        }
+
+        .aviso-importante ul {
+            margin: 8px 0 0 20px;
+            padding: 0;
+        }
+
+        /* --- Sección del Ejemplo --- */
+        .seccion-ejemplo {
+            background: #fffaf0;
+            border: 1px solid #feebc8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .btn-ejemplo {
+            background-color: #dd6b20;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ejemplo:hover:not(:disabled) {
+            background-color: #c05621;
+        }
+
+        .btn-ejemplo:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        #temporizadorContainer {
+            display: none;
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #e53e3e;
+            background-color: #fff5f5;
+            padding: 10px;
+            border: 1px dashed #fc8181;
+            border-radius: 6px;
+        }
+
+        #contenedorEjemplo {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #dd6b20;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .paso {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .paso-titulo {
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 5px;
+        }
+
+        .matematica {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.15em;
+        }
+
+        /* --- Lista de Ejercicios --- */
+        .ejercicios-lista {
+            list-style: none;
+            counter-reset: ejercicio-counter;
+            padding: 0;
+        }
+
+        .ejercicio-item {
+            counter-increment: ejercicio-counter;
+            margin: 16px 0;
+            padding: 18px 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 1.15em;
+        }
+
+        .ejercicio-item::before {
+            content: counter(ejercicio-counter) ".";
+            font-weight: bold;
+            color: #3182ce;
+            font-size: 1.2em;
+            margin-right: 15px;
+            min-width: 25px;
+        }
+
+        .polinomio {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-weight: bold;
+            color: #1a202c;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Pantalla de Bloqueo (Overlay) --- */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(15, 23, 42, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+        }
+
+        #overlay.hidden {
+            display: none;
+        }
+
+        .lock-box {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+            max-width: 420px;
+            width: 90%;
+            border: 1px solid #334155;
+        }
+
+        .lock-icon {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        .lock-box h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.6em;
+        }
+
+        .lock-box p {
+            margin-bottom: 25px;
+            color: #94a3b8;
+            font-size: 0.95em;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 85%;
+            font-size: 16px;
+            border: 2px solid #475569;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            outline: none;
+            background: #0f172a;
+            color: white;
+        }
+
+        input[type="text"]:focus {
+            border-color: #38bdf8;
+        }
+
+        .btn-desbloqueo {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #e11d48;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-desbloqueo:hover {
+            background-color: #be123c;
+        }
+        
+        .intentos-restantes {
+            color: #ef4444;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: block;
+            min-height: 20px;
+        }
+
+        /* --- Zona del Profesor (Resultados) --- */
+        .zona-profesor {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: right;
+        }
+        
+        .input-profe {
+            padding: 6px 10px;
+            font-size: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            width: 150px;
+            background: #f8fafc;
+            color: #64748b;
+            outline: none;
+        }
+        
+        #resultadosProfesor {
+            display: none;
+            text-align: left;
+            margin-top: 15px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+        
+        .resultado-item {
+            margin-bottom: 8px;
+            color: #166534;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de bloqueo superpuesta -->
+    <div id="overlay">
+        <div class="lock-box">
+            <div class="lock-icon">🔒</div>
+            <h2>Archivo Protegido</h2>
+            <p>Ingresa la clave correspondiente para desbloquear la actividad.</p>
+            <span id="mensajeIntentos" class="intentos-restantes"></span>
+            <input type="text" id="unlockCode" placeholder="Escribe el código aquí..." autocomplete="off">
+            <br>
+            <button class="btn-desbloqueo" onclick="verificarCodigo()">Desbloquear</button>
+        </div>
+    </div>
+
+    <!-- Contenido de la actividad -->
+    <div id="mainContent">
+        <h1>Actividad Práctica: División de Polinomios</h1>
+        
+        <div class="aviso-importante">
+            <strong>Requisitos e Instrucciones de Trabajo:</strong>
+            <ul>
+                <li><strong>Completar y ordenar:</strong> Todos los dividendos se presentan incompletos y desordenados. Antes de comenzar a dividir, debes ordenarlos de forma decreciente según sus potencias e incorporar con coeficiente <strong>0</strong> los términos faltantes.</li>
+                <li><strong>Todas las divisiones son exactas:</strong> El resto final obtenido debe ser obligatoriamente igual a <strong>0</strong>.</li>
+                <li><strong>Comprobación Obligatoria:</strong> Al finalizar cada división, debes realizar la verificación matemática demostrando que: 
+                    <br><em>Dividendo = (Divisor &times; Cociente) + Resto</em>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Bloque de visualización del ejemplo (Cronometrado a 3 min) -->
+        <div class="seccion-ejemplo">
+            <p style="margin-top:0; color:#744210; font-weight:600;">¿Tienes dudas sobre el formato de entrega o el procedimiento?</p>
+            
+            <button id="btnVerEjemplo" class="btn-ejemplo" onclick="iniciarEjemplo()">
+                Ver ejemplo guiado (Solo estará visible 3 minutos)
+            </button>
+            
+            <div id="temporizadorContainer">
+                Tiempo restante para copiar/ver el ejemplo: <span id="tiempoRestante">03:00</span>
+            </div>
+
+            <div id="contenedorEjemplo">
+                <h3 style="color:#c05621; margin-top:0;">Ejemplo Guiado de Procedimiento</h3>
+                
+                <p><strong>Operación planteada:</strong> <span class="matematica">(&minus;20 + 2x<sup>4</sup> &minus; 3x<sup>2</sup>) &divide; (x &minus; 2)</span></p>
+
+                <div class="paso">
+                    <div class="paso-titulo">Paso 1: Ordenar y completar el dividendo</div>
+                    El polinomio no tiene término cúbico (<span class="matematica">x<sup>3</sup></span>) ni lineal (<span class="matematica">x</span>), y está desordenado. Se reescribe:<br>
+                    <span class="matematica">P(x) = 2x<sup>4</sup> + 0x<sup>3</sup> &minus; 3x<sup>2</sup> + 0x &minus; 20</span>
+                </div>
+
+                <div class="paso">
+                    <div class="paso-titulo">Paso 2: Realizar la división tradicional</div>
+                    Al efectuar las divisiones sucesivas por <span class="matematica">(x &minus; 2)</span>:<br>
+                    &bull; Cociente obtenido: <span class="matematica">C(x) = 2x<sup>3</sup> + 4x<sup>2</sup> + 5x + 10</span><br>
+                    &bull; Resto final: <span class="matematica">R(x) = 0</span>
+                </div>
+
+                <div class="paso">
+                    <div class="paso-titulo">Paso 3: Comprobación matemática requerida</div>
+                    Multiplicamos el Divisor por el Cociente sumando el Resto:<br>
+                    <span class="matematica">(x &minus; 2) &times; (2x<sup>3</sup> + 4x<sup>2</sup> + 5x + 10) + 0</span><br>
+                    <span class="matematica">= x(2x<sup>3</sup> + 4x<sup>2</sup> + 5x + 10) &minus; 2(2x<sup>3</sup> + 4x<sup>2</sup> + 5x + 10)</span><br>
+                    <span class="matematica">= (2x<sup>4</sup> + 4x<sup>3</sup> + 5x<sup>2</sup> + 10x) &minus; (4x<sup>3</sup> + 8x<sup>2</sup> + 10x + 20)</span><br>
+                    <span class="matematica">= 2x<sup>4</sup> &minus; 3x<sup>2</sup> &minus; 20</span> &nbsp;<em>(¡Coincide exactamente con el dividendo original!)</em>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicios para resolver -->
+        <ol class="ejercicios-lista">
+            <li class="ejercicio-item">
+                <span class="polinomio">(&minus;7x<sup>2</sup> &minus; 18 + x<sup>4</sup>) &divide; (x &minus; 3)</span>
+            </li>
+            
+            <li class="ejercicio-item">
+                <span class="polinomio">(3x<sup>2</sup> &minus; 5 + 2x<sup>4</sup>) &divide; (x + 1)</span>
+            </li>
+            
+            <li class="ejercicio-item">
+                <span class="polinomio">(&minus;6x<sup>2</sup> + 3x<sup>5</sup> + 8 &minus; 6x<sup>3</sup> + x<sup>4</sup>) &divide; (x<sup>2</sup> &minus; 2)</span>
+            </li>
+            
+            <li class="ejercicio-item">
+                <span class="polinomio">(14x + 2x<sup>4</sup> &minus; 8 + 7x<sup>3</sup>) &divide; (2x &minus; 1)</span>
+            </li>
+            
+            <li class="ejercicio-item">
+                <span class="polinomio">(&minus;x + x<sup>5</sup> &minus; 6 &minus; 3x<sup>3</sup>) &divide; (x &minus; 2)</span>
+            </li>
+        </ol>
+
+        <!-- Zona oculta de corrección -->
+        <div class="zona-profesor">
+            <input type="password" id="codigoProfe" class="input-profe" placeholder="Código de revisión..." onkeypress="if(event.key === 'Enter') verificarProfe()">
+            
+            <div id="resultadosProfesor">
+                <strong>Clave de Corrección (Cocientes. Resto siempre 0):</strong>
+                <div class="resultado-item">1) C(x) = x<sup>3</sup> + 3x<sup>2</sup> + 2x + 6</div>
+                <div class="resultado-item">2) C(x) = 2x<sup>3</sup> &minus; 2x<sup>2</sup> + 5x &minus; 5</div>
+                <div class="resultado-item">3) C(x) = 3x<sup>3</sup> + x<sup>2</sup> &minus; 4</div>
+                <div class="resultado-item">4) C(x) = x<sup>3</sup> + 4x<sup>2</sup> + 2x + 8</div>
+                <div class="resultado-item">5) C(x) = x<sup>4</sup> + 2x<sup>3</sup> + x<sup>2</sup> + 2x + 3</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Variables de Bloqueo General ---
+        const maxIntentos = 3;
+        let intentosFallidos = parseInt(localStorage.getItem('actividad_intentos')) || 0;
+        let estadoActividad = localStorage.getItem('actividad_estado') || 'bloqueada';
+
+        // --- Variables del Temporizador del Ejemplo ---
+        const TIEMPO_MAXIMO_EJEMPLO = 3 * 60 * 1000; // 3 minutos en milisegundos
+        let intervaloReloj;
+
+        window.onload = function() {
+            // Verificar estado general
+            if (estadoActividad === 'oculta') {
+                ejecutarBloqueoTotal();
+            } else if (estadoActividad === 'desbloqueada') {
+                document.getElementById('overlay').classList.add('hidden');
+                document.getElementById('mainContent').classList.add('unlocked');
+            }
+
+            // Verificar estado del temporizador del ejemplo
+            revisarEstadoEjemplo();
+        };
+
+        function ejecutarBloqueoTotal() {
+            document.body.innerHTML = `
+                <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #000; color: #ef4444; font-family: sans-serif; text-align: center; padding: 20px;">
+                    <h1 style="font-size: 40px; margin-bottom: 10px;">ACCESO DENEGADO</h1>
+                    <p style="font-size: 20px;">El archivo ha sido bloqueado permanentemente por superar el límite de intentos fallidos.</p>
+                </div>
+            `;
+        }
+
+        function verificarCodigo() {
+            const inputElement = document.getElementById('unlockCode');
+            const mensajeError = document.getElementById('mensajeIntentos');
+            const codigoIngresado = inputElement.value.trim();
+
+            if (codigoIngresado === "Hace la tarea") {
+                estadoActividad = 'desbloqueada';
+                localStorage.setItem('actividad_estado', estadoActividad);
+                intentosFallidos = 0; 
+                localStorage.setItem('actividad_intentos', intentosFallidos);
+                
+                document.getElementById('overlay').classList.add('hidden');
+                document.getElementById('mainContent').classList.add('unlocked');
+            } else {
+                intentosFallidos++;
+                localStorage.setItem('actividad_intentos', intentosFallidos);
+                
+                if (intentosFallidos >= maxIntentos) {
+                    estadoActividad = 'oculta';
+                    localStorage.setItem('actividad_estado', estadoActividad);
+                    ejecutarBloqueoTotal();
+                } else {
+                    const intentosRestantes = maxIntentos - intentosFallidos;
+                    mensajeError.innerText = `Código incorrecto. Te quedan ${intentosRestantes} intento(s).`;
+                    inputElement.value = "";
+                    inputElement.focus();
+                }
+            }
+        }
+
+        document.getElementById('unlockCode').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                verificarCodigo();
+            }
+        });
+
+        // --- LÓGICA DEL TEMPORIZADOR DEL EJEMPLO ---
+
+        function iniciarEjemplo() {
+            let estado = localStorage.getItem('ejemplo_estado');
+            if (!estado) {
+                // Se hace clic por primera vez, guardar la marca de tiempo exacta
+                localStorage.setItem('ejemplo_estado', Date.now().toString());
+                revisarEstadoEjemplo();
+            }
+        }
+
+        function revisarEstadoEjemplo() {
+            const estado = localStorage.getItem('ejemplo_estado');
+            const boton = document.getElementById('btnVerEjemplo');
+            const contenedor = document.getElementById('contenedorEjemplo');
+            const temporizadorContainer = document.getElementById('temporizadorContainer');
+
+            if (estado === 'agotado') {
+                bloquearEjemploPermanente();
+            } else if (estado) { 
+                // Ya se había iniciado, comprobar cuánto tiempo pasó
+                const tiempoTranscurrido = Date.now() - parseInt(estado);
+                
+                if (tiempoTranscurrido >= TIEMPO_MAXIMO_EJEMPLO) {
+                    // Si ya pasaron los 3 minutos
+                    bloquearEjemploPermanente();
+                } else {
+                    // Si aún le queda tiempo
+                    boton.disabled = true;
+                    boton.innerText = "Ejemplo en curso (No cierres la página)";
+                    boton.style.backgroundColor = "#a0aec0"; // Color deshabilitado
+                    
+                    contenedor.style.display = 'block';
+                    temporizadorContainer.style.display = 'block';
+                    
+                    iniciarReloj(TIEMPO_MAXIMO_EJEMPLO - tiempoTranscurrido);
+                }
+            }
+        }
+
+        
+
+              function actualizarTextoReloj(ms) {
+            let totalSegundos = Math.floor(ms / 1000);
+            let minutos = Math.floor(totalSegundos / 60);
+            let segundos = totalSegundos % 60;
+            
+            // Da formato de dos dígitos (ej: 03:05)
+            let textoMinutos = minutos.toString().padStart(2, '0');
+            let textoSegundos = segundos.toString().padStart(2, '0');
+            
+            document.getElementById('tiempoRestante').innerText = `${textoMinutos}:${textoSegundos}`;
+        }
+
+        function bloquearEjemploPermanente() {
+            localStorage.setItem('ejemplo_estado', 'agotado');
+            const boton = document.getElementById('btnVerEjemplo');
+            
+            boton.disabled = true;
+            boton.innerText = "Tiempo del ejemplo agotado (Archivo bloqueado)";
+            boton.style.backgroundColor = "#e53e3e";
+            
+            document.getElementById('contenedorEjemplo').style.display = 'none';
+            document.getElementById('temporizadorContainer').style.display = 'none';
+        }
+
+        // --- Lógica del Profesor ---
+        function verificarProfe() {
+            const inputProfe = document.getElementById('codigoProfe');
+            if (inputProfe.value.trim() === "Profe Nehuen") {
+                document.getElementById('resultadosProfesor').style.display = 'block';
+                inputProfe.style.display = 'none'; 
+            } else {
+                alert("Código de revisión incorrecto.");
+                inputProfe.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
