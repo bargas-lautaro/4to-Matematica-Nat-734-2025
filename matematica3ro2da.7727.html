@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>División de Polinomios</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff00;
+            --neon-red: #ff003c;
+            --bg-color: #0d0d12;
+            --panel-bg: #15151e;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            max-width: 800px;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: #d1d1e0;
+        }
+
+        .exercise-container {
+            background-color: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .exercise-container:hover {
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            border-color: var(--neon-blue);
+        }
+
+        .statement {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--neon-pink);
+            text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+            margin-bottom: 15px;
+        }
+
+        .sub-instruction {
+            font-size: 0.95rem;
+            color: #a0a0b5;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .input-row span {
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            background-color: #050505;
+            border: 2px solid #333;
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            width: 60px;
+            height: 40px;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* Quitar flechas de los inputs numéricos */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+
+        .btn-check {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-check:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .result-message {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        .correct {
+            color: var(--neon-green);
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+
+        .incorrect {
+            color: var(--neon-red);
+            text-shadow: 0 0 8px var(--neon-red);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Práctica: División de Polinomios</h1>
+    <p class="instructions">
+        Realiza la división en tu carpeta y haz la comprobación obligatoria: <strong>Dividendo = Divisor × Cociente + Resto</strong>.<br>
+        Una vez verificado tu procedimiento, ingresa aquí los coeficientes de tus resultados para comprobar si son correctos (si el coeficiente es negativo, inclúyelo en la casilla).
+    </p>
+
+    <!-- Ejercicio 1: Resto Cero -->
+    <div class="exercise-container">
+        <div class="statement">1. (3x³ + 5x² - 11x + 3) ÷ (x + 3)</div>
+        <p class="sub-instruction">Halla el cociente y el resto, luego realiza la comprobación.</p>
+        
+        <div class="input-row">
+            Cociente: 
+            <input type="number" id="e1-c2"> <span>x²</span> 
+            <input type="number" id="e1-c1"> <span>x</span> 
+            <input type="number" id="e1-c0">
+        </div>
+        <div class="input-row">
+            Resto: <input type="number" id="e1-r">
+        </div>
+        
+        <button class="btn-check" onclick="verificarEjercicio(1, { 'e1-c2': 3, 'e1-c1': -4, 'e1-c0': 1, 'e1-r': 0 })">Comprobar Resultado</button>
+        <div id="msg-1" class="result-message"></div>
+    </div>
+
+    <!-- Ejercicio 2: Resto Distinto de Cero -->
+    <div class="exercise-container">
+        <div class="statement">2. (2x³ - 3x² + 4x - 5) ÷ (x - 2)</div>
+        <p class="sub-instruction">Halla el cociente y el resto, luego realiza la comprobación.</p>
+        
+        <div class="input-row">
+            Cociente: 
+            <input type="number" id="e2-c2"> <span>x²</span> 
+            <input type="number" id="e2-c1"> <span>x</span> 
+            <input type="number" id="e2-c0">
+        </div>
+        <div class="input-row">
+            Resto: <input type="number" id="e2-r">
+        </div>
+        
+        <button class="btn-check" onclick="verificarEjercicio(2, { 'e2-c2': 2, 'e2-c1': 1, 'e2-c0': 6, 'e2-r': 7 })">Comprobar Resultado</button>
+        <div id="msg-2" class="result-message"></div>
+    </div>
+
+    <!-- Ejercicio 3: Polinomio de Grado 4 con Resto Cero -->
+    <div class="exercise-container">
+        <div class="statement">3. (x⁴ - x³ - 7x² + x + 6) ÷ (x - 3)</div>
+        <p class="sub-instruction">Halla el cociente y el resto, luego realiza la comprobación.</p>
+        
+        <div class="input-row">
+            Cociente: 
+            <input type="number" id="e3-c3"> <span>x³</span> 
+            <input type="number" id="e3-c2"> <span>x²</span> 
+            <input type="number" id="e3-c1"> <span>x</span> 
+            <input type="number" id="e3-c0">
+        </div>
+        <div class="input-row">
+            Resto: <input type="number" id="e3-r">
+        </div>
+        
+        <button class="btn-check" onclick="verificarEjercicio(3, { 'e3-c3': 1, 'e3-c2': 2, 'e3-c1': -1, 'e3-c0': -2, 'e3-r': 0 })">Comprobar Resultado</button>
+        <div id="msg-3" class="result-message"></div>
+    </div>
+
+    <!-- Ejercicio 4: Polinomio Incompleto con Resto Distinto de Cero -->
+    <div class="exercise-container">
+        <div class="statement">4. (x⁴ + x² - 3x - 1) ÷ (x + 1)</div>
+        <p class="sub-instruction">Atención: Revisa si el dividendo está completo antes de empezar. Halla cociente, resto y haz la comprobación.</p>
+        
+        <div class="input-row">
+            Cociente: 
+            <input type="number" id="e4-c3"> <span>x³</span> 
+            <input type="number" id="e4-c2"> <span>x²</span> 
+            <input type="number" id="e4-c1"> <span>x</span> 
+            <input type="number" id="e4-c0">
+        </div>
+        <div class="input-row">
+            Resto: <input type="number" id="e4-r">
+        </div>
+        
+        <button class="btn-check" onclick="verificarEjercicio(4, { 'e4-c3': 1, 'e4-c2': -1, 'e4-c1': 2, 'e4-c0': -5, 'e4-r': 4 })">Comprobar Resultado</button>
+        <div id="msg-4" class="result-message"></div>
+    </div>
+
+    <script>
+        function verificarEjercicio(ejercicioNum, respuestasCorrectas) {
+            let todoCorrecto = true;
+            let camposVacios = false;
+
+            for (let idInput in respuestasCorrectas) {
+                let valorIngresado = document.getElementById(idInput).value;
+                
+                if (valorIngresado === "") {
+                    camposVacios = true;
+                    break;
+                }
+                
+                if (parseFloat(valorIngresado) !== respuestasCorrectas[idInput]) {
+                    todoCorrecto = false;
+                }
+            }
+
+            let msgDiv = document.getElementById('msg-' + ejercicioNum);
+            msgDiv.classList.remove('correct', 'incorrect');
+
+            if (camposVacios) {
+                msgDiv.textContent = "⚠️ Por favor, completa todos los coeficientes y el resto antes de comprobar.";
+                msgDiv.style.color = "#ffdd00"; 
+                msgDiv.style.textShadow = "none";
+            } else if (todoCorrecto) {
+                msgDiv.textContent = "✓ ¡Excelente! El cociente y el resto son correctos. Si tu comprobación coincidió, el ejercicio está perfecto.";
+                msgDiv.classList.add('correct');
+            } else {
+                msgDiv.textContent = "✗ Algunos valores son incorrectos. Revisa tu división y los signos, o vuelve a hacer la comprobación matemática.";
+                msgDiv.classList.add('incorrect');
+            }
+        }
+    </script>
+
+</body>
+</html>
