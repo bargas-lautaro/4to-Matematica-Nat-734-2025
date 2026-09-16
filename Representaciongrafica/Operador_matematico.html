@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de Representación Gráfica - 3er Año</title>
+    <style>
+        :root {
+            --bg-color: #0a0a12;
+            --panel-bg: #13141f;
+            --text-main: #e0e0f0;
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ea;
+            --neon-green: #39ff14;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+            text-align: center;
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #aaaaaa;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            border-left: 4px solid var(--neon-pink);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .card h2 {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px rgba(255, 0, 234, 0.4);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-container {
+            text-align: center;
+            background: #000;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #333;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .content-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .consigna-box {
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .consigna-box h3 {
+            color: var(--neon-blue);
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .datos-box {
+            background: rgba(57, 255, 20, 0.05);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .datos-box h3 {
+            color: var(--neon-green);
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+        
+        li:last-child {
+            margin-bottom: 0;
+        }
+        
+        strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Representación Gráfica - 3er Año</h1>
+        <div class="subtitle">Prácticas de Tablero | Láminas A3 | Escuelas Técnicas</div>
+
+        <!-- Actividad 1 -->
+        <div class="card">
+            <h2>Lámina N°1: Planta Arquitectónica 7x6m</h2>
+            <div class="grid-layout">
+                <div class="image-container">
+                    <img src="1000304030.jpg" alt="Plano de vivienda 7x6m">
+                </div>
+                <div class="content-box">
+                    <div class="consigna-box">
+                        <h3>Consigna de Trabajo</h3>
+                        <p>A partir del croquis acotado proporcionado, dibujar la <strong>Planta de Arquitectura</strong> de la vivienda a <strong>escala 1:50</strong> en una lámina formato A3. Utilizar los espesores y valores de línea correspondientes (muros en corte, proyecciones, equipamiento). Acotar el plano completo según normas IRAM de dibujo técnico.</p>
+                    </div>
+                    <div class="datos-box">
+                        <h3>Datos Reglamentarios Faltantes</h3>
+                        <ul>
+                            <li><strong>Espesores de muros:</strong> Muros perimetrales (exteriores) de 0.20 m. Muros divisorios (interiores) de 0.15 m.</li>
+                            <li><strong>Altura de locales:</strong> Nivel de piso a cielorraso 2.60 m.</li>
+                            <li><strong>Aberturas - Puertas:</strong> Ingreso principal: 0.90 x 2.05 m. Interiores (Dormitorios/Estar): 0.80 x 2.05 m. Baño: 0.70 x 2.05 m.</li>
+                            <li><strong>Aberturas - Ventanas:</strong> Altura de dintel unificada a 2.05 m. Antepecho general a 0.90 m. Ventana de baño con antepecho a 1.50 m.</li>
+                            <li><strong>Cubierta:</strong> Techo de chapa con pendiente del 15% a un agua.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actividad 2 -->
+        <div class="card">
+            <h2>Lámina N°2: Vivienda Compacta 5x5m</h2>
+            <div class="grid-layout">
+                <div class="image-container">
+                    <img src="1000304029.jpg" alt="Plano de vivienda 5x5m">
+                </div>
+                <div class="content-box">
+                    <div class="consigna-box">
+                        <h3>Consigna de Trabajo</h3>
+                        <p>Dibujar la <strong>Planta de Arquitectura</strong> y una <strong>Vista Frontal (Fachada)</strong> a <strong>escala 1:50</strong>. Posicionar correctamente el dibujo en la lámina A3. Prestar especial atención a ubicar las aberturas (indicadas con marcas azules en el croquis) proyectando sus líneas hacia la fachada.</p>
+                    </div>
+                    <div class="datos-box">
+                        <h3>Datos Reglamentarios Faltantes</h3>
+                        <ul>
+                            <li><strong>Espesores de muros:</strong> Muros exteriores de 0.20 m. Tabiques interiores de 0.10 m.</li>
+                            <li><strong>Niveles:</strong> Nivel de Piso Terminado (NPT) a +0.15 m respecto al terreno natural.</li>
+                            <li><strong>Altura de locales:</strong> Altura libre de piso a cielorraso: 2.50 m. Espesor de losa de techo: 0.15 m.</li>
+                            <li><strong>Aberturas (Marcas Azules):</strong> Puerta principal de 0.90 x 2.05 m. Ventanas generales con dintel a 2.05 m y antepecho a 1.00 m.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actividad 3 -->
+        <div class="card">
+            <h2>Lámina N°3: Gazebo Hexagonal (Vistas Ortogonales)</h2>
+            <div class="grid-layout">
+                <div class="image-container">
+                    <img src="1000304028.webp" alt="Gazebo Hexagonal">
+                </div>
+                <div class="content-box">
+                    <div class="consigna-box">
+                        <h3>Consigna de Trabajo</h3>
+                        <p>A partir del modelo isométrico, dibujar las vistas ortogonales principales: <strong>Planta (Vista Superior)</strong> y <strong>Vista Anterior (Frontal)</strong> a <strong>escala 1:25</strong> o <strong>1:20</strong> (según diagrama de la lámina A3). Respetar la correspondencia de líneas de enlace (Método Monge) entre ambas vistas.</p>
+                    </div>
+                    <div class="datos-box">
+                        <h3>Datos Reglamentarios Faltantes</h3>
+                        <ul>
+                            <li><strong>Base geométrica:</strong> Planta en forma de hexágono regular de 1.50 m de lado exterior.</li>
+                            <li><strong>Estructura:</strong> Columnas de madera de sección cuadrada de 0.15 x 0.15 m.</li>
+                            <li><strong>Alturas:</strong> Nivel del piso (deck) a +0.20 m. Altura libre de las columnas: 2.20 m.</li>
+                            <li><strong>Cubierta:</strong> Altura total hasta el vértice (cumbrera) del techo: 3.20 m.</li>
+                            <li><strong>Seguridad:</strong> Barandas perimetrales a 0.90 m de altura.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
