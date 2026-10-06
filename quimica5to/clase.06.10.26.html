@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guía Interactiva: Diagrama Hierro-Carbono (Fe-C)</title>
+  <title>Cálculo de Porcentaje de Cementita (Fe₃C)</title>
   <style>
     :root {
-      --primary: #1e3a8a;
-      --primary-light: #3b82f6;
-      --secondary: #0d9488;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --primary: #38bdf8;
       --accent: #f59e0b;
-      --success-bg: #ecfdf5;
-      --success-border: #10b981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --code-bg: #0b1120;
+      --sol-bg: rgba(6, 78, 59, 0.35);
+      --sol-border: #10b981;
+      --btn-bg: #2563eb;
+      --btn-hover: #1d4ed8;
+      --box-highlight: #1e3a5f;
     }
 
     * {
@@ -26,86 +28,129 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 20px;
+      padding: 24px 16px;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
     }
 
     header {
       text-align: center;
       margin-bottom: 2rem;
-      padding: 2rem 1rem;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: white;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid var(--card-border);
       border-radius: 12px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
     header h1 {
       font-size: 2rem;
+      color: var(--primary);
       margin-bottom: 0.5rem;
     }
 
     header p {
+      color: var(--text-muted);
       font-size: 1.05rem;
-      opacity: 0.95;
     }
 
-    .intro-card {
+    /* Espacio reservado para la imagen */
+    .image-placeholder-card {
       background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 10px;
+      border: 2px dashed #475569;
+      border-radius: 12px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
       margin-bottom: 2rem;
-      border-left: 5px solid var(--accent);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 220px;
     }
 
-    .intro-card h2 {
-      margin-bottom: 0.8rem;
+    .image-placeholder-card .icon {
+      font-size: 2.5rem;
       color: var(--primary);
     }
 
-    .guide-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
+    .image-placeholder-card p {
+      color: var(--text-muted);
       font-size: 0.95rem;
     }
 
-    .guide-table th, .guide-table td {
-      border: 1px solid var(--border);
-      padding: 8px 12px;
+    .image-placeholder-card code {
+      background: var(--code-bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #38bdf8;
+      font-size: 0.85rem;
+    }
+
+    /* Cuadro de explicación detallada */
+    .explanation-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-left: 5px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    }
+
+    .explanation-panel h2 {
+      color: var(--accent);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .table-explanation {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    .table-explanation th, .table-explanation td {
+      border: 1px solid var(--card-border);
+      padding: 10px 14px;
       text-align: left;
     }
 
-    .guide-table th {
-      background-color: #f1f5f9;
-      color: var(--text);
+    .table-explanation th {
+      background-color: var(--box-highlight);
+      color: #e0f2fe;
     }
 
-    .section-title {
-      font-size: 1.5rem;
-      color: var(--primary);
-      margin: 2rem 0 1rem 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .table-explanation td strong {
+      color: #38bdf8;
     }
 
+    .formula-tag {
+      background: var(--code-bg);
+      border-left: 4px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      color: #bae6fd;
+      margin-top: 10px;
+    }
+
+    /* Tarjetas de ejercicios */
     .exercise-card {
       background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 10px;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      border: 1px solid var(--border);
     }
 
     .exercise-header {
@@ -117,56 +162,52 @@
       gap: 0.5rem;
     }
 
-    .exercise-title {
+    .exercise-num {
       font-size: 1.15rem;
       font-weight: 700;
       color: var(--primary);
     }
 
     .tag {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 20px;
+      background-color: var(--box-highlight);
+      color: #7dd3fc;
+      padding: 2px 10px;
+      border-radius: 9999px;
       font-size: 0.8rem;
       font-weight: 600;
-      background: #e0e7ff;
-      color: #3730a3;
     }
 
-    .exercise-statement {
-      margin-bottom: 1rem;
+    .statement {
+      margin-bottom: 1.2rem;
       font-size: 1rem;
     }
 
-    .exercise-statement strong {
-      color: #0f172a;
+    .statement strong {
+      color: #38bdf8;
     }
 
     .btn-toggle {
-      background-color: var(--primary-light);
-      color: white;
+      background-color: var(--btn-bg);
+      color: #ffffff;
       border: none;
       padding: 10px 18px;
       border-radius: 6px;
+      cursor: pointer;
       font-size: 0.95rem;
       font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       transition: background-color 0.2s ease;
     }
 
     .btn-toggle:hover {
-      background-color: var(--primary);
+      background-color: var(--btn-hover);
     }
 
     .solution-box {
       display: none;
       margin-top: 1.2rem;
-      padding: 1.2rem;
-      background-color: var(--success-bg);
-      border: 1px solid var(--success-border);
+      padding: 1.25rem;
+      background-color: var(--sol-bg);
+      border: 1px solid var(--sol-border);
       border-radius: 8px;
     }
 
@@ -174,143 +215,168 @@
       display: block;
     }
 
-    .solution-box h4 {
-      color: #065f46;
-      margin-bottom: 0.5rem;
+    .solution-title {
+      font-weight: 700;
+      color: #34d399;
+      margin-bottom: 0.75rem;
       font-size: 1.05rem;
     }
 
-    .step-list {
-      padding-left: 1.3rem;
-      margin-top: 0.5rem;
+    .calc-row {
+      background: var(--code-bg);
+      border: 1px solid #065f46;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-size: 0.95rem;
+      color: #a7f3d0;
+      margin: 6px 0;
     }
 
-    .step-list li {
-      margin-bottom: 0.4rem;
-    }
-
-    .highlight-res {
-      display: inline-block;
-      margin-top: 0.5rem;
-      padding: 4px 8px;
-      background: #d1fae5;
-      font-weight: bold;
+    .final-badge {
+      margin-top: 0.75rem;
+      padding: 10px 12px;
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 4px solid #10b981;
       border-radius: 4px;
-      color: #064e3b;
+      font-weight: 600;
+      color: #ecfdf5;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Ejercicios de Diagrama Hierro-Carbono (Fe-C)</h1>
-      <p>Material didáctico para estudiantes de nivel secundario / técnico</p>
+      <h1>Cálculo de Cementita (Fe₃C) y Fase Conjugada</h1>
+      <p>Guía de problemas resueltos mediante la Regla de la Palanca según el Diagrama Fe-C</p>
     </header>
 
-    <div class="intro-card">
-      <h2>Puntos Clave para Orientarse en el Gráfico</h2>
-      <p>Para resolver cualquier ejercicio, solo debes ubicar las coordenadas como si fuera un mapa (eje horizontal: <strong>% de Carbono</strong>, eje vertical: <strong>Temperatura °C</strong>):</p>
-      <table class="guide-table">
+    <!-- Espacio reservado para la imagen -->
+    <div class="image-placeholder-card">
+      <div class="icon">📊</div>
+      <h3>Espacio para Imagen del Diagrama Fe-C</h3>
+      <p>Inserta aquí la imagen del gráfico reemplazando la etiqueta de abajo o copiando tu archivo de imagen:</p>
+      <code>&lt;img src="tu_imagen.jpg" alt="Diagrama de fases Fe-C" style="max-width:100%; border-radius:8px;"&gt;</code>
+    </div>
+
+    <!-- Cuadro de Explicación -->
+    <div class="explanation-panel">
+      <h2>Explicación: La Cementita y su Fase Conjugada</h2>
+      <p>
+        La <strong>Cementita</strong> es un compuesto intermetálico con fórmula química <strong>Fe₃C</strong> (carburo de hierro).
+        En el extremo derecho del diagrama se ubica exactamente en el <strong>6,67% de Carbono</strong> (y el <strong>93,33% de Hierro</strong>).
+      </p>
+
+      <table class="table-explanation">
         <thead>
           <tr>
-            <th>Porcentaje de C</th>
-            <th>Tipo de Aleación</th>
-            <th>Puntos Característicos</th>
+            <th>Composición / Rango</th>
+            <th>Fases en Equilibrio (&lt; 723 °C)</th>
+            <th>Fórmula para % Cementita</th>
+            <th>Fórmula para la Otra Fase</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>0% a 0,89% C</td>
-            <td>Acero Hipo-eutectoide</td>
-            <td>Ferrita + Perlita a temperatura ambiente (&lt; 723 °C)</td>
+            <td><strong>Aceros Hipereutectoides</strong> (0,89% a 1,76% C)</td>
+            <td>Perlita (0,89% C) + <strong>Cementita (6,67% C)</strong></td>
+            <td><code>[(%C - 0,89) / (6,67 - 0,89)] × 100</code></td>
+            <td><code>% Perlita = 100 - % Cementita</code></td>
           </tr>
           <tr>
-            <td>Exactamente 0,89% C</td>
-            <td>Acero Eutectoide</td>
-            <td>100% Perlita al enfriar por debajo de 723 °C</td>
+            <td><strong>Aleación Total / Ferrita</strong> (0% a 6,67% C)</td>
+            <td>Ferrita (0% C) + <strong>Cementita (6,67% C)</strong></td>
+            <td><code>[(%C - 0) / (6,67 - 0)] × 100</code></td>
+            <td><code>% Ferrita = 100 - % Cementita</code></td>
           </tr>
           <tr>
-            <td>0,89% a 1,76% C</td>
-            <td>Acero Híper-eutectoide</td>
-            <td>Perlita + Cementita a temperatura ambiente (&lt; 723 °C)</td>
-          </tr>
-          <tr>
-            <td>1,76% a 6,67% C</td>
-            <td>Fundiciones de Hierro</td>
-            <td>Punto eutéctico a 4,3% C y 1130 °C (Presencia de Ledeburita)</td>
+            <td><strong>Alta Temperatura</strong> (&gt; 723 °C a 1130 °C)</td>
+            <td>Austenita (variable según límite) + <strong>Cementita (6,67% C)</strong></td>
+            <td><code>[(%C - %C_aust) / (6,67 - %C_aust)] × 100</code></td>
+            <td><code>% Austenita = 100 - % Cementita</code></td>
           </tr>
         </tbody>
       </table>
-    </div>
 
-    <h2 class="section-title">Actividades Prácticas</h2>
+      <div class="formula-tag">
+        Regla de la Palanca: % Cementita = [ ( %C de la aleación - %C de la fase izquierda ) / ( 6,67 - %C de la fase izquierda ) ] × 100
+      </div>
+    </div>
 
     <!-- Ejercicio 1 -->
     <div class="exercise-card">
       <div class="exercise-header">
-        <span class="exercise-title">Ejercicio 1: Acero de bajo carbono a temperatura ambiente</span>
-        <span class="tag">Acero hipoeutectoide</span>
+        <span class="exercise-num">Ejercicio 1</span>
+        <span class="tag">Acero 1,2% C a T° ambiente</span>
       </div>
-      <div class="exercise-statement">
-        Una pieza de acero contiene <strong>0,4% de Carbono</strong> y se encuentra a temperatura ambiente (<strong>25 °C</strong>).<br>
-        Identifica en qué zona del diagrama se sitúa y qué microconstituyentes componen la aleación.
+      <div class="statement">
+        Una barra de acero contiene <strong>1,2% de Carbono</strong> y se encuentra a temperatura ambiente (<strong>20 °C</strong>).<br>
+        <strong>Pregunta:</strong><br>
+        a) ¿Qué fases/constituyentes se forman según el diagrama?<br>
+        b) ¿Cuál es el porcentaje de <strong>Cementita</strong> y cuál es el porcentaje de la otra fase (<strong>Perlita</strong>)?
       </div>
       <button class="btn-toggle" onclick="toggleSolution('sol-1', this)">Mostrar Resolución</button>
       <div id="sol-1" class="solution-box">
-        <h4>Paso a paso:</h4>
-        <ol class="step-list">
-          <li><strong>Eje X (% Carbono):</strong> Ubicamos 0,4%. Como 0,4% está entre 0% y 0,89%, se trata de un acero hipoeutectoide.</li>
-          <li><strong>Eje Y (Temperatura):</strong> 25 °C está muy por debajo de la línea horizontal de 723 °C (A1).</li>
-          <li><strong>Lectura del diagrama:</strong> En el cuadrante inferior izquierdo (&lt;0,89% C y &lt;723 °C), el gráfico indica claramente la región.</li>
-        </ol>
-        <div class="highlight-res">Fase / Microestructura: Perlita + Ferrita.</div>
+        <div class="solution-title">Resolución Paso a Paso:</div>
+        <p>1. <strong>Identificación:</strong> A 20 °C (&lt; 723 °C) y con 1,2% C (entre 0,89% y 1,76%), los constituyentes presentes son <strong>Perlita + Cementita</strong>.</p>
+        <p>2. <strong>Segmento de la palanca:</strong> Extremo izquierdo = Perlita (0,89% C). Extremo derecho = Cementita (6,67% C). Longitud total = 6,67 - 0,89 = 5,78.</p>
+        <div class="calc-row">% Cementita = [(1,2 - 0,89) / 5,78] × 100 = (0,31 / 5,78) × 100 = 5,36%</div>
+        <div class="calc-row">% Perlita = [(6,67 - 1,2) / 5,78] × 100 = (5,47 / 5,78) × 100 = 94,64%</div>
+        <div class="final-badge">
+          Fases: Perlita + Cementita.<br>
+          Porcentajes: 5,36% Cementita (Fe₃C) y 94,64% Perlita (Suma: 100%).
+        </div>
       </div>
     </div>
 
     <!-- Ejercicio 2 -->
     <div class="exercise-card">
       <div class="exercise-header">
-        <span class="exercise-title">Ejercicio 2: Tratamiento térmico de forja</span>
-        <span class="tag">Alta temperatura</span>
+        <span class="exercise-num">Ejercicio 2</span>
+        <span class="tag">Acero 1,5% C a T° ambiente</span>
       </div>
-      <div class="exercise-statement">
-        Se calienta una probeta con <strong>0,6% de Carbono</strong> hasta alcanzar <strong>1000 °C</strong> para realizar un proceso de forjado.<br>
-        ¿Cuál es la fase presente en el material a esa temperatura según el gráfico?
+      <div class="statement">
+        Se dispone de un acero para limas con <strong>1,5% de Carbono</strong> a <strong>25 °C</strong>.<br>
+        <strong>Pregunta:</strong><br>
+        a) Determina los constituyentes presentes.<br>
+        b) Calcula el porcentaje de <strong>Cementita</strong> y el porcentaje de <strong>Perlita</strong>.
       </div>
       <button class="btn-toggle" onclick="toggleSolution('sol-2', this)">Mostrar Resolución</button>
       <div id="sol-2" class="solution-box">
-        <h4>Paso a paso:</h4>
-        <ol class="step-list">
-          <li><strong>Eje X (% Carbono):</strong> Localizamos 0,6% (entre 0% y 0,89%).</li>
-          <li><strong>Eje Y (Temperatura):</strong> Subimos verticalmente hasta los 1000 °C (por encima de la línea de 910 °C y por debajo de 1130 °C).</li>
-          <li><strong>Lectura del diagrama:</strong> A esa temperatura y porcentaje, el punto cae de lleno dentro del campo verde superior izquierdo.</li>
-        </ol>
-        <div class="highlight-res">Fase: Austenita (100% fase sólida homogénea).</div>
+        <div class="solution-title">Resolución Paso a Paso:</div>
+        <p>1. <strong>Identificación:</strong> Por debajo de 723 °C se ubica en el recuadro "Perlita + Cementita".</p>
+        <p>2. <strong>Cálculos:</strong> Límites: 0,89% y 6,67%. Segmento total = 6,67 - 0,89 = 5,78.</p>
+        <div class="calc-row">% Cementita = [(1,5 - 0,89) / 5,78] × 100 = (0,61 / 5,78) × 100 = 10,55%</div>
+        <div class="calc-row">% Perlita = 100 - 10,55% = 89,45%</div>
+        <div class="final-badge">
+          Fases: Perlita + Cementita.<br>
+          Porcentajes: 10,55% Cementita (Fe₃C) y 89,45% Perlita.
+        </div>
       </div>
     </div>
 
     <!-- Ejercicio 3 -->
     <div class="exercise-card">
       <div class="exercise-header">
-        <span class="exercise-title">Ejercicio 3: Composición en el punto eutectoide</span>
-        <span class="tag">Punto Eutectoide</span>
+        <span class="exercise-num">Ejercicio 3</span>
+        <span class="tag">Acero 1,4% C a 820 °C</span>
       </div>
-      <div class="exercise-statement">
-        Tenemos un alambre de acero con exactamente <strong>0,89% de Carbono</strong>.<br>
-        a) ¿Qué microestructura tendrá a <strong>600 °C</strong>?<br>
-        b) ¿Cómo se denomina a este punto específico en el diagrama?
+      <div class="statement">
+        Una pieza con <strong>1,4% de Carbono</strong> se calienta hasta <strong>820 °C</strong>. A esa temperatura, el diagrama indica que la solubilidad de carbono en la Austenita es de <strong>1,2% de C</strong>.<br>
+        <strong>Pregunta:</strong><br>
+        a) ¿Qué fases coexisten a 820 °C?<br>
+        b) ¿Qué porcentaje de <strong>Cementita</strong> y qué porcentaje de <strong>Austenita</strong> existen?
       </div>
       <button class="btn-toggle" onclick="toggleSolution('sol-3', this)">Mostrar Resolución</button>
       <div id="sol-3" class="solution-box">
-        <h4>Paso a paso:</h4>
-        <ol class="step-list">
-          <li><strong>Eje X (% Carbono):</strong> Nos ubicamos justo en la línea vertical de 0,89% C.</li>
-          <li><strong>Eje Y (Temperatura):</strong> A 600 °C estamos por debajo de la temperatura eutectoide (723 °C).</li>
-          <li><strong>Lectura del diagrama:</strong> Justo en 0,89% la austenita se descompone completamente en láminas de ferrita y cementita.</li>
-        </ol>
-        <div class="highlight-res">
-          a) Microestructura: 100% Perlita.<br>
-          b) Denominación: Punto eutectoide (ocurre a 0,89% C y 723 °C).
+        <div class="solution-title">Resolución Paso a Paso:</div>
+        <p>1. <strong>Identificación:</strong> A 820 °C y 1,4% C, la aleación cae en la zona "Austenita + Cementita".</p>
+        <p>2. <strong>Segmento a 820 °C:</strong> Límite izquierdo (Austenita) = 1,2% C. Límite derecho (Cementita) = 6,67% C. Longitud = 6,67 - 1,2 = 5,47.</p>
+        <div class="calc-row">% Cementita = [(1,4 - 1,2) / 5,47] × 100 = (0,2 / 5,47) × 100 = 3,66%</div>
+        <div class="calc-row">% Austenita = [(6,67 - 1,4) / 5,47] × 100 = (5,27 / 5,47) × 100 = 96,34%</div>
+        <div class="final-badge">
+          Fases: Austenita + Cementita.<br>
+          Porcentajes: 3,66% Cementita y 96,34% Austenita.
         </div>
       </div>
     </div>
@@ -318,24 +384,25 @@
     <!-- Ejercicio 4 -->
     <div class="exercise-card">
       <div class="exercise-header">
-        <span class="exercise-title">Ejercicio 4: Acero para herramientas de corte</span>
-        <span class="tag">Acero hipereutectoide</span>
+        <span class="exercise-num">Ejercicio 4</span>
+        <span class="tag">Fundición 5,0% C a 1200 °C</span>
       </div>
-      <div class="exercise-statement">
-        Una herramienta de acero contiene <strong>1,2% de Carbono</strong> y se encuentra a temperatura ambiente (<strong>20 °C</strong>).<br>
-        ¿Qué constituyentes forman este material? ¿Por qué es más duro y frágil que el de 0,4% C?
+      <div class="statement">
+        Una fundición blanca hiper-eutéctica con <strong>5,0% de Carbono</strong> se mantiene a <strong>1200 °C</strong>. A esta temperatura, el líquido contiene <strong>4,5% de C</strong>.<br>
+        <strong>Pregunta:</strong><br>
+        a) ¿Qué estado y qué fases se observan en la región del gráfico?<br>
+        b) ¿Cuál es el porcentaje de <strong>Cementita primaria</strong> y cuál el de <strong>Líquido</strong>?
       </div>
       <button class="btn-toggle" onclick="toggleSolution('sol-4', this)">Mostrar Resolución</button>
       <div id="sol-4" class="solution-box">
-        <h4>Paso a paso:</h4>
-        <ol class="step-list">
-          <li><strong>Eje X (% Carbono):</strong> 1,2% se encuentra entre 0,89% y 1,76%.</li>
-          <li><strong>Eje Y (Temperatura):</strong> Por debajo de 723 °C, observamos el recuadro celeste inferior.</li>
-          <li><strong>Lectura del diagrama:</strong> La región señala "Perlita + Cementita".</li>
-        </ol>
-        <div class="highlight-res">
-          Constituyentes: Perlita + Cementita.<br>
-          Justificación: La cementita es un compuesto muy duro y frágil (carburo de hierro), lo que aumenta la dureza general del acero.
+        <div class="solution-title">Resolución Paso a Paso:</div>
+        <p>1. <strong>Identificación:</strong> En la zona superior derecha del diagrama (&gt; 4,3% C y &gt; 1130 °C), el rótulo indica <strong>"Cementita + Líquido"</strong> (estado semisólido).</p>
+        <p>2. <strong>Segmento:</strong> Líquido = 4,5% C. Cementita = 6,67% C. Longitud total = 6,67 - 4,5 = 2,17.</p>
+        <div class="calc-row">% Cementita = [(5,0 - 4,5) / 2,17] × 100 = (0,5 / 2,17) × 100 = 23,04%</div>
+        <div class="calc-row">% Líquido = [(6,67 - 5,0) / 2,17] × 100 = (1,67 / 2,17) × 100 = 76,96%</div>
+        <div class="final-badge">
+          Estado: Semisólido bifásico (Cementita + Líquido).<br>
+          Porcentajes: 23,04% Cementita y 76,96% fase Líquida.
         </div>
       </div>
     </div>
@@ -343,69 +410,22 @@
     <!-- Ejercicio 5 -->
     <div class="exercise-card">
       <div class="exercise-header">
-        <span class="exercise-title">Ejercicio 5: Fundición de hierro en fase líquida/pastosa</span>
-        <span class="tag">Fundición / Zona bifásica</span>
+        <span class="exercise-num">Ejercicio 5</span>
+        <span class="tag">Cálculo Total de Fases</span>
       </div>
-      <div class="exercise-statement">
-        Una pieza de fundición contiene <strong>3,0% de Carbono</strong> y se encuentra en un horno a <strong>1250 °C</strong>.<br>
-        Indica el estado físico y las fases que coexisten según el diagrama.
+      <div class="statement">
+        Para un acero de <strong>0,5% de Carbono</strong> a temperatura ambiente, determina el porcentaje de <strong>Cementita total (Fe₃C)</strong> y de <strong>Ferrita total</strong> que existen a nivel cristalográfico básico (considerando Ferrita pura = 0% C y Cementita = 6,67% C).
       </div>
       <button class="btn-toggle" onclick="toggleSolution('sol-5', this)">Mostrar Resolución</button>
       <div id="sol-5" class="solution-box">
-        <h4>Paso a paso:</h4>
-        <ol class="step-list">
-          <li><strong>Eje X (% Carbono):</strong> Buscamos 3,0% (entre 1,76% y 4,3%). Al superar 1,76% ya se clasifica como fundición.</li>
-          <li><strong>Eje Y (Temperatura):</strong> Buscamos 1250 °C (entre la línea de 1130 °C y la línea superior de líquidus).</li>
-          <li><strong>Lectura del diagrama:</strong> Cae en la zona violeta claro que indica mezcla sólido + líquido.</li>
-        </ol>
-        <div class="highlight-res">Fases presentes: Austenita + Líquido (estado pastoso / semisólido).</div>
-      </div>
-    </div>
-
-    <!-- Ejercicio 6 -->
-    <div class="exercise-card">
-      <div class="exercise-header">
-        <span class="exercise-title">Ejercicio 6: Solidificación en el punto eutéctico</span>
-        <span class="tag">Punto Eutéctico</span>
-      </div>
-      <div class="exercise-statement">
-        Se funde una aleación de fundición con <strong>4,3% de Carbono</strong> y se deja enfriar lentamente hasta <strong>1000 °C</strong>.<br>
-        ¿Qué constituyentes aparecen a 1000 °C y qué nombre recibe la transformación que ocurrió a 1130 °C?
-      </div>
-      <button class="btn-toggle" onclick="toggleSolution('sol-6', this)">Mostrar Resolución</button>
-      <div id="sol-6" class="solution-box">
-        <h4>Paso a paso:</h4>
-        <ol class="step-list">
-          <li><strong>Eje X (% Carbono):</strong> 4,3% es exactamente el punto eutéctico.</li>
-          <li><strong>Enfriamiento:</strong> Al pasar por 1130 °C (línea de sólidus eutéctica), todo el líquido solidifica formando Ledeburita.</li>
-          <li><strong>A 1000 °C:</strong> En el intervalo de 1,76% a 4,3% entre 723 °C y 1130 °C, el diagrama indica la presencia de constituyentes sólidos intermedios.</li>
-        </ol>
-        <div class="highlight-res">
-          Constituyentes a 1000 °C: Austenita + Ledeburita + Cementita.<br>
-          Nombre del punto: Punto eutéctico (4,3% C a 1130 °C).
+        <div class="solution-title">Resolución Paso a Paso:</div>
+        <p>1. <strong>Extremos:</strong> Ferrita (0% C) y Cementita pura (6,67% C). Longitud total = 6,67 - 0 = 6,67.</p>
+        <div class="calc-row">% Cementita total = [(0,5 - 0) / 6,67] × 100 = (0,5 / 6,67) × 100 = 7,50%</div>
+        <div class="calc-row">% Ferrita total = [(6,67 - 0,5) / 6,67] × 100 = (6,17 / 6,67) × 100 = 92,50%</div>
+        <div class="final-badge">
+          Fases cristalográficas: Ferrita + Cementita.<br>
+          Porcentajes: 7,50% Cementita (Fe₃C) y 92,50% Ferrita.
         </div>
-      </div>
-    </div>
-
-    <!-- Ejercicio 7 -->
-    <div class="exercise-card">
-      <div class="exercise-header">
-        <span class="exercise-title">Ejercicio 7: Fundición gris/blanca a temperatura ambiente</span>
-        <span class="tag">Fundición a T° ambiente</span>
-      </div>
-      <div class="exercise-statement">
-        Un bloque de motor fabricado con fundición de <strong>3,5% de Carbono</strong> se deja enfriar completamente hasta <strong>20 °C</strong>.<br>
-        Según el diagrama suministrado, ¿cuáles son los constituyentes finales a temperatura ambiente?
-      </div>
-      <button class="btn-toggle" onclick="toggleSolution('sol-7', this)">Mostrar Resolución</button>
-      <div id="sol-7" class="solution-box">
-        <h4>Paso a paso:</h4>
-        <ol class="step-list">
-          <li><strong>Eje X (% Carbono):</strong> Ubicamos 3,5% (entre 1,76% y 4,3%).</li>
-          <li><strong>Eje Y (Temperatura):</strong> Temperatura ambiente (20 °C) se encuentra en la franja inferior (&lt; 723 °C).</li>
-          <li><strong>Lectura del diagrama:</strong> En esa zona rectangular verde claro, la austenita previa se transformó en perlita.</li>
-        </ol>
-        <div class="highlight-res">Constituyentes finales: Perlita + Ledeburita + Cementita.</div>
       </div>
     </div>
 
