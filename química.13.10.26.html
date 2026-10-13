@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guía de Actividades: Diagrama Fe-C y Regla de la Palanca</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #22c55e;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions {
+      background: #0284c720;
+      border-left: 4px solid var(--primary);
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .activity-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .activity-card:hover {
+      border-color: var(--primary);
+    }
+
+    .activity-card:active {
+      transform: scale(0.995);
+    }
+
+    .activity-header {
+      margin-bottom: 0.75rem;
+    }
+
+    .activity-title {
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .problem-statement {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .solution-box {
+      display: none;
+      background: #064e3b30;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 1rem;
+      margin-top: 1rem;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .solution-box h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .solution-box p, .solution-box ul {
+      font-size: 0.92rem;
+      color: #d1fae5;
+    }
+
+    .solution-box ul {
+      margin-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .research-section {
+      background: var(--card-bg);
+      border: 1px dashed var(--primary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .research-section h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .research-list {
+      margin-left: 1.5rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .alert-drawing {
+      background: #f59e0b15;
+      border-left: 4px solid #f59e0b;
+      padding: 0.85rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+      color: #fde68a;
+      font-size: 0.95rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Diagrama Hierro-Carbono (Fe-C)</h1>
+    <p>Cálculo de Fases, Regla de la Palanca, Estados Cristalinos y Composición</p>
+  </header>
+
+  <div class="instructions">
+    <strong>Consigna para el estudiante:</strong> Lee atentamente cada ejercicio, ubica las coordenadas termodinámicas en el diagrama Fe-C, indica el estado y naturaleza de los constituyentes presentes y aplica la <em>Regla de la Palanca</em> para resolver las fracciones de fase.
+  </div>
+
+  <!-- Ejercicio 1 -->
+  <div class="activity-card" onclick="registerClick(1)">
+    <div class="activity-header">
+      <span class="activity-title">Actividad 1: Estado y Fracción Bifásica</span>
+    </div>
+    <div class="problem-statement">
+      Una aleación contiene <strong>1.5% en peso de Carbono</strong> y se encuentra a una temperatura constante de <strong>800 °C</strong>.
+      <br>1. Identifica qué fases o compuestos coexisten en equilibrio en ese punto e indica su estado (solución sólida o compuesto intermetálico).
+      <br>2. Determina el porcentaje en peso de cada una de las fases presentes mediante la regla de la palanca.
+    </div>
+    <div class="solution-box" id="sol-1">
+      <h4>Resolución:</h4>
+      <p>A 800 °C y 1.5% C coexisten en estado sólido:</p>
+      <ul>
+        <li><strong>Austenita (&gamma;):</strong> Solución sólida intersticial de carbono en hierro &gamma; (FCC). Límite de solubilidad a 800 °C: ~0.95% C.</li>
+        <li><strong>Cementita (Fe₃C):</strong> Compuesto químico intermetálico definido (ortorrómbico), estequiométrico con 6.67% C.</li>
+        <li>% Austenita = [(6.67 - 1.5) / (6.67 - 0.95)] &times; 100 = <strong>90.38%</strong></li>
+        <li>% Cementita = [(1.5 - 0.95) / (6.67 - 0.95)] &times; 100 = <strong>9.62%</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ejercicio 2 -->
+  <div class="activity-card" onclick="registerClick(2)">
+    <div class="activity-header">
+      <span class="activity-title">Actividad 2: Análisis Hipoeutectoide y Estado Alotrópico</span>
+    </div>
+    <div class="problem-statement">
+      Se tiene un acero con <strong>0.35% de C</strong> a una temperatura de <strong>750 °C</strong>.
+      <br>1. ¿Cuáles son las fases presentes? Indica el tipo de solución sólida y red cristalina de cada constituyente.
+      <br>2. Calcula el porcentaje relativo de cada fase aplicando los segmentos de la isoterma correspondiente.
+    </div>
+    <div class="solution-box" id="sol-2">
+      <h4>Resolución:</h4>
+      <p>A 750 °C y 0.35% C coexisten dos fases en estado sólido:</p>
+      <ul>
+        <li><strong>Ferrita proeutectoide (&alpha;):</strong> Solución sólida intersticial con red cúbica centrada en el cuerpo (BCC). Límite a 750 °C: ~0.02% C.</li>
+        <li><strong>Austenita (&gamma;):</strong> Solución sólida con red cúbica centrada en las caras (FCC). Límite a 750 °C: ~0.60% C.</li>
+        <li>% Ferrita (&alpha;) = [(0.60 - 0.35) / (0.60 - 0.02)] &times; 100 = <strong>43.10%</strong></li>
+        <li>% Austenita (&gamma;) = [(0.35 - 0.02) / (0.60 - 0.02)] &times; 100 = <strong>56.90%</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ejercicio 3 -->
+  <div class="activity-card" onclick="registerClick(3)">
+    <div class="activity-header">
+      <span class="activity-title">Actividad 3: Transición Líquido-Sólido y Estados Físicos</span>
+    </div>
+    <div class="problem-statement">
+      Una mezcla de fundición contiene <strong>3.0% de C</strong> y se mantiene a <strong>1250 °C</strong>.
+      <br>1. Identifica el estado físico de los componentes presentes (fase líquida homogénea vs. cristal sólido en equilibrio).
+      <br>2. Aplica la regla de la palanca para calcular cuánto material se encuentra en estado líquido y cuánto ha cristalizado como austenita.
+    </div>
+    <div class="solution-box" id="sol-3">
+      <h4>Resolución:</h4>
+      <p>A 1250 °C y 3.0% C coexisten un estado líquido y uno sólido:</p>
+      <ul>
+        <li><strong>Líquido (L):</strong> Solución líquida fundida rica en Fe y C. Composición sobre la línea de líquidus: ~3.6% C.</li>
+        <li><strong>Austenita (&gamma;):</strong> Cristales sólidos en formación (FCC). Composición sobre la línea de sólidus: ~1.7% C.</li>
+        <li>% Líquido = [(3.0 - 1.7) / (3.6 - 1.7)] &times; 100 = <strong>68.42%</strong></li>
+        <li>% Austenita = [(3.6 - 3.0) / (3.6 - 1.7)] &times; 100 = <strong>31.58%</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ejercicio 4 -->
+  <div class="activity-card" onclick="registerClick(4)">
+    <div class="activity-header">
+      <span class="activity-title">Actividad 4: Modificación de Composición por Adición de Hierro Puro</span>
+    </div>
+    <div class="problem-statement">
+      Partiendo de <strong>100 kg</strong> de una aleación con <strong>2.0% de C</strong> a <strong>800 °C</strong>:
+      <br>1. Se añaden <strong>100 kg de hierro puro (0% C)</strong> manteniendo constante la temperatura a 800 °C. Determina la nueva concentración global.
+      <br>2. Detalla qué ocurre con el compuesto intermetálico Fe₃C: ¿aumenta, disminuye o se redisuelve en la solución sólida austenítica? Cuantifica con la regla de la palanca antes y después.
+    </div>
+    <div class="solution-box" id="sol-4">
+      <h4>Resolución:</h4>
+      <p><strong>Nuevo % C:</strong> Masa de carbono inicial = 2.0 kg. Masa total nueva = 200 kg. Concentración final = (2.0 / 200) &times; 100 = <strong>1.0% C</strong>.</p>
+      <ul>
+        <li><strong>Estado inicial (2.0% C a 800 °C):</strong>
+          <br>Coexistencia de &gamma; + Fe₃C.
+          <br>% Fe₃C = [(2.0 - 0.95) / (6.67 - 0.95)] &times; 100 = <strong>18.36%</strong>
+        </li>
+        <li><strong>Estado final (1.0% C a 800 °C):</strong>
+          <br>Al diluirse el carbono con Fe puro, gran parte de la Cementita se redisuelve en la matriz de Austenita:
+          <br>% Fe₃C = [(1.0 - 0.95) / (6.67 - 0.95)] &times; 100 = <strong>0.87%</strong>
+          <br>% Austenita (&gamma;) = <strong>99.13%</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ejercicio 5 -->
+  <div class="activity-card" onclick="registerClick(5)">
+    <div class="activity-header">
+      <span class="activity-title">Actividad 5: Precipitación de Compuestos por Enriquecimiento de Carbono</span>
+    </div>
+    <div class="problem-statement">
+      Se tiene un lote de <strong>50 kg</strong> con <strong>0.8% C</strong> a <strong>900 °C</strong> (estado monofásico).
+      <br>1. Si por difusión de carbono la aleación pasa a tener <strong>1.4% C</strong> a la misma temperatura, ¿cuántos kg de C neto se incorporaron?
+      <br>2. Explica qué cambio de estado sufre el sistema: ¿permanece monofásico o satura la solubilidad provocando la formación del compuesto cementita? Determina los porcentajes finales.
+    </div>
+    <div class="solution-box" id="sol-5">
+      <h4>Resolución:</h4>
+      <p><strong>Cálculo de masa:</strong> C_inicial = 50 &times; 0.008 = 0.40 kg. Fe = 49.60 kg.
+      <br>Para concentración de 1.4%: C_final / (49.60 + C_final) = 0.014 &rArr; C_final &asymp; 0.704 kg.
+      <br>Carbono incorporado &asymp; <strong>0.304 kg</strong>.</p>
+      <ul>
+        <li><strong>Cambio de estado:</strong> A 900 °C el límite de solubilidad máxima de carbono en la red FCC de la austenita (línea Acm) es ~1.25%.
+        Al alcanzar 1.4% C, se satura la solución sólida y precipita el compuesto intermetálico <strong>Cementita (Fe₃C)</strong>.</li>
+        <li>Límites: Austenita (&gamma;) &asymp; 1.25% C; Cementita (Fe₃C) = 6.67% C.</li>
+        <li>% Fe₃C = [(1.4 - 1.25) / (6.67 - 1.25)] &times; 100 = <strong>2.77%</strong></li>
+        <li>% &gamma; = <strong>97.23%</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Sección de Investigación y Representación Gráfica -->
+  <section class="research-section">
+    <h2>Trabajo de Investigación y Representación Gráfica</h2>
+    <p style="margin-bottom: 0.5rem; color: var(--text-muted);">
+      Para la entrega del informe técnico individual, cada estudiante deberá desarrollar los siguientes fundamentos conceptuales:
+    </p>
+
+    <div class="alert-drawing">
+      <strong>⚠️ Requisito gráfico obligatorio:</strong> En el informe escrito se deben <u>dibujar a mano alzada con regla o representar esquemáticamente en perspectiva isométrica</u> las celdas unitarias correspondientes a cada estado y fase, señalando con claridad las posiciones de los átomos de hierro y los intersticios donde se aloja el carbono.
+    </div>
+
+    <ol class="research-list" style="margin-top: 1rem;">
+      <li>
+        <strong>Naturaleza de los constituyentes y estados de enlace:</strong>
+        <br>Explica la diferencia fisicoquímica entre un elemento puro (Fe), una <em>solución sólida de inserción o intersticial</em> (Ferrita, Austenita) y un <em>compuesto intermetálico estequiométrico</em> (Cementita - Fe₃C). ¿Por qué la cementita tiene una fórmula fija de 6.67% C en peso?
+      </li>
+      <li>
+        <strong>Estructuras cristalinas a representar:</strong>
+        <ul>
+          <li><strong>Ferrita (&alpha; y &delta;):</strong> Red cúbica centrada en el cuerpo (BCC). Indicar factor de empaquetamiento atómico y tamaño relativo de los huecos octaédricos/tetraédricos.</li>
+          <li><strong>Austenita (&gamma;):</strong> Red cúbica centrada en las caras (FCC). Justificar por qué admite mayor porcentaje de carbono soluble que la ferrita a pesar de tener mayor empaquetamiento volumétrico.</li>
+          <li><strong>Cementita (Fe₃C):</strong> Estructura ortorrómbica compleja. Relacionar su red con su elevada dureza y fragilidad.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Diferencia entre Fase y Microconstituyente:</strong>
+        <br>Define qué es una fase termodinámica homogénea y qué es un microconstituyente bifásico (analiza la microestructura laminar de la <strong>Perlita</strong> y la estructura eutéctica de la <strong>Ledeburita</strong>).
+      </li>
+      <li>
+        <strong>Transformaciones isotérmicas e invariantes:</strong>
+        <br>Indica las temperaturas, composiciones y ecuaciones de reacción para los puntos <em>Peritéctico (1495 °C)</em>, <em>Eutéctico (1148 °C)</em> y <em>Eutectoide (727 °C)</em>.
+      </li>
+    </ol>
+  </section>
+</div>
+
+<script>
+  const clicks = {};
+
+  function registerClick(id) {
+    if (!clicks[id]) clicks[id] = 0;
+    if (clicks[id] >= 15) return;
+
+    clicks[id]++;
+
+    if (clicks[id] === 15) {
+      const sol = document.getElementById('sol-' + id);
+      if (sol) {
+        sol.style.display = 'block';
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
