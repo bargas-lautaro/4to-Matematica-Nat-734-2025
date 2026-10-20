@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de Álgebra: Multiplicación de Polinomios - 5° Año E.S.T.P. Chubut</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono para estilo técnico -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        chubut: {
+                            blue: '#0284c7',
+                            gold: '#eab308',
+                            dark: '#0f172a',
+                            card: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Fondo estilo plano de ingeniería / hoja técnica milimetrada */
+        .bg-grid-pattern {
+            background-size: 32px 32px;
+            background-image: 
+                linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+        }
+        .math-expr sup {
+            font-size: 0.72em;
+            vertical-align: super;
+            line-height: 0;
+            margin-left: 1px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+        .light .math-expr sup {
+            color: #0369a1;
+        }
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen bg-grid-pattern transition-colors duration-300">
+
+    <!-- BARRA SUPERIOR ADHESIVA (HEADER + CONTROLES + TEMPORIZADOR) -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/90 border-b border-slate-800 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <!-- Fila 1: Identidad Institucional -->
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 pb-3 border-b border-slate-800/80">
+                <div class="flex items-start md:items-center gap-3">
+                    <div class="bg-sky-600/20 border border-sky-500/40 text-sky-400 p-2.5 rounded-xl flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-compass-drafting text-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
+                                <i class="fa-solid fa-gear mr-1"></i>Provincia del Chubut • E.S.T.P.
+                            </span>
+                            <span class="px-2.5 py-0.5 text-xs font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-full">
+                                5° Año Ciclo Superior Técnico
+                            </span>
+                        </div>
+                        <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white mt-0.5">
+                            Práctica de Álgebra: Multiplicación de Polinomios <span class="font-mono text-sky-400 font-normal text-base">P(x) · Q(x)</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Botón Guía Rápida y Modo Claro/Oscuro -->
+                <div class="flex items-center gap-2 self-end md:self-center">
+                    <button onclick="toggleHelpModal()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-question text-sky-400"></i> Cómo escribir respuestas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fila 2: Panel de Control, Temporizador y Puntaje -->
+            <div class="pt-3 flex flex-wrap items-center justify-between gap-3">
+                <!-- Botones Principales de Generación y Verificación -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <button id="btn-generate" onclick="generateNewSet()" class="px-4 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white shadow-lg shadow-sky-600/25 active:scale-95 transition flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-dice"></i> Generar 20 Ejercicios
+                    </button>
+
+                    <button id="btn-verify-all" onclick="verifyAllExercises()" class="px-4 py-2.5 rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 active:scale-95 transition flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-check-double"></i> Verificar Todos
+                    </button>
+
+                    <button onclick="toggleAllProcedures(true)" class="px-3 py-2 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1.5" title="Desplegar los 20 procedimientos">
+                        <i class="fa-solid fa-book-open text-amber-400"></i> Ver Todos los Procedimientos
+                    </button>
+                </div>
+
+                <!-- Temporizador Configurable -->
+                <div class="flex items-center gap-2 bg-slate-950/90 border border-slate-800 px-3 py-1.5 rounded-xl">
+                    <div class="flex items-center gap-1.5 text-xs text-slate-400">
+                        <i class="fa-regular fa-clock text-sky-400"></i>
+                        <label for="time-select" class="hidden sm:inline">Tiempo:</label>
+                        <select id="time-select" onchange="changeTimerDuration()" class="bg-slate-800 text-white font-semibold rounded-lg px-2 py-1 border border-slate-700 text-xs focus:outline-none focus:border-sky-500">
+                            <option value="15">15 min</option>
+                            <option value="25">25 min</option>
+                            <option value="30" selected>30 min</option>
+                            <option value="45">45 min</option>
+                            <option value="60">60 min</option>
+                        </select>
+                    </div>
+
+                    <div class="h-5 w-[1px] bg-slate-800 mx-1"></div>
+
+                    <!-- Display Reloj -->
+                    <div id="timer-display" class="font-mono text-lg sm:text-xl font-bold text-emerald-400 tracking-wider min-w-[70px] text-center">
+                        30:00
+                    </div>
+
+                    <!-- Controles Reloj -->
+                    <div class="flex items-center gap-1">
+                        <button id="btn-timer-toggle" onclick="toggleTimer()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition" title="Pausar / Reanudar">
+                            <i id="icon-timer-toggle" class="fa-solid fa-pause"></i>
+                        </button>
+                        <button onclick="resetTimer()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition" title="Reiniciar reloj">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Indicador de Progreso y Nota -->
+                <div class="flex items-center gap-3 bg-slate-950/90 border border-slate-800 px-3.5 py-1.5 rounded-xl">
+                    <div class="text-xs">
+                        <span class="text-slate-400 block">Correctos</span>
+                        <span id="score-counter" class="font-mono font-bold text-base text-sky-400">0 / 20</span>
+                    </div>
+                    <div class="h-6 w-[1px] bg-slate-800"></div>
+                    <div class="text-xs">
+                        <span class="text-slate-400 block">Calificación</span>
+                        <span id="grade-counter" class="font-mono font-bold text-base text-amber-400">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER DE ESTADO O ALERTA DE TIEMPO -->
+    <div id="status-banner" class="hidden max-w-7xl mx-auto px-4 mt-4">
+        <div id="status-banner-content" class="p-4 rounded-xl border flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <i id="status-banner-icon" class="fa-solid fa-bell text-xl"></i>
+                <div>
+                    <h3 id="status-banner-title" class="font-bold text-sm"></h3>
+                    <p id="status-banner-text" class="text-xs opacity-90"></p>
+                </div>
+            </div>
+            <button onclick="closeBanner()" class="text-sm opacity-75 hover:opacity-100 px-2 py-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+        
+        <!-- Resumen de Propiedades Algebraicas para 5to Año -->
+        <section class="mb-6 bg-slate-900/70 border border-slate-800 rounded-2xl p-4 shadow-lg">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-sky-400 flex items-center gap-2">
+                        <i class="fa-solid fa-microchip"></i> Recordatorio Técnico de Propiedades Algebraicas
+                    </h2>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Para multiplicar polinomios en una variable <span class="font-mono text-white">x</span> con cualquier exponente natural, aplicamos la <strong>Propiedad Distributiva</strong> multiplicando cada término del primer factor por cada término del segundo, la <strong>Propiedad Asociativa y Conmutativa</strong> para multiplicar coeficientes entre sí y sumar exponentes de igual base (<span class="font-mono text-amber-300">a·x<sup>n</sup> · b·x<sup>m</sup> = (a·b)·x<sup>n+m</sup></span>), y finalmente reducimos <strong>términos semejantes</strong>.
+                    </p>
+                </div>
+                <!-- Filtro rápido de vista -->
+                <div class="flex flex-wrap items-center gap-2 shrink-0">
+                    <span class="text-xs text-slate-400 font-medium">Filtrar:</span>
+                    <button onclick="filterCards('all')" id="filter-all" class="px-3 py-1 rounded-lg text-xs font-semibold bg-sky-600 text-white transition">Todos (20)</button>
+                    <button onclick="filterCards('pending')" id="filter-pending" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Pendientes</button>
+                    <button onclick="filterCards('correct')" id="filter-correct" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-emerald-400 hover:bg-slate-700 transition">Correctos</button>
+                    <button onclick="filterCards('incorrect')" id="filter-incorrect" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-rose-400 hover:bg-slate-700 transition">Por corregir</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRILLA DE LOS 20 EJERCICIOS -->
+        <div id="exercises-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Las 20 tarjetas se inyectan dinámicamente vía JS -->
+        </div>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="max-w-7xl mx-auto px-4 py-8 mt-8 border-t border-slate-800/80 text-center text-xs text-slate-400">
+        <p class="font-semibold text-slate-300">Espacio Curricular: Matemática • 5° Año Educación Secundaria Técnico Profesional (Chubut)</p>
+        <p class="mt-1">Generador dinámico de ejercitación algebraica con verificación simbólica y desglose de propiedades distributiva, asociativa y conmutativa.</p>
+    </footer>
+
+    <!-- MODAL DE AYUDA DE ESCRITURA DE POLINOMIOS -->
+    <div id="help-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-keyboard text-sky-400"></i> ¿Cómo ingresar los polinomios resultado?
+                </h3>
+                <button onclick="toggleHelpModal()" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p>El verificador algebraico interpreta tu respuesta de forma flexible (no importan los espacios ni el orden en que escribas los términos, siempre que hayas <strong>reducido todos los términos semejantes</strong>):</p>
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 space-y-2 font-mono text-xs">
+                    <div>
+                        <span class="text-slate-400">Para escribir </span>
+                        <span class="text-sky-400 font-bold">-6x<sup>7</sup> + 14x<sup>4</sup> - 3x + 8</span>
+                        <span class="text-slate-400"> podés ingresar:</span>
+                    </div>
+                    <div class="text-emerald-400 bg-emerald-950/30 px-2.5 py-1.5 rounded border border-emerald-800/40">
+                        -6x^7 + 14x^4 - 3x + 8
+                    </div>
+                    <div class="text-slate-400 text-[11px]">
+                        También se acepta sin el símbolo <code class="text-amber-300">^</code>, por ejemplo: <code class="text-emerald-300">-6x7 + 14x4 - 3x + 8</code>
+                    </div>
+                </div>
+                <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-300">
+                    <li>Usá los <strong>botones rápidos</strong> debajo de cada campo (<code class="text-sky-300">x^2</code>, <code class="text-sky-300">x^3</code>, <code class="text-sky-300">^</code>, <code class="text-sky-300">+</code>, <code class="text-sky-300">-</code>) para escribir más rápido en celular o computadora.</li>
+                    <li>Debajo de cada caja de texto verás una <strong>Vista Previa Matemática en vivo</strong> con superíndices para confirmar que escribiste los exponentes que querías.</li>
+                    <li>Si necesitás entender cómo se resuelve o corregir un error, presioná <strong>"Mostrar procedimiento"</strong> en ese ejercicio para ver las propiedades <em>Distributiva</em>, <em>Asociativa</em> y el <em>Método Vertical</em>.</li>
+                </ul>
+            </div>
+            <div class="pt-2 flex justify-end">
+                <button onclick="toggleHelpModal()" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-xl text-xs transition">
+                    ¡Entendido!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LÓGICA JAVASCRIPT DE LA APLICACIÓN -->
+    <script>
+        /***********************************************************************
+         * ESTADO GLOBAL DE LA APLICACIÓN
+         ***********************************************************************/
+        let exercises = [];          // Lista de los 20 ejercicios actuales
+        let timerInterval = null;    // Referencia al reloj
+        let remainingSeconds = 1800; // 30 minutos por defecto
+        let isTimerRunning = false;
+        let currentFilter = 'all';
+
+        /***********************************************************************
+         * MOTOR MATEMÁTICO DE POLINOMIOS (1 VARIABLE 'x', GRADO ARBITRARIO)
+         * Un polinomio se representa como un Array de términos:
+         * [{ coeff: Number, exp: Number }, ...]
+         ***********************************************************************/
+
+        // Genera un entero aleatorio entre min y max (inclusive), excluyendo el 0 si nonZero=true
+        function randInt(min, max, nonZero = true) {
+            let val = 0;
+            do {
+                val = Math.floor(Math.random() * (max - min + 1)) + min;
+            } while (nonZero && val === 0);
+            return val;
+        }
+
+        // Elige k exponentes únicos aleatorios en el rango [minExp, maxExp] y los devuelve ordenados de mayor a menor
+        function pickUniqueExponents(count, minExp, maxExp, mustIncludeZero = false) {
+            const pool = [];
+            for (let e = minExp; e <= maxExp; e++) {
+                if (mustIncludeZero && e === 0) continue;
+                pool.push(e);
+            }
+            // Mezclar pool (Fisher-Yates)
+            for (let i = pool.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [pool[i], pool[j]] = [pool[j], pool[i]];
+            }
+            const chosen = mustIncludeZero ? [0, ...pool.slice(0, count - 1)] : pool.slice(0, count);
+            return chosen.sort((a, b) => b - a);
+        }
+
+        // Reduce y ordena un polinomio en forma decreciente de grado
+        function simplifyPolynomial(terms) {
+            const map = new Map();
+            for (const t of terms) {
+                if (t.coeff === 0) continue;
+                map.set(t.exp, (map.get(t.exp) || 0) + t.coeff);
+            }
+            const result = [];
+            for (const [exp, coeff] of map.entries()) {
+                if (coeff !== 0) {
+                    result.push({ coeff, exp });
+                }
+            }
+            result.sort((a, b) => b.exp - a.exp);
+            return result;
+        }
+
+        // Multiplica dos polinomios P(x) y Q(x) devolviendo tanto los pasos intermedios como el polinomio reducido
+        function multiplyTwoPolynomials(P, Q) {
+            const rawTerms = [];
+            const distributivePairs = [];
+
+            for (let i = 0; i < P.length; i++) {
+                for (let j = 0; j < Q.length; j++) {
+                    const t1 = P[i];
+                    const t2 = Q[j];
+                    const prodCoeff = t1.coeff * t2.coeff;
+                    const prodExp = t1.exp + t2.exp;
+                    rawTerms.push({ coeff: prodCoeff, exp: prodExp });
+                    distributivePairs.push({
+                        t1,
+                        t2,
+                        result: { coeff: prodCoeff, exp: prodExp }
+                    });
+                }
+            }
+
+            const simplified = simplifyPolynomial(rawTerms);
+            return {
+                rawTerms,
+                distributivePairs,
+                simplified
+            };
+        }
+
+        // Formatea un término individual en HTML con superíndice (ej: -3x<sup>4</sup>)
+        function formatTermHTML(term, isFirst = false, explicitPlus = false) {
+            const { coeff, exp } = term;
+            if (coeff === 0) return isFirst ? '0' : '';
+
+            const sign = coeff < 0 ? ' - ' : (isFirst ? (explicitPlus ? '+' : '') : ' + ');
+            const absC = Math.abs(coeff);
+
+            let coeffStr = '';
+            if (exp === 0) {
+                coeffStr = `${absC}`;
+            } else {
+                coeffStr = absC === 1 ? '' : `${absC}`;
+            }
+
+            let varStr = '';
+            if (exp === 1) {
+                varStr = 'x';
+            } else if (exp > 1) {
+                varStr = `x<sup>${exp}</sup>`;
+            }
+
+            return `${sign}${coeffStr}${varStr}`;
+        }
+
+        // Formatea un término en formato compacto con paréntesis para explicaciones: ej. (-3x^4)
+        function formatSingleMonomialHTML(term, wrapNegative = true) {
+            const { coeff, exp } = term;
+            const sign = coeff < 0 ? '-' : '';
+            const absC = Math.abs(coeff);
+            const coeffStr = (exp === 0) ? `${absC}` : (absC === 1 ? '' : `${absC}`);
+            const varStr = exp === 0 ? '' : (exp === 1 ? 'x' : `x<sup>${exp}</sup>`);
+            const core = `${sign}${coeffStr}${varStr}`;
+            return (coeff < 0 && wrapNegative) ? `(${core})` : core;
+        }
+
+        // Formatea un polinomio completo en HTML
+        function formatPolynomialHTML(poly) {
+            if (!poly || poly.length === 0) return '0';
+            return poly.map((t, idx) => formatTermHTML(t, idx === 0)).join('');
+        }
+
+        // Formatea un polinomio en texto plano (ej: -6x^7 + 4x^3 - 2)
+        function formatPolynomialPlain(poly) {
+            if (!poly || poly.length === 0) return '0';
+            return poly.map((t, idx) => {
+                const sign = t.coeff < 0 ? (idx === 0 ? '-' : ' - ') : (idx === 0 ? '' : ' + ');
+                const absC = Math.abs(t.coeff);
+                const coeffStr = (t.exp === 0) ? `${absC}` : (absC === 1 ? '' : `${absC}`);
+                const varStr = t.exp === 0 ? '' : (t.exp === 1 ? 'x' : `x^${t.exp}`);
+                return `${sign}${coeffStr}${varStr}`;
+            }).join('');
+        }
+
+        /***********************************************************************
+         * PARSER FLEXIBLE DE RESPUESTAS DEL ALUMNO
+         * Acepta entradas como:
+         *   "-6x^7 + 4x^3 - x + 5"
+         *   "-6x7+4x3-x+5"
+         *   "4x^3 - 6x^7 + 5 - 1x^1"
+         * E informa si el alumno olvidó agrupar términos semejantes.
+         ***********************************************************************/
+        function parseStudentPolynomial(inputStr) {
+            if (!inputStr || !inputStr.trim()) {
+                return { valid: false, empty: true, error: 'Ingresá una expresión algebraica.' };
+            }
+
+            // Normalizar caracteres comunes (guiones largos, espacios, mayúsculas, asteriscos)
+            let clean = inputStr
+                .toLowerCase()
+                .replace(/[−–—]/g, '-')
+                .replace(/\s+/g, '')
+                .replace(/\*/g, '')
+                .replace(/²/g, '^2')
+                .replace(/³/g, '^3')
+                .replace(/⁴/g, '^4')
+                .replace(/⁵/g, '^5')
+                .replace(/⁶/g, '^6')
+                .replace(/⁷/g, '^7')
+                .replace(/⁸/g, '^8')
+                .replace(/⁹/g, '^9');
+
+            if (clean === '0') {
+                return { valid: true, terms: [], rawCount: 0, hasUnreducedTerms: false };
+            }
+
+            // Validar caracteres permitidos
+            if (!/^[0-9x\+\-\^]+$/.test(clean)) {
+                return {
+                    valid: false,
+                    empty: false,
+                    error: 'Formato inválido. Usá únicamente números, la variable "x", signos (+, -) y "^" para exponentes.'
+                };
+            }
+
+            // Separar en tokens conservando el signo + o - delante de cada término
+            const tokens = clean.match(/[+\-]?[^+\-]+/g);
+            if (!tokens || tokens.length === 0) {
+                return { valid: false, empty: false, error: 'No se pudo interpretar el polinomio.' };
+            }
+
+            const parsedRawTerms = [];
+            const seenExponents = new Set();
+            let hasUnreducedTerms = false;
+
+            for (const tok of tokens) {
+                // Caso término con x: [+-]?(\d*)x(?:\^?(\d+))?
+                const matchX = tok.match(/^([+\-]?\d*)x(?:\^?(\d+))?$/);
+                // Caso término independiente (constante): [+-]?\d+
+                const matchConst = tok.match(/^([+\-]?\d+)$/);
+
+                if (matchX) {
+                    const rawCoeff = matchX[1];
+                    let coeff = 1;
+                    if (rawCoeff === '' || rawCoeff === '+') coeff = 1;
+                    else if (rawCoeff === '-') coeff = -1;
+                    else coeff = parseInt(rawCoeff, 10);
+
+                    const exp = matchX[2] !== undefined ? parseInt(matchX[2], 10) : 1;
+
+                    if (isNaN(coeff) || isNaN(exp)) {
+                        return { valid: false, empty: false, error: `Error de sintaxis en el término "${tok}".` };
+                    }
+                    if (seenExponents.has(exp)) {
+                        hasUnreducedTerms = true;
+                    }
+                    seenExponents.add(exp);
+                    parsedRawTerms.push({ coeff, exp });
+                } else if (matchConst) {
+                    const coeff = parseInt(matchConst[1], 10);
+                    if (isNaN(coeff)) {
+                        return { valid: false, empty: false, error: `Error numérico en "${tok}".` };
+                    }
+                    if (seenExponents.has(0)) {
+                        hasUnreducedTerms = true;
+                    }
+                    seenExponents.add(0);
+                    parsedRawTerms.push({ coeff, exp: 0 });
+                } else {
+                    return {
+                        valid: false,
+                        empty: false,
+                        error: `El término "${tok}" no tiene un formato válido (ej. válido: -4x^5).`
+                    };
+                }
+            }
+
+            const simplified = simplifyPolynomial(parsedRawTerms);
+            return {
+                valid: true,
+                empty: false,
+                rawTerms: parsedRawTerms,
+                terms: simplified,
+                hasUnreducedTerms
+            };
+        }
+
+        /***********************************************************************
+         * GENERADOR DE 20 EJERCICIOS ÚNICOS CON ARQUITECTURA CURRICULAR 5° AÑO
+         * Incluye exponentes altos (hasta grado 8 en factores, 15 en producto),
+         * polinomios incompletos, binomios, trinomios, productos notables y 3 factores.
+         ***********************************************************************/
+        function createExerciseByTemplate(index) {
+            let P = [];
+            let Q = [];
+            let R = null; // Opcional 3er factor para ejercicios avanzados
+            let category = '';
+            let badgeColor = '';
+            let specialNote = null;
+
+            switch (index) {
+                case 0:
+                case 1: {
+                    // 1-2: Monomio de grado alto × Binomio/Trinomio de grados variados
+                    category = 'Monomio × Polinomio (Grado Alto)';
+                    badgeColor = 'bg-sky-500/20 text-sky-300 border-sky-500/30';
+                    const expM = randInt(2, 6, true);
+                    P = [{ coeff: randInt(-7, 8, true), exp: expM }];
+                    const expsQ = pickUniqueExponents(3, 0, 6);
+                    Q = expsQ.map(e => ({ coeff: randInt(-6, 7, true), exp: e }));
+                    break;
+                }
+                case 2:
+                case 3: {
+                    // 3-4: Binomio × Binomio (Lineales y Cuadráticos)
+                    category = 'Binomio × Binomio';
+                    badgeColor = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+                    const exp1 = randInt(1, 3, true);
+                    P = [
+                        { coeff: randInt(-6, 6, true), exp: exp1 },
+                        { coeff: randInt(-8, 8, true), exp: 0 }
+                    ];
+                    Q = [
+                        { coeff: randInt(-6, 6, true), exp: exp1 },
+                        { coeff: randInt(-8, 8, true), exp: 0 }
+                    ];
+                    break;
+                }
+                case 4:
+                case 5:
+                case 6: {
+                    // 5-7: Binomio × Binomio con exponentes arbitrarios (x^4, x^5, x^7...)
+                    category = 'Binomios de Exponentes Arbitrarios';
+                    badgeColor = 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30';
+                    const expsP = pickUniqueExponents(2, 1, 7);
+                    const expsQ = pickUniqueExponents(2, 0, 6);
+                    P = expsP.map(e => ({ coeff: randInt(-7, 7, true), exp: e }));
+                    Q = expsQ.map(e => ({ coeff: randInt(-7, 7, true), exp: e }));
+                    break;
+                }
+                case 7:
+                case 8: {
+                    // 8-9: Producto Notable - Diferencia de Cuadrados (A + B)(A - B) con potencias altas
+                    category = 'Producto Notable: Conjugados';
+                    badgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+                    const expA = randInt(2, 6, true);
+                    const expB = randInt(0, expA - 1, false);
+                    const cA = randInt(2, 7, true);
+                    const cB = randInt(2, 8, true);
+                    P = [{ coeff: cA, exp: expA }, { coeff: cB, exp: expB }];
+                    Q = [{ coeff: cA, exp: expA }, { coeff: -cB, exp: expB }];
+                    specialNote = 'Observá que los factores son binomios conjugados $(A + B)\\cdot(A - B) = A^2 - B^2$. Al distribuir, los términos cruzados son opuestos y se cancelan.';
+                    break;
+                }
+                case 9:
+                case 10: {
+                    // 10-11: Cuadrado de un Binomio expresado como producto (A ± B)(A ± B)
+                    category = 'Producto Notable: Binomio al Cuadrado';
+                    badgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+                    const expA = randInt(2, 5, true);
+                    const expB = randInt(0, 1, false);
+                    const cA = randInt(-6, 6, true);
+                    const cB = randInt(-7, 7, true);
+                    P = [{ coeff: cA, exp: expA }, { coeff: cB, exp: expB }];
+                    Q = [{ coeff: cA, exp: expA }, { coeff: cB, exp: expB }];
+                    specialNote = 'Ambos factores son idénticos: equivale al desarrollo del cuadrado de un binomio $(A + B)^2 = A^2 + 2AB + B^2$.';
+                    break;
+                }
+                case 11:
+                case 12:
+                case 13:
+                case 14: {
+                    // 12-15: Binomio × Trinomio (con huecos de grado y potencias variadas)
+                    category = 'Binomio × Trinomio';
+                    badgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+                    const expsP = pickUniqueExponents(2, 0, 5);
+                    const expsQ = pickUniqueExponents(3, 0, 6);
+                    P = expsP.map(e => ({ coeff: randInt(-6, 6, true), exp: e }));
+                    Q = expsQ.map(e => ({ coeff: randInt(-6, 6, true), exp: e }));
+                    break;
+                }
+                case 15:
+                case 16:
+                case 17: {
+                    // 16-18: Trinomio × Trinomio (Polinomios completos o incompletos de grado alto)
+                    category = 'Trinomio × Trinomio';
+                    badgeColor = 'bg-rose-500/20 text-rose-300 border-rose-500/30';
+                    const expsP = pickUniqueExponents(3, 0, 6);
+                    const expsQ = pickUniqueExponents(3, 0, 6);
+                    P = expsP.map(e => ({ coeff: randInt(-5, 5, true), exp: e }));
+                    Q = expsQ.map(e => ({ coeff: randInt(-5, 5, true), exp: e }));
+                    break;
+                }
+                case 18:
+                case 19: {
+                    // 19-20: Triple producto: Monomio × Binomio × Binomio (Aplicación explícita de Prop. Asociativa)
+                    category = 'Producto de 3 Factores (Asociativa)';
+                    badgeColor = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
+                    const expM = randInt(1, 4, true);
+                    P = [{ coeff: randInt(-4, 4, true), exp: expM }];
+                    const expsQ = pickUniqueExponents(2, 0, 4);
+                    const expsR = pickUniqueExponents(2, 0, 4);
+                    Q = expsQ.map(e => ({ coeff: randInt(-5, 5, true), exp: e }));
+                    R = expsR.map(e => ({ coeff: randInt(-5, 5, true), exp: e }));
+                    specialNote = 'En un producto de tres factores $A(x) \\cdot B(x) \\cdot C(x)$ aplicamos la Propiedad Asociativa: primero multiplicamos $[A(x) \\cdot B(x)]$ y al resultado lo distribuimos con $C(x)$.';
+                    break;
+                }
+            }
+
+            // Calcular resultado y pasos
+            let step1Calc = multiplyTwoPolynomials(P, Q);
+            let finalCalc = step1Calc;
+            if (R) {
+                finalCalc = multiplyTwoPolynomials(step1Calc.simplified, R);
+            }
+
+            // Construir firma única para evitar duplicados
+            const signature = `${formatPolynomialPlain(P)}*${formatPolynomialPlain(Q)}${R ? '*' + formatPolynomialPlain(R) : ''}`;
+
+            return {
+                id: index + 1,
+                category,
+                badgeColor,
+                P,
+                Q,
+                R,
+                specialNote,
+                step1Calc,
+                finalCalc,
+                expected: finalCalc.simplified,
+                signature,
+                status: 'pending', // 'pending' | 'correct' | 'incorrect'
+                studentInput: '',
+                activeTab: 'distributiva', // 'distributiva' | 'asociativa' | 'vertical'
+                procedureOpen: false
+            };
+        }
+
+        function generateNewSet() {
+            const generated = [];
+            const signatures = new Set();
+
+            for (let i = 0; i < 20; i++) {
+                let candidate;
+                let attempts = 0;
+                do {
+                    candidate = createExerciseByTemplate(i);
+                    attempts++;
+                } while (signatures.has(candidate.signature) && attempts < 20);
+
+                signatures.add(candidate.signature);
+                generated.push(candidate);
+            }
+
+            exercises = generated;
+            currentFilter = 'all';
+            updateFilterButtons();
+            renderExercises();
+            updateScoreboard();
+            closeBanner();
+            resetTimer(true);
+        }
+
+        /***********************************************************************
+         * GENERADOR DE EXPLICACIÓN PASO A PASO (LOS 3 MÉTODOS / PROPIEDADES)
+         ***********************************************************************/
+        function buildProcedureHTML(ex) {
+            // Determinar los dos factores principales que se multiplican en el paso definitivo
+            const factorA = ex.R ? ex.step1Calc.simplified : ex.P;
+            const factorB = ex.R ? ex.R : ex.Q;
+            const calc = ex.finalCalc;
+
+            // Pre-bloque si hay 3 factores (Propiedad Asociativa de factores)
+            let preFactorBlock = '';
+            if (ex.R) {
+                const pHTML = formatPolynomialHTML(ex.P);
+                const qHTML = formatPolynomialHTML(ex.Q);
+                const rHTML = formatPolynomialHTML(ex.R);
+                const pqHTML = formatPolynomialHTML(ex.step1Calc.simplified);
+                preFactorBlock = `
+                    <div class="mb-3 p-3 rounded-xl bg-cyan-950/40 border border-cyan-700/40 text-xs space-y-1.5">
+                        <div class="font-bold text-cyan-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-layer-group"></i> Paso Previo — Propiedad Asociativa del Producto:
+                        </div>
+                        <p class="text-slate-300">Asociamos los dos primeros factores <span class="font-mono text-white">[ P(x) · Q(x) ] · R(x)</span>:</p>
+                        <div class="font-mono text-slate-200 bg-slate-950/70 p-2 rounded-lg overflow-x-auto math-expr">
+                            [ (${pHTML}) · (${qHTML}) ] · (${rHTML}) = <span class="text-cyan-300 font-bold">(${pqHTML})</span> · (${rHTML})
+                        </div>
+                    </div>
+                `;
+            }
+
+            // TAB 1: PROPIEDAD DISTRIBUTIVA (Término a término + Ley de exponentes)
+            const distLines = calc.distributivePairs.map((pair, idx) => {
+                const m1 = formatSingleMonomialHTML(pair.t1, true);
+                const m2 = formatSingleMonomialHTML(pair.t2, true);
+                const res = formatSingleMonomialHTML(pair.result, false);
+                const expSum = (pair.t1.exp > 0 || pair.t2.exp > 0)
+                    ? `x<sup>${pair.t1.exp} + ${pair.t2.exp}</sup> = x<sup>${pair.result.exp}</sup>`
+                    : 'término independiente';
+                return `
+                    <div class="flex flex-wrap items-center justify-between gap-2 py-1.5 px-2.5 rounded-lg bg-slate-900/90 border border-slate-800/80 text-xs font-mono math-expr">
+                        <div>
+                            <span class="text-slate-400 mr-1">${idx + 1})</span>
+                            <span class="text-sky-300">${m1}</span> · <span class="text-amber-300">${m2}</span>
+                            <span class="text-slate-400"> = (${pair.t1.coeff} · ${pair.t2.coeff})·${pair.result.exp > 0 ? `x<sup>${pair.t1.exp}+${pair.t2.exp}</sup>` : '1'}</span>
+                        </div>
+                        <div class="font-bold text-emerald-400">
+                            = ${res} <span class="text-[10px] font-normal text-slate-400 ml-1">(${expSum})</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const unreducedString = calc.rawTerms.map((t, i) => formatTermHTML(t, i === 0)).join('');
+
+            // TAB 2: PROPIEDAD ASOCIATIVA Y CONMUTATIVA (Agrupación de términos semejantes por grado)
+            const degreeGroups = new Map();
+            for (const t of calc.rawTerms) {
+                if (!degreeGroups.has(t.exp)) degreeGroups.set(t.exp, []);
+                degreeGroups.get(t.exp).push(t.coeff);
+            }
+            const sortedDegrees = Array.from(degreeGroups.keys()).sort((a, b) => b - a);
+
+            const groupRows = sortedDegrees.map(deg => {
+                const coeffs = degreeGroups.get(deg);
+                const sumCoeff = coeffs.reduce((a, b) => a + b, 0);
+                const varLabel = deg === 0 ? 'Grado 0 (Término Independiente)' : (deg === 1 ? 'Grado 1 (x)' : `Grado ${deg} (x<sup>${deg}</sup>)`);
+                const varPart = deg === 0 ? '' : (deg === 1 ? 'x' : `x<sup>${deg}</sup>`);
+                const exprInside = coeffs.map((c, idx) => idx === 0 ? `${c}` : (c < 0 ? ` - ${Math.abs(c)}` : ` + ${c}`)).join('');
+                const finalTermStr = sumCoeff === 0
+                    ? `<span class="text-rose-400 italic">0${varPart} (se cancelan)</span>`
+                    : `<span class="text-emerald-400 font-bold">${formatSingleMonomialHTML({ coeff: sumCoeff, exp: deg }, false)}</span>`;
+
+                return `
+                    <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-mono math-expr">
+                        <span class="text-sky-300 font-sans font-semibold">${varLabel}:</span>
+                        <div>
+                            (${exprInside})${varPart} = ${finalTermStr}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // TAB 3: DISPOSICIÓN VERTICAL / POR COLUMNAS DE GRADO
+            const partialRows = factorB.map((bTerm, rIdx) => {
+                const rowTerms = factorA.map(aTerm => ({
+                    coeff: aTerm.coeff * bTerm.coeff,
+                    exp: aTerm.exp + bTerm.exp
+                }));
+                return {
+                    multiplier: bTerm,
+                    rowPoly: rowTerms
+                };
+            });
+
+            const verticalRowsHTML = partialRows.map((row) => {
+                const multHTML = formatSingleMonomialHTML(row.multiplier, false);
+                const polyHTML = formatPolynomialHTML(row.rowPoly);
+                return `
+                    <div class="flex items-center justify-between gap-3 py-1.5 px-3 bg-slate-900/70 rounded border border-slate-800/70 font-mono text-xs math-expr">
+                        <span class="text-amber-300 shrink-0">Fila [${multHTML} · P(x)]:</span>
+                        <span class="text-slate-200 text-right overflow-x-auto">${polyHTML}</span>
+                    </div>
+                `;
+            }).join('');
+
+            const finalPolyHTML = formatPolynomialHTML(ex.expected);
+
+            return `
+                <div class="mt-4 pt-4 border-t border-slate-800 space-y-3">
+                    <!-- Selector de Pestañas de Propiedades -->
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-graduation-cap"></i> Desarrollo Paso a Paso
+                        </span>
+                        <div class="flex flex-wrap gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800">
+                            <button onclick="switchProcedureTab(${ex.id}, 'distributiva')" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition ${ex.activeTab === 'distributiva' ? 'bg-sky-600 text-white' : 'text-slate-400 hover:text-white'}">
+                                1. Prop. Distributiva
+                            </button>
+                            <button onclick="switchProcedureTab(${ex.id}, 'asociativa')" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition ${ex.activeTab === 'asociativa' ? 'bg-sky-600 text-white' : 'text-slate-400 hover:text-white'}">
+                                2. Prop. Asociativa / Grados
+                            </button>
+                            <button onclick="switchProcedureTab(${ex.id}, 'vertical')" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition ${ex.activeTab === 'vertical' ? 'bg-sky-600 text-white' : 'text-slate-400 hover:text-white'}">
+                                3. Disposición Vertical
+                            </button>
+                        </div>
+                    </div>
+
+                    ${ex.specialNote ? `
+                        <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex items-start gap-2">
+                            <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                            <span>${ex.specialNote.replace(/\$([^$]+)\$/g, '<span class="font-mono text-amber-300">$1</span>')}</span>
+                        </div>
+                    ` : ''}
+
+                    ${preFactorBlock}
+
+                    <!-- CONTENIDO PESTAÑA 1: DISTRIBUTIVA -->
+                    <div class="${ex.activeTab === 'distributiva' ? 'block' : 'hidden'} space-y-2.5">
+                        <p class="text-xs text-slate-300">
+                            Aplicamos la <strong>Propiedad Distributiva</strong> multiplicando cada término del primer factor por cada término del segundo, asociando coeficientes y sumando exponentes (<span class="font-mono text-sky-300">x<sup>n</sup> · x<sup>m</sup> = x<sup>n+m</sup></span>):
+                        </p>
+                        <div class="space-y-1.5 max-h-64 overflow-y-auto pr-1">
+                            ${distLines}
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+                            <span class="text-slate-400 block mb-1">Polinomio desarrollado sin reducir:</span>
+                            <div class="font-mono text-sky-300 math-expr overflow-x-auto">${unreducedString}</div>
+                        </div>
+                    </div>
+
+                    <!-- CONTENIDO PESTAÑA 2: ASOCIATIVA Y CONMUTATIVA -->
+                    <div class="${ex.activeTab === 'asociativa' ? 'block' : 'hidden'} space-y-2.5">
+                        <p class="text-xs text-slate-300">
+                            Por <strong>Propiedad Conmutativa y Asociativa de la suma</strong>, reordenamos y agrupamos los términos semejantes (los que tienen el mismo exponente en <span class="font-mono">x</span>) sumando sus coeficientes:
+                        </p>
+                        <div class="space-y-1.5">
+                            ${groupRows}
+                        </div>
+                    </div>
+
+                    <!-- CONTENIDO PESTAÑA 3: MÉTODO VERTICAL -->
+                    <div class="${ex.activeTab === 'vertical' ? 'block' : 'hidden'} space-y-2.5">
+                        <p class="text-xs text-slate-300">
+                            En el <strong>Método Tradicional o por Filas</strong>, multiplicamos todo el primer polinomio por cada término del segundo factor y luego sumamos los términos semejantes columna a columna:
+                        </p>
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                            <div class="text-right font-mono text-xs text-sky-300 math-expr">
+                                (${formatPolynomialHTML(factorA)})
+                            </div>
+                            <div class="text-right font-mono text-xs text-amber-300 border-b border-slate-700 pb-2 math-expr">
+                                × (${formatPolynomialHTML(factorB)})
+                            </div>
+                            <div class="space-y-1.5 pt-1">
+                                ${verticalRowsHTML}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RESULTADO FINAL REDUCIDO Y ORDENADO -->
+                    <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-check-circle"></i> Polinomio Resultante Reducido:
+                        </span>
+                        <span class="font-mono font-bold text-sm sm:text-base text-white math-expr">
+                            ${finalPolyHTML}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        /***********************************************************************
+         * RENDERIZADO DE LAS 20 TARJETAS DE EJERCICIOS
+         ***********************************************************************/
+        function renderExercises() {
+            const grid = document.getElementById('exercises-grid');
+            grid.innerHTML = '';
+
+            exercises.forEach((ex) => {
+                // Filtrado visual
+                if (currentFilter !== 'all' && ex.status !== currentFilter) {
+                    return;
+                }
+
+                // Expresión del problema
+                const pHTML = formatPolynomialHTML(ex.P);
+                const qHTML = formatPolynomialHTML(ex.Q);
+                const rHTML = ex.R ? formatPolynomialHTML(ex.R) : null;
+
+                const factorP = ex.P.length === 1 ? pHTML : `(${pHTML})`;
+                const factorQ = ex.Q.length === 1 ? qHTML : `(${qHTML})`;
+                const factorR = ex.R ? (ex.R.length === 1 ? ` · ${rHTML}` : ` · (${rHTML})`) : '';
+                const problemExpressionHTML = `${factorP} · ${factorQ}${factorR}`;
+
+                // Borde según estado
+                let borderClass = 'border-slate-800 hover:border-slate-700';
+                let statusBadge = `
+                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-800 text-slate-400 border border-slate-700">
+                        Pendiente
+                    </span>
+                `;
+
+                if (ex.status === 'correct') {
+                    borderClass = 'border-emerald-500/70 bg-emerald-950/10';
+                    statusBadge = `
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                            <i class="fa-solid fa-check"></i> Correcto
+                        </span>
+                    `;
+                } else if (ex.status === 'incorrect') {
+                    borderClass = 'border-rose-500/70 bg-rose-950/10';
+                    statusBadge = `
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 flex items-center gap-1">
+                            <i class="fa-solid fa-xmark"></i> Revisar
+                        </span>
+                    `;
+                }
+
+                // Vista previa matemática en vivo del input actual
+                const previewHTML = getLivePreviewHTML(ex.studentInput);
+
+                const card = document.createElement('article');
+                card.id = `card-ex-${ex.id}`;
+                card.className = `bg-slate-900/90 border-2 ${borderClass} rounded-2xl p-5 shadow-xl transition-all flex flex-col justify-between`;
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Encabezado de la tarjeta -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-xl bg-sky-600/20 border border-sky-500/40 text-sky-300 font-mono font-bold text-sm flex items-center justify-center">
+                                    #${ex.id}
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold border ${ex.badgeColor}">
+                                    ${ex.category}
+                                </span>
+                            </div>
+                            <div id="status-badge-${ex.id}">
+                                ${statusBadge}
+                            </div>
+                        </div>
+
+                        <!-- Enunciado Matemático -->
+                        <div class="my-3 p-4 rounded-xl bg-slate-950 border border-slate-800/90 shadow-inner">
+                            <div class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">
+                                Desarrollar y reducir el producto:
+                            </div>
+                            <div class="font-mono text-base sm:text-lg md:text-xl font-bold text-white math-expr overflow-x-auto py-1">
+                                P<sub>${ex.id}</sub>(x) = ${problemExpressionHTML}
+                            </div>
+                        </div>
+
+                        <!-- Campo de respuesta y teclado rápido -->
+                        <div class="space-y-2 mt-4">
+                            <div class="flex flex-col sm:flex-row gap-2">
+                                <div class="relative flex-1">
+                                    <input
+                                        type="text"
+                                        id="input-ex-${ex.id}"
+                                        value="${ex.studentInput.replace(/"/g, '&quot;')}"
+                                        oninput="handleStudentTyping(${ex.id}, this.value)"
+                                        onkeydown="if(event.key === 'Enter') verifySingleExercise(${ex.id})"
+                                        placeholder="Ej: -12x^7 + 5x^4 - 3x + 8"
+                                        autocomplete="off"
+                                        spellcheck="false"
+                                        class="w-full bg-slate-950 border border-slate-700 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 rounded-xl px-3.5 py-2.5 text-sm font-mono text-white placeholder-slate-500 outline-none transition"
+                                    />
+                                </div>
+                                <button
+                                    onclick="verifySingleExercise(${ex.id})"
+                                    class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-sky-600 hover:bg-sky-500 text-white shadow-md active:scale-95 transition flex items-center justify-center gap-1.5 shrink-0 cursor-pointer"
+                                >
+                                    <i class="fa-solid fa-check"></i> Verificar
+                                </button>
+                            </div>
+
+                            <!-- Botonera de inserción rápida de exponentes y símbolos -->
+                            <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+                                <div class="flex flex-wrap items-center gap-1">
+                                    <span class="text-[11px] text-slate-400 mr-1">Insertar:</span>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, 'x')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs border border-slate-700">x</button>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, '^')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-amber-300 font-mono text-xs border border-slate-700">^</button>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, 'x^2')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 font-mono text-xs border border-slate-700">x²</button>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, 'x^3')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 font-mono text-xs border border-slate-700">x³</button>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, 'x^4')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 font-mono text-xs border border-slate-700">x⁴</button>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, 'x^5')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 font-mono text-xs border border-slate-700">x⁵</button>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, ' + ')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs border border-slate-700">+</button>
+                                    <button type="button" onclick="insertSymbol(${ex.id}, ' - ')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs border border-slate-700">-</button>
+                                </div>
+
+                                <!-- Vista previa formateada en tiempo real -->
+                                <div id="preview-ex-${ex.id}" class="text-xs font-mono text-slate-300 math-expr">
+                                    ${previewHTML}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Caja de Feedback Individual -->
+                        <div id="feedback-ex-${ex.id}" class="mt-3 ${ex.feedbackMsg ? 'block' : 'hidden'}">
+                            ${ex.feedbackMsg || ''}
+                        </div>
+                    </div>
+
+                    <!-- Pie de Tarjeta: Botón Mostrar Procedimiento -->
+                    <div class="mt-4 pt-3 border-t border-slate-800/80">
+                        <button
+                            onclick="toggleProcedure(${ex.id})"
+                            id="btn-proc-${ex.id}"
+                            class="w-full py-2 px-3 rounded-xl font-semibold text-xs bg-slate-800/90 hover:bg-slate-800 text-amber-300 border border-slate-700/80 transition flex items-center justify-between cursor-pointer"
+                        >
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span id="btn-proc-text-${ex.id}">${ex.procedureOpen ? 'Ocultar procedimiento y propiedades' : 'Mostrar procedimiento (Distributiva / Asociativa)'}</span>
+                            </span>
+                            <i id="btn-proc-icon-${ex.id}" class="fa-solid ${ex.procedureOpen ? 'fa-chevron-up' : 'fa-chevron-down'}"></i>
+                        </button>
+
+                        <!-- Contenedor Desplegable del Procedimiento -->
+                        <div id="proc-container-${ex.id}" class="${ex.procedureOpen ? 'block' : 'hidden'}">
+                            ${buildProcedureHTML(ex)}
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Genera la vista previa en vivo cuando el estudiante escribe
+        function getLivePreviewHTML(rawText) {
+            if (!rawText || !rawText.trim()) {
+                return '<span class="text-slate-500 italic">Vista previa: sin ingresar</span>';
+            }
+            const parsed = parseStudentPolynomial(rawText);
+            if (!parsed.valid) {
+                return `<span class="text-amber-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Escribiendo...</span>`;
+            }
+            // Mostrar exactamente los términos que escribió con superíndices
+            const formatted = parsed.rawTerms && parsed.rawTerms.length > 0
+                ? parsed.rawTerms.map((t, idx) => formatTermHTML(t, idx === 0)).join('')
+                : '0';
+            return `<span class="text-slate-400">Tu expresión:</span> <span class="text-sky-300 font-semibold">${formatted}</span>`;
+        }
+
+        function handleStudentTyping(id, val) {
+            const ex = exercises.find(e => e.id === id);
+            if (!ex) return;
+            ex.studentInput = val;
+            const previewEl = document.getElementById(`preview-ex-${id}`);
+            if (previewEl) {
+                previewEl.innerHTML = getLivePreviewHTML(val);
+            }
+        }
+
+        function insertSymbol(id, sym) {
+            const input = document.getElementById(`input-ex-${id}`);
+            if (!input) return;
+            const start = input.selectionStart || input.value.length;
+            const end = input.selectionEnd || input.value.length;
+            const text = input.value;
+            input.value = text.substring(0, start) + sym + text.substring(end);
+            input.focus();
+            const newPos = start + sym.length;
+            input.setSelectionRange(newPos, newPos);
+            handleStudentTyping(id, input.value);
+        }
+
+        /***********************************************************************
+         * VERIFICACIÓN DIAGNÓSTICA DE UN EJERCICIO O DE TODOS
+         ***********************************************************************/
+        function evaluateExercise(ex) {
+            const parsed = parseStudentPolynomial(ex.studentInput);
+
+            if (!parsed.valid) {
+                ex.status = 'incorrect';
+                ex.feedbackMsg = `
+                    <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-start gap-2">
+                        <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
+                        <div>${parsed.error}</div>
+                    </div>
+                `;
+                return false;
+            }
+
+            // Comparar polinomio simplificado del alumno con el esperado
+            const expected = ex.expected;
+            const student = parsed.terms;
+
+            let isSameReduced = expected.length === student.length;
+            if (isSameReduced) {
+                for (let i = 0; i < expected.length; i++) {
+                    if (expected[i].exp !== student[i].exp || expected[i].coeff !== student[i].coeff) {
+                        isSameReduced = false;
+                        break;
+                    }
+                }
+            }
+
+            if (isSameReduced && parsed.hasUnreducedTerms) {
+                // El desarrollo distributivo es equivalente pero le faltó asociar/reducir términos semejantes
+                ex.status = 'incorrect';
+                ex.feedbackMsg = `
+                    <div class="p-3 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs flex items-start gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-400 mt-0.5"></i>
+                        <div>
+                            <strong>¡Casi listo!</strong> Tu desarrollo distributivo es algebraicamente equivalente, pero tenés <strong>términos semejantes sin agrupar</strong>. Aplicá la Propiedad Asociativa para sumar los coeficientes del mismo grado.
+                        </div>
+                    </div>
+                `;
+                return false;
+            }
+
+            if (isSameReduced) {
+                ex.status = 'correct';
+                ex.feedbackMsg = `
+                    <div class="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+                            <span><strong>¡Excelente!</strong> Polinomio resultante reducido y correcto: <span class="font-mono math-expr">${formatPolynomialHTML(expected)}</span></span>
+                        </div>
+                    </div>
+                `;
+                return true;
+            }
+
+            // Diagnóstico detallado de qué grado difiere para guiar al alumno
+            const expMap = new Map(expected.map(t => [t.exp, t.coeff]));
+            const stuMap = new Map(student.map(t => [t.exp, t.coeff]));
+            const allDegrees = Array.from(new Set([...expMap.keys(), ...stuMap.keys()])).sort((a, b) => b - a);
+
+            const hints = [];
+            for (const deg of allDegrees) {
+                const eCoeff = expMap.get(deg) || 0;
+                const sCoeff = stuMap.get(deg) || 0;
+                if (eCoeff !== sCoeff) {
+                    const degName = deg === 0 ? 'el término independiente (grado 0)' : (deg === 1 ? 'el término lineal (x)' : `el término de grado ${deg} (x<sup>${deg}</sup>)`);
+                    hints.push(degName);
+                }
+            }
+
+            ex.status = 'incorrect';
+            ex.feedbackMsg = `
+                <div class="p-3 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-200 text-xs space-y-1">
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-rose-400 mt-0.5"></i>
+                        <div>
+                            <strong>Respuesta incorrecta.</strong> Revisá ${hints.slice(0, 2).join(' y ')}. Podés abrir <em>"Mostrar procedimiento"</em> abajo para ver el paso a paso.
+                        </div>
+                    </div>
+                </div>
+            `;
+            return false;
+        }
+
+        function verifySingleExercise(id) {
+            const ex = exercises.find(e => e.id === id);
+            if (!ex) return;
+            evaluateExercise(ex);
+            renderExercises();
+            updateScoreboard();
+        }
+
+        function verifyAllExercises() {
+            let correctCount = 0;
+            let attemptedCount = 0;
+
+            exercises.forEach(ex => {
+                if (ex.studentInput && ex.studentInput.trim() !== '') {
+                    attemptedCount++;
+                }
+                const ok = evaluateExercise(ex);
+                if (ok) correctCount++;
+            });
+
+            renderExercises();
+            updateScoreboard();
+
+            const pct = Math.round((correctCount / 20) * 100);
+            showBanner(
+                correctCount >= 14 ? 'emerald' : 'sky',
+                `Verificación completada: ${correctCount} de 20 ejercicios correctos (${pct}%)`,
+                attemptedCount < 20
+                    ? `Completaste ${attemptedCount} de los 20 ejercicios. Podés revisar los procedimientos paso a paso en cada tarjeta.`
+                    : `Has respondido los 20 ejercicios de la práctica.`
+            );
+        }
+
+        function updateScoreboard() {
+            const correctCount = exercises.filter(e => e.status === 'correct').length;
+            const pct = Math.round((correctCount / 20) * 100);
+            document.getElementById('score-counter').textContent = `${correctCount} / 20`;
+            document.getElementById('grade-counter').textContent = `${pct}%`;
+        }
+
+        /***********************************************************************
+         * PROCEDIMIENTO DESPLEGABLE Y PESTAÑAS
+         ***********************************************************************/
+        function toggleProcedure(id) {
+            const ex = exercises.find(e => e.id === id);
+            if (!ex) return;
+            ex.procedureOpen = !ex.procedureOpen;
+
+            const container = document.getElementById(`proc-container-${id}`);
+            const textSpan = document.getElementById(`btn-proc-text-${id}`);
+            const icon = document.getElementById(`btn-proc-icon-${id}`);
+
+            if (container && textSpan && icon) {
+                container.classList.toggle('hidden', !ex.procedureOpen);
+                textSpan.textContent = ex.procedureOpen
+                    ? 'Ocultar procedimiento y propiedades'
+                    : 'Mostrar procedimiento (Distributiva / Asociativa)';
+                icon.className = `fa-solid ${ex.procedureOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`;
+            }
+        }
+
+        function switchProcedureTab(id, tabName) {
+            const ex = exercises.find(e => e.id === id);
+            if (!ex) return;
+            ex.activeTab = tabName;
+            ex.procedureOpen = true;
+            const container = document.getElementById(`proc-container-${id}`);
+            if (container) {
+                container.innerHTML = buildProcedureHTML(ex);
+            }
+        }
+
+        function toggleAllProcedures(openState) {
+            const allOpen = exercises.every(e => e.procedureOpen);
+            const target = openState !== undefined ? openState : !allOpen;
+            exercises.forEach(e => e.procedureOpen = target);
+            renderExercises();
+        }
+
+        /***********************************************************************
+         * FILTROS DE TARJETAS
+         ***********************************************************************/
+        function filterCards(filterType) {
+            currentFilter = filterType;
+            updateFilterButtons();
+            renderExercises();
+        }
+
+        function updateFilterButtons() {
+            const filters = ['all', 'pending', 'correct', 'incorrect'];
+            filters.forEach(f => {
+                const btn = document.getElementById(`filter-${f}`);
+                if (!btn) return;
+                if (f === currentFilter) {
+                    btn.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-sky-600 text-white transition shadow';
+                } else {
+                    btn.className = 'px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+                }
+            });
+        }
+
+        /***********************************************************************
+         * CONTROL DEL TEMPORIZADOR
+         ***********************************************************************/
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        function updateTimerUI() {
+            const display = document.getElementById('timer-display');
+            display.textContent = formatTime(remainingSeconds);
+
+            if (remainingSeconds <= 60) {
+                display.className = 'font-mono text-lg sm:text-xl font-bold text-rose-400 animate-pulse tracking-wider min-w-[70px] text-center';
+            } else if (remainingSeconds <= 300) {
+                display.className = 'font-mono text-lg sm:text-xl font-bold text-amber-400 tracking-wider min-w-[70px] text-center';
+            } else {
+                display.className = 'font-mono text-lg sm:text-xl font-bold text-emerald-400 tracking-wider min-w-[70px] text-center';
+            }
+
+            const icon = document.getElementById('icon-timer-toggle');
+            if (icon) {
+                icon.className = isTimerRunning ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+            }
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            isTimerRunning = true;
+            updateTimerUI();
+
+            timerInterval = setInterval(() => {
+                if (remainingSeconds > 0) {
+                    remainingSeconds--;
+                    updateTimerUI();
+                } else {
+                    clearInterval(timerInterval);
+                    isTimerRunning = false;
+                    updateTimerUI();
+                    onTimeExpired();
+                }
+            }, 1000);
+        }
+
+        function toggleTimer() {
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                updateTimerUI();
+            } else {
+                if (remainingSeconds <= 0) {
+                    const mins = parseInt(document.getElementById('time-select').value, 10) || 30;
+                    remainingSeconds = mins * 60;
+                }
+                startTimer();
+            }
+        }
+
+        function resetTimer(autoStart = true) {
+            clearInterval(timerInterval);
+            const mins = parseInt(document.getElementById('time-select').value, 10) || 30;
+            remainingSeconds = mins * 60;
+            isTimerRunning = false;
+            updateTimerUI();
+            if (autoStart) startTimer();
+        }
+
+        function changeTimerDuration() {
+            resetTimer(true);
+        }
+
+        function onTimeExpired() {
+            verifyAllExercises();
+            showBanner(
+                'amber',
+                '¡Tiempo cumplido!',
+                'Se verificaron automáticamente las respuestas ingresadas hasta el momento. Podés seguir practicando o consultar el procedimiento de cada ejercicio.'
+            );
+        }
+
+        /***********************************************************************
+         * UTILIDADES DE INTERFAZ (BANNERS Y MODAL)
+         ***********************************************************************/
+        function showBanner(color, title, text) {
+            const banner = document.getElementById('status-banner');
+            const content = document.getElementById('status-banner-content');
+            const titleEl = document.getElementById('status-banner-title');
+            const textEl = document.getElementById('status-banner-text');
+
+            const palette = {
+                emerald: 'bg-emerald-950/90 border-emerald-500/50 text-emerald-200',
+                amber: 'bg-amber-950/90 border-amber-500/50 text-amber-200',
+                sky: 'bg-sky-950/90 border-sky-500/50 text-sky-200'
+            };
+
+            content.className = `p-4 rounded-xl border flex items-center justify-between gap-4 shadow-lg ${palette[color] || palette.sky}`;
+            titleEl.textContent = title;
+            textEl.textContent = text;
+            banner.classList.remove('hidden');
+        }
+
+        function closeBanner() {
+            document.getElementById('status-banner').classList.add('hidden');
+        }
+
+        function toggleHelpModal() {
+            const modal = document.getElementById('help-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Inicializar al cargar la página
+        window.onload = function () {
+            generateNewSet();
+        };
+    </script>
+</body>
+</html>
