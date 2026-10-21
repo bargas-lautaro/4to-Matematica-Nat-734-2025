@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Escrita de Matemática: Polinomios, División y Factorización (Bhaskara) - 5° Año E.S.T.P. Chubut</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter, Merriweather (estilo documento oficial) y JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Fondo de escritorio técnico con hoja de examen destacada */
+        body {
+            background-color: #cbd5e1;
+            background-image: radial-gradient(#94a3b8 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Papel cuadriculado sutil para los recuadros de desarrollo matemático */
+        .math-paper-grid {
+            background-color: #f8fafc;
+            background-size: 20px 20px;
+            background-image:
+                linear-gradient(to right, rgba(148, 163, 184, 0.18) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.18) 1px, transparent 1px);
+        }
+        .math-expr sup {
+            font-size: 0.72em;
+            vertical-align: super;
+            line-height: 0;
+            margin-left: 1px;
+            font-weight: 700;
+            color: #0369a1;
+        }
+        .math-expr sub {
+            font-size: 0.70em;
+            vertical-align: sub;
+            line-height: 0;
+        }
+        /* Estilos de impresión para usar como prueba real en papel si se desea */
+        @media print {
+            body {
+                background: #ffffff !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .exam-sheet {
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            .exercise-card {
+                break-inside: avoid;
+                border: 1px solid #94a3b8 !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-900 font-sans min-h-screen pb-14">
+
+    <!-- BARRA DE CONTROL FLOTANTE (HERRAMIENTAS DEL DOCENTE / ALUMNO) -->
+    <nav class="sticky top-0 z-50 bg-slate-900 text-white border-b-2 border-sky-500 shadow-xl no-print">
+        <div class="max-w-6xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+            <!-- Botones de Acción Principal -->
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="generateNewExam()" class="px-4 py-2 rounded-lg font-bold text-xs sm:text-sm bg-sky-600 hover:bg-sky-500 text-white shadow-md active:scale-95 transition flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-file-pen"></i> Generar Prueba (20 Ejercicios)
+                </button>
+
+                <button onclick="gradeEntireExam()" class="px-4 py-2 rounded-lg font-bold text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-md active:scale-95 transition flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-stamp"></i> Entregar y Calificar Prueba
+                </button>
+
+                <button onclick="toggleAllProcedures()" class="px-3 py-2 rounded-lg font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-list-check"></i> Ver/Ocultar Todos los Procedimientos
+                </button>
+
+                <button onclick="toggleFormulasModal()" class="px-3 py-2 rounded-lg font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-square-root-variable"></i> Hoja de Fórmulas
+                </button>
+
+                <button onclick="window.print()" class="px-3 py-2 rounded-lg font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1.5 cursor-pointer" title="Imprimir hoja de prueba">
+                    <i class="fa-solid fa-print"></i> Imprimir
+                </button>
+            </div>
+
+            <!-- Reloj / Tiempo de Examen -->
+            <div class="flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl">
+                <i class="fa-regular fa-clock text-sky-400 text-xs"></i>
+                <select id="time-select" onchange="changeTimerDuration()" class="bg-slate-800 text-white font-semibold rounded px-2 py-0.5 border border-slate-700 text-xs focus:outline-none">
+                    <option value="40">40 min</option>
+                    <option value="60" selected>60 min</option>
+                    <option value="80">80 min</option>
+                    <option value="90">90 min</option>
+                </select>
+                <div id="timer-display" class="font-mono text-base sm:text-lg font-bold text-emerald-400 tracking-wider min-w-[64px] text-center">
+                    60:00
+                </div>
+                <button onclick="toggleTimer()" class="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition cursor-pointer" title="Pausar / Reanudar tiempo">
+                    <i id="icon-timer-toggle" class="fa-solid fa-pause"></i>
+                </button>
+                <button onclick="resetTimer(true)" class="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition cursor-pointer" title="Reiniciar reloj">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOJA DE EVALUACIÓN ESCRITA (ESTÉTICA DE PRUEBA DE ESCUELA TÉCNICA) -->
+    <main class="max-w-5xl mx-auto mt-6 px-3 sm:px-6">
+        <div class="exam-sheet bg-white border-2 border-slate-800 rounded-none sm:rounded-lg shadow-2xl p-5 sm:p-8 md:p-10 relative">
+
+            <!-- ENCABEZADO OFICIAL DE LA PRUEBA -->
+            <header class="border-2 border-slate-900 p-4 sm:p-5 bg-slate-50">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b-2 border-slate-900 pb-4">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-12 h-12 rounded-lg bg-slate-900 text-white flex items-center justify-center font-serif font-bold text-xl shrink-0">
+                            E.T.
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-bold uppercase tracking-widest text-slate-600">
+                                Ministerio de Educación • Provincia del Chubut
+                            </div>
+                            <h1 class="font-serif text-lg sm:text-xl md:text-2xl font-bold text-slate-900 leading-tight">
+                                EVALUACIÓN ESCRITA DE MATEMÁTICA
+                            </h1>
+                            <p class="text-xs font-semibold text-slate-700 mt-0.5">
+                                Unidad: Operaciones con Polinomios, División (Euclides / Ruffini) y Factorización con Bhaskara
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Sello de Calificación estilo Prueba Escrita -->
+                    <div class="flex items-center gap-3 self-end md:self-center border-2 border-slate-900 bg-white px-4 py-2">
+                        <div class="text-right">
+                            <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-500">NOTA FINAL</span>
+                            <span id="exam-grade-number" class="font-mono text-2xl sm:text-3xl font-extrabold text-slate-900">-- / 10</span>
+                        </div>
+                        <div class="h-10 w-[2px] bg-slate-300"></div>
+                        <div>
+                            <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-500">ACIERTOS</span>
+                            <span id="exam-score-raw" class="font-mono text-base font-bold text-sky-700">0 / 20</span>
+                            <span id="exam-status-badge" class="block text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 mt-0.5 text-center">
+                                EN CURSO
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos del Estudiante y Curso -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-4 text-xs">
+                    <div class="sm:col-span-5 flex items-center gap-2">
+                        <label for="student-name" class="font-bold uppercase text-slate-700 shrink-0">Estudiante:</label>
+                        <input id="student-name" type="text" placeholder="Apellido y Nombres..." class="w-full border-b border-slate-400 bg-transparent px-1 py-0.5 font-medium text-slate-900 focus:border-sky-600 outline-none" />
+                    </div>
+                    <div class="sm:col-span-3 flex items-center gap-2">
+                        <span class="font-bold uppercase text-slate-700">Curso:</span>
+                        <span class="font-mono font-semibold text-slate-900 border-b border-slate-400 px-2 py-0.5 w-full">5° Año E.S.T.P.</span>
+                    </div>
+                    <div class="sm:col-span-2 flex items-center gap-2">
+                        <span class="font-bold uppercase text-slate-700">Tema:</span>
+                        <span id="exam-theme-code" class="font-mono font-bold text-sky-800 bg-sky-100 border border-sky-300 px-2 py-0.5 rounded">TEMA A-01</span>
+                    </div>
+                    <div class="sm:col-span-2 flex items-center gap-2">
+                        <span class="font-bold uppercase text-slate-700">Fecha:</span>
+                        <span id="exam-date" class="font-mono text-slate-800 border-b border-slate-400 px-1 py-0.5 w-full text-center"></span>
+                    </div>
+                </div>
+
+                <!-- Criterios de Evaluación de la Prueba -->
+                <div class="mt-4 pt-3 border-t border-slate-300 flex flex-col lg:flex-row lg:items-center justify-between gap-2 text-[11px] text-slate-700">
+                    <div>
+                        <strong>Consigna general:</strong> Cada uno de los 20 puntos vale <strong>0,50 pts</strong> (Total: 10 puntos; se aprueba con 6,00 pts = 12 ejercicios correctos). Respetar en cada punto el <strong>método obligatorio indicado en el encabezado</strong>.
+                    </div>
+                    <!-- Filtros rápidos de navegación (No salen impresos) -->
+                    <div class="flex flex-wrap items-center gap-1 shrink-0 no-print">
+                        <button onclick="setSectionFilter('all')" id="sec-btn-all" class="px-2.5 py-1 rounded font-bold bg-slate-900 text-white cursor-pointer">Todos (20)</button>
+                        <button onclick="setSectionFilter('sec1')" id="sec-btn-sec1" class="px-2 py-1 rounded font-semibold bg-slate-200 hover:bg-slate-300 text-slate-800 cursor-pointer">I. Suma/Resta (5)</button>
+                        <button onclick="setSectionFilter('sec2')" id="sec-btn-sec2" class="px-2 py-1 rounded font-semibold bg-slate-200 hover:bg-slate-300 text-slate-800 cursor-pointer">II. División (5)</button>
+                        <button onclick="setSectionFilter('sec3')" id="sec-btn-sec3" class="px-2 py-1 rounded font-semibold bg-slate-200 hover:bg-slate-300 text-slate-800 cursor-pointer">III. Bhaskara (5)</button>
+                        <button onclick="setSectionFilter('sec4')" id="sec-btn-sec4" class="px-2 py-1 rounded font-semibold bg-slate-200 hover:bg-slate-300 text-slate-800 cursor-pointer">IV. División + Bhaskara (5)</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- BANNER DE RESULTADO AL ENTREGAR LA PRUEBA -->
+            <div id="exam-alert-banner" class="hidden my-5 p-4 rounded-lg border-2 flex items-center justify-between gap-4 no-print">
+                <div class="flex items-center gap-3">
+                    <i id="exam-alert-icon" class="fa-solid fa-circle-check text-2xl"></i>
+                    <div>
+                        <h3 id="exam-alert-title" class="font-bold text-sm sm:text-base"></h3>
+                        <p id="exam-alert-desc" class="text-xs sm:text-sm"></p>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('exam-alert-banner').classList.add('hidden')" class="px-2 py-1 text-sm font-bold opacity-70 hover:opacity-100 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- CONTENEDOR DINÁMICO DE LAS 4 SECCIONES Y SUS 20 EJERCICIOS -->
+            <div id="exam-sections-container" class="mt-6 space-y-8">
+                <!-- Se genera dinámicamente por JS -->
+            </div>
+
+            <!-- PIE DE LA HOJA DE PRUEBA -->
+            <footer class="mt-10 pt-4 border-t-2 border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 gap-2">
+                <div>
+                    <strong>E.S.T.P. Provincia del Chubut</strong> • 5° Año Ciclo Superior Técnico • Espacio Curricular: Matemática
+                </div>
+                <div class="font-mono">
+                    Firma del Docente / Calificación Definitiva: ______________________
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <!-- MODAL DE FÓRMULAS Y RECORDATORIO TÉCNICO (BHASKARA, RUFFINI, DIVISIÓN) -->
+    <div id="formulas-modal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 no-print">
+        <div class="bg-white border-2 border-slate-900 rounded-xl max-w-3xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto text-slate-900">
+            <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3">
+                <h3 class="text-base sm:text-lg font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-book-open-reader text-sky-700"></i> Hoja de Fórmulas Permitida en la Prueba (5° Año E.S.T.P.)
+                </h3>
+                <button onclick="toggleFormulasModal()" class="text-slate-500 hover:text-slate-900 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
+                <!-- Bhaskara -->
+                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-300 space-y-1.5">
+                    <div class="font-bold text-sky-800 uppercase">1. Fórmula Resolvente de Bhaskara (Grado 2)</div>
+                    <p>Para todo polinomio cuadrático <span class="font-mono font-semibold">P(x) = a·x² + b·x + c</span> (con <span class="font-mono">a ≠ 0</span>):</p>
+                    <div class="p-2 bg-white border border-slate-200 rounded font-mono text-center text-sm font-bold text-slate-900">
+                        x₁,₂ = [ -b ± √(b² - 4·a·c) ] / (2·a)
+                    </div>
+                    <p>Una vez halladas las raíces <span class="font-mono">x₁</span> y <span class="font-mono">x₂</span>, la <strong>forma factorizada</strong> es:</p>
+                    <div class="p-1.5 bg-amber-50 border border-amber-300 rounded font-mono text-center font-bold text-amber-900">
+                        P(x) = a · (x - x₁) · (x - x₂)
+                    </div>
+                    <p class="text-[11px] text-rose-700 font-semibold">¡Atención! Nunca olvides escribir el coeficiente principal "a" multiplicando adelante.</p>
+                </div>
+
+                <!-- División Euclidiana y Ruffini -->
+                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-300 space-y-1.5">
+                    <div class="font-bold text-emerald-800 uppercase">2. División de Polinomios y Regla de Ruffini</div>
+                    <p><strong>Algoritmo de la División Entera:</strong> Dados <span class="font-mono">P(x)</span> y <span class="font-mono">D(x)</span>, existen únicos Cociente <span class="font-mono">C(x)</span> y Resto <span class="font-mono">R(x)</span> tales que:</p>
+                    <div class="p-2 bg-white border border-slate-200 rounded font-mono text-center font-bold text-slate-900">
+                        P(x) = D(x) · C(x) + R(x)
+                    </div>
+                    <p><strong>Regla de Ruffini y Teorema del Resto:</strong> Se aplica cuando el divisor es de la forma <span class="font-mono">(x - r)</span>. El resto coincide con evaluar <span class="font-mono">R = P(r)</span>. Si <span class="font-mono">R = 0</span>, la división es exacta.</p>
+                </div>
+
+                <!-- Factorización con División + Bhaskara -->
+                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-300 space-y-1.5 md:col-span-2">
+                    <div class="font-bold text-purple-800 uppercase">3. Factorización de Polinomios de Grado 3 o Superior (División por Ruffini + Bhaskara)</div>
+                    <p>
+                        Para factorizar <span class="font-mono font-semibold">P(x) = a·x³ + b·x² + c·x + d</span> conociendo una raíz <span class="font-mono">x₁</span> (o un factor divisor <span class="font-mono">(x - x₁)</span>):
+                    </p>
+                    <ol class="list-decimal list-inside space-y-1 font-medium text-slate-800">
+                        <li>Dividimos <span class="font-mono">P(x) ÷ (x - x₁)</span> aplicando la <strong>Regla de Ruffini</strong> (verificando que el resto sea <span class="font-mono">0</span>) para bajar un grado y obtener el cociente cuadrático <span class="font-mono">C(x) = a·x² + b'·x + c'</span>.</li>
+                        <li>Aplicamos la <strong>Fórmula de Bhaskara</strong> al cociente <span class="font-mono">C(x)</span> para hallar las dos raíces restantes <span class="font-mono">x₂</span> y <span class="font-mono">x₃</span>.</li>
+                        <li>Escribimos el polinomio completamente factorizado: <span class="font-mono font-bold text-purple-900">P(x) = a · (x - x₁) · (x - x₂) · (x - x₃)</span>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+                <button onclick="toggleFormulasModal()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-lg text-xs cursor-pointer">
+                    Volver a la Prueba
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOTOR ALGEBRAICO Y LÓGICA INTERACTIVA -->
+    <script>
+        /***********************************************************************
+         * ESTADO GLOBAL DE LA PRUEBA
+         ***********************************************************************/
+        let examExercises = [];
+        let activeSectionFilter = 'all';
+        let timerInterval = null;
+        let remainingSeconds = 3600; // 60 min por defecto
+        let isTimerRunning = false;
+        let examThemeCounter = 1;
+
+        /***********************************************************************
+         * FUNCIONES AUXILIARES MATEMÁTICAS Y DE POLINOMIOS
+         ***********************************************************************/
+        function randInt(min, max, nonZero = true) {
+            let v = 0;
+            do {
+                v = Math.floor(Math.random() * (max - min + 1)) + min;
+            } while (nonZero && v === 0);
+            return v;
+        }
+
+        function randChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function gcd(a, b) {
+            a = Math.abs(a);
+            b = Math.abs(b);
+            while (b > 0) {
+                const t = b;
+                b = a % b;
+                a = t;
+            }
+            return a || 1;
+        }
+
+        function gcdArray(arr) {
+            if (!arr.length) return 1;
+            return arr.reduce((acc, v) => gcd(acc, v), Math.abs(arr[0]));
+        }
+
+        // Simplifica y ordena de mayor a menor exponente un polinomio [{coeff, exp}]
+        function simplifyPoly(terms) {
+            const map = new Map();
+            for (const t of terms) {
+                if (!t || t.coeff === 0) continue;
+                map.set(t.exp, (map.get(t.exp) || 0) + t.coeff);
+            }
+            const res = [];
+            for (const [exp, coeff] of map.entries()) {
+                if (coeff !== 0) res.push({ coeff, exp });
+            }
+            res.sort((a, b) => b.exp - a.exp);
+            return res;
+        }
+
+        function addPoly(A, B) {
+            return simplifyPoly([...A, ...B]);
+        }
+
+        function scalePoly(P, k) {
+            return simplifyPoly(P.map(t => ({ coeff: t.coeff * k, exp: t.exp })));
+        }
+
+        function subtractPoly(A, B) {
+            return addPoly(A, scalePoly(B, -1));
+        }
+
+        function multiplyPoly(A, B) {
+            if (!A.length || !B.length) return [];
+            const raw = [];
+            for (const ta of A) {
+                for (const tb of B) {
+                    raw.push({ coeff: ta.coeff * tb.coeff, exp: ta.exp + tb.exp });
+                }
+            }
+            return simplifyPoly(raw);
+        }
+
+        function powerPoly(P, n) {
+            let res = [{ coeff: 1, exp: 0 }];
+            for (let i = 0; i < n; i++) {
+                res = multiplyPoly(res, P);
+            }
+            return res;
+        }
+
+        function arePolysEqual(P, Q) {
+            const sP = simplifyPoly(P);
+            const sQ = simplifyPoly(Q);
+            if (sP.length !== sQ.length) return false;
+            for (let i = 0; i < sP.length; i++) {
+                if (sP[i].exp !== sQ[i].exp || sP[i].coeff !== sQ[i].coeff) return false;
+            }
+            return true;
+        }
+
+        // Obtiene el coeficiente de grado `deg` en un polinomio
+        function getCoeffAt(P, deg) {
+            const found = P.find(t => t.exp === deg);
+            return found ? found.coeff : 0;
+        }
+
+        // Formatea un término en HTML
+        function formatTermHTML(term, isFirst = false) {
+            const { coeff, exp } = term;
+            if (coeff === 0) return isFirst ? '0' : '';
+            const sign = coeff < 0 ? (isFirst ? '-' : ' - ') : (isFirst ? '' : ' + ');
+            const absC = Math.abs(coeff);
+            const coeffStr = exp === 0 ? `${absC}` : (absC === 1 ? '' : `${absC}`);
+            const varStr = exp === 0 ? '' : (exp === 1 ? 'x' : `x<sup>${exp}</sup>`);
+            return `${sign}${coeffStr}${varStr}`;
+        }
+
+        function formatPolyHTML(poly) {
+            const s = simplifyPoly(poly);
+            if (s.length === 0) return '0';
+            return s.map((t, i) => formatTermHTML(t, i === 0)).join('');
+        }
+
+        function formatPolyPlain(poly) {
+            const s = simplifyPoly(poly);
+            if (s.length === 0) return '0';
+            return s.map((t, i) => {
+                const sign = t.coeff < 0 ? (i === 0 ? '-' : ' - ') : (i === 0 ? '' : ' + ');
+                const absC = Math.abs(t.coeff);
+                const coeffStr = t.exp === 0 ? `${absC}` : (absC === 1 ? '' : `${absC}`);
+                const varStr = t.exp === 0 ? '' : (t.exp === 1 ? 'x' : `x^${t.exp}`);
+                return `${sign}${coeffStr}${varStr}`;
+            }).join('');
+        }
+
+        // Formatea un factor lineal (x - r) correctamente según el signo de r
+        function linearFactorPoly(r) {
+            return [{ coeff: 1, exp: 1 }, { coeff: -r, exp: 0 }];
+        }
+
+        /***********************************************************************
+         * PARSER UNIVERSAL (SIRVE PARA POLINOMIOS EXPANDIDOS Y FACTORIZADOS)
+         ***********************************************************************/
+        function parseStandardPolyString(str) {
+            if (str === null || str === undefined) return null;
+            let clean = str
+                .toLowerCase()
+                .replace(/[−–—]/g, '-')
+                .replace(/²/g, '^2')
+                .replace(/³/g, '^3')
+                .replace(/⁴/g, '^4')
+                .replace(/⁵/g, '^5')
+                .replace(/⁶/g, '^6')
+                .replace(/⁷/g, '^7')
+                .replace(/⁸/g, '^8')
+                .replace(/⁹/g, '^9')
+                .replace(/\*/g, '')
+                .replace(/\s+/g, '');
+
+            if (!clean) return null;
+            if (clean === '0' || clean === '+0' || clean === '-0') return [];
+            if (!/^[0-9x\+\-\^]+$/.test(clean)) return null;
+
+            const tokens = clean.match(/[+\-]?[^+\-]+/g);
+            if (!tokens || !tokens.length) return null;
+
+            const raw = [];
+            for (const tok of tokens) {
+                const matchX = tok.match(/^([+\-]?\d*)x(?:\^?(\d+))?$/);
+                const matchC = tok.match(/^([+\-]?\d+)$/);
+
+                if (matchX) {
+                    const rc = matchX[1];
+                    let coeff = 1;
+                    if (rc === '' || rc === '+') coeff = 1;
+                    else if (rc === '-') coeff = -1;
+                    else coeff = parseInt(rc, 10);
+                    const exp = matchX[2] !== undefined ? parseInt(matchX[2], 10) : 1;
+                    if (isNaN(coeff) || isNaN(exp)) return null;
+                    raw.push({ coeff, exp });
+                } else if (matchC) {
+                    const coeff = parseInt(matchC[1], 10);
+                    if (isNaN(coeff)) return null;
+                    raw.push({ coeff, exp: 0 });
+                } else {
+                    return null;
+                }
+            }
+            return simplifyPoly(raw);
+        }
+
+        function parseFactoredExpression(inputStr) {
+            if (!inputStr || !inputStr.trim()) {
+                return { valid: false, error: 'El campo de respuesta está vacío.' };
+            }
+
+            let s = inputStr
+                .toLowerCase()
+                .replace(/[−–—]/g, '-')
+                .replace(/\[/g, '(')
+                .replace(/\]/g, ')')
+                .replace(/·/g, '*')
+                .replace(/²/g, '^2')
+                .replace(/³/g, '^3')
+                .replace(/⁴/g, '^4')
+                .replace(/⁵/g, '^5')
+                .replace(/⁶/g, '^6')
+                .replace(/⁷/g, '^7')
+                .replace(/⁸/g, '^8')
+                .replace(/⁹/g, '^9')
+                .replace(/\s+/g, '');
+
+            let depth = 0;
+            for (let i = 0; i < s.length; i++) {
+                if (s[i] === '(') depth++;
+                else if (s[i] === ')') depth--;
+                if (depth < 0 || depth > 1) {
+                    return { valid: false, error: 'Revisá el cierre de los paréntesis.' };
+                }
+            }
+            if (depth !== 0) {
+                return { valid: false, error: 'Falta cerrar un paréntesis ")".' };
+            }
+
+            let idx = 0;
+            let globalSign = 1;
+            const factors = [];
+
+            while (idx < s.length) {
+                if (s[idx] === '*') {
+                    idx++;
+                    continue;
+                }
+                if ((s[idx] === '+' || s[idx] === '-') && s[idx + 1] === '(') {
+                    if (s[idx] === '-') globalSign *= -1;
+                    idx++;
+                    continue;
+                }
+
+                if (s[idx] === '(') {
+                    const closeIdx = s.indexOf(')', idx);
+                    if (closeIdx === -1) return { valid: false, error: 'Paréntesis sin cerrar.' };
+                    const inside = s.substring(idx + 1, closeIdx);
+                    const poly = parseStandardPolyString(inside);
+                    if (poly === null || poly.length === 0) {
+                        return { valid: false, error: `No se pudo interpretar el paréntesis "(${inside})".` };
+                    }
+                    idx = closeIdx + 1;
+                    let power = 1;
+                    if (idx < s.length && s[idx] === '^') {
+                        idx++;
+                        const m = s.substring(idx).match(/^(\d+)/);
+                        if (!m) return { valid: false, error: 'Falta el exponente numérico luego de "^".' };
+                        power = parseInt(m[1], 10);
+                        idx += m[1].length;
+                    }
+                    factors.push({ poly, power, isParen: true });
+                } else {
+                    let nextParen = s.indexOf('(', idx);
+                    let nextStar = s.indexOf('*', idx);
+                    let endTok = s.length;
+                    if (nextParen !== -1) endTok = Math.min(endTok, nextParen);
+                    if (nextStar !== -1) endTok = Math.min(endTok, nextStar);
+
+                    const tokenStr = s.substring(idx, endTok);
+                    const poly = parseStandardPolyString(tokenStr);
+                    if (poly === null || poly.length === 0) {
+                        return { valid: false, error: `Expresión "${tokenStr}" no reconocida. Recordá encerrar cada factor entre paréntesis.` };
+                    }
+                    factors.push({ poly, power: 1, isParen: false });
+                    idx = endTok;
+                }
+            }
+
+            if (!factors.length) return { valid: false, error: 'Respuesta vacía.' };
+
+            let expanded = [{ coeff: globalSign, exp: 0 }];
+            let degreeOneOrMoreCount = 0;
+            let maxFactorDegree = 0;
+
+            for (const f of factors) {
+                const pExp = powerPoly(f.poly, f.power);
+                expanded = multiplyPoly(expanded, pExp);
+                const deg = Math.max(...f.poly.map(t => t.exp));
+                if (deg >= 1) {
+                    if (f.poly.length === 1) {
+                        degreeOneOrMoreCount += 1; // monomio x^k
+                    } else {
+                        degreeOneOrMoreCount += f.power;
+                        if (deg > maxFactorDegree) maxFactorDegree = deg;
+                    }
+                }
+            }
+
+            return {
+                valid: true,
+                factors,
+                globalSign,
+                expanded,
+                degreeOneOrMoreCount,
+                maxFactorDegree
+            };
+        }
+
+        /***********************************************************************
+         * GENERADOR DE LAS 4 SECCIONES DE LA PRUEBA (20 EJERCICIOS TOTALES)
+         ***********************************************************************/
+
+        // =====================================================================
+        // SECCIÓN I: OPERACIONES GENERALES (SUMA, RESTA Y COMBINADAS) - Ej 1 a 5
+        // =====================================================================
+        function generateSection1Exercise(num) {
+            // num: 1..5
+            let methodTag = '';
+            let statementHTML = '';
+            let expectedPoly = [];
+            let procStep1 = '';
+            let procStep2 = '';
+            let procStep3 = '';
+
+            // Elegimos grados altos y huecos para que sea de 5° Año E.S.T.P.
+            const degMax = randInt(4, 6, true);
+            const degMid = randInt(2, degMax - 1, true);
+            const degLow = 1;
+
+            const P = simplifyPoly([
+                { coeff: randInt(-6, 7, true), exp: degMax },
+                { coeff: randInt(-8, 8, true), exp: degMid },
+                { coeff: randInt(-7, 7, true), exp: degLow },
+                { coeff: randInt(-9, 9, true), exp: 0 }
+            ]);
+
+            const Q = simplifyPoly([
+                { coeff: randInt(-6, 7, true), exp: degMax },
+                { coeff: randInt(-8, 8, true), exp: degMid - 1 },
+                { coeff: randInt(-7, 7, true), exp: degLow },
+                { coeff: randInt(-9, 9, true), exp: 0 }
+            ]);
+
+            if (num === 1 || num === 2) {
+                // SUMA DE POLINOMIOS
+                methodTag = 'OPERACIÓN: SUMA DE POLINOMIOS (ASOCIACIÓN DE SEMEJANTES)';
+                expectedPoly = addPoly(P, Q);
+                statementHTML = `
+                    Dados los polinomios <span class="font-mono text-slate-900">P(x) = ${formatPolyHTML(P)}</span> y
+                    <span class="font-mono text-slate-900">Q(x) = ${formatPolyHTML(Q)}</span>, calcular la suma:
+                    <div class="mt-2 font-mono text-base sm:text-lg font-bold text-sky-900 bg-sky-50 border border-sky-200 px-3 py-1.5 rounded inline-block">
+                        S(x) = P(x) + Q(x)
+                    </div>
+                `;
+
+                procStep1 = `
+                    <p class="text-xs text-slate-700">Ordenamos los polinomios en forma decreciente e identificamos los exponentes presentes en <span class="font-mono">P(x)</span> y <span class="font-mono">Q(x)</span>:</p>
+                    <div class="p-2.5 bg-white border border-slate-300 rounded font-mono text-xs math-expr space-y-1">
+                        <div>P(x) = ${formatPolyHTML(P)}</div>
+                        <div>Q(x) = ${formatPolyHTML(Q)}</div>
+                    </div>
+                `;
+
+                // Desglose por grado
+                const allExps = Array.from(new Set([...P.map(t => t.exp), ...Q.map(t => t.exp)])).sort((a, b) => b - a);
+                const assocLines = allExps.map(e => {
+                    const cP = getCoeffAt(P, e);
+                    const cQ = getCoeffAt(Q, e);
+                    const sum = cP + cQ;
+                    const vStr = e === 0 ? '' : (e === 1 ? 'x' : `x<sup>${e}</sup>`);
+                    return `<div class="p-1.5 bg-white border border-slate-200 rounded flex justify-between">
+                        <span>Grado ${e}: (${cP >= 0 ? '+' + cP : cP} ${cQ >= 0 ? '+ ' + cQ : '- ' + Math.abs(cQ)})${vStr}</span>
+                        <span class="font-bold text-sky-800">= ${sum}${vStr}</span>
+                    </div>`;
+                }).join('');
+
+                procStep2 = `
+                    <p class="text-xs text-slate-700">Aplicamos la <strong>Propiedad Conmutativa y Asociativa de la suma</strong> agrupando los términos semejantes (de igual exponente):</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-mono text-xs math-expr">${assocLines}</div>
+                `;
+
+                procStep3 = `
+                    <p class="text-xs text-slate-700">Polinomio resultante ordenado y reducido:</p>
+                    <div class="p-2.5 bg-emerald-50 border border-emerald-300 rounded font-mono text-sm font-bold text-emerald-950 math-expr">
+                        P(x) + Q(x) = ${formatPolyHTML(expectedPoly)}
+                    </div>
+                `;
+            } else if (num === 3 || num === 4) {
+                // RESTA DE POLINOMIOS
+                methodTag = 'OPERACIÓN: RESTA DE POLINOMIOS (OPUESTO DEL SUSTRAENDO)';
+                const negQ = scalePoly(Q, -1);
+                expectedPoly = subtractPoly(P, Q);
+                // Evitar polinomio nulo
+                if (expectedPoly.length === 0) {
+                    P[0].coeff += 2;
+                    expectedPoly = subtractPoly(P, Q);
+                }
+
+                statementHTML = `
+                    Dados los polinomios <span class="font-mono text-slate-900">P(x) = ${formatPolyHTML(P)}</span> y
+                    <span class="font-mono text-slate-900">Q(x) = ${formatPolyHTML(Q)}</span>, resolver la resta:
+                    <div class="mt-2 font-mono text-base sm:text-lg font-bold text-rose-900 bg-rose-50 border border-rose-200 px-3 py-1.5 rounded inline-block">
+                        D(x) = P(x) - Q(x)
+                    </div>
+                `;
+
+                procStep1 = `
+                    <p class="text-xs text-slate-700">Para restar <span class="font-mono">Q(x)</span>, distribuimos el signo menos delante del paréntesis sumando el <strong>polinomio opuesto <span class="font-mono">-Q(x)</span></strong> (cambiamos el signo de todos los términos de <span class="font-mono">Q(x)</span>):</p>
+                    <div class="p-2.5 bg-white border border-slate-300 rounded font-mono text-xs math-expr space-y-1">
+                        <div>P(x) = ${formatPolyHTML(P)}</div>
+                        <div class="text-rose-700 font-bold">-Q(x) = ${formatPolyHTML(negQ)}</div>
+                    </div>
+                `;
+
+                const allExps = Array.from(new Set([...P.map(t => t.exp), ...negQ.map(t => t.exp)])).sort((a, b) => b - a);
+                const assocLines = allExps.map(e => {
+                    const cP = getCoeffAt(P, e);
+                    const cNegQ = getCoeffAt(negQ, e);
+                    const sum = cP + cNegQ;
+                    const vStr = e === 0 ? '' : (e === 1 ? 'x' : `x<sup>${e}</sup>`);
+                    return `<div class="p-1.5 bg-white border border-slate-200 rounded flex justify-between">
+                        <span>Grado ${e}: (${cP >= 0 ? '+' + cP : cP} ${cNegQ >= 0 ? '+ ' + cNegQ : '- ' + Math.abs(cNegQ)})${vStr}</span>
+                        <span class="font-bold text-sky-800">= ${sum}${vStr}</span>
+                    </div>`;
+                }).join('');
+
+                procStep2 = `
+                    <p class="text-xs text-slate-700">Asociamos los términos semejantes entre <span class="font-mono">P(x)</span> y <span class="font-mono">-Q(x)</span>:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-mono text-xs math-expr">${assocLines}</div>
+                `;
+
+                procStep3 = `
+                    <div class="p-2.5 bg-emerald-50 border border-emerald-300 rounded font-mono text-sm font-bold text-emerald-950 math-expr">
+                        P(x) - Q(x) = ${formatPolyHTML(expectedPoly)}
+                    </div>
+                `;
+            } else {
+                // EJERCICIO 5: OPERACIÓN COMBINADA DE SUMA, RESTA Y ESCALAR k1*P(x) - k2*Q(x)
+                const k1 = randChoice([2, 3]);
+                const k2 = randChoice([2, 3]);
+                methodTag = `OPERACIÓN COMBINADA: DISTRIBUTIVA POR ESCALAR Y RESTA (${k1}·P(x) - ${k2}·Q(x))`;
+                const k1P = scalePoly(P, k1);
+                const negk2Q = scalePoly(Q, -k2);
+                expectedPoly = addPoly(k1P, negk2Q);
+
+                statementHTML = `
+                    Dados <span class="font-mono text-slate-900">P(x) = ${formatPolyHTML(P)}</span> y
+                    <span class="font-mono text-slate-900">Q(x) = ${formatPolyHTML(Q)}</span>, resolver la operación combinada:
+                    <div class="mt-2 font-mono text-base sm:text-lg font-bold text-indigo-900 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded inline-block">
+                        M(x) = ${k1} · P(x) - ${k2} · Q(x)
+                    </div>
+                `;
+
+                procStep1 = `
+                    <p class="text-xs text-slate-700">Aplicamos primero la <strong>Propiedad Distributiva</strong> multiplicando cada polinomio por su escalar (y cambiando signos en el segundo término por el <span class="font-mono">-${k2}</span>):</p>
+                    <div class="p-2.5 bg-white border border-slate-300 rounded font-mono text-xs math-expr space-y-1">
+                        <div class="text-sky-800 font-semibold">${k1}·P(x) = ${formatPolyHTML(k1P)}</div>
+                        <div class="text-rose-800 font-semibold">-${k2}·Q(x) = ${formatPolyHTML(negk2Q)}</div>
+                    </div>
+                `;
+
+                procStep2 = `
+                    <p class="text-xs text-slate-700">Asociamos término a término los grados semejantes de <span class="font-mono">${k1}P(x)</span> y <span class="font-mono">-${k2}Q(x)</span>.</p>
+                `;
+
+                procStep3 = `
+                    <div class="p-2.5 bg-emerald-50 border border-emerald-300 rounded font-mono text-sm font-bold text-emerald-950 math-expr">
+                        ${k1}·P(x) - ${k2}·Q(x) = ${formatPolyHTML(expectedPoly)}
+                    </div>
+                `;
+            }
+
+            return {
+                id: num,
+                sectionId: 'sec1',
+                type: 'single_poly',
+                methodTag,
+                tagColor: 'bg-sky-100 text-sky-900 border-sky-400',
+                statementHTML,
+                expectedPoly,
+                canonicalHTML: formatPolyHTML(expectedPoly),
+                procStep1,
+                procStep2,
+                procStep3,
+                studentInput: '',
+                status: 'pending',
+                feedbackMsg: '',
+                procedureOpen: false
+            };
+        }
+
+        // =====================================================================
+        // SECCIÓN II: DIVISIÓN DE POLINOMIOS (SIEMPRE INDICADA) - Ej 6 a 10
+        // =====================================================================
+        function generateSection2Exercise(num) {
+            // Ej 6, 7, 8: División por Regla de Ruffini y Teorema del Resto
+            // Ej 9, 10: División Tradicional Euclidiana (por divisor de grado 2 o binomio no mónico)
+            if (num <= 8) {
+                const methodTag = 'MÉTODO OBLIGATORIO: DIVISIÓN POR REGLA DE RUFFINI Y TEOREMA DEL RESTO';
+                const r = randChoice([-3, -2, -1, 2, 3]);
+                const divisor = linearFactorPoly(r); // (x - r)
+                // Generamos un cociente de grado 2 o 3 y un resto entero R
+                const degC = num === 6 ? 2 : 3;
+                const C = simplifyPoly([
+                    { coeff: randInt(-3, 4, true), exp: degC },
+                    { coeff: randInt(-5, 5, false), exp: degC - 1 },
+                    { coeff: randInt(-6, 6, true), exp: 1 },
+                    { coeff: randInt(-7, 7, true), exp: 0 }
+                ]);
+                const remVal = num === 6 ? 0 : randInt(-9, 9, true);
+                const R = remVal === 0 ? [] : [{ coeff: remVal, exp: 0 }];
+
+                const P = addPoly(multiplyPoly(divisor, C), R);
+                const maxDegP = P[0].exp;
+
+                // Construir tabla visual de Ruffini paso a paso
+                const coeffsP = [];
+                for (let d = maxDegP; d >= 0; d--) {
+                    coeffsP.push(getCoeffAt(P, d));
+                }
+                const multRow = [''];
+                const bottomRow = [coeffsP[0]];
+                for (let i = 1; i < coeffsP.length; i++) {
+                    const m = bottomRow[i - 1] * r;
+                    multRow.push(m >= 0 ? `+${m}` : `${m}`);
+                    bottomRow.push(coeffsP[i] + m);
+                }
+
+                const topCells = coeffsP.map(c => `<td class="px-3 py-1 text-center font-bold">${c}</td>`).join('');
+                const midCells = multRow.map(m => `<td class="px-3 py-1 text-center text-sky-700">${m}</td>`).join('');
+                const botCells = bottomRow.map((b, idx) =>
+                    idx === bottomRow.length - 1
+                        ? `<td class="px-3 py-1 text-center font-extrabold bg-amber-100 text-amber-900 border-l-2 border-slate-800">${b}</td>`
+                        : `<td class="px-3 py-1 text-center font-bold text-emerald-800">${b}</td>`
+                ).join('');
+
+                const statementHTML = `
+                    Hallar el <strong>Cociente C(x)</strong> y el <strong>Resto R(x)</strong> de la siguiente división aplicando <strong>Regla de Ruffini</strong> y verificando con el <strong>Teorema del Resto</strong>:
+                    <div class="mt-2 font-mono text-base sm:text-lg font-bold text-slate-900 bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded inline-block math-expr">
+                        (${formatPolyHTML(P)}) ÷ (${formatPolyHTML(divisor)})
+                    </div>
+                `;
+
+                const procStep1 = `
+                    <p class="text-xs text-slate-700">
+                        Completamos y ordenamos el dividendo <span class="font-mono">P(x)</span> de grado ${maxDegP} hasta grado 0:
+                        coeficientes <span class="font-mono font-bold">[ ${coeffsP.join(' , ')} ]</span>.
+                        La raíz del divisor <span class="font-mono math-expr">(${formatPolyHTML(divisor)})</span> es <span class="font-mono font-bold text-sky-800">r = ${r}</span>.
+                    </p>
+                `;
+
+                const procStep2 = `
+                    <p class="text-xs text-slate-700 mb-1">Disposición práctica de la <strong>Tabla de Ruffini</strong>:</p>
+                    <div class="overflow-x-auto">
+                        <table class="border-collapse font-mono text-xs bg-white border border-slate-400">
+                            <tr class="border-b border-slate-300">
+                                <td class="px-3 py-1 border-r-2 border-slate-800 bg-slate-100 font-bold">Grados</td>
+                                ${coeffsP.map((_, i) => `<td class="px-3 py-1 text-center text-slate-500">x<sup>${maxDegP - i}</sup></td>`).join('')}
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-1 border-r-2 border-slate-800 bg-slate-50"></td>
+                                ${topCells}
+                            </tr>
+                            <tr class="border-b-2 border-slate-800">
+                                <td class="px-3 py-1 border-r-2 border-slate-800 bg-sky-50 font-bold text-sky-900">r = ${r}</td>
+                                ${midCells}
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-1 border-r-2 border-slate-800 bg-slate-100 font-bold">Cociente / Resto</td>
+                                ${botCells}
+                            </tr>
+                        </table>
+                    </div>
+                `;
+
+                const procStep3 = `
+                    <p class="text-xs text-slate-700">
+                        <strong>Verificación por Teorema del Resto:</strong> Evaluamos <span class="font-mono">P(${r}) = ${remVal}</span>.
+                    </p>
+                    <div class="p-2.5 bg-emerald-50 border border-emerald-300 rounded font-mono text-xs sm:text-sm font-bold text-emerald-950 math-expr flex flex-wrap gap-6">
+                        <span>Cociente C(x) = ${formatPolyHTML(C)}</span>
+                        <span>Resto R(x) = ${remVal}</span>
+                    </div>
+                `;
+
+                return {
+                    id: num,
+                    sectionId: 'sec2',
+                    type: 'division_poly',
+                    methodTag,
+                    tagColor: 'bg-emerald-100 text-emerald-900 border-emerald-400',
+                    statementHTML,
+                    expectedQuotient: C,
+                    expectedRemainder: R,
+                    canonicalHTML: `C(x) = ${formatPolyHTML(C)}  |  R(x) = ${formatPolyHTML(R)}`,
+                    procStep1,
+                    procStep2,
+                    procStep3,
+                    studentQuotient: '',
+                    studentRemainder: '',
+                    status: 'pending',
+                    feedbackMsg: '',
+                    procedureOpen: false
+                };
+            } else {
+                // Ej 9 y 10: DIVISIÓN TRADICIONAL EUCLIDIANA DE POLINOMIOS
+                const methodTag = 'MÉTODO OBLIGATORIO: DIVISIÓN TRADICIONAL DE POLINOMIOS (ALGORITMO DE EUCLIDES)';
+                // Divisor cuadrático D(x) = x^2 + ax + b
+                const D = simplifyPoly([
+                    { coeff: 1, exp: 2 },
+                    { coeff: randChoice([-2, -1, 1, 2]), exp: 1 },
+                    { coeff: randChoice([-3, 2, 3]), exp: 0 }
+                ]);
+                // Cociente lineal o cuadrático C(x)
+                const C = simplifyPoly([
+                    { coeff: randChoice([1, 2, 3]), exp: num === 9 ? 1 : 2 },
+                    { coeff: randInt(-4, 4, true), exp: num === 9 ? 0 : 1 },
+                    ...(num === 10 ? [{ coeff: randInt(-3, 3, true), exp: 0 }] : [])
+                ]);
+                // Resto de grado <= 1
+                const R = num === 9
+                    ? []
+                    : simplifyPoly([
+                        { coeff: randInt(-5, 5, true), exp: 1 },
+                        { coeff: randInt(-6, 6, true), exp: 0 }
+                    ]);
+
+                const P = addPoly(multiplyPoly(D, C), R);
+
+                const statementHTML = `
+                    Dado que el divisor es de <strong>grado 2</strong> (no se puede usar Ruffini directo), realizar la <strong>División Tradicional de Polinomios</strong> para hallar el <strong>Cociente C(x)</strong> y el <strong>Resto R(x)</strong>:
+                    <div class="mt-2 font-mono text-base sm:text-lg font-bold text-slate-900 bg-teal-50 border border-teal-300 px-3 py-1.5 rounded inline-block math-expr">
+                        (${formatPolyHTML(P)}) ÷ (${formatPolyHTML(D)})
+                    </div>
+                `;
+
+                // Explicación paso a paso de cada término del cociente
+                let remStep = [...P];
+                const euclidSteps = [];
+                for (const termC of C) {
+                    const leadRem = remStep[0];
+                    const leadD = D[0];
+                    const subPoly = multiplyPoly([termC], D);
+                    const nextRem = subtractPoly(remStep, subPoly);
+                    euclidSteps.push(`
+                        <div class="p-2 bg-white border border-slate-200 rounded font-mono text-xs math-expr">
+                            • Dividimos los términos principales: (${formatTermHTML(leadRem, true)}) ÷ (${formatTermHTML(leadD, true)}) = <strong class="text-sky-800">${formatTermHTML(termC, true)}</strong>.<br>
+                            • Multiplicamos (${formatTermHTML(termC, true)}) · (${formatPolyHTML(D)}) = ${formatPolyHTML(subPoly)} y lo restamos al dividendo parcial, quedando: <span class="text-slate-800 font-semibold">${formatPolyHTML(nextRem)}</span>.
+                        </div>
+                    `);
+                    remStep = nextRem;
+                }
+
+                const procStep1 = `
+                    <p class="text-xs text-slate-700">
+                        Ordenamos y completamos dividendo <span class="font-mono math-expr">P(x) = ${formatPolyHTML(P)}</span> y divisor <span class="font-mono math-expr">D(x) = ${formatPolyHTML(D)}</span>.
+                    </p>
+                `;
+
+                const procStep2 = `
+                    <p class="text-xs text-slate-700">Iteraciones del Algoritmo de División Tradicional:</p>
+                    <div class="space-y-1.5">${euclidSteps.join('')}</div>
+                `;
+
+                const procStep3 = `
+                    <p class="text-xs text-slate-700">
+                        Verificación por Identidad Fundamental de la División Entera <span class="font-mono">P(x) = D(x)·C(x) + R(x)</span>:
+                    </p>
+                    <div class="p-2.5 bg-emerald-50 border border-emerald-300 rounded font-mono text-xs sm:text-sm font-bold text-emerald-950 math-expr flex flex-wrap gap-6">
+                        <span>Cociente C(x) = ${formatPolyHTML(C)}</span>
+                        <span>Resto R(x) = ${formatPolyHTML(R)}</span>
+                    </div>
+                `;
+
+                return {
+                    id: num,
+                    sectionId: 'sec2',
+                    type: 'division_poly',
+                    methodTag,
+                    tagColor: 'bg-teal-100 text-teal-900 border-teal-400',
+                    statementHTML,
+                    expectedQuotient: C,
+                    expectedRemainder: R,
+                    canonicalHTML: `C(x) = ${formatPolyHTML(C)}  |  R(x) = ${formatPolyHTML(R)}`,
+                    procStep1,
+                    procStep2,
+                    procStep3,
+                    studentQuotient: '',
+                    studentRemainder: '',
+                    status: 'pending',
+                    feedbackMsg: '',
+                    procedureOpen: false
+                };
+            }
+        }
+
+        // =====================================================================
+        // SECCIÓN III: FACTORIZACIÓN CON FÓRMULA DE BHASKARA - Ej 11 a 15
+        // =====================================================================
+        function generateSection3Exercise(num) {
+            // Ej 11 y 12: Trinomio cuadrático mónico (a = 1) con raíces enteras -> (x - x1)(x - x2)
+            // Ej 13 y 14: Trinomio cuadrático NO mónico (a != 1) -> a(x - x1)(x - x2)
+            // Ej 15: Factor Común Monomio x^k + Fórmula de Bhaskara -> a*x^k*(x - x1)(x - x2)
+            const rootPairs = [
+                [-4, 2], [-5, 3], [-3, 6], [-2, 5], [-6, 1], [2, 5], [-4, -1], [-5, 2], [1, 4], [-3, 5]
+            ];
+            const [x1, x2] = rootPairs[(num * 3 + randInt(0, 9, false)) % rootPairs.length];
+
+            let a = 1;
+            let commonExp = 0;
+            let methodTag = 'MÉTODO OBLIGATORIO: FACTORIZACIÓN POR FÓRMULA RESOLVENTE DE BHASKARA';
+
+            if (num === 13 || num === 14) {
+                a = randChoice([2, 3, -2, 4]);
+                methodTag = 'MÉTODO OBLIGATORIO: BHASKARA CON COEFICIENTE PRINCIPAL a ≠ 1  →  a·(x - x₁)·(x - x₂)';
+            } else if (num === 15) {
+                a = randChoice([2, 3]);
+                commonExp = randChoice([2, 3]);
+                methodTag = `MÉTODO OBLIGATORIO: FACTOR COMÚN (${a}x^${commonExp}) + FÓRMULA DE BHASKARA`;
+            }
+
+            const f1 = linearFactorPoly(x1);
+            const f2 = linearFactorPoly(x2);
+            const monicQuad = multiplyPoly(f1, f2); // x^2 - (x1+x2)x + x1*x2
+            const quadPoly = scalePoly(monicQuad, a); // a*x^2 + b*x + c
+
+            const b = getCoeffAt(quadPoly, 1);
+            const c = getCoeffAt(quadPoly, 0);
+            const discriminant = b * b - 4 * a * c;
+            const sqrtDisc = Math.round(Math.sqrt(discriminant));
+
+            const preFactor = [{ coeff: a, exp: commonExp }];
+            const originalPoly = multiplyPoly(preFactor, monicQuad);
+
+            const preHTML = commonExp === 0
+                ? (a === 1 ? '' : (a === -1 ? '-' : `${a} · `))
+                : `${formatPolyHTML(preFactor)} · `;
+
+            const canonicalHTML = `${preHTML}(${formatPolyHTML(f1)}) · (${formatPolyHTML(f2)})`;
+            const minFactorsExpected = commonExp > 0 ? 3 : 2;
+
+            const statementHTML = `
+                Factorizar completamente el siguiente polinomio aplicando ${commonExp > 0 ? 'primero <strong>Factor Común</strong> y luego ' : ''}la <strong>Fórmula Resolvente de Bhaskara</strong> <span class="font-mono text-xs">[ x = (-b ± √(b² - 4ac)) / (2a) ]</span>:
+                <div class="mt-2 font-mono text-base sm:text-lg font-bold text-amber-950 bg-amber-50 border border-amber-300 px-3 py-1.5 rounded inline-block math-expr">
+                    P(x) = ${formatPolyHTML(originalPoly)}
+                </div>
+            `;
+
+            const procStep1 = `
+                ${commonExp > 0 ? `<p class="text-xs text-slate-700 mb-1"><strong>Paso previo (Factor Común):</strong> Extraemos <span class="font-mono font-bold text-sky-800 math-expr">x<sup>${commonExp}</sup></span> (o <span class="font-mono font-bold text-sky-800 math-expr">${formatPolyHTML(preFactor)}</span>), quedando el polinomio cuadrático <span class="font-mono math-expr">${formatPolyHTML(quadPoly)}</span>.</p>` : ''}
+                <p class="text-xs text-slate-700">Identificamos los coeficientes del trinomio cuadrático <span class="font-mono math-expr">${formatPolyHTML(quadPoly)}</span>:</p>
+                <div class="grid grid-cols-3 gap-2 font-mono text-xs text-center mt-1">
+                    <div class="p-1.5 bg-white border border-slate-300 rounded"><strong>a = ${a}</strong></div>
+                    <div class="p-1.5 bg-white border border-slate-300 rounded"><strong>b = ${b}</strong></div>
+                    <div class="p-1.5 bg-white border border-slate-300 rounded"><strong>c = ${c}</strong></div>
+                </div>
+            `;
+
+            const procStep2 = `
+                <p class="text-xs text-slate-700">Reemplazamos en la <strong>Fórmula de Bhaskara</strong> y calculamos el discriminante <span class="font-mono">Δ = b² - 4·a·c</span>:</p>
+                <div class="p-2.5 bg-white border border-slate-300 rounded font-mono text-xs space-y-1">
+                    <div>Δ = (${b})² - 4 · (${a}) · (${c}) = ${b * b} - (${4 * a * c}) = <strong class="text-sky-800">${discriminant}</strong>  ⟹  √Δ = <strong>${sqrtDisc}</strong></div>
+                    <div>x₁,₂ = [ -(${b}) ± ${sqrtDisc} ] / (2 · ${a}) = [ ${-b} ± ${sqrtDisc} ] / ${2 * a}</div>
+                    <div class="pt-1 flex flex-wrap gap-4 text-emerald-800 font-bold">
+                        <span>Raíz x₁ = ${x1}  ⟹  Factor (${formatPolyHTML(f1)})</span>
+                        <span>Raíz x₂ = ${x2}  ⟹  Factor (${formatPolyHTML(f2)})</span>
+                    </div>
+                </div>
+            `;
+
+            const procStep3 = `
+                <p class="text-xs text-slate-700">
+                    Armamos la expresión factorizada <span class="font-mono font-bold">a · (x - x₁) · (x - x₂)</span>${a !== 1 ? ` (recordando colocar el coeficiente principal <strong>a = ${a}</strong> adelante)` : ''}:
+                </p>
+                <div class="p-2.5 bg-emerald-50 border border-emerald-300 rounded font-mono text-sm font-bold text-emerald-950 math-expr">
+                    P(x) = ${canonicalHTML}
+                </div>
+            `;
+
+            return {
+                id: num,
+                sectionId: 'sec3',
+                type: 'factored_poly',
+                methodTag,
+                tagColor: 'bg-amber-100 text-amber-900 border-amber-400',
+                statementHTML,
+                expectedPoly: originalPoly,
+                canonicalHTML,
+                minFactorsExpected,
+                roots: [x1, x2],
+                leadCoeff: a,
+                procStep1,
+                procStep2,
+                procStep3,
+                studentInput: '',
+                status: 'pending',
+                feedbackMsg: '',
+                procedureOpen: false
+            };
+        }
+
+        // =====================================================================
+        // SECCIÓN IV: FACTORIZACIÓN CON DIVISIÓN DE POLINOMIOS + BHASKARA - Ej 16 a 20
+        // =====================================================================
+        function generateSection4Exercise(num) {
+            const methodTag = 'MÉTODO OBLIGATORIO: DIVISIÓN DE POLINOMIOS (RUFFINI) + FÓRMULA DE BHASKARA';
+
+            // Polinomio cúbico P(x) = a*(x - r1)*(x - r2)*(x - r3)
+            const cubicConfigs = [
+                { a: 1, r1: 1, r2: -2, r3: 3 },
+                { a: 1, r1: -1, r2: 2, r3: -4 },
+                { a: 1, r1: 2, r2: -3, r3: 4 },
+                { a: 2, r1: 1, r2: -1, r3: 3 },
+                { a: 2, r1: -2, r2: 1, r3: 4 },
+                { a: 1, r1: -2, r2: -1, r3: 5 },
+                { a: 3, r1: 1, r2: -2, r3: 2 },
+                { a: 1, r1: 3, r2: -2, r3: -4 }
+            ];
+            const cfg = cubicConfigs[(num * 2 + randInt(0, 7, false)) % cubicConfigs.length];
+            const { a, r1, r2, r3 } = cfg;
+
+            const f1 = linearFactorPoly(r1);
+            const f2 = linearFactorPoly(r2);
+            const f3 = linearFactorPoly(r3);
+
+            // Cociente cuadrático tras dividir por (x - r1): C(x) = a*(x - r2)*(x - r3)
+            const quotientQuad = scalePoly(multiplyPoly(f2, f3), a);
+            const originalPoly = multiplyPoly(f1, quotientQuad);
+
+            // Coeficientes de P(x) de grado 3 a 0 para mostrar la tabla de Ruffini en el procedimiento
+            const c3 = getCoeffAt(originalPoly, 3);
+            const c2 = getCoeffAt(originalPoly, 2);
+            const c1 = getCoeffAt(originalPoly, 1);
+            const c0 = getCoeffAt(originalPoly, 0);
+
+            const q2 = c3;
+            const q1 = c2 + q2 * r1;
+            const q0 = c1 + q1 * r1;
+            const rem = c0 + q0 * r1; // siempre 0
+
+            // Datos de Bhaskara sobre C(x) = q2*x^2 + q1*x + q0
+            const disc = q1 * q1 - 4 * q2 * q0;
+            const sqrtDisc = Math.round(Math.sqrt(disc));
+
+            const leadStr = a === 1 ? '' : `${a} · `;
+            const canonicalHTML = `${leadStr}(${formatPolyHTML(f1)}) · (${formatPolyHTML(f2)}) · (${formatPolyHTML(f3)})`;
+
+            const statementHTML = `
+                Sabiendo que <span class="font-mono font-bold text-purple-900">x₁ = ${r1}</span> es raíz del polinomio (es decir, es divisible por <span class="font-mono font-bold text-purple-900 math-expr">(${formatPolyHTML(f1)})</span>):
+                <br>1°) Realizar la <strong>División de Polinomios (Regla de Ruffini)</strong> <span class="font-mono math-expr">P(x) ÷ (${formatPolyHTML(f1)})</span> para obtener el cociente de grado 2.
+                <br>2°) Aplicar la <strong>Fórmula de Bhaskara</strong> al cociente y escribir <span class="font-mono">P(x)</span> completamente factorizado:
+                <div class="mt-2 font-mono text-base sm:text-lg font-bold text-purple-950 bg-purple-50 border border-purple-300 px-3 py-1.5 rounded inline-block math-expr">
+                    P(x) = ${formatPolyHTML(originalPoly)}
+                </div>
+            `;
+
+            const procStep1 = `
+                <p class="text-xs text-slate-700 mb-1">
+                    <strong>Paso 1 (División de Polinomios por Ruffini):</strong> Dividimos <span class="font-mono math-expr">(${formatPolyHTML(originalPoly)}) ÷ (${formatPolyHTML(f1)})</span> usando <span class="font-mono font-bold">r₁ = ${r1}</span>:
+                </p>
+                <div class="overflow-x-auto">
+                    <table class="border-collapse font-mono text-xs bg-white border border-slate-400">
+                        <tr class="border-b border-slate-300 bg-slate-50">
+                            <td class="px-3 py-1 border-r-2 border-slate-800 font-bold">Coef. P(x)</td>
+                            <td class="px-3 py-1 text-center font-bold">${c3}</td>
+                            <td class="px-3 py-1 text-center font-bold">${c2}</td>
+                            <td class="px-3 py-1 text-center font-bold">${c1}</td>
+                            <td class="px-3 py-1 text-center font-bold">${c0}</td>
+                        </tr>
+                        <tr class="border-b-2 border-slate-800">
+                            <td class="px-3 py-1 border-r-2 border-slate-800 bg-purple-50 font-bold text-purple-900">r₁ = ${r1}</td>
+                            <td class="px-3 py-1 text-center"></td>
+                            <td class="px-3 py-1 text-center text-sky-700">${q2 * r1 >= 0 ? '+' + (q2 * r1) : q2 * r1}</td>
+                            <td class="px-3 py-1 text-center text-sky-700">${q1 * r1 >= 0 ? '+' + (q1 * r1) : q1 * r1}</td>
+                            <td class="px-3 py-1 text-center text-sky-700">${q0 * r1 >= 0 ? '+' + (q0 * r1) : q0 * r1}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-1 border-r-2 border-slate-800 bg-slate-100 font-bold">Cociente C(x)</td>
+                            <td class="px-3 py-1 text-center font-bold text-emerald-800">${q2}</td>
+                            <td class="px-3 py-1 text-center font-bold text-emerald-800">${q1}</td>
+                            <td class="px-3 py-1 text-center font-bold text-emerald-800">${q0}</td>
+                            <td class="px-3 py-1 text-center font-extrabold bg-emerald-100 text-emerald-900 border-l-2 border-slate-800">R = ${rem}</td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="text-xs text-slate-700 mt-1">
+                    Obtenemos el cociente cuadrático: <span class="font-mono font-bold text-slate-900 math-expr">C(x) = ${formatPolyHTML(quotientQuad)}</span>, por lo que <span class="font-mono math-expr">P(x) = (${formatPolyHTML(f1)}) · (${formatPolyHTML(quotientQuad)})</span>.
+                </p>
+            `;
+
+            const procStep2 = `
+                <p class="text-xs text-slate-700">
+                    <strong>Paso 2 (Fórmula de Bhaskara sobre el cociente <span class="font-mono math-expr">C(x) = ${formatPolyHTML(quotientQuad)}</span>):</strong>
+                    Con <span class="font-mono">a = ${q2}, b = ${q1}, c = ${q0}</span>:
+                </p>
+                <div class="p-2.5 bg-white border border-slate-300 rounded font-mono text-xs space-y-1 mt-1">
+                    <div>Δ = (${q1})² - 4·(${q2})·(${q0}) = ${q1 * q1} - (${4 * q2 * q0}) = <strong>${disc}</strong>  ⟹  √Δ = <strong>${sqrtDisc}</strong></div>
+                    <div>x₂,₃ = [ ${-q1} ± ${sqrtDisc} ] / ${2 * q2}  ⟹  <strong class="text-emerald-800">x₂ = ${r2}</strong> , <strong class="text-emerald-800">x₃ = ${r3}</strong></div>
+                </div>
+            `;
+
+            const procStep3 = `
+                <p class="text-xs text-slate-700">
+                    <strong>Paso 3 (Factorización completa de grado 3):</strong> Reemplazando el cociente factorizado:
+                </p>
+                <div class="p-2.5 bg-emerald-50 border border-emerald-300 rounded font-mono text-sm font-bold text-emerald-950 math-expr">
+                    P(x) = ${canonicalHTML}
+                </div>
+            `;
+
+            return {
+                id: num,
+                sectionId: 'sec4',
+                type: 'factored_poly',
+                methodTag,
+                tagColor: 'bg-purple-100 text-purple-900 border-purple-400',
+                statementHTML,
+                expectedPoly: originalPoly,
+                canonicalHTML,
+                minFactorsExpected: 3,
+                roots: [r1, r2, r3],
+                leadCoeff: a,
+                procStep1,
+                procStep2,
+                procStep3,
+                studentInput: '',
+                status: 'pending',
+                feedbackMsg: '',
+                procedureOpen: false
+            };
+        }
+
+        /***********************************************************************
+         * GENERACIÓN COMPLETA DE LOS 20 PUNTOS DE LA PRUEBA
+         ***********************************************************************/
+        function generateNewExam() {
+            const list = [];
+            for (let i = 1; i <= 5; i++) list.push(generateSection1Exercise(i));
+            for (let i = 6; i <= 10; i++) list.push(generateSection2Exercise(i));
+            for (let i = 11; i <= 15; i++) list.push(generateSection3Exercise(i));
+            for (let i = 16; i <= 20; i++) list.push(generateSection4Exercise(i));
+
+            examExercises = list;
+
+            // Actualizar código de Tema y Fecha
+            const letters = ['A', 'B', 'C', 'D'];
+            const letter = letters[examThemeCounter % letters.length];
+            const numCode = String(randInt(10, 99, true));
+            document.getElementById('exam-theme-code').textContent = `TEMA ${letter}-${numCode}`;
+            examThemeCounter++;
+
+            const now = new Date();
+            document.getElementById('exam-date').textContent = now.toLocaleDateString('es-AR');
+
+            // Reiniciar nota y banners
+            document.getElementById('exam-grade-number').textContent = '-- / 10';
+            document.getElementById('exam-score-raw').textContent = '0 / 20';
+            const badge = document.getElementById('exam-status-badge');
+            badge.textContent = 'EN CURSO';
+            badge.className = 'block text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 mt-0.5 text-center';
+            document.getElementById('exam-alert-banner').classList.add('hidden');
+
+            renderExamSheet();
+            resetTimer(true);
+        }
+
+        /***********************************************************************
+         * RENDERIZADO DE LAS SECCIONES Y TARJETAS DE LA PRUEBA
+         ***********************************************************************/
+        const sectionMetadata = [
+            {
+                id: 'sec1',
+                roman: 'SECCIÓN I',
+                title: 'Operaciones Generales con Polinomios (Suma, Resta y Combinadas)',
+                subtitle: 'Puntos 1 al 5 (2,50 puntos) • Ordenar, cambiar signos en la resta y asociar términos semejantes.',
+                headerBg: 'bg-sky-900 text-white'
+            },
+            {
+                id: 'sec2',
+                roman: 'SECCIÓN II',
+                title: 'División de Polinomios (Regla de Ruffini y División Tradicional Euclidiana)',
+                subtitle: 'Puntos 6 al 10 (2,50 puntos) • Indicar explícitamente tanto el Cociente C(x) como el Resto R(x) utilizando el método pedido.',
+                headerBg: 'bg-emerald-900 text-white'
+            },
+            {
+                id: 'sec3',
+                roman: 'SECCIÓN III',
+                title: 'Factorización de Polinomios mediante Fórmula Resolvente de Bhaskara',
+                subtitle: 'Puntos 11 al 15 (2,50 puntos) • Hallar las raíces con Bhaskara y expresar como producto a·(x - x₁)·(x - x₂).',
+                headerBg: 'bg-amber-900 text-white'
+            },
+            {
+                id: 'sec4',
+                roman: 'SECCIÓN IV',
+                title: 'Factorización mediante División de Polinomios (Ruffini) + Bhaskara',
+                subtitle: 'Puntos 16 al 20 (2,50 puntos) • Bajar el grado dividiendo por Ruffini y aplicar luego Bhaskara al cociente cuadrático.',
+                headerBg: 'bg-purple-900 text-white'
+            }
+        ];
+
+        function buildExerciseInputHTML(ex) {
+            if (ex.type === 'division_poly') {
+                return `
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 mt-3">
+                        <div class="md:col-span-7">
+                            <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1">
+                                Cociente C(x):
+                            </label>
+                            <input
+                                type="text"
+                                id="input-q-${ex.id}"
+                                value="${ex.studentQuotient.replace(/"/g, '&quot;')}"
+                                oninput="handleDivisionTyping(${ex.id})"
+                                onkeydown="if(event.key==='Enter') verifySinglePoint(${ex.id})"
+                                placeholder="Ej: 2x^2 - 3x + 5"
+                                class="w-full bg-white border-2 border-slate-300 focus:border-sky-600 rounded-lg px-3 py-2 text-sm font-mono text-slate-900 outline-none"
+                            />
+                        </div>
+                        <div class="md:col-span-3">
+                            <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1">
+                                Resto R(x):
+                            </label>
+                            <input
+                                type="text"
+                                id="input-r-${ex.id}"
+                                value="${ex.studentRemainder.replace(/"/g, '&quot;')}"
+                                oninput="handleDivisionTyping(${ex.id})"
+                                onkeydown="if(event.key==='Enter') verifySinglePoint(${ex.id})"
+                                placeholder="Ej: 0 o -4"
+                                class="w-full bg-white border-2 border-slate-300 focus:border-sky-600 rounded-lg px-3 py-2 text-sm font-mono text-slate-900 outline-none"
+                            />
+                        </div>
+                        <div class="md:col-span-2 flex items-end no-print">
+                            <button onclick="verifySinglePoint(${ex.id})" class="w-full py-2 px-3 rounded-lg font-bold text-xs bg-slate-900 hover:bg-slate-800 text-white transition cursor-pointer">
+                                <i class="fa-solid fa-check mr-1"></i>Verificar
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Botonera matemática rápida -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-2 no-print">
+                        <div class="flex flex-wrap items-center gap-1">
+                            <span class="text-[11px] text-slate-500 mr-1">Símbolos para C(x):</span>
+                            <button type="button" onclick="insertAtInput('input-q-${ex.id}', 'x^3', ${ex.id}, true)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-mono text-xs cursor-pointer">x³</button>
+                            <button type="button" onclick="insertAtInput('input-q-${ex.id}', 'x^2', ${ex.id}, true)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-mono text-xs cursor-pointer">x²</button>
+                            <button type="button" onclick="insertAtInput('input-q-${ex.id}', 'x', ${ex.id}, true)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-mono text-xs cursor-pointer">x</button>
+                            <button type="button" onclick="insertAtInput('input-q-${ex.id}', ' + ', ${ex.id}, true)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-mono text-xs cursor-pointer">+</button>
+                            <button type="button" onclick="insertAtInput('input-q-${ex.id}', ' - ', ${ex.id}, true)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-mono text-xs cursor-pointer">-</button>
+                        </div>
+                        <div id="preview-ex-${ex.id}" class="text-xs font-mono text-slate-600 math-expr"></div>
+                    </div>
+                `;
+            }
+
+            const placeholderText = ex.type === 'factored_poly'
+                ? 'Ej: 2(x - 1)(x + 3)  o  (x - 2)(x + 4)'
+                : 'Ej: 4x^5 - 3x^3 + 2x - 7';
+
+            const labelText = ex.type === 'factored_poly'
+                ? 'Respuesta Factorizada Completa:'
+                : 'Polinomio Resultado Reducido y Ordenado:';
+
+            return `
+                <div class="mt-3">
+                    <label class="block text-[11px] font-bold uppercase text-slate-700 mb-1">
+                        ${labelText}
+                    </label>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input
+                            type="text"
+                            id="input-single-${ex.id}"
+                            value="${ex.studentInput.replace(/"/g, '&quot;')}"
+                            oninput="handleSingleTyping(${ex.id}, this.value)"
+                            onkeydown="if(event.key==='Enter') verifySinglePoint(${ex.id})"
+                            placeholder="${placeholderText}"
+                            class="flex-1 bg-white border-2 border-slate-300 focus:border-sky-600 rounded-lg px-3 py-2 text-sm font-mono text-slate-900 outline-none"
+                        />
+                        <button onclick="verifySinglePoint(${ex.id})" class="px-4 py-2 rounded-lg font-bold text-xs bg-slate-900 hover:bg-slate-800 text-white transition shrink-0 cursor-pointer no-print">
+                            <i class="fa-solid fa-check mr-1"></i>Verificar punto
+                        </button>
+                    </div>
+                    <!-- Botonera matemática rápida -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-2 no-print">
+                        <div class="flex flex-wrap items-center gap-1">
+                            <span class="text-[11px] text-slate-500 mr-1">Insertar:</span>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', '(', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">(</button>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', ')', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">)</button>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', 'x', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">x</button>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', '^2', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">²</button>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', '^3', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">³</button>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', '^', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">^</button>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', ' + ', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">+</button>
+                            <button type="button" onclick="insertAtInput('input-single-${ex.id}', ' - ', ${ex.id}, false)" class="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-900 font-mono text-xs cursor-pointer">-</button>
+                        </div>
+                        <div id="preview-ex-${ex.id}" class="text-xs font-mono text-slate-600 math-expr"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderExamSheet() {
+            const container = document.getElementById('exam-sections-container');
+            container.innerHTML = '';
+
+            sectionMetadata.forEach(sec => {
+                if (activeSectionFilter !== 'all' && activeSectionFilter !== sec.id) return;
+
+                const secExercises = examExercises.filter(e => e.sectionId === sec.id);
+                const sectionEl = document.createElement('section');
+                sectionEl.className = 'space-y-4';
+
+                // Encabezado de la Sección de la Prueba
+                sectionEl.innerHTML = `
+                    <div class="${sec.headerBg} p-3.5 rounded-lg shadow flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <span class="text-[11px] font-mono uppercase tracking-widest opacity-80 block">${sec.roman}</span>
+                            <h2 class="text-sm sm:text-base font-bold">${sec.title}</h2>
+                            <p class="text-xs opacity-90 mt-0.5">${sec.subtitle}</p>
+                        </div>
+                    </div>
+                    <div id="grid-${sec.id}" class="space-y-4"></div>
+                `;
+
+                container.appendChild(sectionEl);
+                const secGrid = sectionEl.querySelector(`#grid-${sec.id}`);
+
+                secExercises.forEach(ex => {
+                    let cardBorder = 'border-slate-300 bg-white';
+                    let scorePill = `<span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 text-slate-700 border border-slate-300">Valor: 0,50 pts</span>`;
+
+                    if (ex.status === 'correct') {
+                        cardBorder = 'border-emerald-600 bg-emerald-50/20';
+                        scorePill = `<span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-emerald-100 text-emerald-900 border border-emerald-400"><i class="fa-solid fa-check mr-1"></i>0,50 / 0,50 pts</span>`;
+                    } else if (ex.status === 'incorrect') {
+                        cardBorder = 'border-rose-600 bg-rose-50/20';
+                        scorePill = `<span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-rose-100 text-rose-900 border border-rose-400"><i class="fa-solid fa-xmark mr-1"></i>0,00 / 0,50 pts</span>`;
+                    }
+
+                    const card = document.createElement('article');
+                    card.className = `exercise-card border-2 ${cardBorder} rounded-lg p-4 sm:p-5 shadow-sm transition`;
+
+                    card.innerHTML = `
+                        <!-- Fila Superior: Número de Punto + Cartel de Método Obligatorio + Puntaje -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-slate-200">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-1 rounded bg-slate-900 text-white font-mono font-bold text-xs">
+                                    PUNTO ${ex.id}
+                                </span>
+                                <span class="px-2.5 py-1 rounded text-[11px] font-extrabold uppercase tracking-wide border ${ex.tagColor}">
+                                    <i class="fa-solid fa-bullseye mr-1"></i>${ex.methodTag}
+                                </span>
+                            </div>
+                            <div>${scorePill}</div>
+                        </div>
+
+                        <!-- Consigna y Polinomio del Ejercicio -->
+                        <div class="mt-3 text-xs sm:text-sm text-slate-800 leading-relaxed math-paper-grid p-3.5 rounded-lg border border-slate-200">
+                            ${ex.statementHTML}
+                        </div>
+
+                        <!-- Campos de Respuesta del Estudiante -->
+                        ${buildExerciseInputHTML(ex)}
+
+                        <!-- Mensaje de Corrección Diagnóstica -->
+                        <div id="feedback-box-${ex.id}" class="mt-3 ${ex.feedbackMsg ? 'block' : 'hidden'}">
+                            ${ex.feedbackMsg}
+                        </div>
+
+                        <!-- Botón Individual "Mostrar procedimiento" -->
+                        <div class="mt-4 pt-3 border-t border-slate-200 no-print">
+                            <button
+                                type="button"
+                                onclick="toggleSingleProcedure(${ex.id})"
+                                class="px-3.5 py-1.5 rounded-lg font-bold text-xs bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-400 transition flex items-center gap-2 cursor-pointer"
+                            >
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                                <span id="btn-proc-label-${ex.id}">${ex.procedureOpen ? 'Ocultar procedimiento' : 'Mostrar procedimiento'}</span>
+                                <i id="btn-proc-chevron-${ex.id}" class="fa-solid ${ex.procedureOpen ? 'fa-chevron-up' : 'fa-chevron-down'} ml-1"></i>
+                            </button>
+
+                            <!-- Desarrollo Paso a Paso Desplegable -->
+                            <div id="proc-panel-${ex.id}" class="${ex.procedureOpen ? 'block' : 'hidden'} mt-3 p-4 rounded-lg bg-slate-100 border-2 border-slate-300 space-y-3">
+                                <div class="text-xs font-extrabold uppercase tracking-wider text-slate-800 border-b border-slate-300 pb-1.5 flex items-center justify-between">
+                                    <span><i class="fa-solid fa-pen-ruler text-sky-700 mr-1.5"></i>Resolución Oficial Paso a Paso (Punto ${ex.id})</span>
+                                    <span class="font-mono text-[11px] text-slate-600">${ex.methodTag}</span>
+                                </div>
+                                <div class="space-y-2.5">
+                                    <div>${ex.procStep1}</div>
+                                    <div>${ex.procStep2}</div>
+                                    <div>${ex.procStep3}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    secGrid.appendChild(card);
+                });
+            });
+        }
+
+        /***********************************************************************
+         * ENTRADA DE TEXTO Y BOTONERA MATEMÁTICA RÁPIDA
+         ***********************************************************************/
+        function handleSingleTyping(id, val) {
+            const ex = examExercises.find(e => e.id === id);
+            if (!ex) return;
+            ex.studentInput = val;
+            const prev = document.getElementById(`preview-ex-${id}`);
+            if (!prev) return;
+
+            if (!val.trim()) {
+                prev.innerHTML = '';
+                return;
+            }
+            if (ex.type === 'single_poly') {
+                const p = parseStandardPolyString(val);
+                prev.innerHTML = p !== null
+                    ? `Vista previa: <strong class="text-sky-800">${formatPolyHTML(p)}</strong>`
+                    : `<span class="text-amber-700">Escribiendo...</span>`;
+            } else {
+                const f = parseFactoredExpression(val);
+                if (f.valid) {
+                    const txt = f.factors.map(fac => {
+                        const pH = formatPolyHTML(fac.poly);
+                        if (!fac.isParen && fac.poly.length === 1) return pH;
+                        return `(${pH})${fac.power > 1 ? `<sup>${fac.power}</sup>` : ''}`;
+                    }).join(' · ');
+                    prev.innerHTML = `Vista previa: <strong class="text-sky-800">${f.globalSign === -1 ? '-' : ''}${txt}</strong>`;
+                } else {
+                    prev.innerHTML = `<span class="text-amber-700">Escribiendo factores...</span>`;
+                }
+            }
+        }
+
+        function handleDivisionTyping(id) {
+            const ex = examExercises.find(e => e.id === id);
+            if (!ex) return;
+            const qInput = document.getElementById(`input-q-${id}`);
+            const rInput = document.getElementById(`input-r-${id}`);
+            ex.studentQuotient = qInput ? qInput.value : '';
+            ex.studentRemainder = rInput ? rInput.value : '';
+
+            const prev = document.getElementById(`preview-ex-${id}`);
+            if (!prev) return;
+            const pQ = parseStandardPolyString(ex.studentQuotient);
+            const pR = parseStandardPolyString(ex.studentRemainder);
+            if (pQ !== null || pR !== null) {
+                prev.innerHTML = `C(x) = <strong class="text-sky-800">${pQ !== null ? formatPolyHTML(pQ) : '?'}</strong> | R(x) = <strong class="text-amber-800">${pR !== null ? formatPolyHTML(pR) : '?'}</strong>`;
+            } else {
+                prev.innerHTML = '';
+            }
+        }
+
+        function insertAtInput(inputId, sym, exId, isDivision) {
+            const inp = document.getElementById(inputId);
+            if (!inp) return;
+            const s = inp.selectionStart || inp.value.length;
+            const e = inp.selectionEnd || inp.value.length;
+            const v = inp.value;
+            inp.value = v.substring(0, s) + sym + v.substring(e);
+            inp.focus();
+            const pos = s + sym.length;
+            inp.setSelectionRange(pos, pos);
+            if (isDivision) handleDivisionTyping(exId);
+            else handleSingleTyping(exId, inp.value);
+        }
+
+        /***********************************************************************
+         * EVALUACIÓN DE CADA PUNTO Y DIAGNÓSTICO PEDAGÓGICO
+         ***********************************************************************/
+        function evaluateExamPoint(ex) {
+            // Caso 1: Suma / Resta / Combinada (Sección I)
+            if (ex.type === 'single_poly') {
+                const parsed = parseStandardPolyString(ex.studentInput);
+                if (parsed === null) {
+                    ex.status = 'incorrect';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-amber-100 border border-amber-400 text-amber-950 text-xs"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Ingresá un polinomio válido (ejemplo: <code class="font-mono">3x^4 - 5x^2 + 2</code>).</div>`;
+                    return false;
+                }
+                if (arePolysEqual(parsed, ex.expectedPoly)) {
+                    ex.status = 'correct';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-emerald-100 border border-emerald-400 text-emerald-950 text-xs font-semibold"><i class="fa-solid fa-circle-check mr-1"></i>¡Punto correcto! El polinomio reducido coincide con <span class="font-mono math-expr">${ex.canonicalHTML}</span>.</div>`;
+                    return true;
+                } else {
+                    ex.status = 'incorrect';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-rose-100 border border-rose-400 text-rose-950 text-xs"><i class="fa-solid fa-circle-xmark mr-1"></i><strong>Resultado incorrecto.</strong> Revisá los signos al restar o la suma de coeficientes de igual grado. Podés tocar <em>"Mostrar procedimiento"</em>.</div>`;
+                    return false;
+                }
+            }
+
+            // Caso 2: División de Polinomios (Sección II: Cociente y Resto)
+            if (ex.type === 'division_poly') {
+                const pQ = parseStandardPolyString(ex.studentQuotient);
+                const pR = parseStandardPolyString(ex.studentRemainder);
+
+                if (pQ === null || pR === null) {
+                    ex.status = 'incorrect';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-amber-100 border border-amber-400 text-amber-950 text-xs"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Debés completar tanto el <strong>Cociente C(x)</strong> como el <strong>Resto R(x)</strong> (si la división es exacta, escribí <code class="font-mono">0</code> en el resto).</div>`;
+                    return false;
+                }
+
+                const okQ = arePolysEqual(pQ, ex.expectedQuotient);
+                const okR = arePolysEqual(pR, ex.expectedRemainder);
+
+                if (okQ && okR) {
+                    ex.status = 'correct';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-emerald-100 border border-emerald-400 text-emerald-950 text-xs font-semibold"><i class="fa-solid fa-circle-check mr-1"></i>¡División correcta! Tanto el Cociente C(x) como el Resto R(x) son exactos.</div>`;
+                    return true;
+                } else {
+                    ex.status = 'incorrect';
+                    let detail = '';
+                    if (okQ && !okR) detail = 'El Cociente C(x) está bien, pero el <strong>Resto R(x)</strong> es incorrecto.';
+                    else if (!okQ && okR) detail = 'El Resto R(x) está bien, pero el <strong>Cociente C(x)</strong> tiene un error.';
+                    else detail = 'Tanto el Cociente C(x) como el Resto R(x) presentan diferencias.';
+
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-rose-100 border border-rose-400 text-rose-950 text-xs"><i class="fa-solid fa-circle-xmark mr-1"></i><strong>Revisar división:</strong> ${detail} Consultá el botón <em>"Mostrar procedimiento"</em>.</div>`;
+                    return false;
+                }
+            }
+
+            // Caso 3: Factorización con Bhaskara o División + Bhaskara (Secciones III y IV)
+            if (ex.type === 'factored_poly') {
+                const parsed = parseFactoredExpression(ex.studentInput);
+                if (!parsed.valid) {
+                    ex.status = 'incorrect';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-amber-100 border border-amber-400 text-amber-950 text-xs"><i class="fa-solid fa-triangle-exclamation mr-1"></i>${parsed.error}</div>`;
+                    return false;
+                }
+
+                // Verificar si el alumno olvidó el coeficiente principal `a` en Bhaskara (ej. puso (x - x1)(x - x2) en vez de a(x - x1)(x - x2))
+                if (!arePolysEqual(parsed.expanded, ex.expectedPoly)) {
+                    const scaledWithLead = scalePoly(parsed.expanded, ex.leadCoeff);
+                    if (ex.leadCoeff !== 1 && arePolysEqual(scaledWithLead, ex.expectedPoly)) {
+                        ex.status = 'incorrect';
+                        ex.feedbackMsg = `<div class="p-2.5 rounded bg-amber-100 border border-amber-400 text-amber-950 text-xs"><i class="fa-solid fa-circle-exclamation mr-1"></i><strong>¡Cuidado con el coeficiente principal!</strong> Hallaste bien las raíces con Bhaskara, pero olvidaste multiplicar adelante por el coeficiente principal <strong>a = ${ex.leadCoeff}</strong> en la fórmula <code class="font-mono">a·(x - x₁)·(x - x₂)</code>.</div>`;
+                        return false;
+                    }
+
+                    ex.status = 'incorrect';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-rose-100 border border-rose-400 text-rose-950 text-xs"><i class="fa-solid fa-circle-xmark mr-1"></i><strong>No es equivalente al polinomio original.</strong> Al desarrollar tu producto da <span class="font-mono math-expr">${formatPolyHTML(parsed.expanded)}</span>. Revisá los signos de las raíces en <code class="font-mono">(x - x₁)</code>.</div>`;
+                    return false;
+                }
+
+                // Verificar que esté totalmente factorizado en factores de grado 1
+                if (parsed.degreeOneOrMoreCount < ex.minFactorsExpected || parsed.maxFactorDegree > 1) {
+                    ex.status = 'incorrect';
+                    ex.feedbackMsg = `<div class="p-2.5 rounded bg-amber-100 border border-amber-400 text-amber-950 text-xs"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i><strong>Falta aplicar Bhaskara al factor de grado 2:</strong> Tu expresión es equivalente a P(x), pero aún tenés un factor cuadrático sin descomponer en factores lineales <code class="font-mono">(x - r)</code>.</div>`;
+                    return false;
+                }
+
+                ex.status = 'correct';
+                ex.feedbackMsg = `<div class="p-2.5 rounded bg-emerald-100 border border-emerald-400 text-emerald-950 text-xs font-semibold"><i class="fa-solid fa-circle-check mr-1"></i>¡Excelente! Polinomio completamente factorizado: <span class="font-mono math-expr">${ex.canonicalHTML}</span>.</div>`;
+                return true;
+            }
+
+            return false;
+        }
+
+        function verifySinglePoint(id) {
+            const ex = examExercises.find(e => e.id === id);
+            if (!ex) return;
+            evaluateExamPoint(ex);
+            renderExamSheet();
+            updateExamHeaderScore(false);
+        }
+
+        function gradeEntireExam() {
+            let correct = 0;
+            examExercises.forEach(ex => {
+                if (evaluateExamPoint(ex)) correct++;
+            });
+            renderExamSheet();
+            updateExamHeaderScore(true);
+        }
+
+        function updateExamHeaderScore(showFinalBanner = false) {
+            const correct = examExercises.filter(e => e.status === 'correct').length;
+            const grade10 = (correct * 0.5).toFixed(2).replace('.00', '');
+            document.getElementById('exam-score-raw').textContent = `${correct} / 20`;
+            document.getElementById('exam-grade-number').textContent = `${grade10} / 10`;
+
+            const badge = document.getElementById('exam-status-badge');
+            const approved = correct >= 12; // 6.00 / 10
+
+            if (approved) {
+                badge.textContent = 'APROBADO';
+                badge.className = 'block text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-emerald-600 text-white mt-0.5 text-center';
+            } else {
+                badge.textContent = showFinalBanner ? 'A RECUPERAR' : 'EN CURSO';
+                badge.className = showFinalBanner
+                    ? 'block text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-rose-600 text-white mt-0.5 text-center'
+                    : 'block text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 mt-0.5 text-center';
+            }
+
+            if (showFinalBanner) {
+                const banner = document.getElementById('exam-alert-banner');
+                const icon = document.getElementById('exam-alert-icon');
+                const title = document.getElementById('exam-alert-title');
+                const desc = document.getElementById('exam-alert-desc');
+
+                if (approved) {
+                    banner.className = 'my-5 p-4 rounded-lg border-2 border-emerald-600 bg-emerald-50 text-emerald-950 flex items-center justify-between gap-4 no-print';
+                    icon.className = 'fa-solid fa-award text-3xl text-emerald-600';
+                    title.textContent = `¡Prueba Aprobada! Calificación Final: ${grade10} / 10 (${correct} de 20 puntos correctos)`;
+                    desc.textContent = 'Excelente dominio de operaciones con polinomios, división por Ruffini/Euclides y factorización con Bhaskara.';
+                } else {
+                    banner.className = 'my-5 p-4 rounded-lg border-2 border-rose-600 bg-rose-50 text-rose-950 flex items-center justify-between gap-4 no-print';
+                    icon.className = 'fa-solid fa-circle-info text-3xl text-rose-600';
+                    title.textContent = `Calificación Final: ${grade10} / 10 (${correct} de 20 puntos correctos)`;
+                    desc.textContent = 'Revisá los puntos marcados en rojo haciendo clic en el botón "Mostrar procedimiento" de cada ejercicio.';
+                }
+            }
+        }
+
+        /***********************************************************************
+         * PROCEDIMIENTOS Y FILTROS DE SECCIÓN
+         ***********************************************************************/
+        function toggleSingleProcedure(id) {
+            const ex = examExercises.find(e => e.id === id);
+            if (!ex) return;
+            ex.procedureOpen = !ex.procedureOpen;
+
+            const panel = document.getElementById(`proc-panel-${id}`);
+            const label = document.getElementById(`btn-proc-label-${id}`);
+            const chev = document.getElementById(`btn-proc-chevron-${id}`);
+            if (panel && label && chev) {
+                panel.classList.toggle('hidden', !ex.procedureOpen);
+                label.textContent = ex.procedureOpen ? 'Ocultar procedimiento' : 'Mostrar procedimiento';
+                chev.className = `fa-solid ${ex.procedureOpen ? 'fa-chevron-up' : 'fa-chevron-down'} ml-1`;
+            }
+        }
+
+        function toggleAllProcedures() {
+            const allOpen = examExercises.every(e => e.procedureOpen);
+            examExercises.forEach(e => e.procedureOpen = !allOpen);
+            renderExamSheet();
+        }
+
+        function setSectionFilter(secId) {
+            activeSectionFilter = secId;
+            const ids = ['all', 'sec1', 'sec2', 'sec3', 'sec4'];
+            ids.forEach(id => {
+                const btn = document.getElementById(`sec-btn-${id}`);
+                if (!btn) return;
+                btn.className = id === secId
+                    ? 'px-2.5 py-1 rounded font-bold bg-slate-900 text-white cursor-pointer'
+                    : 'px-2 py-1 rounded font-semibold bg-slate-200 hover:bg-slate-300 text-slate-800 cursor-pointer';
+            });
+            renderExamSheet();
+        }
+
+        function toggleFormulasModal() {
+            document.getElementById('formulas-modal').classList.toggle('hidden');
+        }
+
+        /***********************************************************************
+         * TEMPORIZADOR DE LA PRUEBA
+         ***********************************************************************/
+        function formatClock(sec) {
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        function updateTimerDisplay() {
+            const el = document.getElementById('timer-display');
+            el.textContent = formatClock(remainingSeconds);
+            if (remainingSeconds <= 180) {
+                el.className = 'font-mono text-base sm:text-lg font-bold text-rose-400 animate-pulse tracking-wider min-w-[64px] text-center';
+            } else if (remainingSeconds <= 600) {
+                el.className = 'font-mono text-base sm:text-lg font-bold text-amber-400 tracking-wider min-w-[64px] text-center';
+            } else {
+                el.className = 'font-mono text-base sm:text-lg font-bold text-emerald-400 tracking-wider min-w-[64px] text-center';
+            }
+            const icon = document.getElementById('icon-timer-toggle');
+            if (icon) icon.className = isTimerRunning ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            isTimerRunning = true;
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                if (remainingSeconds > 0) {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    isTimerRunning = false;
+                    updateTimerDisplay();
+                    gradeEntireExam();
+                }
+            }, 1000);
+        }
+
+        function toggleTimer() {
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                updateTimerDisplay();
+            } else {
+                startTimer();
+            }
+        }
+
+        function resetTimer(autoStart = true) {
+            clearInterval(timerInterval);
+            const mins = parseInt(document.getElementById('time-select').value, 10) || 60;
+            remainingSeconds = mins * 60;
+            isTimerRunning = false;
+            updateTimerDisplay();
+            if (autoStart) startTimer();
+        }
+
+        function changeTimerDuration() {
+            resetTimer(true);
+        }
+
+        window.onload = function () {
+            generateNewExam();
+        };
+    </script>
+</body>
+</html>
